@@ -1,11 +1,14 @@
 import "./App.css";
+import Connexion from "./pages/Connexion";
+import Feed from "./components/Feed/Feed";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold text-green-400 underline">
-        Hello world!
-      </h1>
+      <Connexion />
+      <Header />
+      <Feed />
     </div>
   );
 }

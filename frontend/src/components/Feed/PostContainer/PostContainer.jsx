@@ -1,7 +1,12 @@
 import React from "react";
+import Post from "./Post";
 
 function PostContainer() {
-  return <div>PostContainer</div>;
+  return (
+    <div>
+      <Post />
+    </div>
+  );
 }
 
 export default PostContainer;
