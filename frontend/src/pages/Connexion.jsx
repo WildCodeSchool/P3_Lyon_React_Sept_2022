@@ -1,8 +1,8 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable react/button-has-type */
 import React from "react";
 import enedisLogo from "../assets/logo-enedis.png";
 import "../App.css";
-import line from "../assets/line.svg";
 
 function Connexion() {
   return (
@@ -11,17 +11,18 @@ function Connexion() {
         <img className="mx-auto" src={enedisLogo} alt="" />
       </div>
       <div className="mb-[80px]">
-        <h1 className="text-[40px] leading-[2.9rem] text-[#1423DC] font-bold text-center ">
-          Votre outil de <span>communication</span> Enedis !
+        <h1 className="text-[40px] leading-[2.9rem] text-primary font-bold text-center ">
+          Votre outil de communication Enedis !
         </h1>
       </div>
       <div>
-        <h3 className=" absolute text-3xl text-[#1423DC] ml-[40px] my-[17px]  text-center">
+        <h3 className=" absolute text-3xl text-primary ml-[40px] my-[17px]  text-center">
           Accédez à votre espace
         </h3>
-        <img src={line} className="absolute left-[7%] mx-auto" alt="" />
+        <div className="bg-[url('../src/assets/line.svg')] bg-no-repeat  h-[356px] ml-[23px]"></div>
+        ;
       </div>
-      <div className="relative z-index:2 top-[13%] left-[2%] ">
+      <div className="mt-[-22em]">
         <div>
           <p className="text-black font-bold text-lg mt-[80px] ml-[50px]">
             Identifiant
