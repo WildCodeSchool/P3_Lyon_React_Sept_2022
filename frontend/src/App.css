@@ -1,53 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300&display=swap%27");
 
 @font-face {
-	font-family:'Enedis';
-	src:	url('Enedis-Light.woff2') format('woff2'),
-			url('Enedis-Light.woff') format('woff');
-	font-weight: 300;
-	font-style: normal;
+  font-family: "Enedis";
+  src: url("Enedis-Light.woff2") format("woff2"),
+    url("Enedis-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
-	font-family:'Enedis';
-	src:	url('Enedis-Regular.woff2') format('woff2'),
-			url('Enedis-Regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
+  font-family: "Enedis";
+  src: url("Enedis-Regular.woff2") format("woff2"),
+    url("Enedis-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-	font-family:'Enedis';
-	src:	url('Enedis-Medium.woff2') format('woff2'),
-			url('Enedis-Medium.woff') format('woff');
-	font-weight: 500;
-	font-style: normal;
+  font-family: "Enedis";
+  src: url("Enedis-Medium.woff2") format("woff2"),
+    url("Enedis-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
-	font-family:'Enedis';
-	src:	url('Enedis-Bold.woff2') format('woff2'),
-			url('Enedis-Bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
+  font-family: "Enedis";
+  src: url("Enedis-Bold.woff2") format("woff2"),
+    url("Enedis-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
-	font-family:'Enedis';
-	src:	url('Enedis-Black.woff2') format('woff2'),
-			url('Enedis-Black.woff') format('woff');
-	font-weight: 900;
-	font-style: normal;
+  font-family: "Enedis";
+  src: url("Enedis-Black.woff2") format("woff2"),
+    url("Enedis-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
 }
 
-h1,h2,h3 {
-  font-family:'Enedis';
+h1,
+h2,
+h3 {
+  font-family: "Enedis";
   font-weight: bold;
-  
 }
 
+span {
+  font-family: "Enedis";
+  font-weight: light;
+}
 
-
-button,p {
-  font-family: 'Public Sans', sans-serif;
+button,
+p {
+  font-family: "Public Sans", sans-serif;
 }
