@@ -8,35 +8,34 @@ import "swiper/css";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
+const groupes = [
+  { id: 1, groupname: "Communication Agence", imageurl: "" },
+  { id: 2, groupname: "Métier", imageurl: "" },
+  { id: 3, groupname: "Prévention", imageurl: "" },
+  { id: 4, groupname: "Entre nous", imageurl: "" },
+  { id: 5, groupname: "Clients", imageurl: "" },
+];
+
 function Carrousel() {
   return (
-    <div className="carrousel-container">
+    <div className="carrousel-container pt-8">
       <Swiper
-        className="h-44"
+        className="h-36"
         // install Swiper modules
         modules={[Pagination, A11y]}
-        spaceBetween={30}
+        spaceBetween={20}
         slidesPerView={2.5}
         pagination={{ clickable: true }}
         onSwiper={(swiper) => console.warn(swiper)}
         onSlideChange={() => console.warn("slide change")}
       >
-        <SwiperSlide className="flex bg-blue-400 justify-center items-center">
-          Slide 1
-        </SwiperSlide>
-        <SwiperSlide className="flex bg-blue-400 justify-center items-center">
-          Slide 2
-        </SwiperSlide>
-        <SwiperSlide className="flex bg-blue-400 justify-center items-center">
-          Slide 3
-        </SwiperSlide>
-        <SwiperSlide className="flex bg-blue-400 justify-center items-center">
-          Slide 4
-        </SwiperSlide>
-        <SwiperSlide className="flex bg-blue-400 justify-center items-center">
-          Slide 5
-        </SwiperSlide>
-        ...
+        {groupes.map((groupe) => (
+          <SwiperSlide className="group-card flex bg-cover bg-[url('./assets/solar-groups.jpeg')] justify-center items-center align-middle text-center">
+            <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
+              {groupe.groupname}
+            </p>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

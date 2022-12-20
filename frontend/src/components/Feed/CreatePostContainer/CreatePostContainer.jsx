@@ -1,7 +1,20 @@
 import React from "react";
 
 function CreatePostContainer() {
-  return <div>CreatePostContainer</div>;
+  return (
+    <div>
+      <div className="w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 flex items-center justify-center p-6">
+        <img
+          className="rounded-full w-16 mr-2 border-4 border-violet"
+          src="./src/assets/my-avatar.jpeg"
+          alt="My profile avatar"
+        />
+        <div className="border border-primary w-5/6 rounded-xl h-10 pt-2">
+          <span className="ml-2 text-gray-400">Votre publication...</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default CreatePostContainer;
