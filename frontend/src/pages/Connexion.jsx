@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/button-has-type */
 import React from "react";
+import { Link } from "react-router-dom";
 import enedisLogo from "../assets/logo-enedis.png";
 import "../App.css";
 
@@ -42,9 +43,11 @@ function Connexion() {
           />
         </div>
         <div className="text-center my-5">
-          <button className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] rounded-[20px]">
-            Se connecter
-          </button>
+          <Link to="/feed">
+            <button className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] rounded-[20px]">
+              Se connecter
+            </button>
+          </Link>
         </div>
       </div>
     </div>

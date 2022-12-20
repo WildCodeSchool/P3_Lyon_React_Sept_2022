@@ -1,12 +1,15 @@
-import Connexion from "./pages/Connexion";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import CreatePost from "./components/Feed/CreatePostContainer/CreatePost";
+import Connexion from "./pages/Connexion";
+import Main from "./pages/Main";
 
 function App() {
   return (
-    <div className="App">
-      <Connexion />
-      <CreatePost />
+    <div>
+      <Routes>
+        <Route path="/" element={<Connexion />} />
+        <Route path="/feed" element={<Main />} />
+      </Routes>
     </div>
   );
 }
