@@ -1,14 +1,15 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Connexion from "./pages/Connexion";
-import Feed from "./components/Feed/Feed";
-import Header from "./components/Header";
+import Main from "./pages/Main";
 
 function App() {
   return (
-    <div className="App">
-      <Connexion />
-      <Header />
-      <Feed />
+    <div>
+      <Routes>
+        <Route path="/" element={<Connexion />} />
+        <Route path="/feed" element={<Main />} />
+      </Routes>
     </div>
   );
 }
