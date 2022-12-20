@@ -8,15 +8,15 @@ import "swiper/css";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
-const groupes = [
-  { id: 1, groupname: "Communication Agence", imageurl: "" },
-  { id: 2, groupname: "Métier", imageurl: "" },
-  { id: 3, groupname: "Prévention", imageurl: "" },
-  { id: 4, groupname: "Entre nous", imageurl: "" },
-  { id: 5, groupname: "Clients", imageurl: "" },
-];
-
 function Carrousel() {
+  const groupes = [
+    { id: 1, groupname: "Communication Agence", imageurl: "" },
+    { id: 2, groupname: "Métier", imageurl: "" },
+    { id: 3, groupname: "Prévention", imageurl: "" },
+    { id: 4, groupname: "Entre nous", imageurl: "" },
+    { id: 5, groupname: "Clients", imageurl: "" },
+  ];
+
   return (
     <div className="carrousel-container pt-8">
       <Swiper
