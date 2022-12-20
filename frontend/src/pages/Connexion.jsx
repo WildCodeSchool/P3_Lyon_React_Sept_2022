@@ -21,7 +21,6 @@ function Connexion() {
           Accédez à votre espace
         </h3>
         <div className="bg-[url('../src/assets/line.svg')] bg-no-repeat  h-[356px] ml-[23px]"></div>
-        ;
       </div>
       <div className="mt-[-22em]">
         <div>
