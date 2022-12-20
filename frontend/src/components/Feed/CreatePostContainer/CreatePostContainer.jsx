@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CreatePostContainer() {
   return (
@@ -10,7 +11,9 @@ function CreatePostContainer() {
           alt="My profile avatar"
         />
         <div className="border border-primary w-5/6 rounded-xl h-10 pt-2">
-          <span className="ml-2 text-gray-400">Votre publication...</span>
+          <span className="ml-2 text-gray-400">
+            <Link to="/createPost">Votre publication...</Link>
+          </span>
         </div>
       </div>
     </div>
