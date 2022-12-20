@@ -5,7 +5,7 @@ import Main from "./pages/Main";
 
 function App() {
   return (
-    <div>
+    <div className="bg-background">
       <Routes>
         <Route path="/" element={<Connexion />} />
         <Route path="/feed" element={<Main />} />
