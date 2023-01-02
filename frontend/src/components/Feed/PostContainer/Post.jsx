@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Post() {
   return (
@@ -11,7 +12,9 @@ function Post() {
             alt="User avatar"
           />
           <div className="flex flex-col">
-            <h2 className="text-primary">Margaux Donova</h2>
+            <Link to="/profile">
+              <h2 className="text-primary">Margaux Donova</h2>
+            </Link>
             <h3 className="font-light text-primary">
               Communication Agence - Actualités
             </h3>
