@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <div>
+    <div className="bg-background">
       <h1 className="text-primary text-center text-3xl mb-3">
         Enedis Val de France
       </h1>
