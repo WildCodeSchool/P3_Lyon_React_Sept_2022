@@ -9,11 +9,9 @@ function ProfileCard() {
       </div>
       <div className="square flex justify-center border border-primary rounded-lg w-80 h-72 mx-auto relative top-[-80px]">
         <div className="profile-details text-primary text-center">
-          <h2 className="text-2xl font-black mt-24">Margaux Donova</h2>
-          <h3 className="text-xl italic">Chargée de Communication</h3>
-          <h3 className="text-lg mt-10 px-10">
-            Equipe: Communication / Marketing
-          </h3>
+          <h2 className="text-2xl font-black mt-24">Ryan Bidau</h2>
+          <h3 className="text-xl italic">Project Manager</h3>
+          <h3 className="text-lg mt-10 px-10">Equipe: Commercial</h3>
         </div>
       </div>
     </div>
