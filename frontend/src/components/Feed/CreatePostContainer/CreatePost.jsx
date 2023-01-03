@@ -10,6 +10,9 @@ import croix from "../../../assets/croix.png";
 import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
+import FlecheDownWhite from "../../../assets/Vector-down-white.png";
+import FlecheDownGrey from "../../../assets/Vector-down-grey.png";
+import FlechetopWhite from "../../../assets/Vector-top-white.png";
 
 function CreatePost() {
   const [showMenu1, setShowMenu1] = useState(false);
@@ -17,21 +20,58 @@ function CreatePost() {
   const [showMenu3, setShowMenu3] = useState(false);
   const [showMenu4, setShowMenu4] = useState(false);
   const [showMenu5, setShowMenu5] = useState(false);
-  const [categories, setCategories] = useState("Catégorie");
-  const [groupe, setGroupe] = useState("Groupe");
+  const [categories, setCategories] = useState("");
+  const [groupe, setGroupe] = useState("");
 
   const [showCategories, setShowCategories] = useState(false);
+
+  /* Garde la valeur du li(Catégorie) selectionné  */
 
   function handleCategorie(e) {
     setCategories(e);
   }
+
+  /* Garde la valeur du li(groupe) selectionné et referme la modale  */
+
   function handleGroupe(e) {
     setGroupe(e);
+    setShowCategories(!showCategories);
   }
-  function openAndChangeCategorie() {
+
+  /* ouvre menu déroulant numéro 1 et prend la valeur du titre */
+
+  function openAndChangeCategorie1() {
     setShowMenu1(!showMenu1);
     handleCategorie("Communication Agence");
   }
+
+  /* ouvre menu déroulant numéro 2 et prend la valeur du titre */
+
+  function openAndChangeCategorie2() {
+    setShowMenu2(!showMenu2);
+    handleCategorie("Métier");
+  }
+
+  /* ouvre menu déroulant numéro 1 et prend la valeur du titre */
+
+  function openAndChangeCategorie3() {
+    setShowMenu3(!showMenu3);
+    handleCategorie("Prévention");
+  }
+  /* ouvre menu déroulant numéro 1 et prend la valeur du titre */
+
+  function openAndChangeCategorie4() {
+    setShowMenu4(!showMenu4);
+    handleCategorie("Clients");
+  }
+  /* ouvre menu déroulant numéro 1 et prend la valeur du titre */
+
+  function openAndChangeCategorie5() {
+    setShowMenu5(!showMenu5);
+    handleCategorie("Entre Nous");
+  }
+  /* change la valeur du state showCategorie et fait apparaître la modal des catégories */
+
   function handleCatergories() {
     setShowCategories(!showCategories);
   }
@@ -52,9 +92,9 @@ function CreatePost() {
         </button>
       </div>
       <div className="shadow-md my-[32px]">
-        <h3 className="text-[32px] leading-[2.9rem] text-primary font-bold text-center pb-8 ">
-          Créer votre publication
-        </h3>
+        <h1 className="text-[32px] leading-[2.9rem] text-primary font-bold text-center pb-8 ">
+          Créer une publication
+        </h1>
       </div>
       <div className="flex items-center">
         <img className="rounded-full w-28 ml-3" src={myAvatar} alt="" />
@@ -95,12 +135,12 @@ function CreatePost() {
               alt=""
             />
           </button>
-          <p className="text-[35px] text-primary text-center ">
+          <h1 className="text-[32px] text-primary font-bold text-center ">
             Choisir un groupe et une catégorie
-          </p>
+          </h1>
           <div className=" w-full">
             <input
-              className=" border-2 rounded border-primary mx-auto w-64 h-9"
+              className=" border-2 rounded-full border-primary mx-auto w-[280px] h-9 my-5 ml-16"
               type="search"
               placeholder="Cherchez un groupe..."
             />
@@ -110,10 +150,17 @@ function CreatePost() {
             <div className="dropdown inline-block relative w-full">
               <div className="flex justify-between">
                 <button
-                  onClick={() => openAndChangeCategorie()}
-                  className="bg-primary text-white text-2xl font-['Enedis'] font-bold h-10 w-full"
+                  onClick={() => openAndChangeCategorie1()}
+                  className="bg-primary text-white text-2xl font-['Enedis'] font-bold h-14 w-full"
                 >
-                  Communication Agence
+                  <div className="flex justify-between h-12 border-b-2 border-primary items-center">
+                    <p className="mx-auto">Communication Agence</p>
+                    <img
+                      className="w-6 h-4 mr-2.5 mt-1.5"
+                      src={FlecheDownWhite}
+                      alt=""
+                    />
+                  </div>
                 </button>
               </div>
               {showMenu1 ? (
@@ -146,28 +193,35 @@ function CreatePost() {
             <div className="dropdown inline-block relative w-full">
               <div className="flex justify-between">
                 <button
-                  onClick={() => setShowMenu2(!showMenu2)}
-                  className=" text-black text-2xl font-['Enedis'] font-semibold h-10 rounded w-full"
+                  onClick={() => openAndChangeCategorie2()}
+                  className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
                 >
-                  Métier
+                  <div className="flex justify-between h-12 items-center">
+                    <p className="mx-auto">Métier</p>
+                    <img
+                      className="w-6 h-4 mr-2.5 mt-1.5"
+                      src={FlecheDownGrey}
+                      alt=""
+                    />
+                  </div>
                 </button>
               </div>
               {showMenu2 ? (
                 <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
                   <li
-                    onClick={() => handleGroupe("Nice")}
+                    onClick={() => handleGroupe("à définir")}
                     className="cursor-pointer h-10  hover:bg-primary"
                   >
                     One
                   </li>
                   <li
-                    onClick={() => handleGroupe("Nice")}
+                    onClick={() => handleGroupe("à définir")}
                     className="cursor-pointer h-10  hover:bg-primary"
                   >
                     Two
                   </li>
                   <li
-                    onClick={() => handleGroupe("Nice")}
+                    onClick={() => handleGroupe("à définir")}
                     className="cursor-pointer h-10  hover:bg-primary"
                   >
                     Three is the magic number
@@ -182,17 +236,37 @@ function CreatePost() {
             <div className="dropdown inline-block relative w-full">
               <div className="flex justify-between">
                 <button
-                  onClick={() => setShowMenu3(!showMenu3)}
-                  className=" text-black text-2xl font-['Enedis'] font-semibold h-10 rounded w-full"
+                  onClick={() => openAndChangeCategorie3()}
+                  className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
                 >
-                  Prévention
+                  <div className="flex justify-between h-12 items-center">
+                    <p className="mx-auto">Prévention</p>
+                    <img
+                      className="w-6 h-4 mr-2.5 mt-1.5"
+                      src={FlecheDownGrey}
+                      alt=""
+                    />
+                  </div>
                 </button>
               </div>
               {showMenu3 ? (
                 <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
-                  <li className="cursor-pointer h-10  hover:bg-primary">One</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">Two</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    One
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    Two
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
                     Three is the magic number
                   </li>
                 </ul>
@@ -203,19 +277,39 @@ function CreatePost() {
           </div>
           <div className=" w-full">
             <div className="dropdown inline-block relative w-full">
-              <div className="flex justify-between">
+              <div className="flex justify-between h-12">
                 <button
-                  onClick={() => setShowMenu4(!showMenu4)}
-                  className=" text-black text-2xl font-['Enedis'] font-semibold h-10 rounded w-full"
+                  onClick={() => openAndChangeCategorie4()}
+                  className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
                 >
-                  Clients
+                  <div className="flex justify-between h-12 items-center">
+                    <p className="mx-auto">Clients</p>
+                    <img
+                      className="w-6 h-4 mr-2.5 mt-1.5"
+                      src={FlecheDownGrey}
+                      alt=""
+                    />
+                  </div>
                 </button>
               </div>
               {showMenu4 ? (
                 <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
-                  <li className="cursor-pointer h-10  hover:bg-primary">One</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">Two</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    One
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    Two
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
                     Three is the magic number
                   </li>
                 </ul>
@@ -228,17 +322,37 @@ function CreatePost() {
             <div className="dropdown inline-block relative w-full">
               <div className="flex justify-between">
                 <button
-                  onClick={() => setShowMenu5(!showMenu5)}
-                  className=" text-black text-2xl font-['Enedis'] font-semibold h-10 rounded w-full"
+                  onClick={() => openAndChangeCategorie5()}
+                  className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
                 >
-                  Entre Nous
+                  <div className="flex justify-between h-12 items-center">
+                    <p className="mx-auto">Entre Nous</p>
+                    <img
+                      className="w-6 h-4 mr-2.5 mt-1.5"
+                      src={FlecheDownGrey}
+                      alt=""
+                    />
+                  </div>
                 </button>
               </div>
               {showMenu5 ? (
                 <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
-                  <li className="cursor-pointer h-10  hover:bg-primary">One</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">Two</li>
-                  <li className="cursor-pointer h-10  hover:bg-primary">
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    One
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
+                    Two
+                  </li>
+                  <li
+                    onClick={() => handleGroupe("à définir")}
+                    className="cursor-pointer h-10  hover:bg-primary"
+                  >
                     Three is the magic number
                   </li>
                 </ul>

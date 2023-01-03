@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/button-has-type */
 import React from "react";
@@ -10,9 +12,9 @@ function SelectBar({ showCategories, setShowCategories }) {
     setShowCategories(!showCategories);
   }
   return (
-    <div className="flex justify-around mt-2">
-      <div>
-        <button onClick={() => handleCatergories()}>
+    <div className="flex justify-around text-center mt-2">
+      <div onClick={() => handleCatergories()}>
+        <button>
           <img className="mx-auto" src={groupe} alt="" />
         </button>
         <p className="text-xl text-primary ">Groupe</p>
