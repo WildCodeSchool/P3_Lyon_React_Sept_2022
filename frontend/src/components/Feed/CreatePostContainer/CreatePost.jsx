@@ -80,7 +80,9 @@ function CreatePost() {
     <div>
       <div className="flex justify-between">
         <button>
-          <img className="ml-2 mt-6" src={croix} alt="Close" />
+          <a href="/feed">
+            <img className="ml-2 mt-6" src={croix} alt="Close" />
+          </a>
         </button>
         <button
           className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3

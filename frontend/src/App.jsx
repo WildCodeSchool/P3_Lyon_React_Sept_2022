@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="bg-background">
       <Routes>
-        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/" element={<Connexion />} />
         <Route path="/feed" element={<Main />} />
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/editprofile" element={<EditProfile />} />

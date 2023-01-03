@@ -81,7 +81,7 @@ function EditProfile() {
         >
           Enregistrer
         </button>
-        <Link to="/connexion">
+        <Link to="/">
           <h3 className="font-light">Se déconnecter</h3>
         </Link>
       </div>
