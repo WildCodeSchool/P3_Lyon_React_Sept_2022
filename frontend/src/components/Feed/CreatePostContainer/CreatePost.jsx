@@ -77,7 +77,7 @@ function CreatePost() {
   }
 
   return (
-    <div>
+    <div className="bg-white">
       <div className="flex justify-between">
         <button>
           <a href="/feed">
