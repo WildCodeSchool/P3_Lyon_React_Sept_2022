@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
 
 function Profile() {
+  const [editPost, setEditPost] = useState(false);
+  const handleEditPost = () => {
+    setEditPost(!editPost);
+  };
+
   return (
-    <div>
+    <div className="w-screen">
       <Navbar />
       <ProfileCard />
       <h1 className="text-primary text-center text-4xl mb-3">Publications</h1>
       <div>
-        <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 pt-6 px-6">
+        <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 pt-10 px-6">
+          <button
+            onClick={() => handleEditPost()}
+            className="absolute right-0 bottom-28"
+            type="button"
+          >
+            <img className="h-8" src="./src/assets/menu-dots.png" alt="Menu" />
+          </button>
+          {editPost ? (
+            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <button className="text-black p-4" type="button">
+                <span>Modifier</span>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="flex flex-row self-start pb-4">
             <img
               className="rounded-full w-20 mr-6 border-4 border-violet"
