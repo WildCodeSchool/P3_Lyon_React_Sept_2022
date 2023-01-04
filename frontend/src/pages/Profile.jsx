@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
+import EditPost from "../components/Feed/PostContainer/EditPost";
 
 function Profile() {
-  const [editPost, setEditPost] = useState(false);
+  const [editPostMenu, setEditPostMenu] = useState(false);
+  const [editPostModal, setEditPostModal] = useState(false);
   const handleEditPost = () => {
-    setEditPost(!editPost);
+    setEditPostMenu(!editPostMenu);
+  };
+
+  const handleEditPostModal = () => {
+    setEditPostModal(!editPostModal);
   };
 
   return (
@@ -23,11 +29,24 @@ function Profile() {
           >
             <img className="h-8" src="./src/assets/menu-dots.png" alt="Menu" />
           </button>
-          {editPost ? (
+          {editPostMenu ? (
             <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <button className="text-black p-4" type="button">
+              <button
+                onClick={() => handleEditPostModal()}
+                className="text-black p-4"
+                type="button"
+              >
                 <span>Modifier</span>
               </button>
+              {editPostModal ? (
+                <EditPost
+                  editPostModal={editPostModal}
+                  setEditPostModal={setEditPostModal}
+                  handleEditPostModal={handleEditPostModal}
+                />
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             ""

@@ -103,9 +103,9 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
         <div className="flex items-center">
           <img className="rounded-full w-28 ml-3" src={myAvatar} alt="" />
           <div className="block text-center">
-            <p className="text-xl ml-[24px] text-primary font-bold ">
+            <h2 className="text-xl ml-[24px] text-primary font-bold ">
               Ryan Bidau
-            </p>
+            </h2>
             <p className="text-xl ml-[24px] text-primary">{categories}</p>
             <p className="text-xl ml-[24px] text-primary">{groupe}</p>
           </div>
