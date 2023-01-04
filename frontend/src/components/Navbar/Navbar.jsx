@@ -17,11 +17,13 @@ function Navbar() {
           <div className="rounded-full w-10 h-10 mr-2 border-4 border-violet">
             <Avatar />
           </div>
-          <img
-            className="w-6 h-6 mr-2"
-            src="./src/assets/logout.png"
-            alt="Logout"
-          />
+          <Link to="/">
+            <img
+              className="w-6 h-6 mr-2"
+              src="./src/assets/logout.png"
+              alt="Logout"
+            />
+          </Link>
         </div>
       </div>
     </div>
