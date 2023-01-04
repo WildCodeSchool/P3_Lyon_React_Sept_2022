@@ -3,6 +3,8 @@ import CreatePost from "./components/Feed/CreatePostContainer/CreatePost";
 import "./App.css";
 import Connexion from "./pages/Connexion";
 import Main from "./pages/Main";
+import Profile from "./pages/Profile";
+import EditProfile from "./components/Navbar/Profile/EditProfile";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route path="/" element={<Connexion />} />
         <Route path="/feed" element={<Main />} />
         <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
       </Routes>
     </div>
   );
