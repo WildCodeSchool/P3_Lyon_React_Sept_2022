@@ -42,12 +42,15 @@
 
 h1,
 h2,
-h3, ul {
+h3,
+ul {
   font-family: "Enedis";
   font-weight: bold;
 }
 
-span, input, label {
+span,
+input,
+label {
   font-family: "Enedis";
   font-weight: light;
 }
