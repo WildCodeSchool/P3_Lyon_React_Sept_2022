@@ -5,12 +5,12 @@ import ProfileCard from "../components/Navbar/Profile/ProfileCard";
 
 function Profile() {
   return (
-    <div>
+    <div className="bg-[#f6f6fe]">
       <Navbar />
       <ProfileCard />
       <h1 className="text-primary text-center text-4xl mb-3">Publications</h1>
       <div>
-        <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 pt-6 px-6">
+        <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 pt-6 px-6">
           <div className="flex flex-row self-start pb-4">
             <img
               className="rounded-full w-20 mr-6 border-4 border-violet"

@@ -8,7 +8,7 @@ function Navbar() {
       <div className="w-full pb-6 flex items-center justify-between">
         <Link to="/feed">
           <img
-            className="bg-background w-32 h-16"
+            className="w-32 h-16"
             src="./src/assets/logo-enedis.png"
             alt="Logo"
           />
