@@ -12,7 +12,7 @@ import "../../../App.css";
 import SelectBar from "./SelectBar";
 import FlecheDownWhite from "../../../assets/Vector-down-white.png";
 import FlecheDownGrey from "../../../assets/Vector-down-grey.png";
-import FlechetopWhite from "../../../assets/Vector-top-white.png";
+/* import FlechetopWhite from "../../../assets/Vector-top-white.png"; */
 
 function CreatePost() {
   const [showMenu1, setShowMenu1] = useState(false);
@@ -77,11 +77,11 @@ function CreatePost() {
   }
 
   return (
-    <div>
+    <div className="bg-white">
       <div className="flex justify-between">
         <button>
           <a href="/feed">
-            <img className="ml-2 mt-6" src={croix} alt="" />
+            <img className="ml-2 mt-6" src={croix} alt="Close" />
           </a>
         </button>
         <button

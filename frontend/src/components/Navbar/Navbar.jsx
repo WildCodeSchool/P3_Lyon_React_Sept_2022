@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -15,11 +16,13 @@ function Navbar() {
             src="./src/assets/my-avatar.jpeg"
             alt="My profile avatar"
           />
-          <img
-            className="w-6 h-6 mr-2"
-            src="./src/assets/logout.png"
-            alt="My profile avatar"
-          />
+          <Link to="/connexion">
+            <img
+              className="w-6 h-6 mr-2"
+              src="./src/assets/logout.png"
+              alt="Log out"
+            />{" "}
+          </Link>
         </div>
       </div>
     </div>

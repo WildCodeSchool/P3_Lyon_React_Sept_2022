@@ -47,7 +47,7 @@ h3, ul {
   font-weight: bold;
 }
 
-span, input {
+span, input, label {
   font-family: "Enedis";
   font-weight: light;
 }
