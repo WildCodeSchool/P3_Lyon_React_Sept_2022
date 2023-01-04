@@ -35,11 +35,11 @@ function Post() {
             src="./src/assets/my-avatar.jpeg"
             alt="My profile avatar"
           />
-          <div className="w-5/6 shadow-md rounded-xl h-10 pt-2">
-            <span className="ml-2 text-gray-400">
-              Laissez un commentaire...
-            </span>
-          </div>
+          <input
+            className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+            type="text"
+            placeholder="Laissez un commentaire..."
+          />
         </div>
       </div>
 
@@ -72,11 +72,11 @@ function Post() {
             src="./src/assets/my-avatar.jpeg"
             alt="My profile avatar"
           />
-          <div className="w-5/6 shadow-md rounded-xl h-10 pt-2">
-            <span className="ml-2 text-gray-400">
-              Laissez un commentaire...
-            </span>
-          </div>
+          <input
+            className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+            type="text"
+            placeholder="Laissez un commentaire..."
+          />
         </div>
       </div>
     </div>
