@@ -16,7 +16,7 @@ function Navbar() {
             src="./src/assets/my-avatar.jpeg"
             alt="My profile avatar"
           />
-          <Link to="/connexion">
+          <Link to="/">
             <img
               className="w-6 h-6 mr-2"
               src="./src/assets/logout.png"
