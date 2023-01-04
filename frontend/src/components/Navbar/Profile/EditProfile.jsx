@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function EditProfile() {
+// eslint-disable-next-line react/prop-types
+function EditProfile({ editProfile, setEditProfile }) {
+  /* Close the modal */
+  function closeEditProfile() {
+    setEditProfile(!editProfile);
+  }
+
   return (
-    <div className="h-screen w-screen	overflow-x-hidden bg-white">
-      <button type="button">
-        <img className="ml-2 mt-6" src="./src/assets/croix.png" alt="Close" />
+    <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-hidden">
+      <button onClick={() => closeEditProfile()} type="button">
+        <img className="mr-80 mt-6" src="./src/assets/croix.png" alt="Close" />
       </button>
       <h1 className="text-[32px] text-primary font-bold text-center pb-8">
         Modifier mon profil
