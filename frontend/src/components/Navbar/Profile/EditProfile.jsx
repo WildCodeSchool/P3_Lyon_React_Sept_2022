@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function EditProfile({ editProfile, setEditProfile }) {
+  /* Close the modal */
   function closeEditProfile() {
     setEditProfile(!editProfile);
   }
