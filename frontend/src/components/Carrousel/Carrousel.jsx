@@ -26,8 +26,8 @@ function Carrousel() {
         spaceBetween={20}
         slidesPerView={2.5}
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.warn(swiper)}
-        onSlideChange={() => console.warn("slide change")}
+        // onSwiper={(swiper) => console.warn(swiper)}
+        // onSlideChange={() => console.warn("slide change")}
       >
         {groupes.map((groupe) => (
           <SwiperSlide className="group-card flex bg-cover bg-[url('./assets/solar-groups.jpeg')] justify-center items-center align-middle text-center">

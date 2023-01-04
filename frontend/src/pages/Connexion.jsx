@@ -13,7 +13,7 @@ function Connexion() {
       </div>
       <div className="mb-[80px]">
         <h1 className="text-[40px] leading-[2.9rem] text-primary font-bold text-center ">
-          Votre outil de communication Enedis !
+          Votre outil de communication Enedis
         </h1>
       </div>
       <div>
