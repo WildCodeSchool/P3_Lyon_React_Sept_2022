@@ -11,7 +11,6 @@ import croix from "../../../assets/croix.png";
 import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
-import FlecheDownWhite from "../../../assets/Vector-down-white.png";
 import FlecheDownGrey from "../../../assets/Vector-down-grey.png";
 
 function CreatePost({ showCreatePost, setShowCreatePost }) {
@@ -102,12 +101,12 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
         </div>
         <div className="flex items-center">
           <img className="rounded-full w-28 ml-3" src={myAvatar} alt="" />
-          <div className="block text-center">
-            <p className="text-xl ml-[24px] text-primary font-bold ">
+          <div className="block text-left">
+            <h2 className="text-xl ml-[24px] text-primary font-bold ">
               Ryan Bidau
-            </p>
-            <p className="text-xl ml-[24px] text-primary">{categories}</p>
-            <p className="text-xl ml-[24px] text-primary">{groupe}</p>
+            </h2>
+            <p className="text-md ml-[24px] text-primary">{categories}</p>
+            <p className="text-md ml-[24px] text-primary">{groupe}</p>
           </div>
         </div>
 
@@ -144,46 +143,48 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
             </h1>
             <div className=" w-full">
               <input
-                className=" border-2 rounded-full border-primary mx-auto w-[280px] h-9 my-5 ml-16"
+                className=" border rounded-xl border-primary mx-auto w-[280px] h-9 my-10 ml-16 pl-4"
                 type="search"
                 placeholder="Cherchez un groupe..."
               />
             </div>
 
-            <div className=" w-full">
+            <div className="w-full mt-4">
               <div className="dropdown inline-block relative w-full">
                 <div className="flex justify-between">
                   <button
                     onClick={() => openAndChangeCategorie1()}
-                    className="bg-primary text-white text-2xl font-['Enedis'] font-bold h-14 w-full"
+                    className="text-black text-2xl border border-gray-200 active:bg-primary active:text-white focus:bg-primary focus:text-white h-14 w-full"
                   >
-                    <div className="flex justify-between h-12 border-b-2 border-primary items-center">
-                      <p className="mx-auto">Communication Agence</p>
+                    <div className="flex justify-between h-12 items-center">
+                      <h2 className="mx-auto font-normal pt-2">
+                        Communication Agence
+                      </h2>
                       <img
-                        className="w-6 h-4 mr-2.5 mt-1.5"
-                        src={FlecheDownWhite}
+                        className="w-5 h-5 mr-3 mt-1.5"
+                        src={FlecheDownGrey}
                         alt=""
                       />
                     </div>
                   </button>
                 </div>
                 {showMenu1 ? (
-                  <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
+                  <ul className="dropdown-menu text-lg px-10 font-normal text-gray-700 pt-5 shadow-md">
                     <li
                       onClick={() => handleGroupe("Actualités")}
-                      className="cursor-pointer h-10 hover:bg-primary"
+                      className="cursor-pointer h-10 hover:bg-violet"
                     >
                       Actualités
                     </li>
                     <li
                       onClick={() => handleGroupe("La vie des sites")}
-                      className="cursor-pointer h-10  hover:bg-primary"
+                      className="cursor-pointer h-10  hover:bg-violet"
                     >
                       La vie des sites
                     </li>
                     <li
                       onClick={() => handleGroupe("Affichage réglementaire")}
-                      className="cursor-pointer h-10  hover:bg-primary"
+                      className="cursor-pointer h-10  hover:bg-violet"
                     >
                       Affichage réglementaire
                     </li>
@@ -198,12 +199,12 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                 <div className="flex justify-between">
                   <button
                     onClick={() => openAndChangeCategorie2()}
-                    className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
+                    className=" text-black text-2xl font-['Enedis'] active:bg-primary active:text-white focus:bg-primary focus:text-white font-semibold h-14 rounded w-full"
                   >
                     <div className="flex justify-between h-12 items-center">
-                      <p className="mx-auto">Métier</p>
+                      <h2 className="mx-auto font-normal">Métier</h2>
                       <img
-                        className="w-6 h-4 mr-2.5 mt-1.5"
+                        className="w-5 h-5 mr-3 mt-1.5"
                         src={FlecheDownGrey}
                         alt=""
                       />
@@ -211,7 +212,7 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                   </button>
                 </div>
                 {showMenu2 ? (
-                  <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
+                  <ul className="dropdown-menu text-lg px-10 font-normal text-gray-700 pt-5 shadow-md">
                     <li
                       onClick={() => handleGroupe("à définir")}
                       className="cursor-pointer h-10  hover:bg-primary"
@@ -241,12 +242,12 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                 <div className="flex justify-between">
                   <button
                     onClick={() => openAndChangeCategorie3()}
-                    className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
+                    className=" text-black text-2xl font-['Enedis'] border border-gray-200 active:bg-primary active:text-white focus:bg-primary focus:text-white font-semibold h-14 rounded w-full"
                   >
                     <div className="flex justify-between h-12 items-center">
-                      <p className="mx-auto">Prévention</p>
+                      <h2 className="mx-auto font-normal">Prévention</h2>
                       <img
-                        className="w-6 h-4 mr-2.5 mt-1.5"
+                        className="w-5 h-5 mr-3 mt-1.5"
                         src={FlecheDownGrey}
                         alt=""
                       />
@@ -254,7 +255,7 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                   </button>
                 </div>
                 {showMenu3 ? (
-                  <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
+                  <ul className="dropdown-menu text-lg px-10 font-normal text-gray-700 pt-5 shadow-md">
                     <li
                       onClick={() => handleGroupe("à définir")}
                       className="cursor-pointer h-10  hover:bg-primary"
@@ -284,12 +285,12 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                 <div className="flex justify-between h-12">
                   <button
                     onClick={() => openAndChangeCategorie4()}
-                    className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
+                    className=" text-black text-2xl font-['Enedis'] border-b border-gray-200 active:bg-primary active:text-white focus:bg-primary focus:text-white font-semibold h-14 rounded w-full"
                   >
                     <div className="flex justify-between h-12 items-center">
-                      <p className="mx-auto">Clients</p>
+                      <h2 className="mx-auto font-normal">Clients</h2>
                       <img
-                        className="w-6 h-4 mr-2.5 mt-1.5"
+                        className="w-5 h-5 mr-3 mt-1.5"
                         src={FlecheDownGrey}
                         alt=""
                       />
@@ -297,7 +298,7 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                   </button>
                 </div>
                 {showMenu4 ? (
-                  <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
+                  <ul className="dropdown-menu text-lg px-10 font-normal text-gray-700 pt-5 shadow-md">
                     <li
                       onClick={() => handleGroupe("à définir")}
                       className="cursor-pointer h-10  hover:bg-primary"
@@ -330,9 +331,9 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                     className=" text-black text-2xl font-['Enedis'] font-semibold h-14 rounded w-full"
                   >
                     <div className="flex justify-between h-12 items-center">
-                      <p className="mx-auto">Entre Nous</p>
+                      <h2 className="mx-auto font-normal">Entre Nous</h2>
                       <img
-                        className="w-6 h-4 mr-2.5 mt-1.5"
+                        className="w-5 h-5 mr-3 mt-1.5"
                         src={FlecheDownGrey}
                         alt=""
                       />
@@ -340,7 +341,7 @@ function CreatePost({ showCreatePost, setShowCreatePost }) {
                   </button>
                 </div>
                 {showMenu5 ? (
-                  <ul className="dropdown-menu text-xl font-semibold text-gray-700 pt-1 shadow-md">
+                  <ul className="dropdown-menu text-lg px-10 font-normal text-gray-700 pt-5 shadow-md">
                     <li
                       onClick={() => handleGroupe("à définir")}
                       className="cursor-pointer h-10  hover:bg-primary"

@@ -17,19 +17,19 @@ function SelectBar({ showCategories, setShowCategories }) {
         <button>
           <img className="mx-auto" src={groupe} alt="" />
         </button>
-        <p className="text-xl text-primary ">Groupe</p>
+        <h3 className="text-md font-light text-primary ">Groupe</h3>
       </div>
       <div>
         <button>
           <img className="mx-auto" src={media} alt="" />
         </button>
-        <p className="text-xl text-primary">Image</p>
+        <h3 className="text-md font-light text-primary">Image</h3>
       </div>
       <div>
         <button>
           <img className="mx-auto" src={file} alt="" />
         </button>
-        <p className="text-xl text-primary ">Fichier</p>
+        <h3 className="text-md font-light text-primary ">Fichier</h3>
       </div>
     </div>
   );
