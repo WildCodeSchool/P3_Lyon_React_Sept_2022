@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 function EditProfile({ editProfile, setEditProfile }) {
   /* Close the modal */
-  function closeEditProfile() {
+  const closeEditProfile = () => {
     setEditProfile(!editProfile);
-  }
+  };
 
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-hidden">

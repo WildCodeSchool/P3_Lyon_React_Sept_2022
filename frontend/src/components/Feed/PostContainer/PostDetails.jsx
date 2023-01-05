@@ -1,9 +1,13 @@
 import React from "react";
 
-function PostDetails() {
+// eslint-disable-next-line react/prop-types
+function PostDetails({ postDetails, setPostDetails }) {
+  const closePostDetails = () => {
+    setPostDetails(!postDetails);
+  };
   return (
-    <div className="h-screen bg-white">
-      <button type="button">
+    <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll">
+      <button type="button" onClick={() => closePostDetails()}>
         <img className="ml-4 mt-6" src="./src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10">
@@ -33,29 +37,32 @@ function PostDetails() {
         fin d'année. Des animations de Noël en Ardèche Hermitage se préparent
         pour votre plus grand plaisir !
       </p>
-      <div className="w-full mt-6 flex items-center justify-between px-6">
-        <div className="flex flex-col items-center justify-center">
-          <img
-            className="rounded-full w-10 mr-2 border-4 border-green"
-            src="./src/assets/user-avatar2.jpeg"
-            alt="My profile avatar"
-          />
-          <h3 className="font-light text-[9px]">Michael</h3>
-        </div>
-        <input
-          className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-          type="text"
-          value="Super idée ! On fait Secret Santa ?"
+      <div className="w-full mt-6 flex items-center px-6">
+        <img
+          className="rounded-full w-10 mr-4 border-4 border-green"
+          src="./src/assets/user-avatar2.jpeg"
+          alt="My profile avatar"
         />
+
+        <div className="flex flex-col w-screen">
+          <h3 className="font-light text-[#ABA1A1] text-[9px]">
+            Michael Jordan
+          </h3>
+          <input
+            className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+            type="text"
+            value="Super idée ! On fait Secret Santa ?"
+          />
+        </div>
       </div>
       <div className="w-full mt-6 flex items-center justify-between px-6 pb-6">
         <img
-          className="rounded-full w-10 mr-2 border-4 border-violet"
+          className="rounded-full w-10 mr-4 border-4 border-violet"
           src="./src/assets/my-avatar.jpeg"
           alt="My profile avatar"
         />
         <input
-          className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+          className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
           type="text"
           placeholder="Laissez un commentaire..."
         />
