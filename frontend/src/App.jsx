@@ -6,16 +6,21 @@ import Main from "./pages/Main";
 import Profile from "./pages/Profile";
 import EditProfile from "./components/Navbar/Profile/EditProfile";
 
+import { PostUserContextProvider } from "./contexts/PostUserContext";
+
 function App() {
   return (
     <div className="bg-background">
-      <Routes>
-        <Route path="/" element={<Connexion />} />
-        <Route path="/feed" element={<Main />} />
-        <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/editprofile" element={<EditProfile />} />
-      </Routes>
+      <PostUserContextProvider>
+        <Routes>
+          <Route path="/" element={<Connexion />} />
+          <Route path="/feed" element={<Main />} />
+          <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:user_id" element={<Profile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
+        </Routes>
+      </PostUserContextProvider>
     </div>
   );
 }

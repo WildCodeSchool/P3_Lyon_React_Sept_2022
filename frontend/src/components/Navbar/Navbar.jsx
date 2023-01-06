@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "./Avatar";
 
 function Navbar() {
+  const message = "phjkljnlknlkn";
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between">
@@ -15,7 +15,13 @@ function Navbar() {
         </Link>
         <div className="flex flex-end items-center">
           <div className="rounded-full w-10 h-10 mr-2 border-4 border-violet">
-            <Avatar />
+            <Link to="/profile" message={message}>
+              <img
+                src="./src/assets/my-avatar.jpeg"
+                alt="My profile avatar"
+                className="rounded-full"
+              />
+            </Link>
           </div>
           <Link to="/">
             <img
