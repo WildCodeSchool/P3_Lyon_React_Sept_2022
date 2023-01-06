@@ -4,7 +4,6 @@ const browse = (req, res) => {
   models.user_detail
     .findAll()
     .then((results) => {
-      console.log(results);
       res.send(results);
     })
     .catch((err) => {
@@ -21,7 +20,6 @@ const read = (req, res) => {
     .then((results) => {
       if (results[0]) res.send(results[0]);
       else res.sendStatus(404);
-      console.log(results);
     })
     .catch((error) => {
       console.error(error);

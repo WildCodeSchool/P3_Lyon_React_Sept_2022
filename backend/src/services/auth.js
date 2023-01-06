@@ -17,7 +17,6 @@ const hashPassword = (req, res, next) => {
 
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
-      console.log(hashedPassword);
 
       delete req.body.password;
 

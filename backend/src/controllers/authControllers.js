@@ -5,7 +5,6 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
   models.user_detail
     .findByEmailWithPassword(email)
     .then((user) => {
-      console.log(user);
       req.user = user;
       next();
     })
