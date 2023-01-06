@@ -1,10 +1,15 @@
 import React from "react";
 import Post from "./Post";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
+  const { comments } = usePostUserContext();
+
   return (
     <div>
-      <Post />
+      {comments.map((comment) => (
+        <Post comment={comment} />
+      ))}
     </div>
   );
 }

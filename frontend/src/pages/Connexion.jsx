@@ -13,7 +13,7 @@ function Connexion() {
       </div>
       <div className="mb-[80px]">
         <h1 className="text-[40px] leading-[2.9rem] text-primary font-bold text-center ">
-          Votre outil de communication Enedis !
+          Votre outil de communication Enedis
         </h1>
       </div>
       <div>
@@ -28,7 +28,7 @@ function Connexion() {
             Identifiant
           </p>
           <input
-            className="border border-[#1423DC]  ml-[50px] h-12 w-[76vw] rounded mb-8"
+            className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8"
             type="text"
             placeholder="name@enedis.fr"
           />
@@ -36,7 +36,7 @@ function Connexion() {
         <div>
           <p className="text-black font-bold text-lg ml-[50px]">Mot de passe</p>
           <input
-            className="border border-[#1423DC]  ml-[50px] h-12 w-[76vw] rounded mb-8"
+            className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8"
             type="password"
             placeholder="*************"
           />
