@@ -4,7 +4,6 @@ import "./App.css";
 import Connexion from "./pages/Connexion";
 import Main from "./pages/Main";
 import Profile from "./pages/Profile";
-import EditProfile from "./components/Navbar/Profile/EditProfile";
 
 import { PostUserContextProvider } from "./contexts/PostUserContext";
 
@@ -18,7 +17,6 @@ function App() {
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:user_id" element={<Profile />} />
-          <Route path="/editprofile" element={<EditProfile />} />
         </Routes>
       </PostUserContextProvider>
     </div>

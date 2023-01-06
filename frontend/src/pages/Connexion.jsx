@@ -28,7 +28,7 @@ function Connexion() {
             Identifiant
           </p>
           <input
-            className="border border-[#1423DC]  ml-[50px] h-12 w-[76vw] rounded mb-8"
+            className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8"
             type="text"
             placeholder="name@enedis.fr"
           />
@@ -36,7 +36,7 @@ function Connexion() {
         <div>
           <p className="text-black font-bold text-lg ml-[50px]">Mot de passe</p>
           <input
-            className="border border-[#1423DC]  ml-[50px] h-12 w-[76vw] rounded mb-8"
+            className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8"
             type="password"
             placeholder="*************"
           />
