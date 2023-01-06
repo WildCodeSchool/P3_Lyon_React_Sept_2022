@@ -4,6 +4,8 @@ import "./App.css";
 import Connexion from "./pages/Connexion";
 import Main from "./pages/Main";
 import EditProfile from "./components/Navbar/Profile/EditProfile";
+import Admin from "./pages/Admin";
+import PostList from "./pages/PostList";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/feed" element={<Main />} />
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/adminUser" element={<PostList />} />
       </Routes>
     </div>
   );
