@@ -80,8 +80,8 @@ function Profile() {
               Solar énergies renouvelables
             </h2>
             <p className="self-start text-sm">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus,
-              natus?...
+              Le salon énergies renouvelables à Barcelone a eu lieu le 20
+              décembre...
               <span className="text-primary text-base"> voir plus</span>
             </p>
             <div className="w-full mt-6 flex items-center justify-between pb-6">
