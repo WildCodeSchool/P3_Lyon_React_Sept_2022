@@ -5,9 +5,9 @@ import EditProfile from "./EditProfile";
 function ProfileCard() {
   const [editProfile, setEditProfile] = useState(false);
 
-  function openEditProfile() {
+  const openEditProfile = () => {
     setEditProfile(!editProfile);
-  }
+  };
 
   return (
     <div className="flex flex-col justify-center w-screen">

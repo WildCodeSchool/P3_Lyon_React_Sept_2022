@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PostDetails from "./PostDetails";
 
 function Post() {
+  const [postDetails, setPostDetails] = useState(false);
+
+  const openPostDetails = () => {
+    setPostDetails(!postDetails);
+  };
+
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 pt-6 px-6">
-        <div className="flex flex-row self-start pb-4">
+      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
+        <div className="flex flex-row self-start py-4 px-6">
           <img
             className="rounded-full w-20 mr-6 border-4 border-violet"
             src="./src/assets/avatar-user.jpeg"
@@ -22,29 +29,42 @@ function Post() {
           </div>
         </div>
         <img src="./src/assets/picture-post.jpg" alt="Post" />
-        <h2 className="text-primary self-start my-2">
-          Organisation repas de Noël !
-        </h2>
-        <p className="self-start text-sm">
-          Cette année le repas de Noël aura lieu le 22 décembre...
-          <span className="text-primary text-sm"> voir plus</span>
-        </p>
-        <div className="w-full mt-6 flex items-center justify-between pb-6">
-          <img
-            className="rounded-full w-10 mr-2 border-4 border-violet"
-            src="./src/assets/my-avatar.jpeg"
-            alt="My profile avatar"
-          />
-          <input
-            className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-            type="text"
-            placeholder="Laissez un commentaire..."
-          />
+        <div className="px-6">
+          <h2 className="text-black self-start my-2">
+            Organisation repas de Noël !
+          </h2>
+          <p className="self-start text-sm">
+            Cette année le repas de Noël aura lieu le 22 décembre. Le mois de
+            décembre, nous...
+            <button onClick={() => openPostDetails()} type="button">
+              <span className="text-primary text-base"> voir plus</span>
+            </button>
+            {postDetails ? (
+              <PostDetails
+                postDetails={postDetails}
+                setPostDetails={setPostDetails}
+              />
+            ) : (
+              ""
+            )}
+          </p>
+          <div className="w-full mt-6 flex items-center justify-between pb-6">
+            <img
+              className="rounded-full w-10 mr-2 border-4 border-violet"
+              src="./src/assets/my-avatar.jpeg"
+              alt="My profile avatar"
+            />
+            <input
+              className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+              type="text"
+              placeholder="Laissez un commentaire..."
+            />
+          </div>
         </div>
       </div>
 
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 pt-6 px-6">
-        <div className="flex flex-row self-start pb-4">
+      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
+        <div className="flex flex-row self-start py-4 px-6">
           <img
             className="rounded-full w-20 mr-6 border-4 border-green"
             src="./src/assets/user-avatar2.jpeg"
@@ -58,25 +78,28 @@ function Post() {
             <h3 className="text-gray-400 font-light">3j</h3>
           </div>
         </div>
-        <h2 className="text-primary self-start my-2">
-          Nouvelle réglementation
-        </h2>
-        <p className="self-start text-sm">
-          Lorem ipsum dolor sit amet. Rem quisquam voluptatem eos enim dolor sed
-          quos beatae. Est commodi pariatur id blanditiis aliquam qui similique
-          omnis in voluptatem officiis nam iste sint.
-        </p>
-        <div className="w-full mt-6 flex items-center justify-between pb-6">
-          <img
-            className="rounded-full w-10 mr-2 border-4 border-violet"
-            src="./src/assets/my-avatar.jpeg"
-            alt="My profile avatar"
-          />
-          <input
-            className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-            type="text"
-            placeholder="Laissez un commentaire..."
-          />
+        <div className="px-6">
+          <h2 className="text-black self-start my-2">
+            Nouvelle réglementation
+          </h2>
+          <p className="self-start text-sm">
+            La RT 2020 entrera en vigueur au 1er janvier 2023. Elle impose la
+            construction de bâtiments à énergie positive et de maisons passives.
+            La RT 2020 se différencie de la réglementation thermique 2012 sur le
+            type de bâtiments concernés.
+          </p>
+          <div className="w-full mt-6 flex items-center justify-between pb-6">
+            <img
+              className="rounded-full w-10 mr-2 border-4 border-violet"
+              src="./src/assets/my-avatar.jpeg"
+              alt="My profile avatar"
+            />
+            <input
+              className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+              type="text"
+              placeholder="Laissez un commentaire..."
+            />
+          </div>
         </div>
       </div>
     </div>
