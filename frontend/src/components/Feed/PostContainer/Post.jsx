@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PostDetails from "./PostDetails";
 
-function Post() {
+function Post({ comment }) {
   const [postDetails, setPostDetails] = useState(false);
 
   const openPostDetails = () => {
@@ -11,43 +12,85 @@ function Post() {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
+      {/* <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
         <div className="flex flex-row self-start py-4 px-6">
           <img
             className="rounded-full w-20 mr-6 border-4 border-violet"
-            src="./src/assets/avatar-user.jpeg"
-            alt="User avatar"
+            src={`./src/assets/${comment.avatar}`}
+            alt={`${comment.username}'s avatar`}
           />
           <div className="flex flex-col">
-            <Link to="/profile">
-              <h2 className="text-primary">Margaux Donova</h2>
+            <Link to={`/profile/${comment.user_id}`}>
+              <h2 className="text-primary">{comment.username}</h2>
             </Link>
-            <h3 className="font-light text-primary">
-              Communication Agence - Actualités
-            </h3>
+            <h3 className="font-light text-primary">{comment.category}</h3>
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
-        <img src="./src/assets/picture-post.jpg" alt="Post" />
+        <img src={`./src/assets/${comment.image}`} alt="Post" />
+
+        <h2 className="text-primary self-start my-2">{comment.title}</h2>
+        <p className="self-start text-sm">
+          {comment.article}...
+          <button onClick={() => openPostDetails()} type="button">
+            <span className="text-primary text-sm"> voir plus</span>
+          </button>
+        </p>
+
+        {postDetails ? (
+          <PostDetails
+            postDetails={postDetails}
+            setPostDetails={setPostDetails}
+          />
+        ) : (
+          ""
+        )}
+        <div className="w-full mt-6 flex items-center justify-between pb-6">
+          <img
+            className="rounded-full w-10 mr-2 border-4 border-violet"
+            src="./src/assets/my-avatar.jpeg"
+            alt="My profile avatar"
+          />
+          <input
+            className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+            type="text"
+            placeholder="Laissez un commentaire..."
+          />
+        </div>
+      </div> */}
+
+      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10">
+        <div className="flex flex-row self-start py-4 px-6">
+          <img
+            className="rounded-full w-20 mr-6 border-4 border-violet"
+            src={`./src/assets/${comment.avatar}`}
+            alt={`${comment.username}'s avatar`}
+          />
+          <div className="flex flex-col">
+            <Link to="/profile">
+              <h2 className="text-primary">{comment.username}</h2>
+            </Link>
+            <h3 className="font-light text-primary">{comment.category}</h3>
+            <h3 className="text-gray-400 font-light">1h</h3>
+          </div>
+        </div>
+        <img src={`./src/assets/${comment.image}`} alt="Post" />
         <div className="px-6">
-          <h2 className="text-black self-start my-2">
-            Organisation repas de Noël !
-          </h2>
-          <p className="self-start text-sm">
-            Cette année le repas de Noël aura lieu le 22 décembre. Le mois de
-            décembre, nous...
-            <button onClick={() => openPostDetails()} type="button">
+          <button onClick={() => openPostDetails()} type="button">
+            <h2 className="text-black self-start my-2">{comment.title}</h2>
+            <p className="self-start text-sm">
+              {comment.article}..
               <span className="text-primary text-base"> voir plus</span>
-            </button>
-            {postDetails ? (
-              <PostDetails
-                postDetails={postDetails}
-                setPostDetails={setPostDetails}
-              />
-            ) : (
-              ""
-            )}
-          </p>
+              {postDetails ? (
+                <PostDetails
+                  postDetails={postDetails}
+                  setPostDetails={setPostDetails}
+                />
+              ) : (
+                ""
+              )}
+            </p>
+          </button>
           <div className="w-full mt-6 flex items-center justify-between pb-6">
             <img
               className="rounded-full w-10 mr-2 border-4 border-violet"
@@ -63,7 +106,7 @@ function Post() {
         </div>
       </div>
 
-      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
+      {/* <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10">
         <div className="flex flex-row self-start py-4 px-6">
           <img
             className="rounded-full w-20 mr-6 border-4 border-green"
@@ -101,7 +144,7 @@ function Post() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
