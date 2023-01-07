@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
+// eslint-disable-next-line import/no-named-as-default
 import EditPost from "../components/Feed/PostContainer/EditPost";
 
 function Profile() {
@@ -47,9 +48,9 @@ function Profile() {
               </button>
               {editPostModal ? (
                 <EditPost
-                  editPostModal={editPostModal}
-                  setEditPostModal={setEditPostModal}
                   handleEditPostModal={handleEditPostModal}
+                  setEditPostMenu={setEditPostMenu}
+                  editPostMenu={editPostMenu}
                 />
               ) : (
                 ""
