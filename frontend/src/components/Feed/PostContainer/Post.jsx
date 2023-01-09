@@ -61,11 +61,13 @@ function Post({ comment }) {
 
       <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10">
         <div className="flex flex-row self-start py-4 px-6">
-          <img
-            className="rounded-full w-20 mr-6 border-4 border-violet"
-            src={`./src/assets/${comment.avatar}`}
-            alt={`${comment.username}'s avatar`}
-          />
+          <Link to="/profile">
+            <img
+              className="rounded-full w-20 mr-6 border-4 border-violet"
+              src={`./src/assets/${comment.avatar}`}
+              alt={`${comment.username}'s avatar`}
+            />
+          </Link>
           <div className="flex flex-col">
             <Link to="/profile">
               <h2 className="text-primary">{comment.username}</h2>

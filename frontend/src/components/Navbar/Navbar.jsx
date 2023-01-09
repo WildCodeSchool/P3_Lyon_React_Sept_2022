@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const message = "phjkljnlknlkn";
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between">
@@ -15,7 +14,7 @@ function Navbar() {
         </Link>
         <div className="flex flex-end items-center">
           <div className="rounded-full w-10 h-10 mr-2 border-4 border-violet">
-            <Link to="/profile" message={message}>
+            <Link to="/profile">
               <img
                 src="./src/assets/my-avatar.jpeg"
                 alt="My profile avatar"

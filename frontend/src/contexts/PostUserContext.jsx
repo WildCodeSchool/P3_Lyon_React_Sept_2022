@@ -32,21 +32,21 @@ export function PostUserContextProvider({ children }) {
       name: "Ryan Bidau",
       job: "Project Manager",
       team: "Commercial",
-      image: "../assets/my-avatar.jpeg",
+      avatar: "my-avatar.jpeg",
     },
     {
       user_id: 2,
       name: "Margaux Donova",
       job: "Chargée de Communication",
       team: "Communication / Marketing",
-      image: "../assets/avatar-user.jpeg",
+      avatar: "avatar-user.jpeg",
     },
     {
       user_id: 3,
       name: "Michael Jackson",
       job: "UX Designer",
       team: "Web Services",
-      image: "../assets/user-avatar2.jpeg",
+      avatar: "user-avatar2.jpeg",
     },
   ];
 
