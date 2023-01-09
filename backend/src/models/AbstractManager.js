@@ -4,17 +4,17 @@ class AbstractManager {
   }
 
   find(id) {
-    return this.connection.query(`select * from  ${this.table} where id = ?`, [
+    return this.connection.any(`select * from  ${this.table} where id = $1`, [
       id,
     ]);
   }
 
   findAll() {
-    return this.connection.query(`select * from  ${this.table}`);
+    return this.connection.any(`select * from  ${this.table}`);
   }
 
   delete(id) {
-    return this.connection.query(`delete from ${this.table} where id = ?`, [
+    return this.connection.query(`delete from ${this.table} where id = $1`, [
       id,
     ]);
   }
