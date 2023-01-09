@@ -18,6 +18,7 @@ const hashPassword = (req, res, next) => {
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
 
+      console.log("hashedPassword", hashedPassword);
       delete req.body.password;
 
       next();
@@ -41,7 +42,11 @@ const verifyPassword = (req, res) => {
         });
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
+        console.log(token);
+        console.log(req.user);
+        console.log("Message : You are connected");
       } else res.sendStatus(401);
+      console.log("Error : Your password or email is wrong, try again");
     })
     .catch((err) => {
       // do something with err
@@ -49,8 +54,26 @@ const verifyPassword = (req, res) => {
       res.sendStatus(400);
     });
 };
+const verifyToken = (req, res, next) => {
+  try {
+    const autorizationHeader = req.headers.authorization;
+    if (!autorizationHeader)
+      throw new Error("Autorization needed for this route");
+
+    const [type, token] = autorizationHeader.split(" ");
+    if (type !== "Bearer") throw new Error("Only Bearer token allowed");
+    if (!token) throw new Error("Token needed");
+
+    req.payloads = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
 
 module.exports = {
   hashPassword,
   verifyPassword,
+  verifyToken,
 };

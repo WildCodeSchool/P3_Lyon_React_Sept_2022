@@ -2,7 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-const { hashPassword, verifyPassword } = require("./services/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./services/auth");
 
 const userControllers = require("./controllers/userControllers");
 const authControllers = require("./controllers/authControllers");
@@ -20,6 +24,6 @@ router.get("/api/users", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);
-router.delete("/api/users/:id", userControllers.destroy);
+router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
 module.exports = router;
