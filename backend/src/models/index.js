@@ -1,17 +1,21 @@
+require("dotenv").config();
+const promise = require("bluebird");
 const fs = require("fs");
-const mysql = require("mysql2/promise");
 const path = require("path");
 
-const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+const options = {
+  // Initialization Options
+  promiseLib: promise,
+};
 
-const pool = mysql.createPool({
-  host: DB_HOST,
-  user: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_NAME,
-});
+const pgp = require("pg-promise")(options);
 
-pool.getConnection().catch(() => {
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
+
+const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+const db = pgp(connectionString);
+
+db.connect().catch(() => {
   console.warn(
     "Warning:",
     "Failed to get a DB connection.",
@@ -28,7 +32,7 @@ const models = fs
     const Manager = require(path.join(__dirname, file));
 
     const managerInstance = new Manager();
-    managerInstance.setConnection(pool);
+    managerInstance.setConnection(db);
 
     return { ...acc, [managerInstance.table]: managerInstance };
   }, {});
