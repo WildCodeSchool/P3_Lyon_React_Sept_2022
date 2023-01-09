@@ -18,7 +18,7 @@ const hashPassword = (req, res, next) => {
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
 
-      console.log("hashedPassword", hashedPassword);
+      console.warn("hashedPassword", hashedPassword);
       delete req.body.password;
 
       next();
@@ -42,11 +42,11 @@ const verifyPassword = (req, res) => {
         });
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
-        console.log(token);
-        console.log(req.user);
-        console.log("Message : You are connected");
+        console.warn(token);
+        console.warn(req.user);
+        console.warn("Message : You are connected");
       } else res.sendStatus(401);
-      console.log("Error : Your password or email is wrong, try again");
+      console.warn("Error : Your password or email is wrong, try again");
     })
     .catch((err) => {
       // do something with err
