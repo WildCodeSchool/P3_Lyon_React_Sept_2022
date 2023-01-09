@@ -2,12 +2,28 @@ const express = require("express");
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/itemControllers");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./services/auth");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+const userControllers = require("./controllers/userControllers");
+const authControllers = require("./controllers/authControllers");
+
+// Authentification
+
+router.post(
+  "/api/login",
+  authControllers.getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword
+);
+
+// Gestion des users
+router.get("/api/users", userControllers.browse);
+router.get("/api/users/:id", userControllers.read);
+router.post("/api/users", hashPassword, userControllers.add);
+router.put("/api/users/:id", userControllers.edit);
+router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
 module.exports = router;
