@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import CreatePost from "./components/Feed/CreatePostContainer/CreatePost";
 import "./App.css";
 import Connexion from "./pages/Connexion";
@@ -10,10 +11,15 @@ import Admin from "./pages/Admin";
 import PostList from "./pages/PostList";
 
 function App() {
+  const location = useLocation();
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="bg-background">
-      <CurrentUserContextProvider>
-        <PostUserContextProvider>
+      <PostUserContextProvider>
+        <CurrentUserContextProvider>
           <Routes>
             <Route path="/" element={<Connexion />} />
             <Route path="/feed" element={<Main />} />
@@ -23,8 +29,8 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/adminUser" element={<PostList />} />
           </Routes>
-        </PostUserContextProvider>
-      </CurrentUserContextProvider>
+        </CurrentUserContextProvider>
+      </PostUserContextProvider>
     </div>
   );
 }

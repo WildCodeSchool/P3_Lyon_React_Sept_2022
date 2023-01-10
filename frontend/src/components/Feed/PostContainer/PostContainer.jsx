@@ -3,12 +3,12 @@ import Post from "./Post";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
-  const { comments } = usePostUserContext();
+  const { posts } = usePostUserContext();
 
   return (
     <div>
-      {comments.map((comment) => (
-        <Post comment={comment} />
+      {posts.map((post) => (
+        <Post key={post.post_id} post={post} />
       ))}
     </div>
   );
