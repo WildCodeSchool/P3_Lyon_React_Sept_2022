@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS attached_file;
 DROP TABLE IF EXISTS like_table;
 DROP TABLE IF EXISTS post;
@@ -69,6 +70,15 @@ CONSTRAINT fk_attached_file_post
 FOREIGN KEY(post_id) REFERENCES post(id)
 );
 
+CREATE TABLE comment(
+id serial primary key not null,
+content text not null,
+post_id int not null,
+CONSTRAINT fk_comment_post
+FOREIGN KEY(post_id) REFERENCES post(id),
+CONSTRAINT fk_comment_user
+FOREIGN KEY(user_id) REFERENCES user_detail(id)
+);
 
 
 
