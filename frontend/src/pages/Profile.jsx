@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
+// eslint-disable-next-line import/no-named-as-default
 import EditPost from "../components/Feed/PostContainer/EditPost";
 import { usePostUserContext } from "../contexts/PostUserContext";
+import avatar from "../assets/my-avatar.jpeg";
+import postImage from "../assets/solar-groups.jpeg";
+import menuDots from "../assets/menu-dots.png";
 
 function Profile() {
   const [editPostMenu, setEditPostMenu] = useState(false);
@@ -45,11 +49,7 @@ function Profile() {
             <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6">
               <div className="flex justify-end pt-2">
                 <button onClick={() => handleEditPost()} type="button">
-                  <img
-                    className="h-8"
-                    src="./src/assets/menu-dots.png"
-                    alt="Menu"
-                  />
+                  <img className="h-8" src={menuDots} alt="Menu" />
                 </button>
               </div>
               {editPostMenu ? (
@@ -82,7 +82,7 @@ function Profile() {
               <div className="flex flex-row self-start pb-4 px-6">
                 <img
                   className="rounded-full w-20 mr-6 border-4 border-violet"
-                  src="./src/assets/my-avatar.jpeg"
+                  src={avatar}
                   alt="User avatar"
                 />
                 <div className="flex flex-col">
@@ -95,7 +95,7 @@ function Profile() {
                   <h3 className="text-gray-400 font-light">1h</h3>
                 </div>
               </div>
-              <img src="./src/assets/solar-groups.jpeg" alt="Post" />
+              <img src={postImage} alt="Post" />
               <div className="px-6">
                 <h2 className="text-black self-start my-2">
                   Solar énergies renouvelables
@@ -108,7 +108,7 @@ function Profile() {
                 <div className="w-full mt-6 flex items-center justify-between pb-6">
                   <img
                     className="rounded-full w-10 mr-2 border-4 border-violet"
-                    src="./src/assets/my-avatar.jpeg"
+                    src={avatar}
                     alt="My profile avatar"
                   />
                   <input

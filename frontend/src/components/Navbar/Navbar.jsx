@@ -7,17 +7,17 @@ import { usePostUserContext } from "../../contexts/PostUserContext";
 import avatar from "../../assets/my-avatar.jpeg";
 
 function Navbar() {
-  const { setCurrentUser } = useCurrentUserContext();
-  const { users, setIsCategory } = usePostUserContext();
+  const { setCurrentUser, user } = useCurrentUserContext();
+  const { setIsGroup } = usePostUserContext();
 
   useEffect(() => {
-    setCurrentUser(users[0]);
+    setCurrentUser(user);
   }, []);
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between">
-        <Link to="/feed">
-          <button type="button" onClick={() => setIsCategory(false)}>
+        <Link to={user.is_admin ? "/admin" : "/feed"}>
+          <button type="button" onClick={() => setIsGroup(false)}>
             <img className="w-32 h-16" src={logoEnedis} alt="Logo" />
           </button>
         </Link>

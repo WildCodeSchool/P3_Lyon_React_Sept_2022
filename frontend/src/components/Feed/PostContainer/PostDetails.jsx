@@ -8,7 +8,7 @@ function PostDetails({ postDetails, setPostDetails }) {
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll">
       <button type="button" onClick={() => closePostDetails()}>
-        <img className="ml-4 mt-6" src="./src/assets/croix.png" alt="Close" />
+        <img className="mr-80 mt-6" src="./src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10">
         <img
@@ -37,6 +37,16 @@ function PostDetails({ postDetails, setPostDetails }) {
         fin d'année. Des animations de Noël en Ardèche Hermitage se préparent
         pour votre plus grand plaisir !
       </p>
+      <h2 className="font-bold text-center">Ouvrir le pdf :</h2>
+      <div className="flex items-center justify-center text-center pb-2">
+        <div
+          className="w-2/5 flex flex-col justify-center items-center shadow-md rounded-xl py-4 text-sm
+        placeholder-gray-500 focus:placeholder-gray-400"
+        >
+          <img className="h-8 w-8 pr-1" src="./src/assets/pdf.png" alt="PDF" />
+          participants.pdf
+        </div>
+      </div>
       <div className="w-full mt-6 flex items-center px-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-green"
@@ -45,8 +55,8 @@ function PostDetails({ postDetails, setPostDetails }) {
         />
 
         <div className="flex flex-col w-screen">
-          <h3 className="font-light text-[#ABA1A1] text-[9px]">
-            Michael Jordan
+          <h3 className="font-light self-start text-[#ABA1A1] text-[9px]">
+            Michael Jackson
           </h3>
           <input
             className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
