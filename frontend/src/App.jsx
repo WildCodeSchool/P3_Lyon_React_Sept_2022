@@ -18,8 +18,8 @@ function App() {
 
   return (
     <div className="bg-background">
-      <CurrentUserContextProvider>
-        <PostUserContextProvider>
+      <PostUserContextProvider>
+        <CurrentUserContextProvider>
           <Routes>
             <Route path="/" element={<Connexion />} />
             <Route path="/feed" element={<Main />} />
@@ -29,8 +29,8 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/adminUser" element={<PostList />} />
           </Routes>
-        </PostUserContextProvider>
-      </CurrentUserContextProvider>
+        </CurrentUserContextProvider>
+      </PostUserContextProvider>
     </div>
   );
 }

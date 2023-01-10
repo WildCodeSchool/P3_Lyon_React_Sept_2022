@@ -11,6 +11,7 @@ id serial primary key not null,
 firstname varchar(250),
 lastname varchar(250),
 email varchar(250) not null,
+is_admin boolean not null DEFAULT false,
 user_password varchar(400) not null,
 avatar varchar(250)
 );

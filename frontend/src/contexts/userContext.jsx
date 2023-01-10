@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
@@ -8,9 +9,13 @@ export default CurrentUserContext;
 export function CurrentUserContextProvider({ children }) {
   const [user, setUser] = useState({});
 
+  const [currentUser, setCurrentUser] = useState([]);
+
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <CurrentUserContext.Provider value={{ user, setUser }}>
+    <CurrentUserContext.Provider
+      value={{ user, setUser, currentUser, setCurrentUser }}
+    >
       {children}
     </CurrentUserContext.Provider>
   );

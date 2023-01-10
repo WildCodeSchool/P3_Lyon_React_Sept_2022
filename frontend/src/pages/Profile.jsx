@@ -8,18 +8,19 @@ import { usePostUserContext } from "../contexts/PostUserContext";
 function Profile() {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const [currentUser, setCurrentUser] = useState([]);
-  const { users, loggedUser } = usePostUserContext();
+  const [userProfile, setUserProfile] = useState([]);
+  const { users } = usePostUserContext();
   const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id, 10) > 0) {
+    if (parseInt(params.user_id, 10) > 0) {
       const result = users.filter(
-        (user) => user.user_id === parseInt(params.id, 10)
+        (user) => user.user_id === parseInt(params.user_id, 10)
       );
-      setCurrentUser(result[0]);
+
+      setUserProfile(result[0]);
     } else {
-      setCurrentUser(users[0]);
+      setUserProfile(users[0]);
     }
   }, [params]);
 
@@ -33,14 +34,13 @@ function Profile() {
 
   return (
     <div className="bg-[#f6f6fe] w-screen">
-      {users[0] && (
+      {userProfile && (
         <div>
           <Navbar />
-          <ProfileCard currentUser={currentUser} />
+          <ProfileCard userProfile={userProfile} />
           <h1 className="text-primary text-center text-4xl mb-3">
-            Publications and {loggedUser.name}
+            Publications
           </h1>
-
           <div>
             <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6">
               <div className="flex justify-end pt-2">
