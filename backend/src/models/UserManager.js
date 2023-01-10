@@ -27,16 +27,22 @@ class UserManager extends AbstractManager {
 
   insert(user) {
     return this.connection.any(
-      `INSERT INTO ${this.table} (firstname, lastname, email, user_password) VALUES ($1, $2, $3, $4) RETURNING *;
+      `INSERT INTO ${this.table} ( firstname, lastname, email, user_password, is_admin) VALUES ($1, $2, $3, $4, $5) RETURNING *;
       `,
-      [user.firstname, user.lastname, user.email, user.hashedPassword]
+      [
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.hashedPassword,
+        user.is_admin,
+      ]
     );
   }
 
   update(user) {
     return this.connection.any(
-      `update ${this.table} set firstname = $1, lastname = $2, email = $3 where id = $4`,
-      [user.firstname, user.lastname, user.email, user.id]
+      `update ${this.table} set firstname = $1, lastname = $2, email = $3 , is_admin = $4 where id = $5`,
+      [user.firstname, user.lastname, user.email, user.is_admin, user.id]
     );
   }
 }
