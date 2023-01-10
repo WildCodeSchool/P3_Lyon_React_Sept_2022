@@ -7,7 +7,7 @@ import enedisLogo from "../assets/logo-enedis.png";
 import "../App.css";
 
 function Connexion() {
-  const { setUser } = useCurrentUserContext();
+  const { setUser, setToken } = useCurrentUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,13 +31,17 @@ function Connexion() {
     };
 
     if (email && password) {
+      console.warn(setUser);
       // on appelle le back
       fetch("http://localhost:5000/api/login", requestOptions)
         .then((response) => response.json())
         .then((result) => {
           setUser(result.user);
-          navigate("/feed");
+          setToken(result.token);
+          if (result.user.is_admin) navigate("/admin");
+          else navigate("/feed");
         })
+
         .catch(console.error);
     } else {
       setErrorMessage("Please specify email and password");

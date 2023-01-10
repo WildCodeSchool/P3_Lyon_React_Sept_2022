@@ -12,21 +12,15 @@ const hashingOptions = {
 
 const hashPassword = (req, res, next) => {
   argon2
-
     .hash(req.body.password, hashingOptions)
-
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
-
       console.warn("hashedPassword", hashedPassword);
       delete req.body.password;
-
       next();
     })
-
     .catch((err) => {
       console.error(err);
-
       res.sendStatus(500);
     });
 };
@@ -42,9 +36,6 @@ const verifyPassword = (req, res) => {
         });
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
-        console.warn(token);
-        console.warn(req.user);
-        console.warn("Message : You are connected");
       } else res.sendStatus(401);
       console.warn("Error : Your password or email is wrong, try again");
     })
