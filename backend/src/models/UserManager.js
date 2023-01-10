@@ -20,9 +20,7 @@ class UserManager extends AbstractManager {
   }
 
   findAll() {
-    return this.connection.any(
-      `select id, firstname, lastname, email from  ${this.table}`
-    );
+    return this.connection.any(`select * from  ${this.table}`);
   }
 
   insert(user) {
@@ -41,7 +39,7 @@ class UserManager extends AbstractManager {
 
   update(user) {
     return this.connection.any(
-      `update ${this.table} set firstname = $1, lastname = $2, email = $3 , is_admin = $4 where id = $5`,
+      `update ${this.table} set firstname = $1, lastname = $2, email = $3, is_admin = $4 where id = $5`,
       [user.firstname, user.lastname, user.email, user.is_admin, user.id]
     );
   }
