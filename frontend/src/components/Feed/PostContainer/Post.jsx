@@ -77,8 +77,8 @@ function Post({ comment }) {
         <img src={`./src/assets/${comment.image}`} alt="Post" />
         <div className="px-6">
           <button onClick={() => openPostDetails()} type="button">
-            <h2 className="text-black self-start my-2">{comment.title}</h2>
-            <p className="self-start text-sm">
+            <h2 className="text-black my-2">{comment.title}</h2>
+            <p className="text-sm">
               {comment.article}..
               <span className="text-primary text-base"> voir plus</span>
               {postDetails ? (

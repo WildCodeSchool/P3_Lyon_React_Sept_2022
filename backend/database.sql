@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS user_detail;
 
 CREATE TABLE user_detail(
 id serial primary key not null,
-firstname varchar(50),
-lastname varchar(50),
-email varchar(80) not null,
+firstname varchar(250),
+lastname varchar(250),
+email varchar(250) not null,
 is_admin boolean not null DEFAULT false,
-user_password varchar(255) not null,
+user_password varchar(400) not null,
 avatar varchar(250)
 );
 
