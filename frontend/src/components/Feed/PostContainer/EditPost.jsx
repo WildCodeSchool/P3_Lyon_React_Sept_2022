@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SelectBar from "../CreatePostContainer/SelectBar";
 
 // eslint-disable-next-line react/prop-types
-function EditPost({ handleEditPostModal }) {
+function EditPost({ handleEditPostModal, setEditPostMenu }) {
   const [editTitle, setTitle] = useState("Solar énergies renouvelables");
   const [editText, setText] = useState(
     "In publishing and graphic design, Lorem ipsum is In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form."
@@ -10,7 +10,13 @@ function EditPost({ handleEditPostModal }) {
   return (
     <div className="fixed top-0 left-0 bg-white h-screen w-screen overflow-y-scroll z-10">
       <div className="flex justify-between">
-        <button onClick={() => handleEditPostModal()} type="button">
+        <button
+          onClick={() => {
+            handleEditPostModal();
+            setEditPostMenu(false);
+          }}
+          type="button"
+        >
           <img className="ml-2 mt-6" src="./src/assets/croix.png" alt="Close" />
         </button>
         <button
