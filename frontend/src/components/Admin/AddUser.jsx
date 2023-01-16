@@ -3,21 +3,33 @@ import croix from "../../assets/croix.png";
 
 // eslint-disable-next-line react/prop-types
 export default function AddUser({ openAndCloseUserModal }) {
-  const [errorMessage, setErrorMessage] = useState("");
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
-    email: "",
     phone_number: "",
-    user_password: "",
-    avatar: "",
+    email: "",
+    password: "",
+    role: "",
   });
 
   const onChange = (e) => {
-    // Je reprends le "credentials" soit l'ancien état du state et je vais lui demander de fusionner [e.target.name] qui va désormais contenir e.target.value.
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const onChangepass = (e) => {
+    setCredentials({
+      ...credentials,
+      password: e.target.value,
+    });
+  };
+
+  const onChangeNum = (e) => {
+    setCredentials({
+      ...credentials,
+      phone_number: e.target.value,
     });
   };
 
@@ -32,26 +44,30 @@ export default function AddUser({ openAndCloseUserModal }) {
       method: "POST",
       headers: myHeaders,
       body,
+      redirect: "follow",
     };
-    // Je vérifie que les champs ci-dessous contiennent au moins un caractère afin de passer au fetch
+
     if (
       credentials.firstname &&
       credentials.lastname &&
       credentials.email &&
       credentials.phone_number &&
-      credentials.user_password &&
-      credentials.avatar
+      credentials.password &&
+      credentials.role
     ) {
       fetch("http://localhost:5000/api/register", requestOptions)
         .then((response) => response.text())
         .then(() => {
-          openAndCloseUserModal();
+          // eslint-disable-next-line no-alert
+          alert("User created");
         })
         .catch(console.error);
     } else {
-      setErrorMessage("Please specify email and password");
+      // eslint-disable-next-line no-alert
+      alert("Please specify email and password");
     }
   };
+
   return (
     <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10">
       <div>
@@ -71,15 +87,9 @@ export default function AddUser({ openAndCloseUserModal }) {
         <div className="ml-5 mt-4">
           <button
             type="button"
-            className="text-white my-4 font-[Enedis] bg-primary text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
+            className="text-white mr-4 my-4 font-[Enedis] bg-primary text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
           >
-            Changer
-          </button>
-          <button
-            type="button"
-            className="text-primary font-[Enedis] bg-white text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
-          >
-            Supprimer
+            Modifier
           </button>
         </div>
       </div>
@@ -91,60 +101,66 @@ export default function AddUser({ openAndCloseUserModal }) {
           Prénom :
           <input
             className=" border pl-2 my-3  h-8 rounded w-[80vw] border-primary"
-            id="firstname"
             type="text"
+            name="firstname"
+            placeholder="Prénom"
+            onChange={onChange}
+            value={credentials.firstname}
           />
           Nom :
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
-            id="firstname"
             type="text"
+            name="lastname"
+            placeholder="Nom"
             onChange={onChange}
-            value={credentials.firstname}
+            value={credentials.lastname}
           />
           Téléphone :
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
-            id="firstname"
             type="text"
-            onChange={onChange}
-            value={credentials.lastname}
+            name="phone"
+            placeholder="Téléphone"
+            onChange={onChangeNum}
+            value={credentials.phone_number}
           />
           Email :
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
-            id="firstname"
-            type="text"
+            type="email"
+            name="email"
+            placeholder="email"
             onChange={onChange}
             value={credentials.email}
           />
           Mot de passe :
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
-            id="firstname"
-            type="text"
-            onChange={onChange}
-            value={credentials.user_password}
+            type="password"
+            name="pwd"
+            placeholder="*********"
+            onChange={onChangepass}
+            value={credentials.password}
           />
           Poste :
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
-            id="firstname"
             type="text"
+            name="role"
+            placeholder="Poste"
             onChange={onChange}
-            value={credentials.poste}
+            value={credentials.role}
           />
+          <button
+            type="submit"
+            className="text-white ml-20 mb-1S font-[Enedis] bg-primary text-base w-[40vw] border h-10 border-primary rounded-2xl "
+          >
+            Enregistrer
+          </button>
         </form>
-        <div>{errorMessage}</div>
       </div>
-      <div className="flex mb-3  justify-center">
-        <button
-          type="submit"
-          className="text-white mb-3 font-[Enedis] bg-primary text-base w-[40vw] border h-10 border-primary rounded-2xl "
-        >
-          Enregistrer
-        </button>
-      </div>
+      <div className="flex mb-3  justify-center" />
     </div>
   );
 }
