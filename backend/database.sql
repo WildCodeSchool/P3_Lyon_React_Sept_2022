@@ -9,11 +9,13 @@ DROP TABLE IF EXISTS user_detail;
 
 CREATE TABLE user_detail(
 id serial primary key not null,
-firstname varchar(250),
-lastname varchar(250),
-email varchar(250) not null,
+firstname varchar(250) not null,
+lastname varchar(250) not null,
+email varchar(250) unique not null,
+phone_number varchar(250) unique not null,
+role varchar(250) not null DEFAULT 'user',
 is_admin boolean not null DEFAULT false,
-user_password varchar(400) not null,
+user_password varchar(250) not null,
 avatar varchar(250)
 );
 
