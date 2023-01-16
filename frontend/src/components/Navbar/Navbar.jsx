@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between">
-        <Link to={user.is_admin ? "/admin" : "/feed"}>
+        <Link to={user.is_admin === "admin" ? "/admin" : "/feed"}>
           <button type="button" onClick={() => setIsGroup(false)}>
             <img className="w-32 h-16" src={logoEnedis} alt="Logo" />
           </button>
