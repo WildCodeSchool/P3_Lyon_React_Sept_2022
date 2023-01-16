@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
-  const { posts } = usePostUserContext();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/posts")
+      .then((response) => response.json())
+      .then((result) => {
+        setPosts(result);
+        console.warn(result);
+      });
+  }, []);
 
   return (
     <div>

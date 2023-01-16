@@ -22,7 +22,8 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.3",
     "pg": "^8.8.0",
-    "pg-promise": "^11.0.2"
+    "pg-promise": "^11.0.2",
+    "template-fullstack": "file:.."
   },
   "rules": {
     "no-console": [

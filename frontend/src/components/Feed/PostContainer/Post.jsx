@@ -9,23 +9,26 @@ function Post({ post }) {
   const openPostDetails = () => {
     setPostDetails(!postDetails);
   };
-
   return (
     <div>
       <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10">
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full w-20 mr-6 border-4 border-violet"
-              src={`./src/assets/${post.avatar}`}
-              alt={`${post.username}'s avatar`}
+              className="rounded-full w-20 mr-6 h-24 border-4 border-violet"
+              src={post.avatar}
+              alt={post.username}
             />
           </Link>
           <div className="flex flex-col">
-            <Link to="/profile">
-              <h2 className="text-primary">{post.username}</h2>
+            <Link to={`/profile/${post.user_id}`}>
+              <div className="flex gap-2">
+                <h2 className="text-primary">{post.firstname} </h2>
+                <h2 className="text-primary">{post.lastname}</h2>
+              </div>
             </Link>
-            <h3 className="font-light text-primary">{post.category}</h3>
+            <h3 className="font-light text-primary">{post.group_name}</h3>
+            <h3 className="font-light text-primary">{post.category_name}</h3>
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
@@ -34,7 +37,7 @@ function Post({ post }) {
           <button onClick={() => openPostDetails()} type="button">
             <h2 className="text-black self-start my-2">{post.title}</h2>
             <p className="self-start text-sm">
-              {post.article}..
+              {post.content}..
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </button>
