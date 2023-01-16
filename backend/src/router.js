@@ -41,11 +41,13 @@ router.get("/api/categories", categoryControllers.browse);
 router.get("/api/categories/:id", categoryControllers.read);
 router.post("/api/categories", categoryControllers.add);
 router.put("/api/categories/:id", categoryControllers.edit);
+router.delete("/api/categories/:id", verifyToken, categoryControllers.destroy);
 
 // Gestion des groupes
 router.get("/api/groups", groupControllers.browse);
 router.get("/api/groups/:id", groupControllers.read);
 router.post("/api/groups", groupControllers.add);
 router.put("/api/groups/:id", groupControllers.edit);
+router.delete("/api/groups/:id", verifyToken, groupControllers.destroy);
 
 module.exports = router;

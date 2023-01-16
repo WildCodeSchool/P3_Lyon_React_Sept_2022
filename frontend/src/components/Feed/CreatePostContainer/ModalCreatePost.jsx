@@ -42,8 +42,8 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         </div>
         <ul>
           {valueGroupe.map((group) => (
-            <>
-              <li key={group.id}>{group.name}</li>
+            <li key={group.id}>
+              {group.group_name}
               <ul>
                 {valueCategory.map((category) => (
                   <li onClick={() => console.warn(category)} key={category.id}>
@@ -51,9 +51,15 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   </li>
                 ))}
               </ul>
-            </>
+            </li>
           ))}
         </ul>
+        <button type="button" onClick={() => console.log(valueGroupe)}>
+          teste valueGroupe
+        </button>
+        <button type="button" onClick={() => console.log(valueCategory)}>
+          teste valueCa
+        </button>
       </div>
     </div>
   );
