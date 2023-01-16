@@ -30,11 +30,9 @@ const read = (req, res) => {
 const add = (req, res) => {
   const user = req.body;
 
-  // on verifie les données
-
   models.user_detail
     .insert(user)
-    .then((result) => {
+    .then(([result]) => {
       res.location(`/api/users/${result.insertId}`).sendStatus(201);
     })
     .catch((error) => {
