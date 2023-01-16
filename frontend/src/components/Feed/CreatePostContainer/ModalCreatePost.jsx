@@ -54,12 +54,12 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
             </li>
           ))}
         </ul>
-        <button type="button" onClick={() => console.log(valueGroupe)}>
+        {/* <button type="button" onClick={() => console.log(valueGroupe)}>
           teste valueGroupe
         </button>
         <button type="button" onClick={() => console.log(valueCategory)}>
           teste valueCa
-        </button>
+        </button> */}
       </div>
     </div>
   );
