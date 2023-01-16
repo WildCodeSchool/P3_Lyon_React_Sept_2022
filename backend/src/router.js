@@ -34,6 +34,7 @@ router.get("/api/posts", postControllers.browse);
 router.get("/api/posts/:id", postControllers.read);
 router.post("/api/posts", postControllers.add);
 router.put("/api/posts/:id", postControllers.edit);
+router.delete("/api/posts/:id", postControllers.destroy);
 
 // Gestion des categories
 router.get("/api/categories", categoryControllers.browse);
