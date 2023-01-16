@@ -67,6 +67,8 @@ VALUES
     'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-371-456323-512.png'
   );
 
+UPDATE user_detail SET is_admin = true WHERE id = 3;
+
 CREATE TABLE group_detail(
 id serial primary key not null,
 group_name varchar(80),
