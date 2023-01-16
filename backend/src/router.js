@@ -16,6 +16,7 @@ const groupControllers = require("./controllers/groupControllers");
 
 // Authentification
 
+router.post("/api/register", hashPassword, userControllers.register);
 router.post(
   "/api/login",
   authControllers.getUserByEmailWithPasswordAndPassToNext,

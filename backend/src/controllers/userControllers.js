@@ -30,8 +30,6 @@ const read = (req, res) => {
 const add = (req, res) => {
   const user = req.body;
 
-  // on verifie les données
-
   models.user_detail
     .insert(user)
     .then((result) => {
@@ -39,6 +37,20 @@ const add = (req, res) => {
     })
     .catch((error) => {
       console.error(error);
+      res.sendStatus(500);
+    });
+};
+
+const register = (req, res) => {
+  const user = req.body;
+
+  models.user
+    .insert(user)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
       res.sendStatus(500);
     });
 };
@@ -77,6 +89,7 @@ module.exports = {
   browse,
   read,
   add,
+  register,
   edit,
   destroy,
 };
