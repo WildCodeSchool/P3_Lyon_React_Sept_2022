@@ -36,16 +36,16 @@ function Post({ post }) {
             <p className="self-start text-sm">
               {post.article}..
               <span className="text-primary text-base"> voir plus</span>
-              {postDetails ? (
-                <PostDetails
-                  postDetails={postDetails}
-                  setPostDetails={setPostDetails}
-                />
-              ) : (
-                ""
-              )}
             </p>
           </button>
+          {postDetails ? (
+            <PostDetails
+              postDetails={postDetails}
+              setPostDetails={setPostDetails}
+            />
+          ) : (
+            ""
+          )}
           <div className="w-full mt-6 flex items-center justify-between pb-6">
             <img
               className="rounded-full w-10 mr-2 border-4 border-violet"
