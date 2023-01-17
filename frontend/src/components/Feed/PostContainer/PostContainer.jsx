@@ -17,7 +17,7 @@ function PostContainer() {
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight - 200
+      document.documentElement.scrollHeight - 300
     ) {
       setBase((prev) => prev + 5);
     }
@@ -30,7 +30,7 @@ function PostContainer() {
   return (
     <div>
       {posts.map((post) => (
-        <Post key={post.post_id} post={post} />
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );
