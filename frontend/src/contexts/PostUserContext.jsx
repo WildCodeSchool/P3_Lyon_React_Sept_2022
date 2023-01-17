@@ -12,6 +12,8 @@ export function PostUserContextProvider({ children }) {
   const [valueGroupe, setValueGroupe] = useState([]);
   const [valueCategory, setValueCategory] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [valueSelectedCategory, setValueSelectedCategory] = useState("");
+  const [valueSelectedGroup, setValueSelectedGroup] = useState("");
 
   return (
     <PostUserContext.Provider
@@ -24,6 +26,10 @@ export function PostUserContextProvider({ children }) {
         setValueCategory,
         showCreatePost,
         setShowCreatePost,
+        valueSelectedCategory,
+        setValueSelectedCategory,
+        setValueSelectedGroup,
+        valueSelectedGroup,
       }}
     >
       {children}

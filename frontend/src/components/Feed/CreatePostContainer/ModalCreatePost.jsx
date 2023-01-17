@@ -8,7 +8,15 @@ import croix from "../../../assets/croix.png";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function ModalCreatePost({ showCategories, setShowCategories }) {
-  const { valueGroupe, valueCategory } = usePostUserContext();
+  const {
+    valueGroupe,
+    valueCategory,
+    valueSelectedCategory,
+    setValueSelectedCategory,
+    valueSelectedGroup,
+    setValueSelectedGroup,
+  } = usePostUserContext();
+
   // ferme la modale des groupes avec la croix
   function closeModal() {
     setShowCategories(!showCategories);
@@ -32,6 +40,13 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <h1 className="text-[32px] text-primary font-bold text-center ">
           Choisir un groupe et une catégorie
         </h1>
+        <button
+          type="button"
+          onClick={() => console.warn(valueSelectedCategory)}
+        >
+          {" "}
+          Appuie moi dessus{" "}
+        </button>
         <div className=" w-full">
           <input
             type="text"
@@ -40,26 +55,36 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
             className="border rounded-xl border-primary mx-auto w-[280px] h-11 my-10 ml-16 pl-4"
           />
         </div>
-        <ul>
-          {valueGroupe.map((group) => (
-            <li key={group.id}>
-              {group.group_name}
-              <ul>
-                {valueCategory.map((category) => (
-                  <li onClick={() => console.warn(category)} key={category.id}>
-                    {category.category_name}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-        {/* <button type="button" onClick={() => console.log(valueGroupe)}>
-          teste valueGroupe
-        </button>
-        <button type="button" onClick={() => console.log(valueCategory)}>
-          teste valueCa
-        </button> */}
+        <div className="w-full mt-4">
+          <div className="dropdown inline-block relative w-full">
+            <ul>
+              {valueGroupe.map((group) => (
+                <li
+                  onClick={() => setValueSelectedGroup(group.group_name)}
+                  className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
+                  value={group.group_name}
+                  // onClick={(e) => takeValueFromValueGroupe(e.target.value)}
+                  key={group.id}
+                >
+                  {group.group_name}
+                  <ul>
+                    {valueCategory.map((category) => (
+                      <li
+                        value={category.id}
+                        name={category.name}
+                        className="cursor-pointer h-10  hover:bg-violet"
+                        onClick={(e) => setValueSelectedCategory(category.id)}
+                        key={category.id}
+                      >
+                        {category.category_name}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

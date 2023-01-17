@@ -11,19 +11,22 @@ import { usePostUserContext } from "../../../contexts/PostUserContext";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function CreatePost() {
-  const { valueGroupe, valueCategory, setShowCreatePost, showCreatePost } =
-    usePostUserContext();
+  const {
+    valueSelectedCategory,
+    setShowCreatePost,
+    showCreatePost,
+    valueSelectedGroup,
+  } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
     user_id: user.id,
-    category_id: "",
+    category_id: valueSelectedCategory,
   });
 
   const [showCategories, setShowCategories] = useState(false);
-
   const onChange = (e) => {
     setDataPost({
       ...dataPost,
@@ -46,16 +49,16 @@ function CreatePost() {
     if (
       dataPost.title &&
       dataPost.content &&
-      user.user_id &&
+      dataPost.user_id &&
       dataPost.category_id
     ) {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
-        .then(() => {
-          Navigate("/feed");
+        .then((retour) => {
+          console.warn(retour);
         })
-        .catch(console.error);
+        .catch(console.error());
     }
   };
 
@@ -96,8 +99,16 @@ function CreatePost() {
                 </h2>
               </div>
 
-              <p className="text-md ml-[24px] text-primary">group</p>
-              <p className="text-md ml-[24px] text-primary">category</p>
+              <p className="text-md ml-[24px] text-primary">
+                {valueSelectedGroup}
+              </p>
+              <p
+                className="text-md ml-[24px] text-primary"
+                value={valueSelectedCategory}
+                name={valueSelectedCategory}
+              >
+                {valueSelectedCategory}
+              </p>
             </div>
           </div>
           <div>
@@ -125,8 +136,8 @@ function CreatePost() {
               console.warn(
                 dataPost.content,
                 dataPost.title,
-                dataPost.category_id,
-                user.id
+                user.id,
+                valueSelectedCategory
               )
             }
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
