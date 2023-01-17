@@ -13,6 +13,19 @@ const browse = (req, res) => {
     });
 };
 
+const browseMyPosts = (req, res) => {
+  const base = parseInt(req.params.base, 10);
+  models.post
+    .finMyPosts(base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   const { id } = req.params;
 
@@ -74,6 +87,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseMyPosts,
   read,
   add,
   edit,

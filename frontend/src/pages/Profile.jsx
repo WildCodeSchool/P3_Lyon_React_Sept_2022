@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../components/Feed/PostContainer/Post";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
@@ -11,8 +11,18 @@ import { useCurrentUserContext } from "../contexts/userContext";
 function Profile() {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const { posts } = usePostUserContext();
+  const [myPosts, setMyPosts] = useState([]);
+  const { refresh } = usePostUserContext();
   const { user } = useCurrentUserContext();
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/myposts/limit/0"`)
+      .then((response) => response.json())
+      .then((result) => {
+        setMyPosts(result);
+        console.warn(result);
+      });
+  }, [refresh]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -66,8 +76,8 @@ function Profile() {
                 ""
               )}
 
-              {posts
-                .filter((myPosts) => user.id === myPosts.user_id)
+              {myPosts
+                .filter((mesPosts) => user.id === mesPosts.user_id)
                 .map((post) => (
                   <Post post={post} key={post.id} />
                 ))}
