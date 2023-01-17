@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
-  const [posts, setPosts] = useState([]);
+  const { posts, setPosts } = usePostUserContext();
 
   useEffect(() => {
     fetch("http://localhost:5000/api/posts/limit/2")
