@@ -14,7 +14,14 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select id, title, content, user_id, category_id from  ${this.table} limit 10 offset $1`,
+      `select p.id, p.title, p.content, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
+      FROM ${this.table} as p
+       LEFT JOIN user_detail as ud
+      ON ud.id= p.user_id
+      LEFT JOIN category as c
+      ON c.id = p.category_id
+       LEFT JOIN group_detail as g
+      ON g.id = c.group_id limit 10 offset $1;`,
       [base]
     );
   }

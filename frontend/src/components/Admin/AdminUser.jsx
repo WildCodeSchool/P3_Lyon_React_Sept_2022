@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
+import AddUser from "./AddUser";
 import DropDownTeam from "./DropDownTeam";
 
 export default function AdminUser() {
+  const [addUser, setAddUser] = useState(false);
+
+  const openAndCloseUserModal = () => {
+    setAddUser(!addUser);
+  };
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
       <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
@@ -34,10 +40,15 @@ export default function AdminUser() {
       <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
         <h3>Gérer la liste des utilisateurs</h3>
       </div>
-      <div className="flex flex-row-reverse justify-between w-[74vw] h-18 items-center ml-14 text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+      <button
+        onClick={openAndCloseUserModal}
+        type="button"
+        className="flex flex-row-reverse justify-between w-[74vw] h-18 items-center ml-14 text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+      >
         Ajouter un utilisateur
         <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
-      </div>
+      </button>
+      {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className=" flex justify-around mt-6 ">
         <input
           className="w-[24]  border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"

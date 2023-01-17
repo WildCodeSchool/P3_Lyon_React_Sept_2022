@@ -1,12 +1,13 @@
+/* eslint-disable import/no-useless-path-segments */
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line import/no-useless-path-segments
-import React, { useState } from "react";
+import React from "react";
 import CreatePost from "./CreatePost";
-// eslint-disable-next-line import/no-useless-path-segments
 import Avatar from "../../../components/Navbar/Avatar";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function CreatePostContainer() {
-  const [showCreatePost, setShowCreatePost] = useState(false);
+  const { showCreatePost, setShowCreatePost } = usePostUserContext();
 
   function openModalFull() {
     setShowCreatePost(!showCreatePost);
@@ -23,14 +24,7 @@ function CreatePostContainer() {
           <button onClick={() => openModalFull()}>
             <span className="ml-2 text-gray-400">Votre publication...</span>
           </button>
-          {showCreatePost ? (
-            <CreatePost
-              showCreatePost={showCreatePost}
-              setShowCreatePost={setShowCreatePost}
-            />
-          ) : (
-            ""
-          )}
+          {showCreatePost ? <CreatePost /> : ""}
         </div>
       </div>
     </div>

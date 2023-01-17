@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
 // eslint-disable-next-line react/prop-types
-function PostDetails({ postDetails, setPostDetails }) {
+function PostDetails({ postDetails, setPostDetails, post }) {
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
@@ -16,27 +17,18 @@ function PostDetails({ postDetails, setPostDetails }) {
           src="./src/assets/avatar-user.jpeg"
           alt="User avatar"
         />
-        <h2 className="text-primary text-3xl text-left">
-          Com interne : organisation repas de Noël
-        </h2>
+        <h2 className="text-primary text-3xl text-left">{post.title}</h2>
       </div>
       <div className="flex justify-evenly px-4">
         <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
-          Communication agence
+          {post.group_name}
         </div>
         <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
-          Actualités
+          {post.category_name}
         </div>
       </div>
       <img className="mt-10" src="./src/assets/picture-post.jpg" alt="Post" />
-      <p className="bg-white text-md p-8">
-        Cette année le repas de Noël aura lieu le 22 décembre. Le mois de
-        décembre, nous l'attendons tous avec impatience ! En cette année bien
-        chargée et particulière nous pensons à vous et à vos enfants, afin que
-        vous puissiez continuer à partager des moments unique pour les fêtes de
-        fin d'année. Des animations de Noël en Ardèche Hermitage se préparent
-        pour votre plus grand plaisir !
-      </p>
+      <p className="bg-white text-md p-8">{post.content}</p>
       <h2 className="font-bold text-center">Ouvrir le pdf :</h2>
       <div className="flex items-center justify-center text-center pb-2">
         <div
