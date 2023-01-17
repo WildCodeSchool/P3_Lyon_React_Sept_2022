@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import croix from "../../../assets/croix.png";
 import myAvatar from "../../../assets/my-avatar.jpeg";
@@ -35,6 +35,13 @@ function CreatePost() {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    setDataPost({
+      ...dataPost,
+      category_id: valueSelectedCategory,
+    });
+  }, [valueSelectedCategory]);
 
   const onSubmit = (e) => {
     e.preventDefault();
