@@ -14,7 +14,7 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select p.id, p.title, p.content, p.post_date, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
        LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
