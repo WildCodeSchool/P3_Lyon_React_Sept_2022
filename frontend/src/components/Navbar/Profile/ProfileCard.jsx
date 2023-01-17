@@ -13,11 +13,11 @@ function ProfileCard() {
 
   return (
     <div className="flex flex-col justify-center w-screen">
-      <div className="user-avatar mx-auto rounded-full w-60 h-60 border-4 border-violet z-10">
+      <div className="user-avatar mx-auto rounded-full z-10">
         <img
           src={user.avatar}
           alt="My profile avatar"
-          className="rounded-full"
+          className="rounded-full w-60 h-60 border-4 border-violet "
         />
       </div>
       <div className="square flex justify-center shadow-[3px_3px_4px_#C9CBF0] border border-primary rounded-lg w-80 h-72 mx-auto relative top-[-60px]">
