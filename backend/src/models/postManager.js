@@ -35,7 +35,6 @@ class PostManager extends AbstractManager {
         post.content,
         post.user_id,
         post.category_id,
-        post.post_date,
         post.post_image,
       ]
     );

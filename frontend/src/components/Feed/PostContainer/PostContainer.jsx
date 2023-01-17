@@ -7,7 +7,7 @@ function PostContainer() {
   const { refresh } = usePostUserContext();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/posts/limit/2")
+    fetch(`http://localhost:5000/api/posts/limit/0`)
       .then((response) => response.json())
       .then((result) => {
         setPosts(result);
