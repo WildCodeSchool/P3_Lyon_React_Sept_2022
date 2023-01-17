@@ -9,8 +9,8 @@ import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function ModalCreatePost({ showCategories, setShowCategories }) {
   const {
-    valueGroupe,
-    valueCategory,
+    groupList,
+    categoryList,
     valueSelectedCategory,
     setValueSelectedCategory,
     valueSelectedGroup,
@@ -58,17 +58,17 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <div className="w-full mt-4">
           <div className="dropdown inline-block relative w-full">
             <ul>
-              {valueGroupe.map((group) => (
+              {groupList.map((group) => (
                 <li
                   onClick={() => setValueSelectedGroup(group.group_name)}
                   className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
                   value={group.group_name}
-                  // onClick={(e) => takeValueFromValueGroupe(e.target.value)}
+                  // onClick={(e) => takeValueFromgroupList(e.target.value)}
                   key={group.id}
                 >
                   {group.group_name}
                   <ul>
-                    {valueCategory.map((category) => (
+                    {categoryList.map((category) => (
                       <li
                         value={category.id}
                         name={category.name}

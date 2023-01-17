@@ -194,6 +194,7 @@ title varchar(200) not null,
 content text not null,
 user_id int not null,
 category_id int not null,
+post_date DATE,
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id),
 CONSTRAINT fk_post_category
@@ -201,271 +202,315 @@ FOREIGN KEY(category_id) REFERENCES category(id)
 );
 
 INSERT INTO
-  post (title, content, user_id, category_id)
+  post (title, content, user_id, category_id, post_date)
 VALUES
   (
     'Organisation repas de Noel !',
     'You are my fire. The one desire. Believe when I say. I want it that way',
     1,
-    1
+    1,
+    '2022-11-01'
   ),
   (
     'Vacances d''été',
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     2,
-    2
+    2,
+    '2022-11-02'
   ),
   (
     'Joyeux anniversaire Margaux!',
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     3,
-    3
+    3,
+    '2022-11-03'
   ),
   (
     'Secret Santa',
     'Tell me why, I never wanna hear you say. I want it that way',
     4,
-    4
+    4,
+    '2022-11-04'
   ),
     (
     'Michael Jackson',
     'Don''t stop until you get enough',
     5,
-    5
+    5,
+    '2022-11-05'
   ),
     (
     'Ron Steward',
     'Have you ever seen the rain?',
     1,
-    6
+    6,
+    '2022-11-06'
   ),
     (
     'Mick Jagger',
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     2,
-    7
+    7,
+    '2022-11-07'
   ),
     (
     'Sash',
     '¡ ECUADOR !',
     3,
-    8
+    8,
+    '2022-11-08'
   ),
     (
     'Lenny Kravitz',
     'Are you gona go my way ?',
     4,
-    9
+    9,
+    '2022-11-08'
   ),
     (
     'The Police',
     'You don''t have to put on that red light',
     5,
-    10
+    10,
+    '2022-11-09'
   ),
   (
     'Arctic Monkeys',
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     1,
-    11
+    11,
+    '2022-11-10'
   ),
   (
     'Pink Floyd',
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     2,
-    12
+    12,
+    '2022-11-11'
   ),
     (
     'David Bowie',
     'If you say run, I''ll run with you and if you say hide, we''ll hide',
     3,
-    13
+    13,
+    '2022-11-12'
   ),
 (
     'Derek & The Dominos',
     'What will you do when you get lonely? No one waiting by your side?',
     4,
-    15
+    15,
+    '2022-11-13'
   ),
     (
     'The Mamas & The Papas',
     'All the leaves are brown and the sky is gray.',
     5,
-    1
+    1,
+    '2022-11-14'
   ),
     (
     'Dire Straits',
     'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
     1,
-    2
+    2,
+    '2022-11-15'
   ),
     (
     'The Doors',
     'Come on, baby, light my fire',
     2,
-    3
+    3,
+    '2022-11-16'
   ),
     (
     'Pixies',
     'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
     3,
-    4
+    4,
+    '2022-11-17'
   ),
     (
     'J.J. Cale',
     'If you want to hang out. You''ve got to take her out, cocaine',
     4,
-    5
+    5,
+    '2022-11-18'
   ),
     (
     'KISS',
     'I was made for loving you, baby. You were made for loving me',
     5,
-    6
+    6,
+    '2022-11-19'
   ),
     (
     'Guns N'' Roses',
     'Take me down to the Paradise City, where the grass is green and the girls are pretty',
     1,
-    7
+    7,
+    '2022-11-20'
   ),
     (
     'Thin Lizzy',
     'The boys are back in town',
     2,
-    8
+    8,
+    '2022-11-21'
   ),
   (
     'Organisation repas de Noël !',
     'You are my fire. The one desire. Believe when I say. I want it that way',
     3,
-    9
+    9,
+    '2022-11-22'
   ),
     (
     'Vacances d''été',
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     4,
-    10
+    10,
+    '2022-11-23'
   ),
     (
     'Joyeux anniversaire Margaux!',
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     5,
-    11
+    11,
+    '2022-11-24'
   ),
     (
     'Secret Santa',
     'Tell me why, I never wanna hear you say. I want it that way',
     1,
-    12
+    12,
+    '2022-11-25'
   ),
     (
     'Michael Jackson',
     'Don''t stop until you get enough',
     2,
-    13
+    13,
+    '2022-11-26'
   ),
     (
     'Ron Steward',
     'Have you ever seen the rain?',
     3,
-    14
+    14,
+    '2022-11-27'
   ),
     (
     'Mick Jagger',
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     4,
-    15
+    15,
+    '2022-11-28'
   ),
     (
     'Sash',
     '¡ ECUADOR !',
     5,
-    1
+    1,
+    '2022-11-29'
   ),
     (
     'Lenny Kravitz',
     'Are you gona go my way ?',
     1,
-    2
+    2,
+    '2022-11-30'
   ),
     (
     'The Police',
     'You don''t have to put on that red light',
     2,
-    3
+    3,
+    '2022-12-01'
   ),
   (
     'Arctic Monkeys',
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     3,
-    4
+    4,
+    '2022-12-02'
   ),
   (
     'Pink Floyd',
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     4,
-    5
+    5,
+    '2022-12-03'
   ),
     (
     'David Bowie',
     'If you say run, I''ll run with you and if you say hide, we''ll hide',
     5,
-    6
+    6,
+    '2022-12-04'
   ),
     (
     'Derek & The Dominos',
     'What will you do when you get lonely? No one waiting by your side?',
     1,
-    7
+    7,
+    '2022-12-05'
   ),
     (
     'The Mamas & The Papas',
     'All the leaves are brown and the sky is gray.',
     2,
-    8
+    8,
+    '2022-12-06'
   ),
     (
     'Dire Straits',
     'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
     3,
-    9
+    9,
+    '2022-12-07'
   ),
     (
     'The Doors',
     'Come on, baby, light my fire',
     4,
-    10
+    10,
+    '2022-12-08'
   ),
     (
     'Pixies',
     'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
     5,
-    11
+    11,
+    '2022-12-09'
   ),
     (
     'J.J. Cale',
     'If you want to hang out. You''ve got to take her out, cocaine',
     1,
-    12
+    12,
+    '2022-12-10'
   ),
     (
     'KISS',
     'I was made for loving you, baby. You were made for loving me',
     2,
-    13
+    13,
+    '2022-12-11'
   ),
     (
     'Guns N'' Roses',
     'Take me down to the Paradise City, where the grass is green and the girls are pretty',
     3,
-    14
+    14,
+    '2022-12-12'
   ),
     (
     'Thin Lizzy',
     'The boys are back in town',
     4,
-    15
+    15,
+    '2022-12-13'
   );
 
 CREATE TABLE like_table(
