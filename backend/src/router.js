@@ -30,7 +30,7 @@ router.put("/api/users/:id", userControllers.edit);
 router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
 // Gestion des posts
-router.get("/api/posts", postControllers.browse);
+router.get("/api/posts/limit/:base", postControllers.browse);
 router.get("/api/posts/:id", postControllers.read);
 router.post("/api/posts", postControllers.add);
 router.put("/api/posts/:id", postControllers.edit);

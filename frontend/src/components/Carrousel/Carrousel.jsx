@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 
 function Carrousel() {
   const [groupId, setGroupId] = useState();
-  const { groupes, categories, isGroup, setIsGroup } = usePostUserContext();
+  const { groupList, categoryList, isGroup, setIsGroup } = usePostUserContext();
 
   useEffect(() => {
     setIsGroup(false);
@@ -36,29 +36,31 @@ function Carrousel() {
       >
         {!isGroup ? (
           <>
-            {groupes.map((groupe) => (
+            {groupList.map((group) => (
               <SwiperSlide
-                key={groupe.id}
-                className="group-card flex bg-cover bg-[url('./assets/solar-groups.jpeg')] justify-center items-center align-middle text-center cursor-pointer"
-                onClick={() => handleCategory(groupe.id)}
+                key={group.id}
+                className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                onClick={() => handleCategory(group.id)}
+                style={{ backgroundImage: `url(${group.image})` }}
               >
                 <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
-                  {groupe.groupname}
+                  {group.group_name}
                 </p>
               </SwiperSlide>
             ))}
           </>
         ) : (
           <>
-            {categories
+            {categoryList
               .filter((category) => category.group_id === groupId)
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="group-card flex bg-cover bg-primary justify-center items-center align-middle text-center"
+                  className="group-card flex bg-cover justify-center items-center align-middle text-center"
+                  style={{ backgroundImage: `url(${category.image})` }}
                 >
-                  <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
-                    {category.categoryname}
+                  <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
+                    {category.category_name}
                   </p>
                 </SwiperSlide>
               ))}

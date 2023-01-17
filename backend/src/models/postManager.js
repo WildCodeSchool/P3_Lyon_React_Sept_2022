@@ -12,9 +12,10 @@ class PostManager extends AbstractManager {
     );
   }
 
-  findAll() {
+  findAll(base) {
     return this.connection.any(
-      `select id, title, content, user_id, category_id from  ${this.table}`
+      `select id, title, content, user_id, category_id from  ${this.table} limit 10 offset $1`,
+      [base]
     );
   }
 

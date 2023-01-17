@@ -9,6 +9,8 @@ export default PostUserContext;
 
 export function PostUserContextProvider({ children }) {
   const [isGroup, setIsGroup] = useState(false);
+  const [groupList, setGroupList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
 
   const users = [
     {
@@ -108,7 +110,18 @@ export function PostUserContextProvider({ children }) {
 
   return (
     <PostUserContext.Provider
-      value={{ users, posts, groupes, categories, isGroup, setIsGroup }}
+      value={{
+        users,
+        posts,
+        groupes,
+        categories,
+        isGroup,
+        setIsGroup,
+        groupList,
+        setGroupList,
+        categoryList,
+        setCategoryList,
+      }}
     >
       {children}
     </PostUserContext.Provider>

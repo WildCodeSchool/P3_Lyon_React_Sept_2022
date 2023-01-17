@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const base = parseInt(req.params.base, 10);
   models.post
-    .findAll()
+    .findAll(base)
     .then((results) => {
       res.send(results);
     })
