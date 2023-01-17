@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import croix from "../../../assets/croix.png";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
@@ -63,7 +64,7 @@ function CreatePost() {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
+        .then(() => {
           setRefresh(!refresh);
         })
         .catch(console.error());
@@ -130,7 +131,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            onClick={setShowCreatePost(!showCreatePost)}
+            onClick={() => setShowCreatePost(!showCreatePost)}
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >

@@ -19,7 +19,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
 
   // ferme la modale des groupes avec la croix
   function closeModal() {
-    setShowCategories(false);
+    setShowCategories(!showCategories);
   }
 
   // function pour récuperer la valeur inscrit dans le input et
@@ -48,39 +48,32 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <div className="w-full mt-4">
           <div className="dropdown inline-block relative w-full">
             <ul>
-              {groupList
-                .filter((group) =>
-                  group.group_name
-                    .toLowerCase()
-                    .includes(filterSearch.toLowerCase())
-                )
-                .map((group) => (
-                  <li
-                    onClick={() => setValueSelectedGroup(group.group_name)}
-                    className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
-                    // onClick={(e) => takeValueFromgroupList(e.target.value)}
-                    key={group.id}
-                  >
-                    {group.group_name}
-                    <ul>
-                      {categoryList
-                        .filter((category) => category.group_id === group.id)
-                        .map((category) => (
-                          <li
-                            value={category.id}
-                            name={category.name}
-                            className="cursor-pointer h-10  hover:bg-violet"
-                            onClick={(e) =>
-                              setValueSelectedCategory(category.id)
-                            }
-                            key={category.id}
-                          >
-                            {category.category_name}
-                          </li>
-                        ))}
-                    </ul>
-                  </li>
-                ))}
+              {groupList.map((group) => (
+                <li
+                  onClick={() => setValueSelectedGroup(group.group_name)}
+                  className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
+                  value={group.group_name}
+                  // onClick={(e) => takeValueFromgroupList(e.target.value)}
+                  key={group.id}
+                >
+                  {group.group_name}
+                  <ul>
+                    {categoryList
+                      .filter((category) => category.group_id === group.id)
+                      .map((category) => (
+                        <li
+                          value={category.id}
+                          name={category.name}
+                          className="cursor-pointer h-10  hover:bg-violet"
+                          onClick={(e) => setValueSelectedCategory(category.id)}
+                          key={category.id}
+                        >
+                          {category.category_name}
+                        </li>
+                      ))}
+                  </ul>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

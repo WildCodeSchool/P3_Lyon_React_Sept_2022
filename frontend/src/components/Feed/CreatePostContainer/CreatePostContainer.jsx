@@ -3,15 +3,11 @@
 // eslint-disable-next-line import/no-useless-path-segments
 import React from "react";
 import CreatePost from "./CreatePost";
-import Avatar from "../../Navbar/Avatar";
+import Avatar from "../../../components/Navbar/Avatar";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function CreatePostContainer() {
   const { showCreatePost, setShowCreatePost } = usePostUserContext();
-
-  function openModalFull() {
-    setShowCreatePost(!showCreatePost);
-  }
 
   return (
     <div>
@@ -21,7 +17,7 @@ function CreatePostContainer() {
         </div>
 
         <div className="border border-primary w-5/6 rounded-xl h-10 pt-2">
-          <button onClick={() => openModalFull()}>
+          <button onClick={() => setShowCreatePost(!showCreatePost)}>
             <span className="ml-2 text-gray-400">Votre publication...</span>
           </button>
           {showCreatePost ? <CreatePost /> : ""}
