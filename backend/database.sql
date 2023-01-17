@@ -15,7 +15,7 @@ phone_number varchar(250) unique not null,
 role varchar(250) not null DEFAULT 'user',
 is_admin boolean not null DEFAULT false,
 user_password varchar(400) not null,
-avatar text(350)
+avatar text
 );
 
 INSERT INTO
@@ -37,7 +37,7 @@ VALUES
     '0628164512',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/mhDBFju.jpg'
+    'https://i.imgur.com/FHz3NQx.jpg'
   ),
   (
     'Matthieu',
@@ -195,6 +195,7 @@ content text not null,
 user_id int not null,
 category_id int not null,
 post_date DATE,
+post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id),
 CONSTRAINT fk_post_category
@@ -540,4 +541,3 @@ FOREIGN KEY(post_id) REFERENCES post(id),
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
-

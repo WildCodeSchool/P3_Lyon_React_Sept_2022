@@ -16,6 +16,8 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
+    refresh,
+    setRefresh,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
@@ -57,6 +59,7 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
+          setRefresh(!refresh);
         })
         .catch(console.error());
     }
@@ -132,14 +135,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            onClick={() =>
-              console.warn(
-                dataPost.content,
-                dataPost.title,
-                user.id,
-                valueSelectedCategory
-              )
-            }
+            onClick={() => setRefresh(!refresh)}
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >
