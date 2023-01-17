@@ -9,11 +9,23 @@ function PostContainer() {
     fetch(`http://localhost:5000/api/posts/limit/${base}`)
       .then((response) => response.json())
       .then((result) => {
-        setPosts(result);
-        setBase(0);
-        console.warn(result);
+        setPosts((prev) => [...prev, ...result]);
+        console.warn(base);
       });
   }, [base]);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight - 200
+    ) {
+      setBase((prev) => prev + 5);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div>
