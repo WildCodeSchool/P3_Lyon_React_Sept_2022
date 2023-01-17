@@ -3,15 +3,17 @@ import Post from "./Post";
 
 function PostContainer() {
   const [posts, setPosts] = useState([]);
+  const [base, setBase] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/posts/limit/2")
+    fetch(`http://localhost:5000/api/posts/limit/${base}`)
       .then((response) => response.json())
       .then((result) => {
         setPosts(result);
+        setBase(0);
         console.warn(result);
       });
-  }, []);
+  }, [base]);
 
   return (
     <div>
