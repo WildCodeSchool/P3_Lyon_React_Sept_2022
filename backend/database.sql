@@ -28,7 +28,7 @@ VALUES
     '0628164511',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/lIAKkYJ.jpg'
+    'https://i.imgur.com/LwrVS8h.jpg'
   ),
   (
     'Doroteya',
@@ -41,7 +41,7 @@ VALUES
   ),
   (
     'Matthieu',
-    'Georges',
+    'George',
     'matthieu@enedis.fr',
     '0628164513',
     'user',
@@ -55,7 +55,7 @@ VALUES
     '0628164514',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg'
+    'https://i.imgur.com/lIAKkYJ.jpg'
   ),
   (
     'Ryan',

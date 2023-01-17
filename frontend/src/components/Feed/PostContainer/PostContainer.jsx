@@ -10,14 +10,22 @@ function PostContainer() {
       .then((response) => response.json())
       .then((result) => {
         setPosts((prev) => [...prev, ...result]);
-        console.warn(base);
       });
   }, [base]);
+
+  // function fetchPosts() {
+  //   fetch(`http://localhost:5000/api/posts/limit/${base}`)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       setBase((prev) => prev + 5);
+  //       setPosts((prev) => [...prev, ...result]);
+  //     });
+  // }
 
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight - 300
+      document.documentElement.scrollHeight - 100
     ) {
       setBase((prev) => prev + 5);
     }
@@ -25,10 +33,22 @@ function PostContainer() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div>
+      {/* <button type="button" onClick={() => console.warn(posts)}>
+        BUTTTOOOON
+      </button>
+      {/* <button type="button" onClick={fetchPosts}>
+        Fetch
+      </button>
+      <button type="button" onClick={() => console.warn(base)}>
+        Base
+      </button> */}
+
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
