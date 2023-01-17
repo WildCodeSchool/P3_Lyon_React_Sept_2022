@@ -45,6 +45,7 @@ function Post({ post }) {
             <PostDetails
               postDetails={postDetails}
               setPostDetails={setPostDetails}
+              post={post}
             />
           ) : (
             ""

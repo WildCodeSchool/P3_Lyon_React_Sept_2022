@@ -64,9 +64,6 @@ function CreatePost() {
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
         .then((retour) => {
-          console.warn(retour);
-          // ferme la modale et reviens sur le feed des posts
-          setShowCreatePost(!showCreatePost);
           setRefresh(!refresh);
         })
         .catch(console.error());
@@ -77,7 +74,10 @@ function CreatePost() {
     <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10">
       <div className="bg-white">
         <div className="flex justify-between">
-          <button type="button" onClick={() => setShowCreatePost(false)}>
+          <button
+            type="button"
+            onClick={() => setShowCreatePost(!showCreatePost)}
+          >
             <img className="ml-2 mt-6" src={croix} alt="" />
           </button>
         </div>
@@ -130,7 +130,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            // inverse refresh pour refresh page feed
+            onClick={setShowCreatePost(!showCreatePost)}
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >
