@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import logoEnedis from "../../assets/logo-enedis.png";
 import logOut from "../../assets/logout.png";
 import { useCurrentUserContext } from "../../contexts/userContext";
@@ -7,8 +7,13 @@ import { usePostUserContext } from "../../contexts/PostUserContext";
 import avatar from "../../assets/my-avatar.jpeg";
 
 function Navbar() {
-  const { user } = useCurrentUserContext();
+  const { user, setUser } = useCurrentUserContext();
   const { setIsGroup } = usePostUserContext();
+  const onClick = () => {
+    localStorage.clear();
+    setUser({});
+    Navigate("/login");
+  };
 
   return (
     <div>
@@ -28,9 +33,9 @@ function Navbar() {
               />
             </Link>
           </div>
-          <Link to="/">
+          <button type="button" onClick={onClick}>
             <img className="w-6 h-6 mr-2" src={logOut} alt="Logout" />
-          </Link>
+          </button>
         </div>
       </div>
     </div>

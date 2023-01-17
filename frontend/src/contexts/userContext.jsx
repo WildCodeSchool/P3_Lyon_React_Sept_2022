@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const CurrentUserContext = createContext();
 
 export default CurrentUserContext;
 
 export function CurrentUserContextProvider({ children }) {
-  const [user, setUser] = useState({});
-  const [token, setToken] = useState("");
+  const [user, setUser] = useLocalStorage({});
+  const [token, setToken] = useLocalStorage("");
 
   const [currentUser, setCurrentUser] = useState([]);
 
