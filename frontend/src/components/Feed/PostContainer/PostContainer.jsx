@@ -5,7 +5,7 @@ function PostContainer() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/posts")
+    fetch("http://localhost:5000/api/posts/limit/2")
       .then((response) => response.json())
       .then((result) => {
         setPosts(result);

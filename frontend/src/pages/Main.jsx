@@ -3,24 +3,22 @@ import React, { useEffect } from "react";
 import Feed from "../components/Feed/Feed";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar/Navbar";
+import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
 
 function Main() {
-  const { setValueGroupe, setValueCategory } = usePostUserContext();
+  const { setGroupList, setCategoryList } = usePostUserContext();
 
   useEffect(() => {
     fetch("http://localhost:5000/api/groups")
       .then((response) => response.json())
       .then((groups) => {
-        setValueGroupe(groups);
+        setGroupList(groups);
       });
-  }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/categories ")
+    fetch("http://localhost:5000/api/categories")
       .then((response) => response.json())
       .then((categories) => {
-        setValueCategory(categories);
+        setCategoryList(categories);
       });
   }, []);
 
@@ -28,6 +26,7 @@ function Main() {
     <div>
       <Navbar />
       <Header />
+      <Carrousel />
       <Feed />
     </div>
   );

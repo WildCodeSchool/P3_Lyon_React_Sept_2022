@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoEnedis from "../../assets/logo-enedis.png";
 import logOut from "../../assets/logout.png";
 import { useCurrentUserContext } from "../../contexts/userContext";
@@ -9,10 +9,11 @@ import avatar from "../../assets/my-avatar.jpeg";
 function Navbar() {
   const { user, setUser } = useCurrentUserContext();
   const { setIsGroup } = usePostUserContext();
+  const navigate = useNavigate();
   const onClick = () => {
     localStorage.clear();
     setUser({});
-    Navigate("/login");
+    navigate("/");
   };
 
   return (
