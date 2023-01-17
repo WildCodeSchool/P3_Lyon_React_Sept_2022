@@ -17,7 +17,7 @@ function PostContainer() {
   return (
     <div>
       {posts.map((post) => (
-        <Post key={post.post_id} post={post} />
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );
