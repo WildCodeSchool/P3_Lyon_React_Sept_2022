@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 function Avatar() {
+  const { user } = useCurrentUserContext();
   return (
     <Link to="/profile">
-      <img
-        src="./src/assets/my-avatar.jpeg"
-        alt="My profile avatar"
-        className="rounded-full"
-      />
+      <img src={user.avatar} alt="My profile avatar" className="rounded-full" />
     </Link>
   );
 }
