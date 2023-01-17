@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import croix from "../../../assets/croix.png";
-import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
@@ -16,8 +14,11 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
+    refresh,
+    setRefresh,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
+  // user = avatar, email, firstname, id, is_admin, lastname, phone_number, role, user_password
 
   const [dataPost, setDataPost] = useState({
     title: "",
@@ -33,6 +34,13 @@ function CreatePost() {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    setDataPost({
+      ...dataPost,
+      category_id: valueSelectedCategory,
+    });
+  }, [valueSelectedCategory]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -57,6 +65,9 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
+          // ferme la modale et reviens sur le feed des posts
+          setShowCreatePost(!showCreatePost);
+          setRefresh(!refresh);
         })
         .catch(console.error());
     }
@@ -66,10 +77,7 @@ function CreatePost() {
     <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10">
       <div className="bg-white">
         <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={() => setShowCreatePost(!showCreatePost)}
-          >
+          <button type="button" onClick={() => setShowCreatePost(false)}>
             <img className="ml-2 mt-6" src={croix} alt="" />
           </button>
         </div>
@@ -82,19 +90,13 @@ function CreatePost() {
         {/* Formulaire Pour publier un post  */}
         <form onSubmit={(e) => onSubmit(e)} method="PUT">
           <div className="flex items-center">
-            <img className="rounded-full w-28 ml-3" src={myAvatar} alt="" />
+            <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
             <div className="block text-left">
               <div className="flex">
-                <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
-                  value={user.firstname}
-                >
+                <h2 className="text-xl ml-[24px] text-primary font-bold ">
                   {user.firstname}
                 </h2>
-                <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
-                  value={user.lastname}
-                >
+                <h2 className="text-xl ml-[24px] text-primary font-bold ">
                   {user.lastname}
                 </h2>
               </div>
@@ -102,11 +104,7 @@ function CreatePost() {
               <p className="text-md ml-[24px] text-primary">
                 {valueSelectedGroup}
               </p>
-              <p
-                className="text-md ml-[24px] text-primary"
-                value={valueSelectedCategory}
-                name={valueSelectedCategory}
-              >
+              <p className="text-md ml-[24px] text-primary">
                 {valueSelectedCategory}
               </p>
             </div>
@@ -132,14 +130,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            onClick={() =>
-              console.warn(
-                dataPost.content,
-                dataPost.title,
-                user.id,
-                valueSelectedCategory
-              )
-            }
+            // inverse refresh pour refresh page feed
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >

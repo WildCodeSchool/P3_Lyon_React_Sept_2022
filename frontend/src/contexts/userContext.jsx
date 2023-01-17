@@ -8,8 +8,8 @@ const CurrentUserContext = createContext();
 export default CurrentUserContext;
 
 export function CurrentUserContextProvider({ children }) {
-  const [user, setUser] = useLocalStorage({});
-  const [token, setToken] = useLocalStorage("");
+  const [user, setUser] = useLocalStorage("user", {});
+  const [token, setToken] = useLocalStorage("token", "");
 
   const [currentUser, setCurrentUser] = useState([]);
 

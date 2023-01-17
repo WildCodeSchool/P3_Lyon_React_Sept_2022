@@ -131,8 +131,8 @@ export function PostUserContextProvider({ children }) {
         setValueSelectedCategory,
         setValueSelectedGroup,
         valueSelectedGroup,
-        setRefresh,
         refresh,
+        setRefresh,
       }}
     >
       {children}

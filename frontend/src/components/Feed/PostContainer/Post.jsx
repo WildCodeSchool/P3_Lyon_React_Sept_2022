@@ -15,7 +15,7 @@ function Post({ post }) {
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full w-20 mr-6 h-24 border-4 border-violet"
+              className="rounded-full w-20 mr-6 border-4 border-violet"
               src={post.avatar}
               alt={post.username}
             />

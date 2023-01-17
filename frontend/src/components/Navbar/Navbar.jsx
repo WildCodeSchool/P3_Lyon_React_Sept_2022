@@ -9,7 +9,9 @@ import avatar from "../../assets/my-avatar.jpeg";
 function Navbar() {
   const { user, setUser } = useCurrentUserContext();
   const { setIsGroup } = usePostUserContext();
+
   const navigate = useNavigate();
+
   const onClick = () => {
     localStorage.clear();
     setUser({});
@@ -35,7 +37,7 @@ function Navbar() {
             </Link>
           </div>
           <button type="button" onClick={onClick}>
-            <img className="w-6 h-6 mr-2" src={logOut} alt="Logout" />
+            <img className="w-6 h-6 mr-2" src={logOut} alt="Log out" />
           </button>
         </div>
       </div>

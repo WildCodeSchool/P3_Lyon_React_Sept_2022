@@ -64,7 +64,7 @@ VALUES
     '0628164515',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-371-456323-512.png'
+    'https://urlz.fr/ks90'
   );
 
 UPDATE user_detail SET is_admin = true WHERE id = 3;
@@ -195,6 +195,7 @@ content text not null,
 user_id int not null,
 category_id int not null,
 post_date DATE,
+post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id),
 CONSTRAINT fk_post_category
