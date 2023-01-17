@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import croix from "../../../assets/croix.png";
+import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
@@ -19,7 +20,6 @@ function CreatePost() {
     setRefresh,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
-  // user = avatar, email, firstname, id, is_admin, lastname, phone_number, role, user_password
 
   const [dataPost, setDataPost] = useState({
     title: "",
@@ -64,7 +64,8 @@ function CreatePost() {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
-        .then(() => {
+        .then((retour) => {
+          console.warn(retour);
           setRefresh(!refresh);
         })
         .catch(console.error());
@@ -94,10 +95,16 @@ function CreatePost() {
             <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
             <div className="block text-left">
               <div className="flex">
-                <h2 className="text-xl ml-[24px] text-primary font-bold ">
+                <h2
+                  className="text-xl ml-[24px] text-primary font-bold "
+                  value={user.firstname}
+                >
                   {user.firstname}
                 </h2>
-                <h2 className="text-xl ml-[24px] text-primary font-bold ">
+                <h2
+                  className="text-xl ml-[24px] text-primary font-bold "
+                  value={user.lastname}
+                >
                   {user.lastname}
                 </h2>
               </div>
@@ -105,7 +112,11 @@ function CreatePost() {
               <p className="text-md ml-[24px] text-primary">
                 {valueSelectedGroup}
               </p>
-              <p className="text-md ml-[24px] text-primary">
+              <p
+                className="text-md ml-[24px] text-primary"
+                value={valueSelectedCategory}
+                name={valueSelectedCategory}
+              >
                 {valueSelectedCategory}
               </p>
             </div>
@@ -131,7 +142,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            onClick={() => setShowCreatePost(!showCreatePost)}
+            onClick={() => setRefresh(!refresh)}
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >

@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 // eslint-disable-next-line react/prop-types
 function PostDetails({ postDetails, setPostDetails, post }) {
+  const { user } = useCurrentUserContext();
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
@@ -14,7 +16,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
       <div className="flex flex-row items-center py-6 px-10">
         <img
           className="rounded-full w-24 mr-6 border-4 border-violet"
-          src="./src/assets/avatar-user.jpeg"
+          src={user.avatar}
           alt="User avatar"
         />
         <h2 className="text-primary text-3xl text-left">{post.title}</h2>
