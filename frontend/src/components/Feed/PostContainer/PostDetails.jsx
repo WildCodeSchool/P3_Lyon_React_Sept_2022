@@ -29,7 +29,7 @@ function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
           {post.category_name}
         </div>
       </div>
-      <img className="mt-10" src="./src/assets/picture-post.jpg" alt="Post" />
+      <img className="mt-10" src="../src/assets/picture-post.jpg" alt="Post" />
       <p className="bg-white text-md p-8">{post.content}</p>
       <h2 className="font-bold text-center">Ouvrir le pdf :</h2>
       <div className="flex items-center justify-center text-center pb-2">
@@ -37,14 +37,14 @@ function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
           className="w-2/5 flex flex-col justify-center items-center shadow-md rounded-xl py-4 text-sm
         placeholder-gray-500 focus:placeholder-gray-400"
         >
-          <img className="h-8 w-8 pr-1" src="./src/assets/pdf.png" alt="PDF" />
+          <img className="h-8 w-8 pr-1" src="../src/assets/pdf.png" alt="PDF" />
           participants.pdf
         </div>
       </div>
       <div className="w-full mt-6 flex items-center px-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-green"
-          src={user.avatar}
+          src={profileUser.avatar}
           alt="My profile avatar"
         />
 
