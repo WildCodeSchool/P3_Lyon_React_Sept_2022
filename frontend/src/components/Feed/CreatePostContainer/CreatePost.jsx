@@ -16,8 +16,8 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
-    refresh,
-    setRefresh,
+    setBase,
+    setPosts,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
@@ -39,7 +39,7 @@ function CreatePost() {
   useEffect(() => {
     setDataPost({
       ...dataPost,
-      category_id: valueSelectedCategory,
+      category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
 
@@ -66,7 +66,9 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
-          setRefresh(!refresh);
+          setPosts([]);
+          setBase(0);
+          setShowCreatePost(false);
         })
         .catch(console.error());
     }
@@ -117,7 +119,7 @@ function CreatePost() {
                 value={valueSelectedCategory}
                 name={valueSelectedCategory}
               >
-                {valueSelectedCategory}
+                {valueSelectedCategory.category_name}
               </p>
             </div>
           </div>
@@ -142,7 +144,7 @@ function CreatePost() {
           </div>
           <button
             type="submit"
-            onClick={() => setRefresh(!refresh)}
+            // onClick={() => setBase(0)}
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
           >
