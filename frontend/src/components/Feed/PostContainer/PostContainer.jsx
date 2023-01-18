@@ -41,7 +41,7 @@ function PostContainer() {
   }, []);
 
   return (
-    <div>
+    <div className="md:ml-[-85%] md:w-[40vw] md:rounded-lg">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
