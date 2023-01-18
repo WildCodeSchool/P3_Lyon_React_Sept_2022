@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
 
 function Post({ post }) {
   const [postDetails, setPostDetails] = useState(false);
+  const { user } = useCurrentUserContext();
 
   const openPostDetails = () => {
     setPostDetails(!postDetails);
@@ -53,7 +55,7 @@ function Post({ post }) {
           <div className="w-full mt-6 flex items-center justify-between pb-6">
             <img
               className="rounded-full w-10 mr-2 border-4 border-violet"
-              src="./src/assets/my-avatar.jpeg"
+              src={user.avatar}
               alt="My profile avatar"
             />
             <input
