@@ -16,10 +16,13 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
-    setBase,
-    setPosts,
-    refresh,
-    setRefresh,
+    // setBase,
+    // setPosts,
+    // refresh,
+    // setRefresh,
+    // setValueSelectedGroup,
+    // setValueSelectedCategory,
+    handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
@@ -68,10 +71,13 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
-          setPosts([]);
-          setBase(0);
-          setRefresh(!refresh);
-          setShowCreatePost(false);
+          handleReset();
+          // setPosts([]);
+          // setBase(0);
+          // setRefresh(!refresh);
+          // setShowCreatePost(false);
+          // setValueSelectedGroup("");
+          // setValueSelectedCategory("");
         })
         .catch(console.error());
     }
