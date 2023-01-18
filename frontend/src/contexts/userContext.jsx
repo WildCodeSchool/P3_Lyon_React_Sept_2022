@@ -12,11 +12,21 @@ export function CurrentUserContextProvider({ children }) {
   const [token, setToken] = useLocalStorage("token", "");
 
   const [currentUser, setCurrentUser] = useState([]);
+  const [profileUser, setProfileUser] = useLocalStorage("profileUser", {});
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <CurrentUserContext.Provider
-      value={{ user, setUser, token, setToken, currentUser, setCurrentUser }}
+      value={{
+        user,
+        setUser,
+        token,
+        setToken,
+        currentUser,
+        setCurrentUser,
+        profileUser,
+        setProfileUser,
+      }}
     >
       {children}
     </CurrentUserContext.Provider>

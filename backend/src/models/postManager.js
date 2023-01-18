@@ -26,7 +26,7 @@ class PostManager extends AbstractManager {
     );
   }
 
-  finMyPosts(base) {
+  findMyPosts(base) {
     return this.connection.any(
       `select p.id, p.user_id, p.title, p.content, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
@@ -35,7 +35,7 @@ class PostManager extends AbstractManager {
       LEFT JOIN category as c
       ON c.id = p.category_id
        LEFT JOIN group_detail as g
-      ON g.id = c.group_id ORDER BY p.id;`,
+      ON g.id = c.group_id ORDER BY p.id DESC;`,
       [base]
     );
   }

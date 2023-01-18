@@ -32,7 +32,7 @@ router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
 // appel de mes posts personnel
 
-router.get("/api/myposts/limit/:base", postControllers.browseMyPosts);
+router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
 
 // Gestion des posts
 

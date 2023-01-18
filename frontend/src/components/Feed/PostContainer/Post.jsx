@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PostDetails from "./PostDetails";
 
-function Post({ post }) {
+function Post({ post, profileUser }) {
   const [postDetails, setPostDetails] = useState(false);
 
   const openPostDetails = () => {
@@ -32,7 +32,7 @@ function Post({ post }) {
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
-        <img src={`./src/assets/${post.image}`} alt="Post" />
+        {post.image && <img src={`./src/assets/${post.image}`} alt="Post" />}
         <div className="px-6">
           <button onClick={() => openPostDetails()} type="button">
             <h2 className="text-black self-start my-2">{post.title}</h2>
@@ -45,6 +45,7 @@ function Post({ post }) {
             <PostDetails
               postDetails={postDetails}
               setPostDetails={setPostDetails}
+              post={post}
             />
           ) : (
             ""
@@ -52,7 +53,7 @@ function Post({ post }) {
           <div className="w-full mt-6 flex items-center justify-between pb-6">
             <img
               className="rounded-full w-10 mr-2 border-4 border-violet"
-              src="./src/assets/my-avatar.jpeg"
+              src="./src/assets/myAvatar.png"
               alt="My profile avatar"
             />
             <input
