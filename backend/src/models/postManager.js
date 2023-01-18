@@ -14,23 +14,43 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select p.id, p.title, p.content, p.post_date, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
        LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
       LEFT JOIN category as c
       ON c.id = p.category_id
        LEFT JOIN group_detail as g
-      ON g.id = c.group_id ORDER BY p.post_date DESC limit 5 offset $1;`,
+      ON g.id = c.group_id ORDER BY p.id DESC limit 5 offset $1;`,
+      [base]
+    );
+  }
+
+  finMyPosts(base) {
+    return this.connection.any(
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, ud.lastname, ud.avatar, c.category_name, g.group_name
+      FROM ${this.table} as p
+       LEFT JOIN user_detail as ud
+      ON ud.id= p.user_id
+      LEFT JOIN category as c
+      ON c.id = p.category_id
+       LEFT JOIN group_detail as g
+      ON g.id = c.group_id ORDER BY DESC p.id;`,
       [base]
     );
   }
 
   insert(post) {
     return this.connection.any(
-      `INSERT INTO ${this.table} (title, content, user_id, category_id, post_date) VALUES ($1, $2, $3, $4, current_date) RETURNING *;
+      `INSERT INTO ${this.table} (title, content, user_id, category_id, post_date, post_image) VALUES ($1, $2, $3, $4, current_date, $5) RETURNING *;
       `,
-      [post.title, post.content, post.user_id, post.category_id]
+      [
+        post.title,
+        post.content,
+        post.user_id,
+        post.category_id,
+        post.post_image,
+      ]
     );
   }
 

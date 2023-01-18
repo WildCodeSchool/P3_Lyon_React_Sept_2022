@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import Post from "../components/Feed/PostContainer/Post";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
 // eslint-disable-next-line import/no-named-as-default
 import EditPost from "../components/Feed/PostContainer/EditPost";
 import { usePostUserContext } from "../contexts/PostUserContext";
-import avatar from "../assets/my-avatar.jpeg";
-import postImage from "../assets/solar-groups.jpeg";
 import menuDots from "../assets/menu-dots.png";
+import { useCurrentUserContext } from "../contexts/userContext";
 
 function Profile() {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const [userProfile, setUserProfile] = useState([]);
-  const { users } = usePostUserContext();
-  const params = useParams();
+  const [myPosts, setMyPosts] = useState([]);
+  const { refresh } = usePostUserContext();
+  const { user } = useCurrentUserContext();
 
   useEffect(() => {
-    if (parseInt(params.user_id, 10) > 0) {
-      const result = users.filter(
-        (user) => user.user_id === parseInt(params.user_id, 10)
-      );
-
-      setUserProfile(result[0]);
-    } else {
-      setUserProfile(users[0]);
-    }
-  }, [params]);
+    fetch(`http://localhost:5000/api/myposts/limit/0"`)
+      .then((response) => response.json())
+      .then((result) => {
+        setMyPosts(result);
+        console.warn(result);
+      });
+  }, [refresh]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -38,10 +34,10 @@ function Profile() {
 
   return (
     <div className="bg-[#f6f6fe] w-screen">
-      {userProfile && (
+      {user && (
         <div>
           <Navbar />
-          <ProfileCard userProfile={userProfile} />
+          <ProfileCard user={user} />
           <h1 className="text-primary text-center text-4xl mb-3">
             Publications
           </h1>
@@ -79,45 +75,12 @@ function Profile() {
               ) : (
                 ""
               )}
-              <div className="flex flex-row self-start pb-4 px-6">
-                <img
-                  className="rounded-full w-20 mr-6 border-4 border-violet"
-                  src={avatar}
-                  alt="User avatar"
-                />
-                <div className="flex flex-col">
-                  <Link to="/profile">
-                    <h2 className="text-primary">Ryan Bidau</h2>
-                  </Link>
-                  <h3 className="font-light text-primary">
-                    Communication Agence - Actualités
-                  </h3>
-                  <h3 className="text-gray-400 font-light">1h</h3>
-                </div>
-              </div>
-              <img src={postImage} alt="Post" />
-              <div className="px-6">
-                <h2 className="text-black self-start my-2">
-                  Solar énergies renouvelables
-                </h2>
-                <p className="self-start text-sm">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Minus, natus?...
-                  <span className="text-primary text-base"> voir plus</span>
-                </p>
-                <div className="w-full mt-6 flex items-center justify-between pb-6">
-                  <img
-                    className="rounded-full w-10 mr-2 border-4 border-violet"
-                    src={avatar}
-                    alt="My profile avatar"
-                  />
-                  <input
-                    className="w-5/6 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-                    type="text"
-                    placeholder="Laissez un commentaire..."
-                  />
-                </div>
-              </div>
+
+              {myPosts
+                .filter((mesPosts) => user.id === mesPosts.user_id)
+                .map((post) => (
+                  <Post post={post} key={post.id} />
+                ))}
             </div>
           </div>
         </div>

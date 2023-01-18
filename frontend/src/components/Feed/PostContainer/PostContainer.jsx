@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
-  const [posts, setPosts] = useState([]);
-  const [base, setBase] = useState(0);
+  const { posts, setPosts, base, setBase } = usePostUserContext();
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/limit/${base}`)
       .then((response) => response.json())
       .then((result) => {
         setPosts((prev) => [...prev, ...result]);
+        console.warn("Result:", result);
+        console.warn("posts: ", posts);
+        console.warn("base: ", base);
       });
   }, [base]);
 
@@ -25,7 +28,7 @@ function PostContainer() {
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight - 100
+      document.documentElement.scrollHeight
     ) {
       setBase((prev) => prev + 5);
     }
@@ -39,16 +42,6 @@ function PostContainer() {
 
   return (
     <div>
-      {/* <button type="button" onClick={() => console.warn(posts)}>
-        BUTTTOOOON
-      </button>
-      {/* <button type="button" onClick={fetchPosts}>
-        Fetch
-      </button>
-      <button type="button" onClick={() => console.warn(base)}>
-        Base
-      </button> */}
-
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

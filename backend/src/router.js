@@ -30,7 +30,12 @@ router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);
 router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
+// appel de mes posts personnel
+
+router.get("/api/myposts/limit/:base", postControllers.browseMyPosts);
+
 // Gestion des posts
+
 router.get("/api/posts/limit/:base", postControllers.browse);
 router.get("/api/posts/:id", postControllers.read);
 router.post("/api/posts", postControllers.add);

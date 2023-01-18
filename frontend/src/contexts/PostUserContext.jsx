@@ -15,6 +15,8 @@ export function PostUserContextProvider({ children }) {
   const [refresh, setRefresh] = useState(false);
   const [groupList, setGroupList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [base, setBase] = useState(0);
 
   const users = [
     {
@@ -37,52 +39,6 @@ export function PostUserContextProvider({ children }) {
       job: "UX Designer",
       team: "Web Services",
       avatar: "user-avatar2.jpeg",
-    },
-  ];
-
-  const posts = [
-    {
-      post_id: 1,
-      title: "Organisation repas de Noël !",
-      article:
-        "You are my fire. The one desire. Believe when I say. I want it that way",
-      image: "../assets/picture-post.jpg",
-      category: "Communication Agence - Actualités",
-      username: "Margaux Donova",
-      avatar: "../assets/avatar-user.jpeg",
-      user_id: 2,
-    },
-    {
-      post_id: 2,
-      title: "Vacances d'été",
-      article:
-        "Tell me why, ain't nothing but a heartache. Tell me why, ain't nothing but a mistake",
-      image: "../assets/solar-groups.jpeg",
-      category: "Prévention - Affichage réglementaire",
-      username: "Michael Jackson",
-      avatar: "../assets/user-avatar2.jpeg",
-      user_id: 3,
-    },
-    {
-      post_id: 3,
-      title: "Joyeux anniversaire Margaux!",
-      article:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.",
-      image: "../assets/avatar-user.jpeg",
-      category: "News",
-      username: "Ryan Bidau",
-      avatar: "../assets/my-avatar.jpeg",
-      user_id: 1,
-    },
-    {
-      post_id: 4,
-      title: "Secret Santa",
-      article: "Tell me why, I never wanna hear you say. I want it that way",
-      image: "../assets/picture-post.jpg",
-      category: "Communication Agence - Actualités",
-      username: "Ryan Bidau",
-      avatar: "../assets/my-avatar.jpeg",
-      user_id: 1,
     },
   ];
 
@@ -117,6 +73,7 @@ export function PostUserContextProvider({ children }) {
       value={{
         users,
         posts,
+        setPosts,
         groupes,
         categories,
         isGroup,
@@ -133,6 +90,8 @@ export function PostUserContextProvider({ children }) {
         valueSelectedGroup,
         refresh,
         setRefresh,
+        base,
+        setBase,
       }}
     >
       {children}

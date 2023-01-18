@@ -68,17 +68,19 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                 >
                   {group.group_name}
                   <ul>
-                    {categoryList.map((category) => (
-                      <li
-                        value={category.id}
-                        name={category.name}
-                        className="cursor-pointer h-10  hover:bg-violet"
-                        onClick={(e) => setValueSelectedCategory(category.id)}
-                        key={category.id}
-                      >
-                        {category.category_name}
-                      </li>
-                    ))}
+                    {categoryList
+                      .filter((category) => category.group_id === group.id)
+                      .map((category) => (
+                        <li
+                          value={category.id}
+                          name={category.name}
+                          className="cursor-pointer h-10  hover:bg-violet"
+                          onClick={(e) => setValueSelectedCategory(category)}
+                          key={category.id}
+                        >
+                          {category.category_name}
+                        </li>
+                      ))}
                   </ul>
                 </li>
               ))}
