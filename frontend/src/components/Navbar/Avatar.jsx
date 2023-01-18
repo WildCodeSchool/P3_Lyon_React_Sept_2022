@@ -6,7 +6,11 @@ function Avatar() {
   const { user } = useCurrentUserContext();
   return (
     <Link to="/profile">
-      <img src={user.avatar} alt="My profile avatar" className="rounded-full" />
+      <img
+        src={user.avatar}
+        alt="My profile avatar"
+        className="rounded-full w-24 h-24 border-4 border-violet mr-5 "
+      />
     </Link>
   );
 }

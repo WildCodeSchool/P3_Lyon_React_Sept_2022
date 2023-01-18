@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import croix from "../../../assets/croix.png";
 import myAvatar from "../../../assets/my-avatar.jpeg";
@@ -16,6 +16,8 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
+    setBase,
+    setPosts,
     refresh,
     setRefresh,
   } = usePostUserContext();
@@ -35,6 +37,13 @@ function CreatePost() {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    setDataPost({
+      ...dataPost,
+      category_id: valueSelectedCategory.id,
+    });
+  }, [valueSelectedCategory]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -59,14 +68,17 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
+          setPosts([]);
+          setBase(0);
           setRefresh(!refresh);
+          setShowCreatePost(false);
         })
         .catch(console.error());
     }
   };
 
   return (
-    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10">
+    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10 md:w-1/2 md:ml-[25%] md:backdrop-blur-lg ">
       <div className="bg-white">
         <div className="flex justify-between">
           <button
@@ -83,9 +95,9 @@ function CreatePost() {
         </div>
 
         {/* Formulaire Pour publier un post  */}
-        <form onSubmit={(e) => onSubmit(e)} method="PUT">
+        <form onSubmit={(e) => onSubmit(e)} method="PUT" className="mb-5">
           <div className="flex items-center">
-            <img className="rounded-full w-28 ml-3" src={myAvatar} alt="" />
+            <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
             <div className="block text-left">
               <div className="flex">
                 <h2
@@ -110,7 +122,7 @@ function CreatePost() {
                 value={valueSelectedCategory}
                 name={valueSelectedCategory}
               >
-                {valueSelectedCategory}
+                {valueSelectedCategory.category_name}
               </p>
             </div>
           </div>
@@ -133,10 +145,10 @@ function CreatePost() {
               onChange={onChange}
             />
           </div>
+          <hr className="h-[2px] bg-grey" />
           <button
             type="submit"
-            onClick={() => setRefresh(!refresh)}
-            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
+            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[30%] w-40 md:ml-[38%] md:w-48 
          rounded-[20px] justify-end"
           >
             Publier
