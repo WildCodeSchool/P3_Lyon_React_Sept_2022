@@ -65,7 +65,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                           value={category.id}
                           name={category.name}
                           className="cursor-pointer h-10  hover:bg-violet"
-                          onClick={(e) => setValueSelectedCategory(category.id)}
+                          onClick={(e) => setValueSelectedCategory(category)}
                           key={category.id}
                         >
                           {category.category_name}

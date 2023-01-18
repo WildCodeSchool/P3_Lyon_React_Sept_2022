@@ -10,8 +10,8 @@ function CreatePostContainer() {
   const { showCreatePost, setShowCreatePost } = usePostUserContext();
 
   return (
-    <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 flex items-center justify-center p-6">
+    <div className=" md:ml-[-85%] md:w-[66vw] md:mb-4 ">
+      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 flex items-center justify-center p-6 md:h-28 md:rounded-lg ">
         <div className="rounded-full">
           <Avatar />
         </div>

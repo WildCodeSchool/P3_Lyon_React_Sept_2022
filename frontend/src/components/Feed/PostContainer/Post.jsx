@@ -11,7 +11,7 @@ function Post({ post }) {
   };
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10">
+      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img

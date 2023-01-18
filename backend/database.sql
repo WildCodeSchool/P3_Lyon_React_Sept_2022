@@ -15,7 +15,7 @@ phone_number varchar(250) unique not null,
 role varchar(250) not null DEFAULT 'user',
 is_admin boolean not null DEFAULT false,
 user_password varchar(400) not null,
-avatar text(350)
+avatar text
 );
 
 INSERT INTO
