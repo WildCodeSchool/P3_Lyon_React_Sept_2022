@@ -26,7 +26,7 @@ function ProfileCard({ profileUser }) {
           <button
             type="button"
             className="border-solid border-2 border-sky-500"
-            onClick={() => console.log(profileUser)}
+            onClick={() => console.warn(profileUser)}
           >
             {" "}
             Console moi

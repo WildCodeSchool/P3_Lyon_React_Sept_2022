@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PostDetails from "./PostDetails";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post, profileUser }) {
+  const { user } = useCurrentUserContext();
+
   const [postDetails, setPostDetails] = useState(false);
 
   const openPostDetails = () => {
@@ -46,6 +49,7 @@ function Post({ post, profileUser }) {
               postDetails={postDetails}
               setPostDetails={setPostDetails}
               post={post}
+              profileUser={profileUser}
             />
           ) : (
             ""
@@ -53,7 +57,7 @@ function Post({ post, profileUser }) {
           <div className="w-full mt-6 flex items-center justify-between pb-6">
             <img
               className="rounded-full w-10 mr-2 border-4 border-violet"
-              src="./src/assets/myAvatar.png"
+              src={user.avatar}
               alt="My profile avatar"
             />
             <input
