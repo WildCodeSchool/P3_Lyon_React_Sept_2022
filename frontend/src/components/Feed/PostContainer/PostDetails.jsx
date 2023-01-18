@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import Comment from "./Comment";
 
 // eslint-disable-next-line react/prop-types
 function PostDetails({ postDetails, setPostDetails, post }) {
@@ -8,6 +9,17 @@ function PostDetails({ postDetails, setPostDetails, post }) {
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
+      .then((response) => response.json())
+      .then((result) => {
+        setComments(result);
+        console.warn(result);
+      });
+  }, []);
+
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll">
       <button type="button" onClick={() => closePostDetails()}>
@@ -42,35 +54,14 @@ function PostDetails({ postDetails, setPostDetails, post }) {
         </div>
       </div>
       <div className="w-full mt-6 flex items-center px-6">
-        <img
-          className="rounded-full w-10 mr-4 border-4 border-green"
-          src="./src/assets/user-avatar2.jpeg"
-          alt="My profile avatar"
-        />
+        {comments.map((comment) => (
+          <div key={comment.id} comment={comment}>
+            {comment.avatar} {comment.content}
+          </div>
+        ))}
+      </div>
 
-        <div className="flex flex-col w-screen">
-          <h3 className="font-light self-start text-[#ABA1A1] text-[9px]">
-            Michael Jackson
-          </h3>
-          <input
-            className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-            type="text"
-            value="Super idée ! On fait Secret Santa ?"
-          />
-        </div>
-      </div>
-      <div className="w-full mt-6 flex items-center justify-between px-6 pb-6">
-        <img
-          className="rounded-full w-10 mr-4 border-4 border-violet"
-          src="./src/assets/my-avatar.jpeg"
-          alt="My profile avatar"
-        />
-        <input
-          className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-          type="text"
-          placeholder="Laissez un commentaire..."
-        />
-      </div>
+      <Comment />
     </div>
   );
 }

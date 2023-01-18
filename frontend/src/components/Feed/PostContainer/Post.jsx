@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post }) {
   const [postDetails, setPostDetails] = useState(false);
@@ -11,6 +11,7 @@ function Post({ post }) {
   const openPostDetails = () => {
     setPostDetails(!postDetails);
   };
+
   return (
     <div>
       <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
@@ -42,6 +43,17 @@ function Post({ post }) {
               {post.content}..
               <span className="text-primary text-base"> voir plus</span>
             </p>
+
+            <div className="w-full mt-6 flex items-center justify-between pb-6">
+              <img
+                className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
+                src={user.avatar}
+                alt="My profile avatar"
+              />
+              <div className="w-11/12 shadow-md rounded-xl py-2 pl-4 text-sm text-gray-500 focus:placeholder-gray-400">
+                Laissez un commentaire...
+              </div>
+            </div>
           </button>
           {postDetails ? (
             <PostDetails
@@ -52,18 +64,6 @@ function Post({ post }) {
           ) : (
             ""
           )}
-          <div className="w-full mt-6 flex items-center justify-between pb-6">
-            <img
-              className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-              src={user.avatar}
-              alt="My profile avatar"
-            />
-            <input
-              className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-              type="text"
-              placeholder="Laissez un commentaire..."
-            />
-          </div>
         </div>
       </div>
     </div>

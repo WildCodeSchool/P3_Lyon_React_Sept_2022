@@ -13,6 +13,7 @@ const authControllers = require("./controllers/authControllers");
 const postControllers = require("./controllers/postControllers");
 const categoryControllers = require("./controllers/categoryControllers");
 const groupControllers = require("./controllers/groupControllers");
+const commentControllers = require("./controllers/commentControllers");
 
 // Authentification
 
@@ -55,5 +56,14 @@ router.get("/api/groups/:id", groupControllers.read);
 router.post("/api/groups", groupControllers.add);
 router.put("/api/groups/:id", groupControllers.edit);
 router.delete("/api/groups/:id", verifyToken, groupControllers.destroy);
+
+// Gestion des commentaires
+router.get("/api/posts/:id/comments", commentControllers.browse);
+router.post("/api/posts/:id/comments", commentControllers.add);
+router.delete(
+  "/api/posts/:id/comments/:comment_id",
+  verifyToken,
+  commentControllers.destroy
+);
 
 module.exports = router;
