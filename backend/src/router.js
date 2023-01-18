@@ -38,7 +38,6 @@ router.get(
   postControllers.browseMyPosts
 );
 
-router.use(verifyToken);
 // Gestion des posts
 
 router.get("/api/posts/limit/:base", verifyToken, postControllers.browse);

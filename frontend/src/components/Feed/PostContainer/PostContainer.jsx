@@ -7,8 +7,6 @@ function PostContainer() {
   const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
   const { token } = useCurrentUserContext();
 
- 
-
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/limit/${base}`, {
       method: "GET",

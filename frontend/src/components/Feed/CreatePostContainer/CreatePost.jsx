@@ -33,6 +33,7 @@ function CreatePost() {
     content: "",
     user_id: user.id,
     category_id: valueSelectedCategory,
+    post_image: "",
   });
 
   const [showCategories, setShowCategories] = useState(false);
@@ -49,7 +50,7 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
-
+  const [imageUpload, setImageUpload] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
     const myHeaders = new Headers();
@@ -74,7 +75,6 @@ function CreatePost() {
         .then((retour) => {
           console.warn(retour);
           handleReset();
-
         })
         .catch(console.error());
     }
@@ -148,6 +148,7 @@ function CreatePost() {
               onChange={onChange}
             />
           </div>
+          <div className="">{dataPost.image}</div>
           <hr className="h-[2px] bg-grey" />
           <button
             type="submit"
