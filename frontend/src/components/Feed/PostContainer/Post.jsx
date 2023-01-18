@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
 
-function Post({ post }) {
+function Post({ post, profileUser }) {
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
 
@@ -48,6 +48,7 @@ function Post({ post }) {
               postDetails={postDetails}
               setPostDetails={setPostDetails}
               post={post}
+              profileUser={profileUser}
             />
           ) : (
             ""

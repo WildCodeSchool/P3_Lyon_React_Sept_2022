@@ -1,9 +1,10 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import EditPost from "../components/Feed/PostContainer/EditPost";
 import Post from "../components/Feed/PostContainer/Post";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileCard from "../components/Navbar/Profile/ProfileCard";
-// eslint-disable-next-line import/no-named-as-default
-import EditPost from "../components/Feed/PostContainer/EditPost";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import menuDots from "../assets/menu-dots.png";
 import { useCurrentUserContext } from "../contexts/userContext";
@@ -11,18 +12,33 @@ import { useCurrentUserContext } from "../contexts/userContext";
 function Profile() {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
+  const [profileUser, setProfileUser] = useState({});
   const [myPosts, setMyPosts] = useState([]);
   const { refresh } = usePostUserContext();
+  const { user_id } = useParams();
   const { user } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/myposts/limit/0"`)
+    if (user_id) {
+      fetch(`http://localhost:5000/api/users/${user_id}`)
+        .then((response) => response.json())
+        .then((result) => {
+          setProfileUser(result);
+        });
+    } else {
+      fetch(`http://localhost:5000/api/users/${user.id}`)
+        .then((response) => response.json())
+        .then((result) => {
+          setProfileUser(result);
+        });
+    }
+
+    fetch(`http://localhost:5000/api/myposts/user/${user_id}`)
       .then((response) => response.json())
       .then((result) => {
         setMyPosts(result);
-        console.warn(result);
       });
-  }, [refresh]);
+  }, [refresh, user_id]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -31,13 +47,12 @@ function Profile() {
   const handleEditPostModal = () => {
     setEditPostModal(!editPostModal);
   };
-
   return (
     <div className="bg-[#f6f6fe] w-screen">
-      {user && (
+      {profileUser && (
         <div>
           <Navbar />
-          <ProfileCard user={user} />
+          <ProfileCard profileUser={profileUser} />
           <h1 className="text-primary text-center text-4xl mb-3">
             Publications
           </h1>
@@ -77,9 +92,9 @@ function Profile() {
               )}
 
               {myPosts
-                .filter((mesPosts) => user.id === mesPosts.user_id)
+                .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (
-                  <Post post={post} key={post.id} />
+                  <Post post={post} profileUser={profileUser} key={post.id} />
                 ))}
             </div>
           </div>
