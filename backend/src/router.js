@@ -32,8 +32,13 @@ router.delete("/api/users/:id", verifyToken, userControllers.destroy);
 
 // appel de mes posts personnel
 
-router.get("/api/myposts/limit/:base", postControllers.browseMyPosts);
+router.get(
+  "/api/myposts/limit/:base",
+  verifyToken,
+  postControllers.browseMyPosts
+);
 
+router.use(verifyToken);
 // Gestion des posts
 
 router.get("/api/posts/limit/:base", postControllers.browse);
@@ -47,13 +52,13 @@ router.get("/api/categories", categoryControllers.browse);
 router.get("/api/categories/:id", categoryControllers.read);
 router.post("/api/categories", categoryControllers.add);
 router.put("/api/categories/:id", categoryControllers.edit);
-router.delete("/api/categories/:id", verifyToken, categoryControllers.destroy);
+router.delete("/api/categories/:id", categoryControllers.destroy);
 
 // Gestion des groupes
 router.get("/api/groups", groupControllers.browse);
 router.get("/api/groups/:id", groupControllers.read);
 router.post("/api/groups", groupControllers.add);
 router.put("/api/groups/:id", groupControllers.edit);
-router.delete("/api/groups/:id", verifyToken, groupControllers.destroy);
+router.delete("/api/groups/:id", groupControllers.destroy);
 
 module.exports = router;
