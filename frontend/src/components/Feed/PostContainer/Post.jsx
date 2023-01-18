@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
 
-function Post({ post, profileUser }) {
+function Post({ post }) {
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
 
@@ -27,6 +27,14 @@ function Post({ post, profileUser }) {
               <div className="flex gap-2">
                 <h2 className="text-primary">{post.firstname} </h2>
                 <h2 className="text-primary">{post.lastname}</h2>
+                <button
+                  type="button"
+                  className="border-solid border-2 border-sky-500"
+                  onClick={() => console.warn(post)}
+                >
+                  {" "}
+                  Console moi
+                </button>
               </div>
             </Link>
             <h3 className="font-light text-primary">{post.group_name}</h3>
@@ -48,7 +56,6 @@ function Post({ post, profileUser }) {
               postDetails={postDetails}
               setPostDetails={setPostDetails}
               post={post}
-              profileUser={profileUser}
             />
           ) : (
             ""

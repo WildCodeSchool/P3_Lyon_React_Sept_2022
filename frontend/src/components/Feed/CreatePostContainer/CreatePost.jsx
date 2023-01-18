@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import croix from "../../../assets/croix.png";
-import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
+import croix from "../../../assets/croix.png";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
@@ -16,12 +14,6 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
-    // setBase,
-    // setPosts,
-    // refresh,
-    // setRefresh,
-    // setValueSelectedGroup,
-    // setValueSelectedCategory,
     handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
@@ -72,12 +64,6 @@ function CreatePost() {
         .then((retour) => {
           console.warn(retour);
           handleReset();
-          // setPosts([]);
-          // setBase(0);
-          // setRefresh(!refresh);
-          // setShowCreatePost(false);
-          // setValueSelectedGroup("");
-          // setValueSelectedCategory("");
         })
         .catch(console.error());
     }
