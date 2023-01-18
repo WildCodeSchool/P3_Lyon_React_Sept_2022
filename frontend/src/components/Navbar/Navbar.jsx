@@ -7,7 +7,7 @@ import { usePostUserContext } from "../../contexts/PostUserContext";
 
 function Navbar() {
   const { user, setUser } = useCurrentUserContext();
-  const { setIsGroup } = usePostUserContext();
+  const { handleReset } = usePostUserContext();
 
   const navigate = useNavigate();
 
@@ -17,11 +17,15 @@ function Navbar() {
     navigate("/");
   };
 
+  function handleLogo() {
+    handleReset();
+  }
+
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between">
         <Link to={user.is_admin ? "/admin" : "/feed"}>
-          <button type="button" onClick={() => setIsGroup(false)}>
+          <button type="button" onClick={handleLogo}>
             <img className="w-32 h-16" src={logoEnedis} alt="Logo" />
           </button>
         </Link>

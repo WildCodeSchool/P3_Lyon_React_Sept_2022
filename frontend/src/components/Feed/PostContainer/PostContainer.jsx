@@ -3,7 +3,7 @@ import Post from "./Post";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function PostContainer() {
-  const { posts, setPosts, base, setBase } = usePostUserContext();
+  const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/limit/${base}`)
@@ -14,7 +14,7 @@ function PostContainer() {
         console.warn("posts: ", posts);
         console.warn("base: ", base);
       });
-  }, [base]);
+  }, [base, refresh]);
 
   // function fetchPosts() {
   //   fetch(`http://localhost:5000/api/posts/limit/${base}`)
@@ -42,6 +42,9 @@ function PostContainer() {
 
   return (
     <div>
+      <button type="button" onClick={() => console.warn("Posts: ", posts)}>
+        POSTS
+      </button>
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
