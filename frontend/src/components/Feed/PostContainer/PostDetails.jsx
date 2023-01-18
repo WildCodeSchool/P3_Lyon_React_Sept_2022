@@ -44,7 +44,7 @@ function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
       <div className="w-full mt-6 flex items-center px-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-green"
-          src={profileUser.avatar}
+          src={user.avatar}
           alt="My profile avatar"
         />
 
