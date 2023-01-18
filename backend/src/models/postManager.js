@@ -21,7 +21,7 @@ class PostManager extends AbstractManager {
       LEFT JOIN category as c
       ON c.id = p.category_id
        LEFT JOIN group_detail as g
-      ON g.id = c.group_id ORDER BY p.id DESC limit 5;`,
+      ON g.id = c.group_id ORDER BY p.id DESC limit 5 offset $1;`,
       [base]
     );
   }

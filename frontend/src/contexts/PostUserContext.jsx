@@ -16,6 +16,7 @@ export function PostUserContextProvider({ children }) {
   const [groupList, setGroupList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [base, setBase] = useState(0);
 
   const users = [
     {
@@ -89,6 +90,8 @@ export function PostUserContextProvider({ children }) {
         valueSelectedGroup,
         refresh,
         setRefresh,
+        base,
+        setBase,
       }}
     >
       {children}
