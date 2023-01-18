@@ -18,6 +18,17 @@ export function PostUserContextProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [base, setBase] = useState(0);
 
+  function handleReset() {
+    console.warn("it works");
+    setPosts([]);
+    setBase(0);
+    setRefresh(!refresh);
+    setShowCreatePost(false);
+    setValueSelectedGroup("");
+    setValueSelectedCategory("");
+    setIsGroup(false);
+  }
+
   const users = [
     {
       user_id: 1,
@@ -92,6 +103,7 @@ export function PostUserContextProvider({ children }) {
         setRefresh,
         base,
         setBase,
+        handleReset,
       }}
     >
       {children}
