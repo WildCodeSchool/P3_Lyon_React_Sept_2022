@@ -41,10 +41,7 @@ function PostContainer() {
   }, []);
 
   return (
-    <div>
-      <button type="button" onClick={() => console.warn("Posts: ", posts)}>
-        POSTS
-      </button>
+    <div className="md:ml-[-85%] md:w-[40vw] md:rounded-lg">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

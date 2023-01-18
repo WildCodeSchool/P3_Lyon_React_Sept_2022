@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar/Navbar";
 import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
+import Panel from "../components/Feed/PostContainer/Panel";
 
 function Main() {
   const { setGroupList, setCategoryList } = usePostUserContext();
@@ -25,9 +26,12 @@ function Main() {
   return (
     <div>
       <Navbar />
-      <Header />
-      <Carrousel />
-      <Feed />
+      <div className="md:grid md:grid-cols-4">
+        <Header />
+        <Carrousel />
+        <Feed />
+        <Panel />
+      </div>
     </div>
   );
 }
