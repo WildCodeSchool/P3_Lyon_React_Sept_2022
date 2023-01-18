@@ -11,7 +11,7 @@ function Comment() {
         alt="My profile avatar"
       />
       <input
-        className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+        className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm"
         type="text"
         valeur=""
         placeholder="Laissez un commentaire..."
