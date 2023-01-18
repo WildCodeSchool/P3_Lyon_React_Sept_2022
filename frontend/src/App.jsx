@@ -9,6 +9,7 @@ import { PostUserContextProvider } from "./contexts/PostUserContext";
 import { CurrentUserContextProvider } from "./contexts/userContext";
 import Admin from "./pages/Admin";
 import PostList from "./pages/PostList";
+import ModifUser from "./components/Admin/ModifUser";
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profile/:user_id" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/adminUser" element={<PostList />} />
+            <Route path="/adminUser/:id" element={<ModifUser />} />
           </Routes>
         </CurrentUserContextProvider>
       </PostUserContextProvider>

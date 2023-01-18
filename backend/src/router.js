@@ -28,7 +28,7 @@ router.get("/api/users", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);
-router.delete("/api/users/:id", verifyToken, userControllers.destroy);
+router.delete("/api/users/:id", userControllers.destroy);
 
 // Gestion des posts
 router.get("/api/posts", postControllers.browse);

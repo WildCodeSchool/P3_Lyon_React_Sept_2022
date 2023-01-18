@@ -15,7 +15,7 @@ phone_number varchar(250) unique not null,
 role varchar(250) not null DEFAULT 'user',
 is_admin boolean not null DEFAULT false,
 user_password varchar(400) not null,
-avatar text(350)
+avatar text
 );
 
 INSERT INTO
@@ -195,7 +195,7 @@ content text not null,
 user_id int not null,
 category_id int not null,
 CONSTRAINT fk_post_user
-FOREIGN KEY(user_id) REFERENCES user_detail(id),
+FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
 CONSTRAINT fk_post_category
 FOREIGN KEY(category_id) REFERENCES category(id)
 );
@@ -495,4 +495,5 @@ FOREIGN KEY(post_id) REFERENCES post(id),
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
+
 
