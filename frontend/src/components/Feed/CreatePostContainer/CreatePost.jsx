@@ -18,6 +18,8 @@ function CreatePost() {
     valueSelectedGroup,
     setBase,
     setPosts,
+    refresh,
+    setRefresh,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
@@ -68,6 +70,7 @@ function CreatePost() {
           console.warn(retour);
           setPosts([]);
           setBase(0);
+          setRefresh(!refresh);
           setShowCreatePost(false);
         })
         .catch(console.error());
