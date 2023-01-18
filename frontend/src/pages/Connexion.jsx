@@ -59,7 +59,7 @@ function Connexion() {
           </h1>
         </div>
         <div>
-          <h3 className=" absolute text-3xl text-primary ml-[40px] my-[17px] text-center md:ml-[18%] md:text-2xl md:mt-0">
+          <h3 className="absolute text-2xl text-primary ml-[55px] my-[17px] text-center md:ml-[18%] md:text-2xl md:mt-0">
             Accédez à votre espace
           </h3>
           <div className="bg-[url('../src/assets/line.svg')] bg-no-repeat h-[356px] ml-[23px] md:h-[30vh] md:ml-[30%] md:hidden"></div>
