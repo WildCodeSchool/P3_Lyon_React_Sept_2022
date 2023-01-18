@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import croix from "../../../assets/croix.png";
-import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
+import croix from "../../../assets/croix.png";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
@@ -16,10 +14,7 @@ function CreatePost() {
     setShowCreatePost,
     showCreatePost,
     valueSelectedGroup,
-    setBase,
-    setPosts,
-    refresh,
-    setRefresh,
+    handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
 
@@ -68,10 +63,7 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
-          setPosts([]);
-          setBase(0);
-          setRefresh(!refresh);
-          setShowCreatePost(false);
+          handleReset();
         })
         .catch(console.error());
     }

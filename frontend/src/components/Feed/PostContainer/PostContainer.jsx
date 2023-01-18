@@ -1,29 +1,25 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function PostContainer() {
   const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/limit/${base}`)
+    fetch(`http://localhost:5000/api/posts/limit/${base}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((result) => {
         setPosts((prev) => [...prev, ...result]);
-        console.warn("Result:", result);
-        console.warn("posts: ", posts);
-        console.warn("base: ", base);
       });
   }, [base, refresh]);
-
-  // function fetchPosts() {
-  //   fetch(`http://localhost:5000/api/posts/limit/${base}`)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       setBase((prev) => prev + 5);
-  //       setPosts((prev) => [...prev, ...result]);
-  //     });
-  // }
 
   const handleScroll = () => {
     if (
