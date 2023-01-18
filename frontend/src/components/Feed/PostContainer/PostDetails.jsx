@@ -3,7 +3,7 @@ import React from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 // eslint-disable-next-line react/prop-types
-function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
+function PostDetails({ postDetails, setPostDetails, post }) {
   const { user } = useCurrentUserContext();
   const closePostDetails = () => {
     setPostDetails(!postDetails);
@@ -16,7 +16,7 @@ function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
       <div className="flex flex-row items-center py-6 px-10">
         <img
           className="rounded-full w-24 mr-6 border-4 border-violet"
-          src={profileUser.avatar}
+          src={post.avatar}
           alt="User avatar"
         />
         <h2 className="text-primary text-3xl text-left">{post.title}</h2>
@@ -44,7 +44,7 @@ function PostDetails({ postDetails, setPostDetails, post, profileUser }) {
       <div className="w-full mt-6 flex items-center px-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-green"
-          src={profileUser.avatar}
+          src={post.avatar}
           alt="My profile avatar"
         />
 
