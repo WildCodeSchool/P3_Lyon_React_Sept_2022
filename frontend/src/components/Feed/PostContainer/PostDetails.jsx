@@ -4,17 +4,16 @@ import Comment from "./Comment";
 
 // eslint-disable-next-line react/prop-types
 function PostDetails({ postDetails, setPostDetails, post }) {
+  const [comments, setComments] = useState([]);
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
       .then((response) => response.json())
       .then((result) => {
         setComments(result);
-        console.warn(result);
       });
   }, []);
 
@@ -64,10 +63,21 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           participants.pdf
         </div>
       </div>
-      <div className="w-full mt-6 flex items-center px-6">
+      <div className="w-full mt-6 flex flex-col items-center px-6">
         {comments.map((comment) => (
-          <div key={comment.id} comment={comment}>
-            {comment.avatar} {comment.content}
+          <div
+            key={comment.id}
+            comment={comment}
+            className="flex justify-center items-center pb-2"
+          >
+            <img
+              className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
+              src={comment.avatar}
+              alt="My profile avatar"
+            />
+            <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm">
+              {comment.content}
+            </div>
           </div>
         ))}
       </div>

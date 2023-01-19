@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function Comment() {
   const { user, post } = useCurrentUserContext();
+  const { refresh, setRefresh } = usePostUserContext();
 
-  const [createComment, setCreateComment] = useState({
-    content: "",
-    user_id: "",
-    post_id: "",
-  });
+  const [createComment, setCreateComment] = useState("");
 
   const onChange = (e) => {
     setCreateComment({
       ...createComment,
-      content: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -22,7 +20,11 @@ function Comment() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const body = JSON.stringify(createComment);
+    const body = JSON.stringify({
+      content: "",
+      user_id: user?.id,
+      post_id: post?.id,
+    });
 
     const requestOptions = {
       method: "POST",
@@ -41,7 +43,7 @@ function Comment() {
       )
         .then((response) => response.text())
         .then((response) => {
-          setCreateComment(response);
+          setRefresh(!refresh);
           console.warn(response);
         })
         .catch(console.error());

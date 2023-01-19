@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const { id } = req.params;
   models.comment
-    .findAllByPost()
+    .findAllByPost(id)
     .then((results) => {
       res.send(results);
     })
@@ -18,7 +19,9 @@ const add = (req, res) => {
   models.comment
     .insert(comment)
     .then((result) => {
-      res.location(`/api/comments/${result.insertId}`).sendStatus(201);
+      res
+        .location(`/api/posts/${result.post_id}/comments/${result.insertId}`)
+        .sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
