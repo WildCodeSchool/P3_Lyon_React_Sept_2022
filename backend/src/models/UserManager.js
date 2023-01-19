@@ -7,7 +7,7 @@ class UserManager extends AbstractManager {
 
   find(id) {
     return this.connection.any(
-      `select id, firstname, lastname, email, avatar, phone_number, role from  ${this.table} where id = $1`,
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} where id = $1`,
       [id]
     );
   }
@@ -20,7 +20,9 @@ class UserManager extends AbstractManager {
   }
 
   findAll() {
-    return this.connection.any(`select * from  ${this.table}`);
+    return this.connection.any(
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id ASC`
+    );
   }
 
   insert(user) {
