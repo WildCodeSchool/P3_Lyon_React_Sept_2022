@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import croix from "../../../assets/croix.png";
-import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
@@ -17,12 +16,6 @@ function CreatePost() {
     showCreatePost,
     setValueSelectedGroup,
     valueSelectedGroup,
-    // setBase,
-    // setPosts,
-    // refresh,
-    // setRefresh,
-    // setValueSelectedGroup,
-    // setValueSelectedCategory,
     handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
@@ -78,7 +71,6 @@ function CreatePost() {
         .then((retour) => {
           console.warn(retour);
           handleReset();
-          console.warn("image : ", dataPost.post_image);
         })
         .catch(console.error());
     }

@@ -12,12 +12,12 @@ function PostDetails({ postDetails, setPostDetails, post }) {
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
       <button type="button" onClick={() => closePostDetails()}>
-        <img className="mr-80 mt-6" src="./src/assets/croix.png" alt="Close" />
+        <img className="mr-80 mt-6" src="../src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10 md:mx-auto">
         <img
-          className="rounded-full w-24 mr-6 border-4 border-violet "
-          src={user.avatar}
+          className="rounded-full w-24 mr-6 border-4 border-violet"
+          src={post.avatar}
           alt="User avatar"
         />
         <h2 className="hidden md:block text-primary text-3xl">
@@ -51,21 +51,21 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           className="w-2/5 flex flex-col justify-center items-center shadow-md rounded-xl py-4 text-sm
         placeholder-gray-500 focus:placeholder-gray-400"
         >
-          <img className="h-8 w-8 pr-1" src="./src/assets/pdf.png" alt="PDF" />
+          <img className="h-8 w-8 pr-1" src="../src/assets/pdf.png" alt="PDF" />
           participants.pdf
         </div>
       </div>
       <div className="w-full mt-6 flex items-center px-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-green"
-          src="./src/assets/user-avatar2.jpeg"
+          src={post.avatar}
           alt="My profile avatar"
         />
       </div>
       <div className="w-full mt-6 flex items-center justify-between px-6 pb-6">
         <img
           className="rounded-full w-10 mr-4 border-4 border-violet"
-          src="./src/assets/my-avatar.jpeg"
+          src={user.avatar}
           alt="My profile avatar"
         />
         <input

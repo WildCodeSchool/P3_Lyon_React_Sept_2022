@@ -18,9 +18,6 @@ function PostContainer() {
       .then((response) => response.json())
       .then((result) => {
         setPosts((prev) => [...prev, ...result]);
-        // console.warn("Result:", result);
-        // console.warn("posts: ", posts);
-        // console.warn("base: ", base);
       });
   }, [base, refresh]);
 

@@ -43,13 +43,14 @@ class UserManager extends AbstractManager {
 
   update(user) {
     return this.connection.any(
-      `update ${this.table} set firstname = $1, lastname = $2, email = $3, is_admin = $4, avatar = $5 where id = $6`,
+      `update ${this.table} set firstname = $1, lastname = $2, email = $3, is_admin = $4, phone_number = $5, role = $6 where id = $7`,
       [
         user.firstname,
         user.lastname,
         user.email,
         user.is_admin,
-        user.avatar,
+        user.phone_number,
+        user.role,
         user.id,
       ]
     );

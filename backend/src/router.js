@@ -43,6 +43,7 @@ router.get(
   verifyToken,
   postControllers.browseMyPosts
 );
+router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
 
 // Gestion des posts
 

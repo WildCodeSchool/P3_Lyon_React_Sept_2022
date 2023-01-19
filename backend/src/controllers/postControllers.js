@@ -18,7 +18,7 @@ const browse = (req, res) => {
 const browseMyPosts = (req, res) => {
   const base = parseInt(req.params.base, 10);
   models.post
-    .finMyPosts(base)
+    .findMyPosts(base)
     .then((results) => {
       res.send(results);
     })

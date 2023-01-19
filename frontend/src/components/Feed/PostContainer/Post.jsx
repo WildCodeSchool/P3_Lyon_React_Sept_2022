@@ -29,6 +29,14 @@ function Post({ post }) {
               <div className="flex gap-2">
                 <h2 className="text-primary">{post.firstname} </h2>
                 <h2 className="text-primary">{post.lastname}</h2>
+                <button
+                  type="button"
+                  className="border-solid border-2 border-sky-500"
+                  onClick={() => console.warn(post)}
+                >
+                  {" "}
+                  Console moi
+                </button>
               </div>
             </Link>
             <h3 className="font-light text-primary">{post.group_name}</h3>

@@ -26,7 +26,7 @@ class PostManager extends AbstractManager {
     );
   }
 
-  finMyPosts(base) {
+  findMyPosts(base) {
     return this.connection.any(
       `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
