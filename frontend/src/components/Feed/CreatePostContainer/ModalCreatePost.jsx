@@ -9,8 +9,8 @@ import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function ModalCreatePost({ showCategories, setShowCategories }) {
   const {
-    valueGroupe,
-    valueCategory,
+    groupList,
+    categoryList,
     valueSelectedCategory,
     setValueSelectedCategory,
     valueSelectedGroup,
@@ -23,14 +23,16 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
   }
 
   // function pour récuperer la valeur inscrit dans le input et
-  // la transférer à filterSearch
+  // la transférer à filterSearch pour filter par nom de groupe
   const [filterSearch, setFilterSearch] = useState("");
   function handleSearch(e) {
     setFilterSearch(e.target.value);
   }
 
-  // recupération de la valeur du groupe et de la catégorie sélectionné
-
+  function handleValue(category) {
+    setValueSelectedCategory(category);
+    setShowCategories(!showCategories);
+  }
   return (
     <div>
       <div className="fixed top-0 bg-white w-[101%] h-[100vh]">
@@ -40,13 +42,6 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <h1 className="text-[32px] text-primary font-bold text-center ">
           Choisir un groupe et une catégorie
         </h1>
-        <button
-          type="button"
-          onClick={() => console.warn(valueSelectedCategory)}
-        >
-          {" "}
-          Appuie moi dessus{" "}
-        </button>
         <div className=" w-full">
           <input
             type="text"
@@ -58,27 +53,29 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <div className="w-full mt-4">
           <div className="dropdown inline-block relative w-full">
             <ul>
-              {valueGroupe.map((group) => (
+              {groupList.map((group) => (
                 <li
                   onClick={() => setValueSelectedGroup(group.group_name)}
                   className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
                   value={group.group_name}
-                  // onClick={(e) => takeValueFromValueGroupe(e.target.value)}
+                  // onClick={(e) => takeValueFromgroupList(e.target.value)}
                   key={group.id}
                 >
                   {group.group_name}
                   <ul>
-                    {valueCategory.map((category) => (
-                      <li
-                        value={category.id}
-                        name={category.name}
-                        className="cursor-pointer h-10  hover:bg-violet"
-                        onClick={(e) => setValueSelectedCategory(category.id)}
-                        key={category.id}
-                      >
-                        {category.category_name}
-                      </li>
-                    ))}
+                    {categoryList
+                      .filter((category) => category.group_id === group.id)
+                      .map((category) => (
+                        <li
+                          value={category.id}
+                          name={category.name}
+                          className="cursor-pointer h-10  hover:bg-violet"
+                          onClick={() => handleValue(category)}
+                          key={category.id}
+                        >
+                          {category.category_name}
+                        </li>
+                      ))}
                   </ul>
                 </li>
               ))}

@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 
 function Carrousel() {
   const [groupId, setGroupId] = useState();
-  const { groupes, categories, isGroup, setIsGroup } = usePostUserContext();
+  const { groupList, categoryList, isGroup, setIsGroup } = usePostUserContext();
 
   useEffect(() => {
     setIsGroup(false);
@@ -23,9 +23,12 @@ function Carrousel() {
   };
 
   return (
-    <div className="carrousel-container pt-8">
+    <div className="carrousel-container pt-8 md:h-1/4 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg">
+      <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
+        Mes groupes
+      </h2>
       <Swiper
-        className={!isGroup ? "h-36" : "h-20"}
+        className={!isGroup ? "h-36 md:w-[475px]  md:hidden" : "h-20"}
         // install Swiper modules
         modules={[Pagination, A11y]}
         spaceBetween={20}
@@ -36,35 +39,50 @@ function Carrousel() {
       >
         {!isGroup ? (
           <>
-            {groupes.map((groupe) => (
+            {groupList.map((group) => (
               <SwiperSlide
-                key={groupe.id}
-                className="group-card flex bg-cover bg-[url('./assets/solar-groups.jpeg')] justify-center items-center align-middle text-center cursor-pointer"
-                onClick={() => handleCategory(groupe.id)}
+                key={group.id}
+                className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                onClick={() => handleCategory(group.id)}
+                style={{ backgroundImage: `url(${group.image})` }}
               >
                 <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
-                  {groupe.groupname}
+                  {group.group_name}
                 </p>
               </SwiperSlide>
             ))}
           </>
         ) : (
           <>
-            {categories
+            {categoryList
               .filter((category) => category.group_id === groupId)
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="group-card flex bg-cover bg-primary justify-center items-center align-middle text-center"
+                  className="group-card flex bg-cover justify-center items-center align-middle text-center"
+                  style={{ backgroundImage: `url(${category.image})` }}
                 >
-                  <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
-                    {category.categoryname}
+                  <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
+                    {category.category_name}
                   </p>
                 </SwiperSlide>
               ))}
           </>
         )}
       </Swiper>
+      <div className=" hidden md:block ">
+        {groupList.map((group) => {
+          return (
+            <button
+              type="button"
+              className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+              key={group.id}
+            >
+              {group.group_name}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

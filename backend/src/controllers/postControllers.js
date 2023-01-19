@@ -1,8 +1,22 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const base = parseInt(req.params.base, 10);
   models.post
-    .findAll()
+    .findAll(base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseMyPosts = (req, res) => {
+  const base = parseInt(req.params.base, 10);
+  models.post
+    .findMyPosts(base)
     .then((results) => {
       res.send(results);
     })
@@ -73,6 +87,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseMyPosts,
   read,
   add,
   edit,

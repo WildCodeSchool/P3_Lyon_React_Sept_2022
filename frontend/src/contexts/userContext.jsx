@@ -1,21 +1,32 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const CurrentUserContext = createContext();
 
 export default CurrentUserContext;
 
 export function CurrentUserContextProvider({ children }) {
-  const [user, setUser] = useState({});
-  const [token, setToken] = useState("");
+  const [user, setUser] = useLocalStorage("user", {});
+  const [token, setToken] = useLocalStorage("token", "");
 
   const [currentUser, setCurrentUser] = useState([]);
+  const [profileUser, setProfileUser] = useLocalStorage("profileUser", {});
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <CurrentUserContext.Provider
-      value={{ user, setUser, token, setToken, currentUser, setCurrentUser }}
+      value={{
+        user,
+        setUser,
+        token,
+        setToken,
+        currentUser,
+        setCurrentUser,
+        profileUser,
+        setProfileUser,
+      }}
     >
       {children}
     </CurrentUserContext.Provider>
