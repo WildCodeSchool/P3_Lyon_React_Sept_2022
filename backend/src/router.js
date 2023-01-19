@@ -2,9 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 
-const router = express.Router();
-
 const multer = require("multer");
+
+const router = express.Router();
 
 const upload = multer({ dest: process.env.UPLOADS_FOLDER });
 
