@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
+// import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post }) {
+  // const { user } = useCurrentUserContext();
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
 
@@ -42,7 +44,13 @@ function Post({ post }) {
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
-        {post.image && <img src={`./src/assets/${post.image}`} alt="Post" />}
+        {post.post_image && (
+          <img
+            className="w-full mx-auto"
+            src={`http://localhost:5000/uploads/${post.post_image}`}
+            alt="Post"
+          />
+        )}
         <div className="px-6">
           <button onClick={() => openPostDetails()} type="button">
             <h2 className="text-black self-start my-2">{post.title}</h2>
@@ -50,6 +58,18 @@ function Post({ post }) {
               {post.content}..
               <span className="text-primary text-base"> voir plus</span>
             </p>
+            <div className="w-full mt-6 flex items-center justify-between pb-6">
+              <img
+                className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
+                src={user.avatar}
+                alt="My profile avatar"
+              />
+              <input
+                className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
+                type="text"
+                placeholder="Laissez un commentaire..."
+              />
+            </div>
           </button>
           {postDetails ? (
             <PostDetails
@@ -60,18 +80,6 @@ function Post({ post }) {
           ) : (
             ""
           )}
-          <div className="w-full mt-6 flex items-center justify-between pb-6">
-            <img
-              className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-              src={user.avatar}
-              alt="My profile avatar"
-            />
-            <input
-              className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-              type="text"
-              placeholder="Laissez un commentaire..."
-            />
-          </div>
         </div>
       </div>
     </div>
