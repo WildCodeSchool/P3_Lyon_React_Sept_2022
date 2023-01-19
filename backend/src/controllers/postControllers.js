@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 const models = require("../models");
+const { fileRename } = require("./fileControllers");
 
 const browse = (req, res) => {
   const base = parseInt(req.params.base, 10);
@@ -42,8 +44,8 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const post = req.body;
-
+  const post = JSON.parse(req.body.post);
+  post.post_image = req.renamedFile;
   models.post
     .insert(post)
     .then((result) => {

@@ -1,13 +1,19 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const router = express.Router();
+
+const multer = require("multer");
+
+const upload = multer({ dest: process.env.UPLOADS_FOLDER });
 
 const {
   hashPassword,
   verifyPassword,
   verifyToken,
 } = require("./services/auth");
-
+const fileControllers = require("./controllers/fileControllers");
 const userControllers = require("./controllers/userControllers");
 const authControllers = require("./controllers/authControllers");
 const postControllers = require("./controllers/postControllers");
@@ -42,7 +48,12 @@ router.get(
 
 router.get("/api/posts/limit/:base", verifyToken, postControllers.browse);
 router.get("/api/posts/:id", postControllers.read);
-router.post("/api/posts", postControllers.add);
+router.post(
+  "/api/posts",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  postControllers.add
+);
 router.put("/api/posts/:id", postControllers.edit);
 router.delete("/api/posts/:id", postControllers.destroy);
 
@@ -59,5 +70,9 @@ router.get("/api/groups/:id", groupControllers.read);
 router.post("/api/groups", groupControllers.add);
 router.put("/api/groups/:id", groupControllers.edit);
 router.delete("/api/groups/:id", groupControllers.destroy);
+
+// Gestion des uploads
+// route POST pour recevoir un fichier
+router.post("/api/avatar", upload.single("avatar"), fileControllers.fileRename);
 
 module.exports = router;

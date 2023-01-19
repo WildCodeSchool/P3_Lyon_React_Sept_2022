@@ -36,7 +36,13 @@ function Post({ post }) {
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
-        {post.image && <img src={`./src/assets/${post.image}`} alt="Post" />}
+        {post.post_image && (
+          <img
+            className="w-full mx-auto"
+            src={`http://localhost:5000/uploads/${post.post_image}`}
+            alt="Post"
+          />
+        )}
         <div className="px-6">
           <button onClick={() => openPostDetails()} type="button">
             <h2 className="text-black self-start my-2">{post.title}</h2>

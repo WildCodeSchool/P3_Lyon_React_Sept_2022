@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import croix from "../../../assets/croix.png";
 import myAvatar from "../../../assets/my-avatar.jpeg";
 import "../../../App.css";
@@ -27,7 +26,7 @@ function CreatePost() {
     handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
-
+  const inputRef = useRef(null);
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
@@ -50,31 +49,36 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
-  const [imageUpload, setImageUpload] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    const body = JSON.stringify(dataPost);
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body,
-    };
     if (
       dataPost.title &&
       dataPost.content &&
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
+      const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "multipart/form-data");
+
+      const post = JSON.stringify(dataPost);
+
+      const formData = new FormData();
+      formData.append("post", post);
+      formData.append("picture", inputRef.current.files[0]);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+      };
+      // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
+      // je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
           handleReset();
+          console.warn("image : ", dataPost.post_image);
         })
         .catch(console.error());
     }
@@ -98,7 +102,12 @@ function CreatePost() {
         </div>
 
         {/* Formulaire Pour publier un post  */}
-        <form onSubmit={(e) => onSubmit(e)} method="PUT" className="mb-5">
+        <form
+          onSubmit={(e) => onSubmit(e)}
+          method="PUT"
+          encType="multipart/form-data"
+          className="mb-5"
+        >
           <div className="flex items-center">
             <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
             <div className="block text-left">
@@ -148,7 +157,12 @@ function CreatePost() {
               onChange={onChange}
             />
           </div>
-          <div className="">{dataPost.image}</div>
+          <input
+            type="file"
+            value={dataPost.image}
+            name="avatar"
+            ref={inputRef}
+          />
           <hr className="h-[2px] bg-grey" />
           <button
             type="submit"
