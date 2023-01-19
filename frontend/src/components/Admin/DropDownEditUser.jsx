@@ -1,27 +1,43 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import FlecheDownBlue from "../../assets/arrow-down-blue.png";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import modifDot from "../../assets/modifDot.png";
+import edit from "../../assets/edit.png";
+import deleteBtn from "../../assets/deleteBtn.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownTeam() {
+export default function DropDownCategory({ card, toggleRefresh }) {
+  console.warn(card);
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/api/users/${id}`)
+      .then((response) => {
+        console.warn(response.data);
+        toggleRefresh();
+        alert("Utilisateur supprimé");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="flex justify-between w-[36vw] h-12 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+        <Menu.Button>
           <div className="flex justify-between">
-            Equipes
-            <img className="w-3 h-2 mt-3 ml-3" src={FlecheDownBlue} alt="" />
+            <img className="w-2 h-6 ml-32 " src={modifDot} alt="" />
           </div>
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
-
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -35,15 +51,18 @@ function DropDownTeam() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <Link
+                  to={`/adminUser/${card.id}`}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Actualité
-                </a>
+                  <div className="flex">
+                    <img className="h-3 w-3 mr-2 mt-1" src={edit} alt="" />{" "}
+                    <p>Modifier</p>
+                  </div>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
@@ -55,43 +74,18 @@ function DropDownTeam() {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  La Vie des sites
+                  <div className="flex">
+                    <img className="h-3 w-3 mr-2 mt-1" src={deleteBtn} alt="" />{" "}
+                    <button type="button" onClick={() => handleDelete(card.id)}>
+                      Supprimer
+                    </button>
+                  </div>
                 </a>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Affichage reglementaire
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full px-4 py-2 text-left text-sm"
-                    )}
-                  >
-                    Recrutement
-                  </button>
-                )}
-              </Menu.Item>
-            </form>
           </div>
         </Menu.Items>
       </Transition>
     </Menu>
   );
 }
-
-export default DropDownTeam;

@@ -1,15 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
 import AddUser from "./AddUser";
-import DropDownTeam from "./DropDownTeam";
+import UserCard from "./UserCard";
 
 export default function AdminUser() {
   const [addUser, setAddUser] = useState(false);
+  const [userCard, setUserCard] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const openAndCloseUserModal = () => {
     setAddUser(!addUser);
   };
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const toggleRefresh = () => setRefresh(!refresh);
+
+  useEffect(() => {
+    if (!addUser) {
+      fetch("http://localhost:5000/api/users")
+        .then((response) => response.json())
+        .then((result) => {
+          setUserCard(result);
+        });
+    }
+  }, [addUser, refresh]);
+
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
       <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
@@ -51,46 +71,27 @@ export default function AdminUser() {
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className=" flex justify-around mt-6 ">
         <input
-          className="w-[24]  border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
           type="text"
           placeholder="Rechercher..."
+          onChange={handleSearch}
+          value={searchInput}
         />
-        <DropDownTeam />
       </div>
-      <div className="">
-        <div className="flex font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
-          <img
-            className="rounded-full w-16 mr-6 border-4 border-violet"
-            src="./src/assets/avatar-user.jpeg"
-            alt="User avatar"
-          />
-          <div>
-            <p className="font-bold">Margaux Donova</p>
-            <p className="italic">Chargée de communication</p>
-          </div>
-        </div>
-        <div className="flex font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
-          <img
-            className="rounded-full w-16 mr-6 border-4 border-violet"
-            src="./src/assets/my-avatar.jpeg"
-            alt="User avatar"
-          />
-          <div>
-            <p className="font-bold">Ryan Bidau</p>
-            <p className="italic">Project manager</p>
-          </div>
-        </div>
-        <div className="flex font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
-          <img
-            className="rounded-full w-16 mr-6 border-4 border-violet"
-            src="./src/assets/user-avatar2.jpeg"
-            alt="User avatar"
-          />
-          <div>
-            <p className="font-bold">Michael Jackson</p>
-            <p className="italic">Prévention - Affichage réglementaire</p>
-          </div>
-        </div>
+      <div className="bg-[#F6F6F6]">
+        {userCard
+          .filter(
+            (user) =>
+              user.firstname
+                .toLocaleLowerCase()
+                .includes(searchInput.toLocaleLowerCase()) ||
+              user.lastname
+                .toLocaleLowerCase()
+                .includes(searchInput.toLocaleLowerCase())
+          )
+          .map((card) => (
+            <UserCard key={card.id} card={card} toggleRefresh={toggleRefresh} />
+          ))}
       </div>
     </div>
   );
