@@ -64,7 +64,7 @@ VALUES
     '0628164515',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://urlz.fr/ks90'
+    'https://i.imgur.com/lIAKkYJ.jpg'
   );
 
 UPDATE user_detail SET is_admin = true WHERE id = 3;
@@ -197,7 +197,7 @@ category_id int not null,
 post_date DATE,
 post_image varchar(250),
 CONSTRAINT fk_post_user
-FOREIGN KEY(user_id) REFERENCES user_detail(id),
+FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
 CONSTRAINT fk_post_category
 FOREIGN KEY(category_id) REFERENCES category(id)
 );

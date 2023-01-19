@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
-import "../../../App.css";
+import React, { useState, useEffect, useRef } from "react";
 import croix from "../../../assets/croix.png";
+import "../../../App.css";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
@@ -11,18 +11,21 @@ import { useCurrentUserContext } from "../../../contexts/userContext";
 function CreatePost() {
   const {
     valueSelectedCategory,
+    setValueSelectedCategory,
     setShowCreatePost,
     showCreatePost,
+    setValueSelectedGroup,
     valueSelectedGroup,
     handleReset,
   } = usePostUserContext();
   const { user } = useCurrentUserContext();
-
+  const inputRef = useRef(null);
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
     user_id: user.id,
     category_id: valueSelectedCategory,
+    post_image: "",
   });
 
   const [showCategories, setShowCategories] = useState(false);
@@ -39,26 +42,30 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
-
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    const body = JSON.stringify(dataPost);
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body,
-    };
     if (
       dataPost.title &&
       dataPost.content &&
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
+      const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "multipart/form-data");
+
+      const post = JSON.stringify(dataPost);
+
+      const formData = new FormData();
+      formData.append("post", post);
+      formData.append("picture", inputRef.current.files[0]);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+      };
+      // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
+      // je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
         .then((response) => response.text())
         .then((retour) => {
@@ -87,7 +94,12 @@ function CreatePost() {
         </div>
 
         {/* Formulaire Pour publier un post  */}
-        <form onSubmit={(e) => onSubmit(e)} method="PUT" className="mb-5">
+        <form
+          onSubmit={(e) => onSubmit(e)}
+          method="PUT"
+          encType="multipart/form-data"
+          className="mb-5"
+        >
           <div className="flex items-center">
             <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
             <div className="block text-left">
@@ -137,6 +149,12 @@ function CreatePost() {
               onChange={onChange}
             />
           </div>
+          <input
+            type="file"
+            value={dataPost.image}
+            name="avatar"
+            ref={inputRef}
+          />
           <hr className="h-[2px] bg-grey" />
           <button
             type="submit"
