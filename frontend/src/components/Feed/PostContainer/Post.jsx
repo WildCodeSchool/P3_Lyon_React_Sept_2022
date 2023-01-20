@@ -13,7 +13,7 @@ function Post({ post }) {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
+      <div className="bg-white w-full shadow-lg rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
@@ -34,6 +34,8 @@ function Post({ post }) {
             <h3 className="text-gray-400 font-light">1h</h3>
           </div>
         </div>
+        <h2 className="text-black self-start my-2 text-center">{post.title}</h2>
+        <br />
         {post.post_image && (
           <img
             className="w-full mx-auto"
@@ -43,8 +45,7 @@ function Post({ post }) {
         )}
 
         <button onClick={() => openPostDetails()} type="button">
-          <div className="flex flex-col justify-center items- ml-4">
-            <h2 className="text-black self-start my-2">{post.title}</h2>
+          <div className="flex flex-col justify-center items- ml-4 shadow-md w-full">
             <p className="self-start text-sm">
               {post.content}...
               <span className="text-primary text-base"> voir plus</span>

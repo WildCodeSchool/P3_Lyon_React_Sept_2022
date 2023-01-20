@@ -57,7 +57,7 @@ function Profile() {
             Publications
           </h1>
           <div>
-            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6">
+            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:flex md:flex-wrap">
               <div className="flex justify-end pt-2">
                 <button onClick={() => handleEditPost()} type="button">
                   <img className="h-8" src={menuDots} alt="Menu" />

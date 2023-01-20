@@ -1,5 +1,4 @@
 import { useState } from "react";
-import croix from "../../../assets/croix.png";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function ModalCreatePost({ showCategories, setShowCategories }) {
@@ -10,14 +9,10 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
     setValueSelectedGroup,
   } = usePostUserContext();
 
-  // ferme la modale des groupes avec la croix
-  function closeModal() {
-    setShowCategories(!showCategories);
-  }
-
   // function pour récuperer la valeur inscrit dans le input et
   // la transférer à filterSearch pour filter par nom de groupe
   const [filterSearch, setFilterSearch] = useState("");
+
   function handleSearch(e) {
     setFilterSearch(e.target.value);
   }
@@ -28,10 +23,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
   }
   return (
     <div>
-      <div className="fixed top-0 bg-white w-[101%] h-[100vh] md:w-1/2 md:ml-[50%]">
-        <button type="button" onClick={() => closeModal()}>
-          <img className="ml-2 mt-6" src={croix} alt="" />
-        </button>
+      <div className="fixed top-0 bg-white w-[101%] h-[100vh] md:w-1/2 md:ml-[50%] md:mt-2 ">
         <h1 className="text-[32px] text-primary font-bold text-center ">
           Choisir un groupe et une catégorie
         </h1>
@@ -44,7 +36,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
           />
         </div>
         <div className="w-full mt-4 md:flex md:justify-around md:wrap">
-          <div className="dropdown inline-block relative w-full">
+          <div className=" inline-block relative w-full ">
             <ul>
               {groupList
                 .filter((group) => {
@@ -56,7 +48,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   <button
                     type="button"
                     onClick={() => setValueSelectedGroup(group.group_name)}
-                    className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
+                    className="text-lg px-10 font-normal text-primary pt-5 shadow-md"
                     value={group.group_name}
                     key={group.id}
                   >

@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails({ postDetails, setPostDetails, post }) {
+function PostDetails({ post, setPostDetails }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
-  const closePostDetails = () => {
-    setPostDetails(!postDetails);
-  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
@@ -19,7 +16,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
 
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
-      <button type="button" onClick={() => closePostDetails()}>
+      <button type="button" onClick={() => setPostDetails()}>
         <img className="mr-80 mt-6" src="../src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10 md:mx-auto">
@@ -29,8 +26,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           alt="User avatar"
         />
         <h2 className="hidden md:block text-primary text-3xl">
-          {post.firstname}
-          {post.lastname}
+          {post.firstname} {post.lastname}
         </h2>
       </div>
 
@@ -49,7 +45,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
       </div>
       <img
         className="mt-10 md:h-[40%] md:mx-auto"
-        src="./src/assets/picture-post.jpg"
+        src={`http://localhost:5000/uploads/${post.post_image}`}
         alt="Post"
       />
       <p className="bg-white text-md p-8 md:mx-auto">{post.content}</p>
