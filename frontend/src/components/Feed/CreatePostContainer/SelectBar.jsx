@@ -13,7 +13,6 @@ function SelectBar({ showCategories, setShowCategories }) {
         <img className="mx-auto" src={groupe} alt="" />
       </button>
       <h3 className="text-md font-light text-primary ">Groupe</h3>
-
       <div>
         <button type="button">
           <img className="mx-auto" src={file} alt="" />

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EditPost from "../components/Feed/PostContainer/EditPost";
@@ -14,12 +15,12 @@ function Profile() {
   const [profileUser, setProfileUser] = useState({});
   const [myPosts, setMyPosts] = useState([]);
   const { refresh } = usePostUserContext();
-  const { userId } = useParams();
+  const { user_id } = useParams();
   const { user } = useCurrentUserContext();
 
   useEffect(() => {
-    if (userId) {
-      fetch(`http://localhost:5000/api/users/${userId}`)
+    if (user_id) {
+      fetch(`http://localhost:5000/api/users/${user_id}`)
         .then((response) => response.json())
         .then((result) => {
           setProfileUser(result);
@@ -32,12 +33,12 @@ function Profile() {
         });
     }
 
-    fetch(`http://localhost:5000/api/myposts/user/${userId}`)
+    fetch(`http://localhost:5000/api/myposts/user/${user_id}`)
       .then((response) => response.json())
       .then((result) => {
         setMyPosts(result);
       });
-  }, [refresh, userId]);
+  }, [refresh, user_id]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -93,7 +94,7 @@ function Profile() {
               {myPosts
                 .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (
-                  <Post post={post} profileUser={profileUser} key={post.id} />
+                  <Post post={post} key={post.id} />
                 ))}
             </div>
           </div>

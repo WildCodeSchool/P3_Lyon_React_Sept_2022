@@ -63,8 +63,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/"
+                <div
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
@@ -76,7 +75,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
                       Supprimer
                     </button>
                   </div>
-                </a>
+                </div>
               )}
             </Menu.Item>
           </div>
