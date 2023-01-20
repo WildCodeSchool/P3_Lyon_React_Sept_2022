@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 // eslint-disable-next-line react/prop-types
 function PostDetails({ postDetails, setPostDetails, post }) {
   const [comments, setComments] = useState([]);
+  const { refreshComment } = usePostUserContext();
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
@@ -15,7 +17,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
       .then((result) => {
         setComments(result);
       });
-  }, []);
+  }, [refreshComment]);
 
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
@@ -66,7 +68,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
       <div className="w-full mt-6 flex flex-col items-center px-6">
         {comments.map((comment) => (
           <div
-            key={comment.id}
+            key={`${post.id}${comment.id}`}
             comment={comment}
             className="flex justify-center items-center pb-2"
           >
@@ -82,7 +84,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
         ))}
       </div>
 
-      <Comment />
+      <Comment postId={post.id} />
     </div>
   );
 }

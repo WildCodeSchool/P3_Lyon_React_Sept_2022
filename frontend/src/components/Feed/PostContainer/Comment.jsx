@@ -1,12 +1,17 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function Comment() {
-  const { user, post } = useCurrentUserContext();
-  const { refresh, setRefresh } = usePostUserContext();
+function Comment({ postId }) {
+  const { user } = useCurrentUserContext();
+  const { refreshComment, setRefreshComment } = usePostUserContext();
 
-  const [createComment, setCreateComment] = useState("");
+  const [createComment, setCreateComment] = useState({
+    content: "",
+    user_id: user?.id,
+    post_id: postId,
+  });
 
   const onChange = (e) => {
     setCreateComment({
@@ -20,17 +25,14 @@ function Comment() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const body = JSON.stringify({
-      content: "",
-      user_id: user?.id,
-      post_id: post?.id,
-    });
+    const body = JSON.stringify(createComment);
 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body,
     };
+    console.warn(createComment);
     if (
       createComment.content &&
       createComment.user_id &&
@@ -38,13 +40,14 @@ function Comment() {
     ) {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
       fetch(
-        `http://localhost:5000/api/posts/${post.id}/comments`,
+        `http://localhost:5000/api/posts/${postId}/comments`,
         requestOptions
       )
         .then((response) => response.text())
-        .then((response) => {
-          setRefresh(!refresh);
-          console.warn(response);
+        .then(() => {
+          setRefreshComment(!refreshComment);
+          const form = document.getElementsByName("form")[0];
+          form.reset();
         })
         .catch(console.error());
     }
@@ -56,13 +59,12 @@ function Comment() {
         src={user.avatar}
         alt="My profile avatar"
       />
-      <form onSubmit={(e) => onSubmit(e)} method="PUT">
+      <form onSubmit={onSubmit} name="form">
         <input
           className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm"
           type="text"
-          name="comment"
+          name="content"
           placeholder="Laissez un commentaire..."
-          valeur={createComment.content}
           onChange={onChange}
         />
       </form>

@@ -5,7 +5,6 @@ import PostDetails from "./PostDetails";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post }) {
-  // const { user } = useCurrentUserContext();
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
 

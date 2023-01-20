@@ -17,6 +17,7 @@ export function PostUserContextProvider({ children }) {
   const [categoryList, setCategoryList] = useState([]);
   const [posts, setPosts] = useState([]);
   const [base, setBase] = useState(0);
+  const [refreshComment, setRefreshComment] = useState(false);
 
   function handleReset() {
     console.warn("it works");
@@ -104,6 +105,8 @@ export function PostUserContextProvider({ children }) {
         base,
         setBase,
         handleReset,
+        refreshComment,
+        setRefreshComment,
       }}
     >
       {children}
