@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import EditProfile from "./EditProfile";
 
@@ -23,14 +22,6 @@ function ProfileCard({ profileUser }) {
           <h2 className="text-2xl font-black mt-20">
             {profileUser.firstname} {profileUser.lastname}
           </h2>
-          <button
-            type="button"
-            className="border-solid border-2 border-sky-500"
-            onClick={() => console.warn(profileUser)}
-          >
-            {" "}
-            Console moi
-          </button>
           <h3 className="text-xl italic">{profileUser.role}</h3>
           <h3 className=" text-sm mt-6 px-10">Email : {profileUser.email}</h3>
           <h4 className=" text-sm mt-6 px-10"> {profileUser.phone_number}</h4>

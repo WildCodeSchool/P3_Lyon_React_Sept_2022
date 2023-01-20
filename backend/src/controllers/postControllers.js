@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 const models = require("../models");
-const { fileRename } = require("./fileControllers");
 
 const browse = (req, res) => {
   const base = parseInt(req.params.base, 10);

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -15,8 +14,8 @@ export function CurrentUserContextProvider({ children }) {
   const [profileUser, setProfileUser] = useLocalStorage("profileUser", {});
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <CurrentUserContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         user,
         setUser,

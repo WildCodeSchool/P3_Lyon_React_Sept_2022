@@ -1,10 +1,7 @@
-/* eslint-disable import/no-useless-path-segments */
-/* eslint-disable react/button-has-type */
-// eslint-disable-next-line import/no-useless-path-segments
 import React from "react";
 import CreatePost from "./CreatePost";
-import Avatar from "../../../components/Navbar/Avatar";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
+import Avatar from "../../Navbar/Avatar";
 
 function CreatePostContainer() {
   const { showCreatePost, setShowCreatePost } = usePostUserContext();
@@ -17,7 +14,10 @@ function CreatePostContainer() {
         </div>
 
         <div className="border border-primary w-5/6 rounded-xl h-10 pt-2">
-          <button onClick={() => setShowCreatePost(!showCreatePost)}>
+          <button
+            type="button"
+            onClick={() => setShowCreatePost(!showCreatePost)}
+          >
             <span className="ml-2 text-gray-400">Votre publication...</span>
           </button>
           {showCreatePost ? <CreatePost /> : ""}

@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/button-has-type */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
@@ -62,7 +60,7 @@ function Connexion() {
           <h3 className="absolute text-2xl text-primary ml-[55px] my-[17px] text-center md:ml-[18%] md:text-2xl md:mt-0">
             Accédez à votre espace
           </h3>
-          <div className="bg-[url('../src/assets/line.svg')] bg-no-repeat h-[356px] ml-[23px] md:h-[30vh] md:ml-[30%] md:hidden"></div>
+          <div className="bg-[url('../src/assets/line.svg')] bg-no-repeat h-[356px] ml-[23px] md:h-[30vh] md:ml-[30%] md:hidden" />
         </div>
         <form onSubmit={handleSubmit} className="mt-[-80%]  md:mt-0 ">
           <div className="">
@@ -100,7 +98,7 @@ function Connexion() {
         </form>
         <div>{errorMessage}</div>
       </div>
-      <div className=" md:bg-primary md:h-[100vh] md:w-[50%]"></div>
+      <div className=" md:bg-primary md:h-[100vh] md:w-[50%]" />
     </div>
   );
 }

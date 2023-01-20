@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EditPost from "../components/Feed/PostContainer/EditPost";
@@ -15,12 +14,12 @@ function Profile() {
   const [profileUser, setProfileUser] = useState({});
   const [myPosts, setMyPosts] = useState([]);
   const { refresh } = usePostUserContext();
-  const { user_id } = useParams();
+  const { userId } = useParams();
   const { user } = useCurrentUserContext();
 
   useEffect(() => {
-    if (user_id) {
-      fetch(`http://localhost:5000/api/users/${user_id}`)
+    if (userId) {
+      fetch(`http://localhost:5000/api/users/${userId}`)
         .then((response) => response.json())
         .then((result) => {
           setProfileUser(result);
@@ -33,12 +32,12 @@ function Profile() {
         });
     }
 
-    fetch(`http://localhost:5000/api/myposts/user/${user_id}`)
+    fetch(`http://localhost:5000/api/myposts/user/${userId}`)
       .then((response) => response.json())
       .then((result) => {
         setMyPosts(result);
       });
-  }, [refresh, user_id]);
+  }, [refresh, userId]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);

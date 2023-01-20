@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// eslint-disable-next-line react/prop-types
+
 export default function ModifUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
@@ -19,13 +19,6 @@ export default function ModifUser() {
       [e.target.name]: e.target.value,
     });
   };
-
-  // const onChangepass = (e) => {
-  //   setUserData({
-  //     ...userData,
-  //     password: e.target.value,
-  //   });
-  // };
 
   const onChangeNum = (e) => {
     setUserData({
