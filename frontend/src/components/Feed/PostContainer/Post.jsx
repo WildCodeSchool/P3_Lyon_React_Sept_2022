@@ -3,12 +3,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
+import menuDots from "../../../assets/modifDot.png";
+import EditPost from "./EditPost";
+import rubish from "../../../assets/deleteBtn.png";
 // import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post }) {
   // const { user } = useCurrentUserContext();
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
+  // three dots button and modifying stuff
+  const [editPostMenu, setEditPostMenu] = useState(false);
+  const [editPostModal, setEditPostModal] = useState(false);
+
+  const handleEditPost = () => {
+    setEditPostMenu(!editPostMenu);
+  };
+
+  const handleEditPostModal = () => {
+    setEditPostModal(!editPostModal);
+  };
 
   const openPostDetails = () => {
     setPostDetails(!postDetails);
@@ -16,6 +30,46 @@ function Post({ post }) {
   return (
     <div>
       <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
+        {(post.user_id === user.id || user.is_admin) && (
+          <div className="flex justify-end pt-2">
+            <button onClick={() => handleEditPost()} type="button">
+              <img className="h-6 mr-4" src={menuDots} alt="Menu" />
+            </button>
+          </div>
+        )}
+        {editPostMenu && (
+          <div className="origin-top-right absolute right-2 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {post.user_id === user.id && (
+              <button
+                onClick={() => handleEditPostModal()}
+                className="text-black p-4 flex"
+                type="button"
+              >
+                <img
+                  className="h-5 w-5"
+                  src="./src/assets/edit.png"
+                  alt="Edit"
+                />
+                <span className="pl-3">Modifier</span>
+              </button>
+            )}
+            <button
+              onClick={() => handleEditPostModal()}
+              className="text-black p-4 flex"
+              type="button"
+            >
+              <img className="h-5 w-5" src={rubish} alt="Edit" />
+              <span className="pl-3">Supprimer</span>
+            </button>
+            {editPostModal && (
+              <EditPost
+                editPostModal={editPostModal}
+                setEditPostModal={setEditPostModal}
+                handleEditPostModal={handleEditPostModal}
+              />
+            )}
+          </div>
+        )}
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
@@ -29,14 +83,14 @@ function Post({ post }) {
               <div className="flex gap-2">
                 <h2 className="text-primary">{post.firstname} </h2>
                 <h2 className="text-primary">{post.lastname}</h2>
-                <button
+                {/* <button
                   type="button"
                   className="border-solid border-2 border-sky-500"
                   onClick={() => console.warn(post)}
                 >
                   {" "}
                   Console moi
-                </button>
+                </button> */}
               </div>
             </Link>
             <h3 className="font-light text-primary">{post.group_name}</h3>

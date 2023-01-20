@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
@@ -10,25 +10,48 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 function Carrousel() {
-  const [groupId, setGroupId] = useState();
-  const { groupList, categoryList, isGroup, setIsGroup } = usePostUserContext();
+  const {
+    groupList,
+    categoryList,
+    groupId,
+    setGroupId,
+    categoryId,
+    setCategoryId,
+  } = usePostUserContext();
 
   useEffect(() => {
-    setIsGroup(false);
+    setGroupId(0);
+    setCategoryId(0);
   }, []);
 
-  const handleCategory = (value) => {
+  const handleGroup = (value) => {
     setGroupId(value);
-    setIsGroup(true);
+  };
+
+  const handleCategory = (value) => {
+    setCategoryId(value);
   };
 
   return (
     <div className="carrousel-container pt-8 md:h-1/4 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg">
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
-        Mes groupes
+        {groupId
+          ? groupList
+              .filter((group) => group.id === groupId)
+              .map((group) => group.group_name)
+          : "Mes Groupes"}
+        <br />
+        {categoryId > 0 &&
+          categoryList
+            .filter((category) => category.id === categoryId)
+            .map((category) => category.category_name)}
       </h2>
       <Swiper
-        className={!isGroup ? "h-36 md:w-[475px]  md:hidden" : "h-20"}
+        className={
+          !groupId
+            ? "h-36 md:w-[475px]  md:hidden"
+            : "h-20 md:w-[475px]  md:hidden"
+        }
         // install Swiper modules
         modules={[Pagination, A11y]}
         spaceBetween={20}
@@ -37,13 +60,13 @@ function Carrousel() {
         // onSwiper={(swiper) => console.warn(swiper)}
         // onSlideChange={() => console.warn("slide change")}
       >
-        {!isGroup ? (
+        {!groupId ? (
           <>
             {groupList.map((group) => (
               <SwiperSlide
                 key={group.id}
                 className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
-                onClick={() => handleCategory(group.id)}
+                onClick={() => handleGroup(group.id)}
                 style={{ backgroundImage: `url(${group.image})` }}
               >
                 <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
@@ -59,7 +82,8 @@ function Carrousel() {
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="group-card flex bg-cover justify-center items-center align-middle text-center"
+                  className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                  onClick={() => handleCategory(category.id)}
                   style={{ backgroundImage: `url(${category.image})` }}
                 >
                   <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
