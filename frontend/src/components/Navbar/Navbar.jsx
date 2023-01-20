@@ -17,10 +17,6 @@ function Navbar() {
     navigate("/");
   };
 
-  // function handleLogo() {
-  //   handleReset();
-  // }
-
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between md:shadow-md">

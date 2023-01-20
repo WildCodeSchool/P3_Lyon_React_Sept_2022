@@ -1,8 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-
 import { useState } from "react";
 import croix from "../../../assets/croix.png";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
@@ -11,9 +6,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
   const {
     groupList,
     categoryList,
-    valueSelectedCategory,
     setValueSelectedCategory,
-    valueSelectedGroup,
     setValueSelectedGroup,
   } = usePostUserContext();
 
@@ -53,32 +46,40 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <div className="w-full mt-4">
           <div className="dropdown inline-block relative w-full">
             <ul>
-              {groupList.map((group) => (
-                <li
-                  onClick={() => setValueSelectedGroup(group.group_name)}
-                  className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
-                  value={group.group_name}
-                  // onClick={(e) => takeValueFromgroupList(e.target.value)}
-                  key={group.id}
-                >
-                  {group.group_name}
-                  <ul>
-                    {categoryList
-                      .filter((category) => category.group_id === group.id)
-                      .map((category) => (
-                        <li
-                          value={category.id}
-                          name={category.name}
-                          className="cursor-pointer h-10  hover:bg-violet"
-                          onClick={() => handleValue(category)}
-                          key={category.id}
-                        >
-                          {category.category_name}
-                        </li>
-                      ))}
-                  </ul>
-                </li>
-              ))}
+              {groupList
+                .filter((group) => {
+                  return group.group_name
+                    .toLowerCase()
+                    .includes(filterSearch.toLowerCase());
+                })
+                .map((group) => (
+                  <button
+                    type="button"
+                    onClick={() => setValueSelectedGroup(group.group_name)}
+                    className="dropdown-menu text-lg px-10 font-normal text-primary pt-5 shadow-md"
+                    value={group.group_name}
+                    key={group.id}
+                  >
+                    {group.group_name}
+                    <ul>
+                      {categoryList
+                        .filter((category) => category.group_id === group.id)
+                        .map((category) => (
+                          <li key={category.id}>
+                            <button
+                              type="button"
+                              value={category.id}
+                              name={category.name}
+                              className="cursor-pointer h-10  hover:bg-violet"
+                              onClick={() => handleValue(category)}
+                            >
+                              {category.category_name}
+                            </button>
+                          </li>
+                        ))}
+                    </ul>
+                  </button>
+                ))}
             </ul>
           </div>
         </div>

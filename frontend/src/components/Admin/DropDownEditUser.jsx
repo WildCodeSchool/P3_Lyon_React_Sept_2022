@@ -1,7 +1,3 @@
-/* eslint-disable no-alert */
-/* eslint-disable react/prop-types */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
@@ -22,7 +18,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
       .then((response) => {
         console.warn(response.data);
         toggleRefresh();
-        alert("Utilisateur supprimé");
+        console.warn("Utilisateur supprimé");
       })
       .catch((err) => {
         console.error(err);
@@ -67,8 +63,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <div
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
@@ -80,7 +75,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
                       Supprimer
                     </button>
                   </div>
-                </a>
+                </div>
               )}
             </Menu.Item>
           </div>

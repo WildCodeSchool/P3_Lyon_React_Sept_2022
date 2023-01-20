@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import croix from "../../assets/croix.png";
 
-// eslint-disable-next-line react/prop-types
 export default function AddUser({ openAndCloseUserModal }) {
   const [credentials, setCredentials] = useState({
     firstname: "",

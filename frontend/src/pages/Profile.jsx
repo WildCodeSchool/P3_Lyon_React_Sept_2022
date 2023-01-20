@@ -94,7 +94,7 @@ function Profile() {
               {myPosts
                 .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (
-                  <Post post={post} profileUser={profileUser} key={post.id} />
+                  <Post post={post} key={post.id} />
                 ))}
             </div>
           </div>

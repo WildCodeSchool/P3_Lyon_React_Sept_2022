@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import croix from "../../../assets/croix.png";
 import "../../../App.css";
@@ -11,10 +9,8 @@ import { useCurrentUserContext } from "../../../contexts/userContext";
 function CreatePost() {
   const {
     valueSelectedCategory,
-    setValueSelectedCategory,
     setShowCreatePost,
     showCreatePost,
-    setValueSelectedGroup,
     valueSelectedGroup,
     handleReset,
   } = usePostUserContext();

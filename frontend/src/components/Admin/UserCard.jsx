@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
 import DropDownEditUser from "./DropDownEditUser";
 
-// eslint-disable-next-line react/prop-types
 export default function UserCard({ card, toggleRefresh }) {
   return (
     <div>

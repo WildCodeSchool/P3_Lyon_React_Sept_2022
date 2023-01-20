@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SelectBar from "../CreatePostContainer/SelectBar";
 
-// eslint-disable-next-line react/prop-types
 function EditPost({ handleEditPostModal, setEditPostMenu }) {
   const [editTitle, setTitle] = useState("Solar énergies renouvelables");
   const [editText, setText] = useState(

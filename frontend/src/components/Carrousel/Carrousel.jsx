@@ -1,12 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
-
-// Import Swiper styles
-// eslint-disable-next-line import/no-unresolved
 import "swiper/css";
-// eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
 function Carrousel() {
