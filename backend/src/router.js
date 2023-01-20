@@ -2,9 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 
-const router = express.Router();
-
 const multer = require("multer");
+
+const router = express.Router();
 
 const upload = multer({ dest: process.env.UPLOADS_FOLDER });
 
@@ -19,6 +19,7 @@ const authControllers = require("./controllers/authControllers");
 const postControllers = require("./controllers/postControllers");
 const categoryControllers = require("./controllers/categoryControllers");
 const groupControllers = require("./controllers/groupControllers");
+const commentControllers = require("./controllers/commentControllers");
 
 // Authentification
 
@@ -70,5 +71,14 @@ router.delete("/api/groups/:id", groupControllers.destroy);
 // Gestion des uploads
 // route POST pour recevoir un fichier
 router.post("/api/avatar", upload.single("avatar"), fileControllers.fileRename);
+
+// Gestion des commentaires
+router.get("/api/posts/:id/comments", commentControllers.browse);
+router.post("/api/posts/:id/comments", commentControllers.add);
+router.delete(
+  "/api/posts/:id/comments/:comment_id",
+  verifyToken,
+  commentControllers.destroy
+);
 
 module.exports = router;

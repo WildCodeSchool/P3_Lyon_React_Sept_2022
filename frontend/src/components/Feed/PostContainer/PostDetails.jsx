@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { useCurrentUserContext } from "../../../contexts/userContext";
+import React, { useState, useEffect } from "react";
+import Comment from "./Comment";
 
 // eslint-disable-next-line react/prop-types
 function PostDetails({ postDetails, setPostDetails, post }) {
-  const { user } = useCurrentUserContext();
+  const [comments, setComments] = useState([]);
   const closePostDetails = () => {
     setPostDetails(!postDetails);
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
+      .then((response) => response.json())
+      .then((result) => {
+        setComments(result);
+      });
+  }, []);
 
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
@@ -21,8 +29,8 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           alt="User avatar"
         />
         <h2 className="hidden md:block text-primary text-3xl">
-          {user.firstname}
-          {user.lastname}
+          {post.firstname}
+          {post.lastname}
         </h2>
       </div>
 
@@ -55,25 +63,26 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           participants.pdf
         </div>
       </div>
-      <div className="w-full mt-6 flex items-center px-6">
-        <img
-          className="rounded-full w-10 mr-4 border-4 border-green"
-          src={post.avatar}
-          alt="My profile avatar"
-        />
+      <div className="w-full mt-6 flex flex-col items-center px-6">
+        {comments.map((comment) => (
+          <div
+            key={comment.id}
+            comment={comment}
+            className="flex justify-center items-center pb-2"
+          >
+            <img
+              className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
+              src={comment.avatar}
+              alt="My profile avatar"
+            />
+            <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm">
+              {comment.content}
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="w-full mt-6 flex items-center justify-between px-6 pb-6">
-        <img
-          className="rounded-full w-10 mr-4 border-4 border-violet"
-          src={user.avatar}
-          alt="My profile avatar"
-        />
-        <input
-          className="w-5/6 shadow-md rounded-xl py-4 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-          type="text"
-          placeholder="Laissez un commentaire..."
-        />
-      </div>
+
+      <Comment />
     </div>
   );
 }

@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCurrentUserContext } from "../../../contexts/userContext";
 import PostDetails from "./PostDetails";
-// import { useCurrentUserContext } from "../../../contexts/userContext";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function Post({ post }) {
   // const { user } = useCurrentUserContext();
@@ -13,9 +12,10 @@ function Post({ post }) {
   const openPostDetails = () => {
     setPostDetails(!postDetails);
   };
+
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
+      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
@@ -29,14 +29,6 @@ function Post({ post }) {
               <div className="flex gap-2">
                 <h2 className="text-primary">{post.firstname} </h2>
                 <h2 className="text-primary">{post.lastname}</h2>
-                <button
-                  type="button"
-                  className="border-solid border-2 border-sky-500"
-                  onClick={() => console.warn(post)}
-                >
-                  {" "}
-                  Console moi
-                </button>
               </div>
             </Link>
             <h3 className="font-light text-primary">{post.group_name}</h3>
@@ -51,36 +43,35 @@ function Post({ post }) {
             alt="Post"
           />
         )}
-        <div className="px-6">
-          <button onClick={() => openPostDetails()} type="button">
+
+        <button onClick={() => openPostDetails()} type="button">
+          <div className="flex flex-col justify-center items- ml-4">
             <h2 className="text-black self-start my-2">{post.title}</h2>
             <p className="self-start text-sm">
-              {post.content}..
+              {post.content}...
               <span className="text-primary text-base"> voir plus</span>
             </p>
-            <div className="w-full mt-6 flex items-center justify-between pb-6">
-              <img
-                className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-                src={user.avatar}
-                alt="My profile avatar"
-              />
-              <input
-                className="w-11/12 shadow-md rounded-xl py-2 pl-2 text-sm placeholder-gray-500 focus:placeholder-gray-400 "
-                type="text"
-                placeholder="Laissez un commentaire..."
-              />
-            </div>
-          </button>
-          {postDetails ? (
-            <PostDetails
-              postDetails={postDetails}
-              setPostDetails={setPostDetails}
-              post={post}
+          </div>
+          <div className="w-full mt-6 ml-4 flex items-center justify-between pb-6">
+            <img
+              className="rounded-full w-10 h-10 border-4 border-violet"
+              src={user.avatar}
+              alt="My profile avatar"
             />
-          ) : (
-            ""
-          )}
-        </div>
+            <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">
+              Laissez un commentaire...
+            </div>
+          </div>
+        </button>
+        {postDetails ? (
+          <PostDetails
+            postDetails={postDetails}
+            setPostDetails={setPostDetails}
+            post={post}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
