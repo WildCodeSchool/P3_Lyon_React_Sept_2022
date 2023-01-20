@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 import PostDetails from "./PostDetails";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import EditPost from "./EditPost";
+import menuDots from "../../../assets/menu-dots.png";
+import "react-toastify/dist/ReactToastify.css";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function Post({ post }) {
+  const { handleReset } = usePostUserContext();
+  const [editPostMenu, setEditPostMenu] = useState(false);
+  const [editPostModal, setEditPostModal] = useState(false);
   const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
 
@@ -11,9 +20,37 @@ function Post({ post }) {
     setPostDetails(!postDetails);
   };
 
+  const handleEditPost = () => {
+    setEditPostMenu(!editPostMenu);
+  };
+
+  const handleEditPostModal = () => {
+    setEditPostModal(!editPostModal);
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:5000/api/posts/${post.id}`)
+      .then((response) => {
+        console.warn(response);
+        handleReset();
+        toast(" ✅ Poste Supprimé !", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div>
-      <div className="bg-white w-full shadow-lg rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
+      <div className="bg-white w-full shadow-lg rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg md:max-w-2xl md:gap-2 md:mr-8">
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
@@ -22,6 +59,7 @@ function Post({ post }) {
               alt={post.username}
             />
           </Link>
+
           <div className="flex flex-col">
             <Link to={`/profile/${post.user_id}`}>
               <div className="flex gap-2">
@@ -29,6 +67,48 @@ function Post({ post }) {
                 <h2 className="text-primary">{post.lastname}</h2>
               </div>
             </Link>
+            <div className="pt-2  relative md:ml-[450px] md:mt-[-30px]">
+              <button onClick={() => handleEditPost()} type="button">
+                <img className="h-8" src={menuDots} alt="Menu" />
+              </button>
+            </div>
+            {editPostMenu ? (
+              <div className="origin-top-right mt-2 w-40 rounded-md shadow-lg bg-white ring-1 top-0 ml-52 ring-black ring-opacity-5 focus:outline-none">
+                <button
+                  onClick={() => handleEditPostModal()}
+                  className="text-black p-4 flex"
+                  type="button"
+                >
+                  <img
+                    className="h-5 w-5"
+                    src="./src/assets/edit.png"
+                    alt="Edit"
+                  />
+                  <span className="pl-3">Modifier</span>
+                </button>
+                <button onClick={() => handleDelete(post.id)} type="button">
+                  <img
+                    className="h-5 w-5"
+                    src="./src/assets/edit.png"
+                    alt="Edit"
+                  />
+                  <span className="pl-3">supprimer</span>
+                </button>
+
+                {editPostModal ? (
+                  <EditPost
+                    editPostModal={editPostModal}
+                    setEditPostModal={setEditPostModal}
+                    handleEditPostModal={handleEditPostModal}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+
             <h3 className="font-light text-primary">{post.group_name}</h3>
             <h3 className="font-light text-primary">{post.category_name}</h3>
             <h3 className="text-gray-400 font-light">1h</h3>
