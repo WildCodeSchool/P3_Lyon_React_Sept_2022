@@ -17,6 +17,8 @@ function Carrousel() {
     setGroupId,
     categoryId,
     setCategoryId,
+    setPosts,
+    setBase,
   } = usePostUserContext();
 
   useEffect(() => {
@@ -26,10 +28,14 @@ function Carrousel() {
 
   const handleGroup = (value) => {
     setGroupId(value);
+    setPosts([]);
+    setBase(0);
   };
 
   const handleCategory = (value) => {
     setCategoryId(value);
+    setPosts([]);
+    setBase(0);
   };
 
   return (
@@ -52,7 +58,6 @@ function Carrousel() {
             ? "h-36 md:w-[475px]  md:hidden"
             : "h-20 md:w-[475px]  md:hidden"
         }
-        // install Swiper modules
         modules={[Pagination, A11y]}
         spaceBetween={20}
         slidesPerView={2.5}

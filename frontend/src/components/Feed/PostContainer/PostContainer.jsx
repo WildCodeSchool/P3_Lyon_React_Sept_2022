@@ -8,6 +8,7 @@ function PostContainer() {
   const { token } = useCurrentUserContext();
 
   useEffect(() => {
+    // if (groupId === 0 && categoryId === 0) {
     fetch(`http://localhost:5000/api/posts/limit/${base}`, {
       method: "GET",
       headers: {
@@ -19,6 +20,7 @@ function PostContainer() {
       .then((result) => {
         setPosts((prev) => [...prev, ...result]);
       });
+    // }
   }, [base, refresh]);
 
   const handleScroll = () => {
