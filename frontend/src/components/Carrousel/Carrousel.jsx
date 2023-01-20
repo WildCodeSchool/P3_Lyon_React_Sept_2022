@@ -31,8 +31,6 @@ function Carrousel() {
         spaceBetween={20}
         slidesPerView={2.5}
         pagination={{ clickable: true }}
-        // onSwiper={(swiper) => console.warn(swiper)}
-        // onSlideChange={() => console.warn("slide change")}
       >
         {!isGroup ? (
           <>
@@ -67,19 +65,38 @@ function Carrousel() {
           </>
         )}
       </Swiper>
-      <div className=" hidden md:block ">
-        {groupList.map((group) => {
-          return (
-            <button
-              type="button"
-              className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
-              key={group.id}
-            >
-              {group.group_name}
-            </button>
-          );
-        })}
-      </div>
+
+      {/* pour version Desktop */}
+      {!isGroup ? (
+        <div className=" hidden md:block ">
+          {groupList.map((group) => {
+            return (
+              <button
+                onClick={() => handleCategory(group.id)}
+                type="button"
+                className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                key={group.id}
+              >
+                {group.group_name}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="hidden md:block">
+          {categoryList
+            .filter((category) => category.group_id === groupId)
+            .map((category) => (
+              <button
+                type="button"
+                key={category.id}
+                className="md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
+              >
+                {category.category_name}
+              </button>
+            ))}
+        </div>
+      )}
     </div>
   );
 }

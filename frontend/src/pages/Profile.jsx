@@ -37,7 +37,7 @@ function Profile() {
   }, [refresh, user_id]);
 
   return (
-    <div className="bg-[#f6f6fe] w-screen">
+    <div className="bg-[#f6f6fe] overflow-x-hidden">
       {profileUser && (
         <div>
           <Navbar />

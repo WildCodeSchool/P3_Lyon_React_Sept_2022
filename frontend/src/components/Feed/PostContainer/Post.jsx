@@ -67,51 +67,60 @@ function Post({ post }) {
                 <h2 className="text-primary">{post.lastname}</h2>
               </div>
             </Link>
-            <div className="pt-2  relative md:ml-[450px] md:mt-[-30px]">
-              <button onClick={() => handleEditPost()} type="button">
-                <img className="h-8" src={menuDots} alt="Menu" />
-              </button>
-            </div>
-            {editPostMenu ? (
-              <div className="origin-top-right mt-2 w-40 rounded-md shadow-lg bg-white ring-1 top-0 ml-52 ring-black ring-opacity-5 focus:outline-none">
-                <button
-                  onClick={() => handleEditPostModal()}
-                  className="text-black p-4 flex"
-                  type="button"
-                >
-                  <img
-                    className="h-5 w-5"
-                    src="./src/assets/edit.png"
-                    alt="Edit"
-                  />
-                  <span className="pl-3">Modifier</span>
-                </button>
-                <button onClick={() => handleDelete(post.id)} type="button">
-                  <img
-                    className="h-5 w-5"
-                    src="./src/assets/edit.png"
-                    alt="Edit"
-                  />
-                  <span className="pl-3">supprimer</span>
-                </button>
-
-                {editPostModal ? (
-                  <EditPost
-                    editPostModal={editPostModal}
-                    setEditPostModal={setEditPostModal}
-                    handleEditPostModal={handleEditPostModal}
-                  />
-                ) : (
-                  ""
-                )}
+            <div className="flex">
+              <div className="flex flex-col">
+                <h3 className="font-light text-primary">{post.group_name}</h3>
+                <h3 className="font-light text-primary">
+                  {post.category_name}
+                </h3>
+                <h3 className="text-gray-400 font-light">1h</h3>
               </div>
-            ) : (
-              ""
-            )}
+              <div className="pt-2 md:ml-[250px] md:mt-[-30px]">
+                <button onClick={() => handleEditPost()} type="button">
+                  <img className="h-8" src={menuDots} alt="Menu" />
+                </button>
+              </div>
+              {editPostMenu ? (
+                <div className=" mt-2 w-40 relative rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none ">
+                  <button
+                    onClick={() => handleEditPostModal()}
+                    className="text-black p-4 flex"
+                    type="button"
+                  >
+                    <img
+                      className="h-5 w-5"
+                      src="./src/assets/edit.png"
+                      alt="Edit"
+                    />
+                    <span className="pl-3">Modifier</span>
+                  </button>
+                  <button
+                    onClick={() => handleDelete()}
+                    className="text-black p-4 flex"
+                    type="button"
+                  >
+                    <img
+                      className="h-5 w-5"
+                      src="./src/assets/edit.png"
+                      alt="Edit"
+                    />
+                    <span className="pl-3">supprimer</span>
+                  </button>
 
-            <h3 className="font-light text-primary">{post.group_name}</h3>
-            <h3 className="font-light text-primary">{post.category_name}</h3>
-            <h3 className="text-gray-400 font-light">1h</h3>
+                  {editPostModal ? (
+                    <EditPost
+                      editPostModal={editPostModal}
+                      setEditPostModal={setEditPostModal}
+                      handleEditPostModal={handleEditPostModal}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
         <h2 className="text-black self-start my-2 text-center">{post.title}</h2>
