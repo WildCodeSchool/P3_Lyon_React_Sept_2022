@@ -28,7 +28,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
   }
   return (
     <div>
-      <div className="fixed top-0 bg-white w-[101%] h-[100vh]">
+      <div className="fixed top-0 bg-white w-[101%] h-[100vh] md:w-1/2 md:ml-[50%]">
         <button type="button" onClick={() => closeModal()}>
           <img className="ml-2 mt-6" src={croix} alt="" />
         </button>
@@ -43,7 +43,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
             className="border rounded-xl border-primary mx-auto w-[280px] h-11 my-10 ml-16 pl-4"
           />
         </div>
-        <div className="w-full mt-4">
+        <div className="w-full mt-4 md:flex md:justify-around md:wrap">
           <div className="dropdown inline-block relative w-full">
             <ul>
               {groupList

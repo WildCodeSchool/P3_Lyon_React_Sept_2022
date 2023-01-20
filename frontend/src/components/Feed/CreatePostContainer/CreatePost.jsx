@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import croix from "../../../assets/croix.png";
 import "../../../App.css";
 import SelectBar from "./SelectBar";
 import ModalCreatePost from "./ModalCreatePost";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreatePost() {
-  const {
-    valueSelectedCategory,
-    setShowCreatePost,
-    showCreatePost,
-    valueSelectedGroup,
-    handleReset,
-  } = usePostUserContext();
+  const { valueSelectedCategory, valueSelectedGroup, handleReset } =
+    usePostUserContext();
   const { user } = useCurrentUserContext();
   const inputRef = useRef(null);
   const [dataPost, setDataPost] = useState({
@@ -23,8 +21,10 @@ function CreatePost() {
     category_id: valueSelectedCategory,
     post_image: "",
   });
+  const navigate = useNavigate();
 
   const [showCategories, setShowCategories] = useState(false);
+
   const onChange = (e) => {
     setDataPost({
       ...dataPost,
@@ -60,6 +60,7 @@ function CreatePost() {
         headers: myHeaders,
         body: formData,
       };
+
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
       // je pourrais être renvoyé à la route login
       fetch(`http://localhost:5000/api/posts`, requestOptions)
@@ -67,24 +68,28 @@ function CreatePost() {
         .then((retour) => {
           console.warn(retour);
           handleReset();
+          navigate("/feed");
+          toast(" ✅ Poste Publié!", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "light",
+          });
         })
         .catch(console.error());
     }
   };
 
   return (
-    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10 md:w-1/2 md:ml-[25%] md:backdrop-blur-lg ">
-      <div className="bg-white">
-        <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={() => setShowCreatePost(!showCreatePost)}
-          >
-            <img className="ml-2 mt-6" src={croix} alt="" />
-          </button>
-        </div>
-        <div className="shadow-md my-[32px]">
-          <h1 className="text-[32px] leading-[2.9rem] text-primary font-bold text-center pb-8 ">
+    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10  md:backdrop-blur-lg md:shadow-md ">
+      <div className="md:w-1/2 md:border-r-2 md:border-gray-100">
+        <div className="flex justify-between md:justify-evenly">
+          <Link to="/feed">
+            <img className="ml-2 mt-6 md:mt-2" src={croix} alt="" />
+          </Link>
+          <h1 className="text-[32px] mt:[62px] mr-[46px] leading-[2.9rem] text-primary font-bold text-center md:mr-0 pb-8 md:pb-0 md:mt-2 ">
             Créer une publication
           </h1>
         </div>
@@ -135,7 +140,7 @@ function CreatePost() {
               value={dataPost.title}
               onChange={onChange}
             />
-            <hr className="h-[2px] bg-grey" />
+            <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
             <input
               className="h-[10em] w-full pl-8"
               type="text"
@@ -146,25 +151,31 @@ function CreatePost() {
             />
           </div>
           <input
+            className="md:ml-[25%]"
             type="file"
             value={dataPost.image}
             name="avatar"
             ref={inputRef}
           />
-          <hr className="h-[2px] bg-grey" />
+          <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
+          <div className="md:h-20 md:mt-3">
+            <SelectBar
+              showCategories={showCategories}
+              setShowCategories={setShowCategories}
+            />
+          </div>
+          <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
           <button
             type="submit"
-            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[30%] w-40 md:ml-[38%] md:w-48 
+            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[56%] w-40 md:ml-[38%] md:w-48 
          rounded-[20px] justify-end"
           >
             Publier
           </button>
         </form>
-        <hr className="h-[2px] bg-grey" />
-        <SelectBar
-          showCategories={showCategories}
-          setShowCategories={setShowCategories}
-        />
+
+        <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
+
         {showCategories ? (
           <ModalCreatePost
             showCategories={showCategories}

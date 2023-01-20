@@ -2,7 +2,7 @@ import React from "react";
 
 function Panel() {
   return (
-    <div className="hidden w-0 md:block md:h-1/4 md:bg-primary md:w-80 md:mt-48 md:shadow-md md:rounded-lg">
+    <div className="hidden w-0 md:block md:h-1/4 md:bg-primary md:w-80 md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-28">
       <h2 className="w-0 md:w-auto md:text-white md:text-center md:mb-4 md:text-3xl md:mt-10">
         Actualités
       </h2>
