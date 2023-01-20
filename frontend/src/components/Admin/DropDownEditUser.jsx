@@ -18,7 +18,7 @@ export default function DropDownCategory({ card, toggleRefresh }) {
       .then((response) => {
         console.warn(response.data);
         toggleRefresh();
-        alert("Utilisateur supprimé");
+        console.warn("Utilisateur supprimé");
       })
       .catch((err) => {
         console.error(err);
