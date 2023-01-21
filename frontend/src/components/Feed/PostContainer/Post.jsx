@@ -29,23 +29,24 @@ function Post({ post }) {
   };
 
   const handleDelete = () => {
-    axios
-      .delete(`http://localhost:5000/api/posts/${post.id}`)
-      .then((response) => {
-        console.warn(response);
-        handleReset();
-        toast(" ✅ Poste Supprimé !", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "light",
+    if (user.id === post.user_id) {
+      axios
+        .delete(`http://localhost:5000/api/posts/${post.id}`)
+        .then(() => {
+          handleReset();
+          toast(" ✅ Poste Supprimé !", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "light",
+          });
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }
   };
 
   return (
