@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import CreatePost from "./components/Feed/CreatePostContainer/CreatePost";
+import { ToastContainer } from "react-toastify";
+import CreatePost from "./pages/CreatePost";
 import "./App.css";
 import Connexion from "./pages/Connexion";
 import Main from "./pages/Main";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/adminUser" element={<PostList />} />
             <Route path="/adminUser/:id" element={<ModifUser />} />
           </Routes>
+          <ToastContainer />
         </CurrentUserContextProvider>
       </PostUserContextProvider>
     </div>

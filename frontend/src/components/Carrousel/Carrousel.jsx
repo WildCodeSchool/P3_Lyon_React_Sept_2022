@@ -20,7 +20,7 @@ function Carrousel() {
   };
 
   return (
-    <div className="carrousel-container pt-8 md:h-1/4 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg">
+    <div className="carrousel-container pt-8 md:h-1/6 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
         Mes groupes
       </h2>
@@ -31,8 +31,6 @@ function Carrousel() {
         spaceBetween={20}
         slidesPerView={2.5}
         pagination={{ clickable: true }}
-        // onSwiper={(swiper) => console.warn(swiper)}
-        // onSlideChange={() => console.warn("slide change")}
       >
         {!isGroup ? (
           <>
@@ -67,19 +65,38 @@ function Carrousel() {
           </>
         )}
       </Swiper>
-      <div className=" hidden md:block ">
-        {groupList.map((group) => {
-          return (
-            <button
-              type="button"
-              className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
-              key={group.id}
-            >
-              {group.group_name}
-            </button>
-          );
-        })}
-      </div>
+
+      {/* pour version Desktop */}
+      {!isGroup ? (
+        <div className=" hidden md:block ">
+          {groupList.map((group) => {
+            return (
+              <button
+                onClick={() => handleCategory(group.id)}
+                type="button"
+                className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                key={group.id}
+              >
+                {group.group_name}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="hidden md:block">
+          {categoryList
+            .filter((category) => category.group_id === groupId)
+            .map((category) => (
+              <button
+                type="button"
+                key={category.id}
+                className="md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
+              >
+                {category.category_name}
+              </button>
+            ))}
+        </div>
+      )}
     </div>
   );
 }

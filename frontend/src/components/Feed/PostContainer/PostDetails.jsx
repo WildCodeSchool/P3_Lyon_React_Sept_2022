@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails({ postDetails, setPostDetails, post }) {
+function PostDetails({ post, setPostDetails }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
-  const closePostDetails = () => {
-    setPostDetails(!postDetails);
-  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
@@ -19,7 +16,7 @@ function PostDetails({ postDetails, setPostDetails, post }) {
 
   return (
     <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
-      <button type="button" onClick={() => closePostDetails()}>
+      <button type="button" onClick={() => setPostDetails()}>
         <img className="mr-80 mt-6" src="../src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10 md:mx-auto">
@@ -28,28 +25,27 @@ function PostDetails({ postDetails, setPostDetails, post }) {
           src={post.avatar}
           alt="User avatar"
         />
-        <h2 className="hidden md:block text-primary text-3xl">
-          {post.firstname}
-          {post.lastname}
+        <h2 className=" md:block text-primary text-3xl">
+          {post.firstname} {post.lastname}
         </h2>
+      </div>
+      <div className="flex justify-around md:mx-auto ">
+        <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
+          {post.group_name}
+        </div>
+        <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px] md:ml-5">
+          {post.category_name}
+        </div>
       </div>
 
       <div className="flex justify-center text-center px-4 md:flex md:flex-col md:mx-auto md:w-full ">
         <h2 className="text-3xl text-left md:ml-6 md:text-center">
           {post.title}
         </h2>
-        <div className="md:flex md:mx-auto ">
-          <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
-            {post.group_name}
-          </div>
-          <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px] md:ml-5">
-            {post.category_name}
-          </div>
-        </div>
       </div>
       <img
         className="mt-10 md:h-[40%] md:mx-auto"
-        src="./src/assets/picture-post.jpg"
+        src={`http://localhost:5000/uploads/${post.post_image}`}
         alt="Post"
       />
       <p className="bg-white text-md p-8 md:mx-auto">{post.content}</p>
