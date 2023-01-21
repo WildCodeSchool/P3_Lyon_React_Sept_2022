@@ -25,23 +25,23 @@ function PostDetails({ post, setPostDetails }) {
           src={post.avatar}
           alt="User avatar"
         />
-        <h2 className="hidden md:block text-primary text-3xl">
+        <h2 className=" md:block text-primary text-3xl">
           {post.firstname} {post.lastname}
         </h2>
+      </div>
+      <div className="flex justify-around md:mx-auto ">
+        <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
+          {post.group_name}
+        </div>
+        <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px] md:ml-5">
+          {post.category_name}
+        </div>
       </div>
 
       <div className="flex justify-center text-center px-4 md:flex md:flex-col md:mx-auto md:w-full ">
         <h2 className="text-3xl text-left md:ml-6 md:text-center">
           {post.title}
         </h2>
-        <div className="md:flex md:mx-auto ">
-          <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
-            {post.group_name}
-          </div>
-          <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px] md:ml-5">
-            {post.category_name}
-          </div>
-        </div>
       </div>
       <img
         className="mt-10 md:h-[40%] md:mx-auto"
