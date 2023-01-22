@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function Comment({ postId, numberComments, setNumberComments }) {
+function Comment({ postId }) {
   const { user } = useCurrentUserContext();
   const { refreshComment, setRefreshComment } = usePostUserContext();
 
@@ -44,8 +44,8 @@ function Comment({ postId, numberComments, setNumberComments }) {
       )
         .then((response) => response.text())
         .then(() => {
-          setNumberComments(numberComments + 1);
           setRefreshComment(!refreshComment);
+          // setNumberComments(numberComments + 1);
           const form = document.getElementsByName("form")[0];
           form.reset();
         })
@@ -54,7 +54,7 @@ function Comment({ postId, numberComments, setNumberComments }) {
   };
 
   return (
-    <div className="w-full mt-6 ml-6 flex items-center justify-start pb-6">
+    <div className="w-full mt-6 flex items-center pl-2 pb-4 md:items-start">
       <img
         className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
         src={user.avatar}
