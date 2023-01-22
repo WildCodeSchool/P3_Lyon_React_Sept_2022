@@ -42,6 +42,7 @@ function Post({ post }) {
         });
     }
   };
+  const [numberComments, setNumberComments] = useState(0);
 
   return (
     <div>
@@ -134,8 +135,14 @@ function Post({ post }) {
             alt="Post"
           />
         )}
-
-        <Link to={`/feed/${post.id}`}>
+        <div>
+          <p>{numberComments} commentaires</p>
+        </div>
+        <Link
+          to={`/feed/${post.id}`}
+          setNumberComments={setNumberComments}
+          numberComments={numberComments}
+        >
           <div className="flex flex-col justify-center w-[390px] md:w-[640px]">
             <p className="text-sm p-2">
               {post.content}...

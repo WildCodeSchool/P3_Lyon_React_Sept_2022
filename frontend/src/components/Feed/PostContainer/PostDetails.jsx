@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails() {
+function PostDetails({ numberComments, setNumberComments }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
   const [postDetails, setPostDetails] = useState({});
@@ -87,7 +87,11 @@ function PostDetails() {
           </div>
         ))}
 
-        <Comment postId={postId} />
+        <Comment
+          postId={postId}
+          numberComments={numberComments}
+          setNumberComments={setNumberComments}
+        />
       </div>
     </div>
   );
