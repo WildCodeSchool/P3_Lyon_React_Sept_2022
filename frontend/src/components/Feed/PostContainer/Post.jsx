@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import PostDetails from "./PostDetails";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import EditPost from "./EditPost";
 import menuDots from "../../../assets/menu-dots.png";
@@ -13,17 +12,7 @@ function Post({ post }) {
   const { handleReset } = usePostUserContext();
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const [postDetails, setPostDetails] = useState();
   const { user } = useCurrentUserContext();
-  const { postId } = useParams();
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${postId}`)
-      .then((response) => response.json())
-      .then((result) => {
-        setPostDetails(result);
-      });
-  }, [postId]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -147,22 +136,17 @@ function Post({ post }) {
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </div>
-          <div className="w-full mt-6 ml-4 flex items-center pb-6">
-            <img
-              className="rounded-full w-10 h-10 border-4 border-violet"
-              src={user.avatar}
-              alt="My profile avatar"
-            />
-            <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">
-              Laissez un commentaire...
-            </div>
-          </div>
         </Link>
-        {postDetails ? (
-          <PostDetails postDetails={postDetails} post={post} />
-        ) : (
-          ""
-        )}
+        <div className="w-full mt-6 ml-4 flex items-center pb-6">
+          <img
+            className="rounded-full w-10 h-10 border-4 border-violet"
+            src={user.avatar}
+            alt="My profile avatar"
+          />
+          <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">
+            Laissez un commentaire...
+          </div>
+        </div>
       </div>
     </div>
   );

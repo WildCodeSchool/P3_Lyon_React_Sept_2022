@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails({ postDetails }) {
+function PostDetails() {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
+  const [postDetails, setPostDetails] = useState({});
+  const { postId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${postDetails.id}/comments`)
+    fetch(`http://localhost:5000/api/posts/${postId}/comments`)
       .then((response) => response.json())
       .then((result) => {
         setComments(result);
       });
   }, [refreshComment]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/posts/${postId}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setPostDetails(result);
+      });
+  }, [postId]);
 
   return (
     <div className="bg-white fixed top-6 left-0 z-10 h-screen w-screen overflow-hidden">
