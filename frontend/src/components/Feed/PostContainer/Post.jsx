@@ -136,17 +136,18 @@ function Post({ post }) {
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </div>
-        </Link>
-        <div className="w-full mt-6 ml-4 flex items-center pb-6">
-          <img
-            className="rounded-full w-10 h-10 border-4 border-violet"
-            src={user.avatar}
-            alt="My profile avatar"
-          />
-          <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">
-            Laissez un commentaire...
+
+          <div className="w-full mt-6 ml-4 flex items-center pb-6">
+            <img
+              className="rounded-full w-10 h-10 border-4 border-violet"
+              src={user.avatar}
+              alt="My profile avatar"
+            />
+            <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">
+              Laissez un commentaire...
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );
