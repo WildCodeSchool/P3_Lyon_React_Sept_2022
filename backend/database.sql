@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS user_group;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS attached_file;
 DROP TABLE IF EXISTS like_table;
