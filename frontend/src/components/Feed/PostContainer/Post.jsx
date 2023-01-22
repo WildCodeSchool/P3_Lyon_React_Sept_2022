@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import PostDetails from "./PostDetails";
@@ -13,12 +13,17 @@ function Post({ post }) {
   const { handleReset } = usePostUserContext();
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const [postDetails, setPostDetails] = useState(false);
+  const [postDetails, setPostDetails] = useState();
   const { user } = useCurrentUserContext();
+  const { postId } = useParams();
 
-  const openPostDetails = () => {
-    setPostDetails(!postDetails);
-  };
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/posts/${postId}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setPostDetails(result);
+      });
+  }, [postId]);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -134,7 +139,7 @@ function Post({ post }) {
           />
         )}
 
-        <button onClick={() => openPostDetails()} type="button">
+        <Link to={`/feed/${post.id}`}>
           <div className="flex flex-col justify-center items- shadow-md w-[390px] md:w-[640px]">
             {post.firstname} {post.lastname}
             <p className="text-sm">
@@ -152,13 +157,9 @@ function Post({ post }) {
               Laissez un commentaire...
             </div>
           </div>
-        </button>
+        </Link>
         {postDetails ? (
-          <PostDetails
-            postDetails={postDetails}
-            setPostDetails={setPostDetails}
-            post={post}
-          />
+          <PostDetails postDetails={postDetails} post={post} />
         ) : (
           ""
         )}

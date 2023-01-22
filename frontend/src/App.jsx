@@ -11,6 +11,7 @@ import { CurrentUserContextProvider } from "./contexts/userContext";
 import Admin from "./pages/Admin";
 import PostList from "./pages/PostList";
 import ModifUser from "./components/Admin/ModifUser";
+import PostDetails from "./components/Feed/PostContainer/PostDetails";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Connexion />} />
             <Route path="/feed" element={<Main />} />
             <Route path="/createPost" element={<CreatePost />} />
+            <Route path="/feed/:postId" element={<PostDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/:user_id" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />

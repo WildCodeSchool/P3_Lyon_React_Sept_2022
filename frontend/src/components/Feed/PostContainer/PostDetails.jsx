@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails({ post, setPostDetails }) {
+function PostDetails({ postDetails }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${post.id}/comments`)
+    fetch(`http://localhost:5000/api/posts/${postDetails.id}/comments`)
       .then((response) => response.json())
       .then((result) => {
         setComments(result);
@@ -15,40 +15,40 @@ function PostDetails({ post, setPostDetails }) {
   }, [refreshComment]);
 
   return (
-    <div className="bg-white fixed top-0 left-0 z-10 h-screen w-screen overflow-y-scroll ">
-      <button type="button" onClick={() => setPostDetails()}>
+    <div className="bg-white fixed top-6 left-0 z-10 h-screen w-screen overflow-hidden">
+      <button type="button">
         <img className="mr-80 mt-6" src="../src/assets/croix.png" alt="Close" />
       </button>
       <div className="flex flex-row items-center py-6 px-10 md:mx-auto">
         <img
           className="rounded-full w-24 mr-6 border-4 border-violet"
-          src={post.avatar}
+          src={postDetails.avatar}
           alt="User avatar"
         />
         <h2 className=" md:block text-primary text-3xl">
-          {post.firstname} {post.lastname}
+          {postDetails.firstname} {postDetails.lastname}
         </h2>
       </div>
       <div className="flex justify-around md:mx-auto ">
         <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px]">
-          {post.group_name}
+          {postDetails.group_name}
         </div>
         <div className="border border-primary bg-transparent hover:bg-primary hover:text-white text-primary mt-5 py-2 px-2 max-w-fit rounded-[5px] md:ml-5">
-          {post.category_name}
+          {postDetails.category_name}
         </div>
       </div>
 
       <div className="flex justify-center text-center px-4 md:flex md:flex-col md:mx-auto md:w-full ">
         <h2 className="text-3xl text-left md:ml-6 md:text-center">
-          {post.title}
+          {postDetails.title}
         </h2>
       </div>
       <img
         className="mt-10 md:h-[40%] md:mx-auto"
-        src={`http://localhost:5000/uploads/${post.post_image}`}
+        src={`http://localhost:5000/uploads/${postDetails.post_image}`}
         alt="Post"
       />
-      <p className="bg-white text-md p-8 md:mx-auto">{post.content}</p>
+      <p className="bg-white text-md p-8 md:mx-auto">{postDetails.content}</p>
       <h2 className="font-bold text-center">Ouvrir le pdf :</h2>
       <div className="flex items-center justify-center text-center pb-2">
         <div
@@ -62,7 +62,7 @@ function PostDetails({ post, setPostDetails }) {
       <div className="w-full mt-6 flex flex-col items-center px-6">
         {comments.map((comment) => (
           <div
-            key={`${post.id}${comment.id}`}
+            key={`${postDetails.id}${comment.id}`}
             comment={comment}
             className="flex justify-center items-center pb-2"
           >
@@ -78,7 +78,7 @@ function PostDetails({ post, setPostDetails }) {
         ))}
       </div>
 
-      <Comment postId={post.id} />
+      <Comment postId={postDetails.id} />
     </div>
   );
 }
