@@ -42,7 +42,16 @@ router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
 
 // Gestion des posts
 
-router.get("/api/posts/limit/:base", verifyToken, postControllers.browse);
+router.get("/api/posts/limit/:base", verifyToken, postControllers.browse); // Feed de base
+router.get(
+  "/api/posts/group/:group/limit/:base",
+  postControllers.browseByGroup
+); // Feed par groupe
+router.get(
+  "/api/posts/category/:category/limit/:base",
+  postControllers.browseByCategory
+); // Feed par category
+
 router.get("/api/posts/:id", postControllers.read);
 router.post(
   "/api/posts",

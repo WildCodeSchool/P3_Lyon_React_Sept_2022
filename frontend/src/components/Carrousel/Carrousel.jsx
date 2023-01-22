@@ -19,6 +19,8 @@ function Carrousel() {
     setCategoryId,
     setPosts,
     setBase,
+    refresh,
+    setRefresh,
   } = usePostUserContext();
 
   useEffect(() => {
@@ -30,14 +32,15 @@ function Carrousel() {
     setGroupId(value);
     setPosts([]);
     setBase(0);
+    setRefresh(!refresh);
   };
 
   const handleCategory = (value) => {
     setCategoryId(value);
     setPosts([]);
     setBase(0);
+    setRefresh(!refresh);
   };
-
   return (
     <div className="carrousel-container pt-8 md:h-1/4 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg">
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">

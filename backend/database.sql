@@ -541,3 +541,7 @@ FOREIGN KEY(post_id) REFERENCES post(id),
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
+
+INSERT INTO
+  comment (content, post_id, user_id)
+VALUES ('YOLOOO', 1, 2);

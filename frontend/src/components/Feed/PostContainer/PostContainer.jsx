@@ -4,23 +4,51 @@ import { usePostUserContext } from "../../../contexts/PostUserContext";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 function PostContainer() {
-  const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
+  const { posts, setPosts, base, setBase, refresh, groupId, categoryId } =
+    usePostUserContext();
   const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    // if (groupId === 0 && categoryId === 0) {
-    fetch(`http://localhost:5000/api/posts/limit/${base}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setPosts((prev) => [...prev, ...result]);
-      });
-    // }
+    if (groupId === 0 && categoryId === 0) {
+      fetch(`http://localhost:5000/api/posts/limit/${base}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          setPosts((prev) => [...prev, ...result]);
+        });
+    } else if (groupId > 0 && categoryId === 0) {
+      fetch(`http://localhost:5000/api/posts/group/${groupId}/limit/${base}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          setPosts((prev) => [...prev, ...result]);
+        });
+    } else if (categoryId > 0) {
+      fetch(
+        `http://localhost:5000/api/posts/category/${categoryId}/limit/${base}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setPosts((prev) => [...prev, ...result]);
+        });
+    }
   }, [base, refresh]);
 
   const handleScroll = () => {

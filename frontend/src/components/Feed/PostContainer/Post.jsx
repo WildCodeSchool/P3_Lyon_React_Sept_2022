@@ -109,8 +109,12 @@ function Post({ post }) {
           <button onClick={() => openPostDetails()} type="button">
             <h2 className="text-black self-start my-2">{post.title}</h2>
             <p className="self-start text-sm">
-              {post.content}..
-              <span className="text-primary text-base"> voir plus</span>
+              {post.content.length < 151
+                ? post.content
+                : post.content.slice(0, 150)}
+              {post.content.length > 150 && (
+                <span className="text-primary text-base"> ... voir plus</span>
+              )}
             </p>
             <div className="w-full mt-6 flex items-center justify-between pb-6">
               <img

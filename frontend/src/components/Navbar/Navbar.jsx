@@ -18,6 +18,15 @@ function Navbar() {
     navigate("/");
   };
 
+  const toFeedOrAdmin = () => {
+    handleReset();
+    if (!user.is_admin) {
+      navigate("/feed");
+    } else {
+      navigate("/admin");
+    }
+  };
+
   // function handleLogo() {
   //   handleReset();
   // }
@@ -25,15 +34,15 @@ function Navbar() {
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between md:shadow-md">
-        <Link to={user.is_admin ? "/admin" : "/feed"}>
-          <button type="button" onClick={handleReset}>
-            <img
-              className="w-32 h-16 md:w-48 md:h-20 md:mb-[-26px]"
-              src={logoEnedis}
-              alt="Logo"
-            />
-          </button>
-        </Link>
+        {/* <Link to={user.is_admin ? "/admin" : "/feed"}> */}
+        <button type="button" onClick={toFeedOrAdmin}>
+          <img
+            className="w-32 h-16 md:w-48 md:h-20 md:mb-[-26px]"
+            src={logoEnedis}
+            alt="Logo"
+          />
+        </button>
+        {/* </Link> */}
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">
             {/* <button
