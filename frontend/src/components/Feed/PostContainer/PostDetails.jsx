@@ -56,10 +56,10 @@ function PostDetails() {
         </div>
       </div>
       <div className="w-11/12 m-auto flex flex-col items-start shadow-md rounded-xl py-4 text-sm">
-        <h2 className="text-2xl px-8 md:ml-6 md:text-center">
+        <h2 className="text-2xl px-5 md:ml-6 md:text-center">
           {postDetails.title}
         </h2>
-        <p className="text-md py-2 px-8 md:ml-6 md:text-center">
+        <p className="text-md py-2 px-5 md:ml-6 md:text-center">
           {postDetails.content}
         </p>
         <img
