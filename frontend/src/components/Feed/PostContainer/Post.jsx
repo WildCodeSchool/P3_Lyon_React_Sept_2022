@@ -48,7 +48,7 @@ function Post({ post }) {
         });
     }
   };
-
+  const [numberComments, setNumberComments] = useState(0);
   return (
     <div>
       <div className="bg-white w-full shadow-lg rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg md:max-w-2xl md:gap-2 md:mr-8">
@@ -147,6 +147,9 @@ function Post({ post }) {
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </div>
+          <div>
+            <p>{numberComments} commentaire</p>
+          </div>
           <div className="w-full mt-6 flex items-center pb-6">
             <img
               className="rounded-full w-10 h-10 border-4 border-violet"
@@ -163,6 +166,8 @@ function Post({ post }) {
             postDetails={postDetails}
             setPostDetails={setPostDetails}
             post={post}
+            numberComments={numberComments}
+            setNumberComments={setNumberComments}
           />
         ) : (
           ""

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails({ post, setPostDetails }) {
+function PostDetails({
+  post,
+  setPostDetails,
+  numberComments,
+  setNumberComments,
+}) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
 
@@ -78,7 +83,11 @@ function PostDetails({ post, setPostDetails }) {
         ))}
       </div>
 
-      <Comment postId={post.id} />
+      <Comment
+        postId={post.id}
+        numberComments={numberComments}
+        setNumberComments={setNumberComments}
+      />
     </div>
   );
 }
