@@ -20,8 +20,9 @@ const postControllers = require("./controllers/postControllers");
 const categoryControllers = require("./controllers/categoryControllers");
 const groupControllers = require("./controllers/groupControllers");
 const commentControllers = require("./controllers/commentControllers");
+const userGroupControllers = require("./controllers/userGroupControllers");
 
-// Authentification
+/// //// Authentification //////
 
 router.post("/api/register", hashPassword, userControllers.add);
 router.post(
@@ -30,7 +31,7 @@ router.post(
   verifyPassword
 );
 
-// Gestion des users
+/// //// Gestion des users ///////
 router.get("/api/users", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
@@ -41,7 +42,7 @@ router.delete("/api/users/:id", userControllers.destroy);
 
 router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
 
-// Gestion des posts
+/// /// Gestion des posts ///////
 
 router.get("/api/posts/limit/:base", verifyToken, postControllers.browse);
 router.get("/api/posts/:id", postControllers.read);
@@ -54,7 +55,8 @@ router.post(
 router.put("/api/posts/:id", postControllers.edit);
 router.delete("/api/posts/:id", postControllers.destroy);
 
-// Gestion des categories
+/// //// Gestion des categories ///////
+
 router.get("/api/categories", categoryControllers.browse);
 router.get("/api/categories/:id", categoryControllers.read);
 router.post("/api/categories", categoryControllers.add);
@@ -67,6 +69,39 @@ router.get("/api/groups/:id", groupControllers.read);
 router.post("/api/groups", groupControllers.add);
 router.put("/api/groups/:id", groupControllers.edit);
 router.delete("/api/groups/:id", groupControllers.destroy);
+
+// Gestion des groupes par utiliateur
+
+router.get("/api/groups/user/:id", userGroupControllers.findGroups);
+
+// je récupère les groupes auxquels un utilisateur appartient en fonction de l'id de l'utilisateur
+
+router.get(
+  "/api/user_group/user/:userId",
+  userGroupControllers.findGroupByUserId
+);
+// je récupère les utilisateurs d'un groupe en fonction de l'id du groupe
+router.get(
+  "/api/user_group/group/:groupId",
+  userGroupControllers.findUserByGroupId
+);
+// J'ajoute un utilisateur dans un groupe
+router.post("/api/user_group", userGroupControllers.addUserInGroup);
+
+// J'ajoute un utilisateur dans plusieurs groupes
+
+router.post("/api/user_groups", userGroupControllers.addUserInSeveralGroup);
+
+// je supprime tous les groups auquel un utilisateur appartient en fonction de l'id de l'utilisateur
+router.delete(
+  "/api/user_group/user/:userId",
+  userGroupControllers.deleteByUserId
+);
+// je supprime un utilisateur d'un groupe en fonction de l'id du groupe
+router.delete(
+  "/api/user_group/group/:groupId",
+  userGroupControllers.deleteByGroupId
+);
 
 // Gestion des uploads
 // route POST pour recevoir un fichier
