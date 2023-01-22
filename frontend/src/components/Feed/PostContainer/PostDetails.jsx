@@ -26,7 +26,7 @@ function PostDetails() {
   }, [postId]);
 
   return (
-    <div className="bg-white fixed top-6 left-0 z-10 h-screen w-screen overflow-hidden">
+    <div className="bg-white h-screen w-screen">
       <button type="button">
         <img className="mr-80 mt-6" src="../src/assets/croix.png" alt="Close" />
       </button>
