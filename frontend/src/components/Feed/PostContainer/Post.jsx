@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import PostDetails from "./PostDetails";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import EditPost from "./EditPost";
 import menuDots from "../../../assets/menu-dots.png";
@@ -13,12 +12,7 @@ function Post({ post }) {
   const { handleReset } = usePostUserContext();
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
-  const [postDetails, setPostDetails] = useState(false);
   const { user } = useCurrentUserContext();
-
-  const openPostDetails = () => {
-    setPostDetails(!postDetails);
-  };
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -129,7 +123,9 @@ function Post({ post }) {
             </div>
           </div>
         </div>
-        <h2 className="text-black self-start my-2 text-center">{post.title}</h2>
+        <h2 className="text-black self-start text-left pl-3 pt-3 text-xl">
+          {post.title}
+        </h2>
         <br />
         {post.post_image && (
           <img
@@ -139,15 +135,15 @@ function Post({ post }) {
           />
         )}
 
-        <button onClick={() => openPostDetails()} type="button">
-          <div className="flex flex-col justify-center items- shadow-md w-[390px] md:w-[640px]">
-            {post.firstname} {post.lastname}
-            <p className="text-sm">
+        <Link to={`/feed/${post.id}`}>
+          <div className="flex flex-col justify-center w-[390px] md:w-[640px]">
+            <p className="text-sm p-2">
               {post.content}...
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </div>
-          <div className="w-full mt-6 flex items-center pb-6">
+
+          <div className="w-full mt-6 ml-4 flex items-center pb-6">
             <img
               className="rounded-full w-10 h-10 border-4 border-violet"
               src={user.avatar}
@@ -157,16 +153,7 @@ function Post({ post }) {
               Laissez un commentaire...
             </div>
           </div>
-        </button>
-        {postDetails ? (
-          <PostDetails
-            postDetails={postDetails}
-            setPostDetails={setPostDetails}
-            post={post}
-          />
-        ) : (
-          ""
-        )}
+        </Link>
       </div>
     </div>
   );
