@@ -55,7 +55,7 @@ function Post({ post }) {
         <div className="flex flex-row self-start py-4 px-6 shadow-md">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full w-20 h-20 mr-6 border-4 border-violet"
+              className="rounded-full w-20 h-20 mr-6 border-4 border-violet md:mr-20"
               src={post.avatar}
               alt={post.username}
             />
@@ -69,45 +69,50 @@ function Post({ post }) {
               </div>
             </Link>
             <div className="flex">
-              <div className="flex flex-col">
+              <div className="flex flex-col md:w-60">
                 <h3 className="font-light text-primary">{post.group_name}</h3>
                 <h3 className="font-light text-primary">
                   {post.category_name}
                 </h3>
                 <h3 className="text-gray-400 font-light">1h</h3>
               </div>
-              <div className="pt-2 md:ml-[250px] md:mt-[-30px]">
+              <div className="pt-2 md:ml-36 md:mt-[-30px]">
                 <button onClick={() => handleEditPost()} type="button">
-                  <img className="h-8" src={menuDots} alt="Menu" />
+                  <img
+                    className="h-8 ml-7 -mt-14 md:mt-0 md:ml-20"
+                    src={menuDots}
+                    alt="Menu"
+                  />
                 </button>
               </div>
               {editPostMenu ? (
-                <div className=" mt-2 w-40 relative rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none ">
-                  <button
-                    onClick={() => handleEditPostModal()}
-                    className="text-black p-4 flex"
-                    type="button"
-                  >
-                    <img
-                      className="h-5 w-5"
-                      src="./src/assets/edit.png"
-                      alt="Edit"
-                    />
-                    <span className="pl-3">Modifier</span>
-                  </button>
-                  <button
-                    onClick={() => handleDelete()}
-                    className="text-black p-4 flex"
-                    type="button"
-                  >
-                    <img
-                      className="h-5 w-5"
-                      src="./src/assets/edit.png"
-                      alt="Edit"
-                    />
-                    <span className="pl-3">supprimer</span>
-                  </button>
-
+                <div className=" mt-2 w-40 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
+                  <div className=" px-4 pb-2 h-20 ">
+                    <button
+                      onClick={() => handleEditPostModal()}
+                      className="text-black p-2 flex"
+                      type="button"
+                    >
+                      <img
+                        className="h-5 w-5"
+                        src="./src/assets/edit.png"
+                        alt="Edit"
+                      />
+                      <span className="pl-3">Modifier</span>
+                    </button>
+                    <button
+                      onClick={() => handleDelete()}
+                      className="text-black p-2 flex"
+                      type="button"
+                    >
+                      <img
+                        className="h-5 w-5"
+                        src="./src/assets/edit.png"
+                        alt="Edit"
+                      />
+                      <span className="pl-3">supprimer</span>
+                    </button>
+                  </div>
                   {editPostModal ? (
                     <EditPost
                       editPostModal={editPostModal}
@@ -142,7 +147,7 @@ function Post({ post }) {
               <span className="text-primary text-base"> voir plus</span>
             </p>
           </div>
-          <div className="w-full mt-6 ml-4 flex items-center pb-6">
+          <div className="w-full mt-6 flex items-center pb-6">
             <img
               className="rounded-full w-10 h-10 border-4 border-violet"
               src={user.avatar}
