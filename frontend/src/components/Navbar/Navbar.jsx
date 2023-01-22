@@ -19,7 +19,7 @@ function Navbar({ toggleDarkMode, darkMode }) {
 
   return (
     <div>
-      <div className="w-full pb-6 flex items-center justify-between md:shadow-md">
+      <div className="w-full pb-6 flex items-center justify-between md:shadow-md bg-gray-100">
         <Link to={user.is_admin ? "/admin" : "/feed"}>
           <button type="button" onClick={handleReset}>
             <img
