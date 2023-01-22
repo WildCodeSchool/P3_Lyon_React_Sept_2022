@@ -541,3 +541,14 @@ FOREIGN KEY(post_id) REFERENCES post(id),
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
+
+CREATE TABLE user_group
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INT NOT NULL,
+  group_id INT NOT NULL,
+  CONSTRAINT fk_user_group_user_detail
+    FOREIGN KEY (user_id) REFERENCES user_detail (id) ON DELETE CASCADE,
+  CONSTRAINT fk_user_group_group_detail
+    FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
+);
