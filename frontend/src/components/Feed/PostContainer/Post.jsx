@@ -123,7 +123,9 @@ function Post({ post }) {
             </div>
           </div>
         </div>
-        <h2 className="text-black self-start my-2 text-center">{post.title}</h2>
+        <h2 className="text-black self-start text-left pl-3 pt-3 text-xl">
+          {post.title}
+        </h2>
         <br />
         {post.post_image && (
           <img
@@ -134,9 +136,8 @@ function Post({ post }) {
         )}
 
         <Link to={`/feed/${post.id}`}>
-          <div className="flex flex-col justify-center items- shadow-md w-[390px] md:w-[640px]">
-            {post.firstname} {post.lastname}
-            <p className="text-sm">
+          <div className="flex flex-col justify-center w-[390px] md:w-[640px]">
+            <p className="text-sm p-2">
               {post.content}...
               <span className="text-primary text-base"> voir plus</span>
             </p>
