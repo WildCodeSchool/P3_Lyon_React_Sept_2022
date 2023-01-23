@@ -4,6 +4,8 @@ import { useCurrentUserContext } from "../contexts/userContext";
 import enedisLogo from "../assets/logo-enedis.png";
 import "../App.css";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Connexion() {
   const { setUser, setToken } = useCurrentUserContext();
   const [email, setEmail] = useState("");
@@ -31,7 +33,7 @@ function Connexion() {
     if (email && password) {
       console.warn(setUser);
       // on appelle le back
-      fetch("http://localhost:5000/api/login", requestOptions)
+      fetch(`${backEnd}/api/login`, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           setUser(result.user);

@@ -1,9 +1,10 @@
-/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
+// eslint-disable-next-line import/no-unresolved
 import "swiper/css";
+// eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
 function Carrousel() {
@@ -90,7 +91,7 @@ function Carrousel() {
               <button
                 type="button"
                 key={category.id}
-                className="md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
+                className="  md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
               >
                 {category.category_name}
               </button>

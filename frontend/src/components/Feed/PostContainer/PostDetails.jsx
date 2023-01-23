@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function PostDetails({ numberComments, setNumberComments }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
@@ -10,7 +12,7 @@ function PostDetails({ numberComments, setNumberComments }) {
   const { postId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${postId}/comments`)
+    fetch(`${backEnd}/api/posts/${postId}/comments`)
       .then((response) => response.json())
       .then((result) => {
         setComments(result);
@@ -18,7 +20,7 @@ function PostDetails({ numberComments, setNumberComments }) {
   }, [refreshComment]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${postId}`)
+    fetch(`${backEnd}/api/posts/${postId}`)
       .then((response) => response.json())
       .then((result) => {
         setPostDetails(result);
@@ -64,7 +66,7 @@ function PostDetails({ numberComments, setNumberComments }) {
         </p>
         <img
           className="mt-3 md:h-[40%] md:mx-auto"
-          src={`http://localhost:5000/uploads/${postDetails.post_image}`}
+          src={`${backEnd}/uploads/${postDetails.post_image}`}
           alt="Post"
         />
       </div>

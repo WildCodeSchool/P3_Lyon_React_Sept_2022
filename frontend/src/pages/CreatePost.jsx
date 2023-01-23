@@ -9,6 +9,8 @@ import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
 import "react-toastify/dist/ReactToastify.css";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function CreatePost() {
   const { valueSelectedCategory, valueSelectedGroup, handleReset } =
     usePostUserContext();
@@ -63,7 +65,7 @@ function CreatePost() {
 
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
       // je pourrais être renvoyé à la route login
-      fetch(`http://localhost:5000/api/posts`, requestOptions)
+      fetch(`${backEnd}/api/posts`, requestOptions)
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);

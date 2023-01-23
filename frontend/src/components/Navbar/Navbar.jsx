@@ -38,7 +38,7 @@ function Navbar({ toggleDarkMode, darkMode }) {
           }`}
           onClick={toggleDarkMode}
         >
-          {darkMode ? "Light" : "Dark"}
+          {darkMode ? "Light ☀️" : "Dark 🌙"}
         </button>
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">

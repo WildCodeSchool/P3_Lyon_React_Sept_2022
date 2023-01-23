@@ -3,12 +3,14 @@ import Post from "./Post";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function PostContainer() {
   const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
   const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/limit/${base}`, {
+    fetch(`${backEnd}/api/posts/limit/${base}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

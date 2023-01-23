@@ -8,6 +8,8 @@ import menuDots from "../../../assets/menu-dots.png";
 import "react-toastify/dist/ReactToastify.css";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Post({ post }) {
   const { handleReset } = usePostUserContext();
   const [editPostMenu, setEditPostMenu] = useState(false);
@@ -25,7 +27,7 @@ function Post({ post }) {
   const handleDelete = () => {
     if (user.id === post.user_id) {
       axios
-        .delete(`http://localhost:5000/api/posts/${post.id}`)
+        .delete(`${backEnd}/api/posts/${post.id}`)
         .then(() => {
           handleReset();
           toast(" ✅ Poste Supprimé !", {
@@ -131,7 +133,7 @@ function Post({ post }) {
         {post.post_image && (
           <img
             className="w-full mx-auto"
-            src={`http://localhost:5000/uploads/${post.post_image}`}
+            src={`${backEnd}/uploads/${post.post_image}`}
             alt="Post"
           />
         )}
