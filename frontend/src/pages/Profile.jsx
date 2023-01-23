@@ -7,6 +7,8 @@ import ProfileCard from "../components/Navbar/Profile/ProfileCard";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Profile() {
   const [profileUser, setProfileUser] = useState({});
   const [myPosts, setMyPosts] = useState([]);
@@ -16,20 +18,20 @@ function Profile() {
 
   useEffect(() => {
     if (user_id) {
-      fetch(`http://localhost:5000/api/users/${user_id}`)
+      fetch(`${backEnd}/api/users/${user_id}`)
         .then((response) => response.json())
         .then((result) => {
           setProfileUser(result);
         });
     } else {
-      fetch(`http://localhost:5000/api/users/${user.id}`)
+      fetch(`${backEnd}/api/users/${user.id}`)
         .then((response) => response.json())
         .then((result) => {
           setProfileUser(result);
         });
     }
 
-    fetch(`http://localhost:5000/api/myposts/user/${user_id}`)
+    fetch(`${backEnd}/api/myposts/user/${user_id}`)
       .then((response) => response.json())
       .then((result) => {
         setMyPosts(result);

@@ -25,7 +25,7 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <div className={`${darkMode ? "bg-gray-800" : ""}`}>
+    <div className={`${darkMode ? "bg-gray-800" : " bg-[#f6f6fe]"}`}>
       <PostUserContextProvider>
         <CurrentUserContextProvider>
           <Routes>
