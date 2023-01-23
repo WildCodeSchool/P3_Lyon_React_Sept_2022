@@ -6,7 +6,8 @@ import { useCurrentUserContext } from "../../../contexts/userContext";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function PostContainer() {
-  const { posts, setPosts, base, setBase, refresh } = usePostUserContext();
+  const { posts, setPosts, base, setBase, refresh, groupId, categoryId } =
+    usePostUserContext();
   const { token } = useCurrentUserContext();
 
   useEffect(() => {

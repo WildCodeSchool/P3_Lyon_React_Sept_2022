@@ -13,7 +13,6 @@ function classNames(...classes) {
 }
 
 export default function DropDownCategory({ card, toggleRefresh }) {
-  console.warn(card);
   const handleDelete = (id) => {
     axios
       .delete(`${backEnd}/api/users/${id}`)

@@ -74,7 +74,7 @@ function PostDetails({ numberComments, setNumberComments }) {
       <div className="w-full mt-6 flex flex-col pl-2 md:items-start">
         {comments.map((comment) => (
           <div
-            key={`${postDetails.id}${comment.id}`}
+            key={`${postDetails.id + comment.id}`}
             comment={comment}
             className="flex pl-2 items-center pb-2"
           >

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS user_group;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS attached_file;
 DROP TABLE IF EXISTS like_table;
@@ -542,6 +543,10 @@ CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
 
+INSERT INTO
+  comment (content, post_id, user_id)
+VALUES ('YOLOOO', 1, 2);
+
 CREATE TABLE user_group
 (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -552,3 +557,4 @@ CREATE TABLE user_group
   CONSTRAINT fk_user_group_group_detail
     FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
 );
+
