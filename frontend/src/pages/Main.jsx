@@ -6,18 +6,20 @@ import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import Panel from "../components/Feed/PostContainer/Panel";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Main({ toggleDarkMode, darkMode }) {
   const { setGroupList, setCategoryList } = usePostUserContext();
   const [groupId, setGroupId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/groups")
+    fetch(`${backEnd}/api/groups`)
       .then((response) => response.json())
       .then((groups) => {
         setGroupList(groups);
       });
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${backEnd}/api/categories`)
       .then((response) => response.json())
       .then((categories) => {
         setCategoryList(categories);
@@ -33,7 +35,7 @@ function Main({ toggleDarkMode, darkMode }) {
         setCategoryId={setCategoryId}
       />
       <div className="md:grid md:grid-cols-4">
-        <Header />
+        <Header darkMode={darkMode} />
         <Carrousel
           groupId={groupId}
           setGroupId={setGroupId}

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 export default function ModifUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/users/${id}`)
+    fetch(`${backEnd}/api/users/${id}`)
       .then((response) => response.json())
       .then((user) => setUserData(user))
       .catch(console.error);
@@ -47,7 +49,7 @@ export default function ModifUser() {
       userData.phone_number &&
       userData.role
     )
-      fetch(`http://localhost:5000/api/users/${id}`, requestOptions)
+      fetch(`${backEnd}/api/users/${id}`, requestOptions)
         .then((response) => response.text())
         .then(() => {
           navigate("/adminUser");

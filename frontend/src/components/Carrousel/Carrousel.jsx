@@ -3,7 +3,9 @@ import React from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
+// eslint-disable-next-line import/no-unresolved
 import "swiper/css";
+// eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
 function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
@@ -17,7 +19,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
     setCategoryId(value);
   };
   return (
-    <div className="carrousel-container pt-8 md:h-1/6 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
+    <div className="carrousel-container pt-8 md:h-1/5 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
         {groupId
           ? groupList
@@ -100,7 +102,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               <button
                 type="button"
                 key={category.id}
-                className="md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
+                className="  md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
               >
                 {category.category_name}
               </button>
