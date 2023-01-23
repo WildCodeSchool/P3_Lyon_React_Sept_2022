@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { usePostUserContext } from "../../../contexts/PostUserContext";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-function PostContainer() {
-  const { posts, setPosts, base, setBase, refresh, groupId, categoryId } =
-    usePostUserContext();
+function PostContainer({ groupId, categoryId }) {
+  const [posts, setPosts] = useState([]);
+  const [base, setBase] = useState(0);
   const { token } = useCurrentUserContext();
+
+  useEffect(() => {
+    setPosts([]);
+    if (base > 0) {
+      setBase(0);
+    }
+  }, [groupId, categoryId]);
 
   useEffect(() => {
     if (groupId === 0 && categoryId === 0) {
@@ -48,7 +54,7 @@ function PostContainer() {
           setPosts((prev) => [...prev, ...result]);
         });
     }
-  }, [base, refresh]);
+  }, [base, groupId, categoryId]);
 
   const handleScroll = () => {
     if (

@@ -2,11 +2,11 @@ import React from "react";
 import CreatePostContainer from "./CreatePostContainer/CreatePostContainer";
 import PostContainer from "./PostContainer/PostContainer";
 
-function Feed() {
+function Feed({ groupId, categoryId }) {
   return (
     <div>
       <CreatePostContainer />
-      <PostContainer />
+      <PostContainer groupId={groupId} categoryId={categoryId} />
     </div>
   );
 }
