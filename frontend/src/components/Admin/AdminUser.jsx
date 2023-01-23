@@ -4,6 +4,8 @@ import pictoGroup from "../../assets/pictoGroup.png";
 import AddUser from "./AddUser";
 import UserCard from "./UserCard";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 export default function AdminUser() {
   const [addUser, setAddUser] = useState(false);
   const [userCard, setUserCard] = useState([]);
@@ -22,7 +24,7 @@ export default function AdminUser() {
 
   useEffect(() => {
     if (!addUser) {
-      fetch("http://localhost:5000/api/users")
+      fetch(`${backEnd}/api/users`)
         .then((response) => response.json())
         .then((result) => {
           setUserCard(result);

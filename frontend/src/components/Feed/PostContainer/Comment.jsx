@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Comment({ postId }) {
   const { user } = useCurrentUserContext();
   const { refreshComment, setRefreshComment } = usePostUserContext();
@@ -38,10 +40,7 @@ function Comment({ postId }) {
       createComment.post_id
     ) {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
-      fetch(
-        `http://localhost:5000/api/posts/${postId}/comments`,
-        requestOptions
-      )
+      fetch(`${backEnd}/api/posts/${postId}/comments`, requestOptions)
         .then((response) => response.text())
         .then(() => {
           setRefreshComment(!refreshComment);

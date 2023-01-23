@@ -6,6 +6,8 @@ import modifDot from "../../assets/modifDot.png";
 import edit from "../../assets/edit.png";
 import deleteBtn from "../../assets/deleteBtn.png";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -13,7 +15,7 @@ function classNames(...classes) {
 export default function DropDownCategory({ card, toggleRefresh }) {
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/api/users/${id}`)
+      .delete(`${backEnd}/api/users/${id}`)
       .then((response) => {
         console.warn(response.data);
         toggleRefresh();

@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import croix from "../../assets/croix.png";
+import "react-toastify/dist/ReactToastify.css";
+
+const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 export default function AddUser({ openAndCloseUserModal }) {
   const [credentials, setCredentials] = useState({
@@ -54,16 +58,28 @@ export default function AddUser({ openAndCloseUserModal }) {
       credentials.password &&
       credentials.role
     ) {
-      fetch("http://localhost:5000/api/register", requestOptions)
+      fetch(`${backEnd}/api/register`, requestOptions)
         .then((response) => response.text())
         .then(() => {
-          // eslint-disable-next-line no-alert
-          alert("User created");
+          toast(" ✅ User created !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            theme: "light",
+          });
         })
         .catch(console.error);
     } else {
-      // eslint-disable-next-line no-alert
-      alert("Please specify email and password");
+      toast(" ❌ Please specify email and password  !", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "light",
+      });
     }
   };
 
