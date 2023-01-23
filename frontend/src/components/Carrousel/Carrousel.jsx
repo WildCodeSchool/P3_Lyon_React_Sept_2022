@@ -1,42 +1,20 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect } from "react";
+import React from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
 import "swiper/css";
 import "swiper/css/pagination";
 
-function Carrousel() {
-  const {
-    groupList,
-    categoryList,
-    groupId,
-    setGroupId,
-    categoryId,
-    setCategoryId,
-    setPosts,
-    setBase,
-    refresh,
-    setRefresh,
-  } = usePostUserContext();
-
-  useEffect(() => {
-    setGroupId(0);
-    setCategoryId(0);
-  }, []);
+function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
+  const { groupList, categoryList } = usePostUserContext();
 
   const handleGroup = (value) => {
     setGroupId(value);
-    setPosts([]);
-    setBase(0);
-    setRefresh(!refresh);
   };
 
   const handleCategory = (value) => {
     setCategoryId(value);
-    setPosts([]);
-    setBase(0);
-    setRefresh(!refresh);
   };
   return (
     <div className="carrousel-container pt-8 md:h-1/6 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
