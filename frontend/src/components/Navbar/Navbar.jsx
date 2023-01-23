@@ -50,14 +50,6 @@ function Navbar({ toggleDarkMode, darkMode }) {
         </button>
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">
-            <button
-              type="button"
-              className="border-solid border-2 border-sky-500"
-              onClick={() => console.warn(user)}
-            >
-              {" "}
-              Console moi
-            </button>
             <Link to="/profile">
               <img
                 src={user.avatar}

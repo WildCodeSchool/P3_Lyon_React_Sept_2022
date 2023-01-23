@@ -1,10 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect } from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
-// eslint-disable-next-line import/no-unresolved
 import "swiper/css";
-// eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
 function Carrousel() {
@@ -86,7 +85,7 @@ function Carrousel() {
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                  className="md:hidden group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
                   onClick={() => handleCategory(category.id)}
                   style={{ backgroundImage: `url(${category.image})` }}
                 >

@@ -50,46 +50,6 @@ function Post({ post }) {
   return (
     <div>
       <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
-        {(post.user_id === user.id || user.is_admin) && (
-          <div className="flex justify-end pt-2">
-            <button onClick={() => handleEditPost()} type="button">
-              <img className="h-6 mr-4" src={menuDots} alt="Menu" />
-            </button>
-          </div>
-        )}
-        {editPostMenu && (
-          <div className="origin-top-right absolute right-2 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            {post.user_id === user.id && (
-              <button
-                onClick={() => handleEditPostModal()}
-                className="text-black p-4 flex"
-                type="button"
-              >
-                <img
-                  className="h-5 w-5"
-                  src="./src/assets/edit.png"
-                  alt="Edit"
-                />
-                <span className="pl-3">Modifier</span>
-              </button>
-            )}
-            <button
-              onClick={() => handleEditPostModal()}
-              className="text-black p-4 flex"
-              type="button"
-            >
-              <img className="h-5 w-5" src={rubish} alt="Edit" />
-              <span className="pl-3">Supprimer</span>
-            </button>
-            {editPostModal && (
-              <EditPost
-                editPostModal={editPostModal}
-                setEditPostModal={setEditPostModal}
-                handleEditPostModal={handleEditPostModal}
-              />
-            )}
-          </div>
-        )}
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
@@ -114,18 +74,21 @@ function Post({ post }) {
                 </h3>
                 <h3 className="text-gray-400 font-light">1h</h3>
               </div>
-              <div className="pt-2 md:ml-36 md:mt-[-30px]">
-                <button onClick={() => handleEditPost()} type="button">
-                  <img
-                    className="h-8 ml-7 -mt-14 md:mt-0 md:ml-20"
-                    src={menuDots}
-                    alt="Menu"
-                  />
-                </button>
-              </div>
+              {(post.user_id === user.id || user.is_admin) && (
+                <div className="pt-2 md:ml-36 md:mt-[-30px]">
+                  <button onClick={() => handleEditPost()} type="button">
+                    <img
+                      className="h-8 ml-7 -mt-14 md:mt-0 md:ml-20"
+                      src={menuDots}
+                      alt="Menu"
+                    />
+                  </button>
+                </div>
+              )}
               {editPostMenu && (
                 <div className=" mt-2 w-40 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
-                  <div className=" px-4 pb-2 h-20 ">
+                  {/* <div className=" px-4 pb-2 h-20 "> */}
+                  {post.user_id === user.id && (
                     <button
                       onClick={() => handleEditPostModal()}
                       className="text-black p-2 flex"
@@ -138,19 +101,16 @@ function Post({ post }) {
                       />
                       <span className="pl-3">Modifier</span>
                     </button>
-                    <button
-                      onClick={() => handleDelete()}
-                      className="text-black p-2 flex"
-                      type="button"
-                    >
-                      <img
-                        className="h-5 w-5"
-                        src="./src/assets/edit.png"
-                        alt="Edit"
-                      />
-                      <span className="pl-3">supprimer</span>
-                    </button>
-                  </div>
+                  )}
+                  <button
+                    onClick={() => handleDelete()}
+                    className="text-black p-2 flex"
+                    type="button"
+                  >
+                    <img className="h-5 w-5" src={rubish} alt="Edit" />
+                    <span className="pl-3">Supprimer</span>
+                  </button>
+                  {/* </div> */}
                   {editPostModal && (
                     <EditPost
                       editPostModal={editPostModal}
