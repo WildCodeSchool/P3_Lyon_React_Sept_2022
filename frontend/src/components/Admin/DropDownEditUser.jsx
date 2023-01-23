@@ -11,7 +11,6 @@ function classNames(...classes) {
 }
 
 export default function DropDownCategory({ card, toggleRefresh }) {
-  console.warn(card);
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/api/users/${id}`)

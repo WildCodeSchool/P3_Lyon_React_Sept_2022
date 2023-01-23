@@ -6,7 +6,7 @@ import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import Panel from "../components/Feed/PostContainer/Panel";
 
-function Main() {
+function Main({ toggleDarkMode, darkMode }) {
   const { setGroupList, setCategoryList } = usePostUserContext();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Main() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
       <div className="md:grid md:grid-cols-4">
         <Header />
         <Carrousel />

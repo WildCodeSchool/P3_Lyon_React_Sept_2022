@@ -5,7 +5,9 @@ const PostUserContext = createContext();
 export default PostUserContext;
 
 export function PostUserContextProvider({ children }) {
-  const [isGroup, setIsGroup] = useState(false);
+  const [groupId, setGroupId] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
+  const [showCreatePost, setShowCreatePost] = useState(false);
   const [valueSelectedCategory, setValueSelectedCategory] = useState("");
   const [valueSelectedGroup, setValueSelectedGroup] = useState("");
   const [refresh, setRefresh] = useState(false);
@@ -22,7 +24,8 @@ export function PostUserContextProvider({ children }) {
     setRefresh(!refresh);
     setValueSelectedGroup("");
     setValueSelectedCategory("");
-    setIsGroup(false);
+    setGroupId(0);
+    setCategoryId(0);
   }
 
   return (
@@ -31,12 +34,16 @@ export function PostUserContextProvider({ children }) {
       value={{
         posts,
         setPosts,
-        isGroup,
-        setIsGroup,
+        groupId,
+        setGroupId,
         groupList,
         setGroupList,
         categoryList,
+        categoryId,
+        setCategoryId,
         setCategoryList,
+        showCreatePost,
+        setShowCreatePost,
         valueSelectedCategory,
         setValueSelectedCategory,
         setValueSelectedGroup,

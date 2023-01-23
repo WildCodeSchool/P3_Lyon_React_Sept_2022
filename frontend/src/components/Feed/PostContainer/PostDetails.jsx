@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 
-function PostDetails() {
+function PostDetails({ numberComments, setNumberComments }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
   const [postDetails, setPostDetails] = useState({});
@@ -72,7 +72,7 @@ function PostDetails() {
       <div className="w-full mt-6 flex flex-col pl-2 md:items-start">
         {comments.map((comment) => (
           <div
-            key={`${postDetails.id}${comment.id}`}
+            key={`${postDetails.id + comment.id}`}
             comment={comment}
             className="flex pl-2 items-center pb-2"
           >
@@ -87,7 +87,11 @@ function PostDetails() {
           </div>
         ))}
 
-        <Comment postId={postId} />
+        <Comment
+          postId={postId}
+          numberComments={numberComments}
+          setNumberComments={setNumberComments}
+        />
       </div>
     </div>
   );

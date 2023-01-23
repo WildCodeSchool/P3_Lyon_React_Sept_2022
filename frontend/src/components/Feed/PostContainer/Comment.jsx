@@ -45,12 +45,14 @@ function Comment({ postId }) {
         .then((response) => response.text())
         .then(() => {
           setRefreshComment(!refreshComment);
+          // setNumberComments(numberComments + 1);
           const form = document.getElementsByName("form")[0];
           form.reset();
         })
         .catch(console.error());
     }
   };
+
   return (
     <div className="w-full mt-6 flex items-center pl-2 pb-4 md:items-start">
       <img
