@@ -20,7 +20,7 @@ function Post({ post }) {
   // three dots button and modifying stuff
 
   const formatDate = (date) => {
-    return date.slice(0, 10);
+    return date.slice(0, 10).split("-").reverse().join("-");
   };
 
   const handleEditPost = () => {
