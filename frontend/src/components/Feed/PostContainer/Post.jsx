@@ -19,6 +19,10 @@ function Post({ post }) {
   const { user } = useCurrentUserContext();
   // three dots button and modifying stuff
 
+  const formatDate = (date) => {
+    return date.slice(0, 10);
+  };
+
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
   };
@@ -74,13 +78,15 @@ function Post({ post }) {
                 <h3 className="font-light text-primary">
                   {post.category_name}
                 </h3>
-                <h3 className="text-gray-400 font-light">1h</h3>
+                <h3 className="text-gray-400 font-light">
+                  {formatDate(post.post_date)}
+                </h3>
               </div>
               {(post.user_id === user.id || user.is_admin) && (
-                <div className="pt-2 md:ml-36 md:mt-[-30px]">
+                <div className="md:ml-36 md:mt-[-30px]">
                   <button onClick={() => handleEditPost()} type="button">
                     <img
-                      className="h-8 ml-7 -mt-14 md:mt-0 md:ml-20"
+                      className="h-5 ml-12 md:mt-0 md:ml-20"
                       src={menuDots}
                       alt="Menu"
                     />
@@ -125,10 +131,7 @@ function Post({ post }) {
             </div>
           </div>
         </div>
-        <h2 className="text-black self-start text-left pl-3 pt-3 text-xl">
-          {post.title}
-        </h2>
-        <br />
+
         {post.post_image && (
           <img
             className="w-full mx-auto"
@@ -136,16 +139,17 @@ function Post({ post }) {
             alt="Post"
           />
         )}
-        <div>
-          <p>{numberComments} commentaires</p>
-        </div>
+
         <Link
           to={`/feed/${post.id}`}
           setNumberComments={setNumberComments}
           numberComments={numberComments}
         >
-          <div className="flex flex-col justify-center w-[390px] md:w-[640px]">
-            <p className="text-sm p-2">
+          <div className="flex flex-col justify-center p-5 w-[390px] md:w-[640px]">
+            <h2 className="text-black self-start text-left pb-3 text-xl">
+              {post.title}
+            </h2>
+            <p className="text-md">
               {post.content.length < 151
                 ? post.content
                 : post.content.slice(0, 150)}
@@ -155,7 +159,11 @@ function Post({ post }) {
             </p>
           </div>
 
-          <div className="w-full mt-6 ml-4 flex items-center pb-6">
+          <p className="pl-5 text-sm text-gray-500">
+            {numberComments} commentaires
+          </p>
+
+          <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img
               className="rounded-full w-10 h-10 border-4 border-violet"
               src={user.avatar}
