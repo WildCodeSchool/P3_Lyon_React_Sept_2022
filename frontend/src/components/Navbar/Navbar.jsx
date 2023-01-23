@@ -14,21 +14,29 @@ function Navbar({ toggleDarkMode, darkMode }) {
   const onClick = () => {
     localStorage.clear();
     setUser({});
+    handleReset();
     navigate("/");
+  };
+
+  const toFeedOrAdmin = () => {
+    handleReset();
+    if (!user.is_admin) {
+      navigate("/feed");
+    } else {
+      navigate("/admin");
+    }
   };
 
   return (
     <div>
       <div className="w-full pb-6 flex items-center justify-between md:shadow-md">
-        <Link to={user.is_admin ? "/admin" : "/feed"}>
-          <button type="button" onClick={handleReset}>
-            <img
-              className="w-32 h-16 md:w-48 md:h-20 md:mb-[-26px]"
-              src={logoEnedis}
-              alt="Logo"
-            />
-          </button>
-        </Link>
+        <button type="button" onClick={toFeedOrAdmin}>
+          <img
+            className="w-32 h-16 md:w-48 md:h-20 md:mb-[-26px]"
+            src={logoEnedis}
+            alt="Logo"
+          />
+        </button>
         <button
           type="button"
           className={`${
@@ -42,6 +50,14 @@ function Navbar({ toggleDarkMode, darkMode }) {
         </button>
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">
+            <button
+              type="button"
+              className="border-solid border-2 border-sky-500"
+              onClick={() => console.warn(user)}
+            >
+              {" "}
+              Console moi
+            </button>
             <Link to="/profile">
               <img
                 src={user.avatar}

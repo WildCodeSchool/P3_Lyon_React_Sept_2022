@@ -26,6 +26,34 @@ const browseMyPosts = (req, res) => {
     });
 };
 
+const browseByGroup = (req, res) => {
+  const base = parseInt(req.params.base, 10);
+  const group = parseInt(req.params.group, 10);
+  models.post
+    .findPostsByGroup(group, base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseByCategory = (req, res) => {
+  const base = parseInt(req.params.base, 10);
+  const category = parseInt(req.params.category, 10);
+  models.post
+    .findPostsByCategory(category, base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   const { id } = req.params;
 
@@ -88,6 +116,8 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   browseMyPosts,
+  browseByGroup,
+  browseByCategory,
   read,
   add,
   edit,
