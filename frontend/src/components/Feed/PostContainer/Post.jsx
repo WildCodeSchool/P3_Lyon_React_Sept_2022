@@ -133,7 +133,7 @@ function Post({ post }) {
           </div>
         </div>
         <Link to={`/feed/${post.id}`}>
-          <div className="pl-6 w-[390px] md:w-[640px]">
+          <div className="px-6 w-[390px] md:w-[640px]">
             <h2 className="text-black text-left pb-1 text-xl">{post.title}</h2>
             <p className="text-md py-2">
               {post.content.length < 151

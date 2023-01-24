@@ -30,7 +30,7 @@ function PostDetails({ numberComments, setNumberComments }) {
 
   return (
     <div className="bg-white h-screen w-screen">
-      <div className="">
+      <div>
         <Link to="/feed">
           <img
             className="mt-2 md:mt-6 md:ml-4"
@@ -59,10 +59,10 @@ function PostDetails({ numberComments, setNumberComments }) {
         </div>
       </div>
       <div className="w-11/12 m-auto flex flex-col items-start text-sm">
-        <h2 className="text-2xl px-5 md:ml-6 md:text-center">
+        <h2 className="text-2xl px-2 md:ml-6 md:text-center">
           {postDetails.title}
         </h2>
-        <p className="text-md py-2 px-5 pb-4 md:ml-6 md:text-center">
+        <p className="text-md py-2 px-2 pb-4 md:ml-6 md:text-center">
           {postDetails.content}
         </p>
 
