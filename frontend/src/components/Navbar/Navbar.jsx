@@ -1,30 +1,26 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoEnedis from "../../assets/logo-enedis.png";
 import logOut from "../../assets/logout.png";
 import { useCurrentUserContext } from "../../contexts/userContext";
-import { usePostUserContext } from "../../contexts/PostUserContext";
 
-function Navbar({ toggleDarkMode, darkMode }) {
+function Navbar({ toggleDarkMode, darkMode, setGroupId, setCategoryId }) {
   const { user, setUser } = useCurrentUserContext();
-  const { handleReset } = usePostUserContext();
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   const onClick = () => {
     localStorage.clear();
     setUser({});
-    handleReset();
     navigate("/");
   };
 
   const toFeedOrAdmin = () => {
-    handleReset();
-    if (!user.is_admin) {
-      navigate("/feed");
-    } else {
-      navigate("/admin");
-    }
+    if (location.pathname === "/feed" || location.pathname === "/admin") {
+      setGroupId(0);
+      setCategoryId(0);
+    } else if (user.is_admin) navigate("/admin");
+    else navigate("/feed");
   };
 
   return (
