@@ -12,6 +12,7 @@ export default function AdminUser() {
   const [userCard, setUserCard] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [deleteButton, setDeleteButton] = useState(0);
 
   const openAndCloseUserModal = () => {
     setAddUser(!addUser);
@@ -34,7 +35,17 @@ export default function AdminUser() {
   }, [addUser, refresh]);
 
   const handleGroupSelect = (groupId) => {
+    setDeleteButton(groupId);
     fetch(`http://localhost:5000/api/user_group/group/${groupId}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setUserCard(result);
+      })
+      .catch((error) => console.warn(error));
+  };
+
+  const handleDeleteUserGroup = (groupId, userId) => {
+    fetch(`http://localhost:5000/api/user_group/${groupId}/${userId}`)
       .then((response) => response.json())
       .then((result) => {
         setUserCard(result);
@@ -104,7 +115,13 @@ export default function AdminUser() {
                 .includes(searchInput.toLocaleLowerCase())
           )
           .map((card) => (
-            <UserCard key={card.id} card={card} toggleRefresh={toggleRefresh} />
+            <UserCard
+              key={card.id}
+              card={card}
+              toggleRefresh={toggleRefresh}
+              deleteUserGroup={handleDeleteUserGroup}
+              deleteButton={deleteButton}
+            />
           ))}
       </div>
     </div>

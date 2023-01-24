@@ -12,7 +12,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DropDownCategory({ card, toggleRefresh }) {
+export default function DropDownEditUser({
+  card,
+  toggleRefresh,
+  deleteUserGroup,
+  deleteButton,
+}) {
   const handleDelete = (id) => {
     axios
       .delete(`${backEnd}/api/users/${id}`)
@@ -79,6 +84,32 @@ export default function DropDownCategory({ card, toggleRefresh }) {
                 </div>
               )}
             </Menu.Item>
+            {deleteButton > 0 && (
+              <Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    <div className="flex">
+                      <img
+                        className="h-3 w-3 mr-2 mt-1"
+                        src={deleteBtn}
+                        alt=""
+                      />{" "}
+                      <button
+                        type="button"
+                        onClick={() => deleteUserGroup(deleteButton, card.id)}
+                      >
+                        Supprimer un utilisateur du groupe
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Menu.Item>
+            )}
           </div>
         </Menu.Items>
       </Transition>
