@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
 import AddUser from "./AddUser";
+import DropDownGroup from "./DropDownGroup";
 import UserCard from "./UserCard";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
@@ -32,6 +33,15 @@ export default function AdminUser() {
     }
   }, [addUser, refresh]);
 
+  const handleGroupSelect = (groupId) => {
+    fetch(`http://localhost:5000/api/user_group/group/${groupId}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setUserCard(result);
+      })
+      .catch((error) => console.warn(error));
+  };
+
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
       <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
@@ -49,7 +59,7 @@ export default function AdminUser() {
             type="button"
             className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
           >
-            Utilisatieurs
+            Utilisateurs
           </button>
         </Link>
         <button
@@ -71,6 +81,7 @@ export default function AdminUser() {
         <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
       </button>
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
+      <DropDownGroup onGroupSelect={handleGroupSelect} />
       <div className=" flex justify-around mt-6 ">
         <input
           className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
@@ -80,6 +91,7 @@ export default function AdminUser() {
           value={searchInput}
         />
       </div>
+
       <div className="bg-[#F6F6F6]">
         {userCard
           .filter(
