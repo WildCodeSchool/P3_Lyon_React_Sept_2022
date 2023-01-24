@@ -4,12 +4,15 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar/Navbar";
 import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
-import Panel from "../components/Feed/PostContainer/Panel";
+import { useCurrentUserContext } from "../contexts/userContext";
+// import Panel from "../components/Feed/PostContainer/Panel";
+import HeaderAdmin from "../components/Admin/HeaderAdmin";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Main({ toggleDarkMode, darkMode }) {
   const { setGroupList, setCategoryList } = usePostUserContext();
+  const { user } = useCurrentUserContext();
   const [groupId, setGroupId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
 
@@ -35,15 +38,27 @@ function Main({ toggleDarkMode, darkMode }) {
         setCategoryId={setCategoryId}
       />
       <div className="md:grid md:grid-cols-4">
-        <Header darkMode={darkMode} />
-        <Carrousel
-          groupId={groupId}
-          setGroupId={setGroupId}
-          categoryId={categoryId}
-          setCategoryId={setCategoryId}
-        />
+        {user.is_admin ? (
+          <HeaderAdmin
+            groupId={groupId}
+            setGroupId={setGroupId}
+            categoryId={categoryId}
+            setCategoryId={setCategoryId}
+          />
+        ) : (
+          <>
+            <Header darkMode={darkMode} />
+            <Carrousel
+              groupId={groupId}
+              setGroupId={setGroupId}
+              categoryId={categoryId}
+              setCategoryId={setCategoryId}
+            />
+          </>
+        )}
+
         <Feed groupId={groupId} categoryId={categoryId} />
-        <Panel />
+        {/* <Panel /> */}
       </div>
     </div>
   );

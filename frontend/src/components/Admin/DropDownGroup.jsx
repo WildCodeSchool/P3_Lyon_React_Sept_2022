@@ -2,12 +2,14 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
+import { usePostUserContext } from "../../contexts/PostUserContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup() {
+function DropDownGroup({ setGroupId }) {
+  const { groupList } = usePostUserContext();
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -31,7 +33,31 @@ function DropDownGroup() {
       >
         <Menu.Items className="absolute left-0 z-10 mt-0 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
+            {groupList.map((group) => (
+              <Menu.Item key={group.id}>
+                {({ active }) => (
+                  <div
+                    role="button"
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                    onClick={() => setGroupId(group.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "ArrowDown") {
+                        // ...
+                      } else if (e.key === "ArrowUp") {
+                        // ...
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {group.group_name}
+                  </div>
+                )}
+              </Menu.Item>
+            ))}
+            {/* <Menu.Item>
               {({ active }) => (
                 <a
                   href="/"
@@ -84,7 +110,7 @@ function DropDownGroup() {
                   </button>
                 )}
               </Menu.Item>
-            </form>
+            </form> */}
           </div>
         </Menu.Items>
       </Transition>

@@ -2,12 +2,14 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
+import { usePostUserContext } from "../../contexts/PostUserContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownCategory() {
+function DropDownCategory({ groupId, setCategoryId }) {
+  const { categoryList } = usePostUserContext();
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -31,7 +33,33 @@ function DropDownCategory() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-0 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
+            {categoryList
+              .filter((category) => category.group_id === groupId)
+              .map((category) => (
+                <Menu.Item key={category.id}>
+                  {({ active }) => (
+                    <div
+                      role="button"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                      onClick={() => setCategoryId(category.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "ArrowDown") {
+                          // ...
+                        } else if (e.key === "ArrowUp") {
+                          // ...
+                        }
+                      }}
+                      tabIndex={0}
+                    >
+                      {category.category_name}
+                    </div>
+                  )}
+                </Menu.Item>
+              ))}
+            {/* <Menu.Item>
               {({ active }) => (
                 <a
                   href="/"
@@ -84,7 +112,7 @@ function DropDownCategory() {
                   </button>
                 )}
               </Menu.Item>
-            </form>
+            </form> */}
           </div>
         </Menu.Items>
       </Transition>

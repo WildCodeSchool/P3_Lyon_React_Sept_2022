@@ -8,7 +8,6 @@ import Main from "./pages/Main";
 import Profile from "./pages/Profile";
 import { PostUserContextProvider } from "./contexts/PostUserContext";
 import { CurrentUserContextProvider } from "./contexts/userContext";
-import Admin from "./pages/Admin";
 import PostList from "./pages/PostList";
 import ModifUser from "./components/Admin/ModifUser";
 import PostDetails from "./components/Feed/PostContainer/PostDetails";
@@ -44,7 +43,12 @@ function App() {
             <Route path="/feed/:postId" element={<PostDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/:user_id" element={<Profile />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route
+              path="/admin"
+              element={
+                <Main toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+              }
+            />
             <Route path="/adminUser" element={<PostList />} />
             <Route path="/adminUser/:id" element={<ModifUser />} />
           </Routes>
