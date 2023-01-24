@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
 import menuDots from "../../../assets/modifDot.png";
 import rubish from "../../../assets/deleteBtn.png";
+import pdf from "../../../assets/pdf.png";
 // import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
@@ -131,25 +132,10 @@ function Post({ post }) {
             </div>
           </div>
         </div>
-
-        {post.post_image && (
-          <img
-            className="w-full mx-auto"
-            src={`${backEnd}/uploads/${post.post_image}`}
-            alt="Post"
-          />
-        )}
-
-        <Link
-          to={`/feed/${post.id}`}
-          setNumberComments={setNumberComments}
-          numberComments={numberComments}
-        >
-          <div className="flex flex-col justify-center p-5 w-[390px] md:w-[640px]">
-            <h2 className="text-black self-start text-left pb-3 text-xl">
-              {post.title}
-            </h2>
-            <p className="text-md">
+        <Link to={`/feed/${post.id}`}>
+          <div className="pl-6 w-[390px] md:w-[640px]">
+            <h2 className="text-black text-left pb-1 text-xl">{post.title}</h2>
+            <p className="text-md py-2">
               {post.content.length < 151
                 ? post.content
                 : post.content.slice(0, 150)}
@@ -158,8 +144,35 @@ function Post({ post }) {
               )}
             </p>
           </div>
+        </Link>
 
-          <p className="pl-5 text-sm text-gray-500">
+        {post.post_image &&
+          (post.post_image.slice(-4) === ".pdf" ? (
+            <div className="flex flex-row w-6/12 pl-3 py-6 ml-3 shadow-md rounded-xl">
+              <img className="w-5 h-5 mr-2" src={pdf} alt="pdf" />
+              <a
+                href={`${backEnd}/uploads/${post.post_image}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary text-md"
+              >
+                Visualiser le PDF
+              </a>
+            </div>
+          ) : (
+            <img
+              className="w-full mx-auto"
+              src={`${backEnd}/uploads/${post.post_image}`}
+              alt="Post"
+            />
+          ))}
+
+        <Link
+          to={`/feed/${post.id}`}
+          setNumberComments={setNumberComments}
+          numberComments={numberComments}
+        >
+          <p className="pl-6 mt-4 text-sm text-gray-500">
             {numberComments} commentaires
           </p>
 
