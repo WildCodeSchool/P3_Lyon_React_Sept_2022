@@ -60,10 +60,10 @@ class UserGroupManager extends AbstractManager {
 
   // Je supprime un groupe auquel un utilisateur appartient
 
-  deleteByGroupId(groupId) {
+  deleteByGroupId(groupId, userId) {
     return this.connection.any(
-      `DELETE FROM ${this.table} WHERE group_id = $1`,
-      [groupId]
+      `DELETE FROM ${this.table} WHERE group_id = $1 AND user_id = $2`,
+      [groupId, userId]
     );
   }
 }

@@ -108,7 +108,7 @@ router.delete(
 );
 // je supprime un utilisateur d'un groupe en fonction de l'id du groupe
 router.delete(
-  "/api/user_group/group/:groupId",
+  "/api/user_group/group/:groupId/:userId",
   userGroupControllers.deleteByGroupId
 );
 
