@@ -41,10 +41,19 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (
+    if (valueSelectedCategory === "") {
+      toast(" Veuillez renseigner le groupe de la publication", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "light",
+      });
+    } else if (
       dataPost.title &&
       dataPost.content &&
       dataPost.user_id &&
