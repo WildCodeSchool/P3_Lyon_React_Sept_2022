@@ -38,7 +38,7 @@ VALUES
     '0628164512',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/FHz3NQx.jpg'
+    'https://i.imgur.com/vJKyNZ2.jpg'
   ),
   (
     'Matthieu',
@@ -538,7 +538,7 @@ content text not null,
 post_id int not null,
 user_id int not null,
 CONSTRAINT fk_comment_post
-FOREIGN KEY(post_id) REFERENCES post(id),
+FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
