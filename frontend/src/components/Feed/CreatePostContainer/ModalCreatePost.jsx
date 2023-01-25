@@ -58,8 +58,8 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         .filter((category) => category.group_id === group.id)
                         .map((category) => (
                           <button type="button" key={category.id}>
-                            <li
-                              role="button"
+                            <button
+                              type="button"
                               arial-hidden
                               value={category.id}
                               name={category.name}
@@ -67,7 +67,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                               onClick={() => handleValue(category)}
                             >
                               {category.category_name}
-                            </li>
+                            </button>
                           </button>
                         ))}
                     </ul>
