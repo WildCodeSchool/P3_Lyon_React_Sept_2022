@@ -68,8 +68,9 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   {categoryList
                     .filter((category) => category.group_id === group.id)
                     .map((category) => (
-                      <button
-                        type="button"
+                      <li
+                        role="menuitem"
+                        aria-hidden
                         key={category.id}
                         value={category.id}
                         name={category.name}
@@ -79,7 +80,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         <span className="hover:bg-violet hover:text-primary active:bg-violet active:text-primary">
                           {category.category_name}
                         </span>
-                      </button>
+                      </li>
                     ))}
                 </button>
               ))}
