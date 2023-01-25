@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup({ onGroupSelect }) {
+function DropDownGroup({ setGroupId }) {
   const [groupList, setGroupList] = useState([]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function DropDownGroup({ onGroupSelect }) {
                       <div
                         key={group.id}
                         className="block py-2 px-4 text-sm"
-                        onClick={() => onGroupSelect(group.id)}
+                        onClick={() => setGroupId(group.id)}
                         role="button"
                         onKeyDown={(e) => {
                           if (e.key === "ArrowDown") {

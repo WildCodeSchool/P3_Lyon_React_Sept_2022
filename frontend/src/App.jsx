@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AddUserGroup from "./components/Admin/AddUserGroup";
 import CreatePost from "./pages/CreatePost";
 import "./App.css";
 import Connexion from "./pages/Connexion";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/adminUser" element={<PostList />} />
             <Route path="/adminUser/:id" element={<ModifUser />} />
+            <Route path="/admin/add-user-group" element={<AddUserGroup />} />
           </Routes>
           <ToastContainer />
         </CurrentUserContextProvider>

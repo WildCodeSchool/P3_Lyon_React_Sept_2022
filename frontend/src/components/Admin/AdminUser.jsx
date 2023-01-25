@@ -71,6 +71,15 @@ export default function AdminUser() {
       });
   };
 
+  const handleSearchUserGroup = () => {
+    fetch(`http://localhost:5000/api/users`)
+      .then((response) => response.json())
+      .then((result) => {
+        setUserCard(result);
+      })
+      .catch((error) => console.warn(error));
+  };
+
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
       <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
@@ -109,17 +118,30 @@ export default function AdminUser() {
         Ajouter un utilisateur
         <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
       </button>
+
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
-      <DropDownGroup onGroupSelect={handleGroupSelect} />
-      <div className=" flex justify-around mt-6 ">
-        <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
-          type="text"
-          placeholder="Rechercher..."
-          onChange={handleSearch}
-          value={searchInput}
-        />
-      </div>
+
+      <DropDownGroup setGroupId={handleGroupSelect} />
+
+      {deleteButton > 0 && (
+        <Link
+          to="/admin/add-user-group"
+          handleSearch={handleSearchUserGroup}
+          searchInput={searchInput}
+        >
+          <button type="button">
+            <img className="w-5 h-4 mt-0 mr-3" alt="" src={pictoGroup} />
+          </button>
+        </Link>
+      )}
+
+      <input
+        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+        type="text"
+        placeholder="Rechercher..."
+        onChange={handleSearch}
+        value={searchInput}
+      />
 
       <div className="bg-[#F6F6F6]">
         {userCard
