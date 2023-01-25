@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import DropDownGroup from "./DropDownGroup";
-import DropDownCategory from "./DropDownCategory";
 
 function HeaderAdmin() {
   return (
@@ -9,34 +7,30 @@ function HeaderAdmin() {
         Espace admin
       </h2>
       <div className="flex justify-around mt-8">
-        <button
-          type="button"
-          className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mb-6 mt-6 border-primary rounded-2xl "
-        >
-          Publications
-        </button>
+        <Link to="/feed">
+          <button
+            type="button"
+            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mb-6 mt-6 border-primary rounded-2xl "
+          >
+            Publications
+          </button>
+        </Link>
         <Link to="/adminUser">
           <button
             type="button"
             className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
           >
-            Utilisatieurs
+            Utilisateurs
           </button>
         </Link>
-        <button
-          type="button"
-          className="text-white font-[Enedis] bg-primary w-34 text-l w-[26vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
-        >
-          Espaces
-        </button>
-      </div>
-      <div className="font-[Enedis] text-primary text-center text-2xl mb-6">
-        <h3>Gérer la liste des publications</h3>
-      </div>
-
-      <div className=" flex justify-around mt-6 ">
-        <DropDownGroup />
-        <DropDownCategory />
+        <Link to="/adminEspace">
+          <button
+            type="button"
+            className="text-white font-[Enedis] bg-primary w-34 text-l w-[26vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
+          >
+            Espaces
+          </button>
+        </Link>
       </div>
     </div>
   );

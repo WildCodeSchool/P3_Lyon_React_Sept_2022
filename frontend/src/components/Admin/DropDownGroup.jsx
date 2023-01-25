@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup({ onGroupSelect }) {
+function DropDownGroup({ setGroupId }) {
   const [groupList, setGroupList] = useState([]);
 
   useEffect(() => {
@@ -42,37 +42,30 @@ function DropDownGroup({ onGroupSelect }) {
       >
         <Menu.Items className="absolute left-0 z-10 mt-0 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  <div>
-                    {groupList.map((group) => (
-                      <div
-                        key={group.id}
-                        className="block py-2 px-4 text-sm"
-                        onClick={() => onGroupSelect(group.id)}
-                        role="button"
-                        onKeyDown={(e) => {
-                          if (e.key === "ArrowDown") {
-                            // ...
-                          } else if (e.key === "ArrowUp") {
-                            // ...
-                          }
-                        }}
-                        tabIndex={0}
-                      >
-                        {group.group_name}
-                      </div>
-                    ))}
+            {groupList.map((group) => (
+              <Menu.Item key={group.id}>
+                {({ active }) => (
+                  <div
+                    role="button"
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                    onClick={() => setGroupId(group.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "ArrowDown") {
+                        // ...
+                      } else if (e.key === "ArrowUp") {
+                        // ...
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {group.group_name}
                   </div>
-                </div>
-              )}
-            </Menu.Item>
+                )}
+              </Menu.Item>
+            ))}
           </div>
         </Menu.Items>
       </Transition>
