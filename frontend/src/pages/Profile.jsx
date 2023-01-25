@@ -38,6 +38,12 @@ function Profile() {
       });
   }, [refresh, user_id]);
 
+  const deleteFromPostWithId = (idPost) => {
+    const postIndex = myPosts.findIndex((post) => post.id === idPost);
+    myPosts.splice(postIndex, 1);
+    setMyPosts([...myPosts]);
+  };
+
   return (
     <div className="bg-[#f6f6fe] overflow-x-hidden">
       {profileUser && (
@@ -52,7 +58,11 @@ function Profile() {
               {myPosts
                 .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (
-                  <Post post={post} key={post.id} />
+                  <Post
+                    post={post}
+                    key={post.id}
+                    deleteFromPostWithId={deleteFromPostWithId}
+                  />
                 ))}
             </div>
           </div>
