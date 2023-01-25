@@ -40,7 +40,7 @@ router.delete("/api/users/:id", userControllers.destroy);
 
 // appel de mes posts personnel
 
-router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
+router.get("/api/myposts/user/:id/limit/:base", postControllers.browseMyPosts);
 
 /// /// Gestion des posts ///////
 
@@ -108,7 +108,7 @@ router.delete(
 );
 // je supprime un utilisateur d'un groupe en fonction de l'id du groupe
 router.delete(
-  "/api/user_group/group/:groupId",
+  "/api/user_group/group/:groupId/user/:userId",
   userGroupControllers.deleteByGroupId
 );
 

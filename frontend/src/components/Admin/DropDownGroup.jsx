@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
@@ -7,7 +7,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup() {
+function DropDownGroup({ setGroupId }) {
+  const [groupList, setGroupList] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/groups")
+      .then((response) => response.json())
+      .then((result) => {
+        setGroupList(result);
+      })
+      .catch((error) => console.warn(error));
+  }, []);
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -31,60 +42,30 @@ function DropDownGroup() {
       >
         <Menu.Items className="absolute left-0 z-10 mt-0 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Actualité
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  La Vie des sites
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Affichage reglementaire
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
+            {groupList.map((group) => (
+              <Menu.Item key={group.id}>
                 {({ active }) => (
-                  <button
-                    type="submit"
+                  <div
+                    role="button"
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full px-4 py-2 text-left text-sm"
+                      "block px-4 py-2 text-sm"
                     )}
+                    onClick={() => setGroupId(group.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "ArrowDown") {
+                        // ...
+                      } else if (e.key === "ArrowUp") {
+                        // ...
+                      }
+                    }}
+                    tabIndex={0}
                   >
-                    Recrutement
-                  </button>
+                    {group.group_name}
+                  </div>
                 )}
               </Menu.Item>
-            </form>
+            ))}
           </div>
         </Menu.Items>
       </Transition>

@@ -558,3 +558,8 @@ CREATE TABLE user_group
     FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
 );
 
+
+INSERT INTO
+  user_group (user_id, group_id)
+VALUES (1, 2);
+

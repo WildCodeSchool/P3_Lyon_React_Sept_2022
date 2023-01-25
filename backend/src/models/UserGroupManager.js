@@ -20,7 +20,7 @@ class UserGroupManager extends AbstractManager {
 
   findByGroupId(groupId) {
     return this.connection.any(
-      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email, user_group.user_id FROM user_detail AS ud
+      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
       RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
       WHERE group_id = $1`,
       [groupId]
@@ -60,10 +60,10 @@ class UserGroupManager extends AbstractManager {
 
   // Je supprime un groupe auquel un utilisateur appartient
 
-  deleteByGroupId(groupId) {
+  deleteByGroupId(groupId, userId) {
     return this.connection.any(
-      `DELETE FROM ${this.table} WHERE group_id = $1`,
-      [groupId]
+      `DELETE FROM ${this.table} WHERE group_id = $1 AND user_id = $2`,
+      [groupId, userId]
     );
   }
 }
