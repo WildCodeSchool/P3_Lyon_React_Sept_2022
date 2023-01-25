@@ -5,8 +5,10 @@ import "./App.css";
 import { PostUserContextProvider } from "./contexts/PostUserContext";
 import { CurrentUserContextProvider } from "./contexts/userContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
-import { Admin, PostList, Profile, Main, Connexion, CreatePost } from "./pages";
-import { PostDetails, ModifUser } from "./components";
+import ModifUser from "./components/Admin/ModifUser";
+import PostDetails from "./components/Feed/PostContainer/PostDetails";
+import AdminEspace from "./components/Admin/AdminEspace";
+import { Connexion, Main, CreatePost, Profile, PostList } from "./pages";
 
 function App() {
   const location = useLocation();
@@ -16,7 +18,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div>
+    <div className="bg-[#F6F6FE]">
       <PostUserContextProvider>
         <CurrentUserContextProvider>
           <TokenContextProvider>
@@ -27,9 +29,9 @@ function App() {
               <Route path="/feed/:postId" element={<PostDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/:user_id" element={<Profile />} />
-              <Route path="/admin" element={<Admin />} />
               <Route path="/adminUser" element={<PostList />} />
               <Route path="/adminUser/:id" element={<ModifUser />} />
+              <Route path="/adminEspace" element={<AdminEspace />} />
             </Routes>
             <ToastContainer />
           </TokenContextProvider>

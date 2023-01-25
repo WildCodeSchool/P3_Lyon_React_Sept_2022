@@ -88,10 +88,10 @@ const deleteByUserId = (req, res) => {
 // Je supprime un groupe auquel un utilisateur appartient
 
 const deleteByGroupId = (req, res) => {
-  const { groupId } = req.params;
+  const { groupId, userId } = req.params;
 
   models.user_group
-    .deleteByGroupId(groupId)
+    .deleteByGroupId(groupId, userId)
     .then(() => {
       res.sendStatus(200);
     })

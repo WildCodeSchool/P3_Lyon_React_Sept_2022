@@ -18,6 +18,12 @@ function PostContainer({ groupId, categoryId }) {
     }
   }, [groupId, categoryId]);
 
+  const deleteFromPostWithId = (idPost) => {
+    const postIndex = posts.findIndex((post) => post.id === idPost);
+    posts.splice(postIndex, 1);
+    setPosts([...posts]);
+  };
+
   useEffect(() => {
     if (groupId === 0 && categoryId === 0) {
       fetch(`${backEnd}/api/posts/limit/${base}`, {
@@ -94,7 +100,11 @@ function PostContainer({ groupId, categoryId }) {
   return (
     <div className="md:ml-[-85%] md:w-[40vw] md:rounded-lg">
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post
+          key={post.id}
+          post={post}
+          deleteFromPostWithId={deleteFromPostWithId}
+        />
       ))}
     </div>
   );

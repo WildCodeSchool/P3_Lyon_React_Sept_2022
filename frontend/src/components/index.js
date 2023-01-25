@@ -4,7 +4,6 @@ export { default as Navbar } from "./Navbar/Navbar";
 export { default as Feed } from "./Feed/Feed";
 export { default as Header } from "./Header";
 // components + Navbar + Profile
-export { default as EditProfile } from "./Navbar/Profile/EditProfile";
 export { default as ProfileCard } from "./Navbar/Profile/ProfileCard";
 // components + Feed + CreatePostContainer
 export { default as CreatePostContainer } from "./Feed/CreatePostContainer/CreatePostContainer";

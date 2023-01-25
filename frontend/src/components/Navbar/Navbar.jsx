@@ -16,11 +16,10 @@ function Navbar({ setGroupId, setCategoryId }) {
   };
 
   const toFeedOrAdmin = () => {
-    if (location.pathname === "/feed" || location.pathname === "/admin") {
+    if (location.pathname === "/feed") {
       setGroupId(0);
       setCategoryId(0);
-    } else if (user.is_admin) navigate("/admin");
-    else navigate("/feed");
+    } else navigate("/feed");
   };
 
   return (
@@ -40,7 +39,7 @@ function Navbar({ setGroupId, setCategoryId }) {
               <img
                 src={user.avatar}
                 alt="My profile avatar"
-                className="rounded-full w-10 h-10 mr-2 border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
+                className="rounded-full object-cover w-10 h-10 mr-2 border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
               />
             </Link>
           </div>

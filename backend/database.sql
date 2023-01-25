@@ -29,7 +29,7 @@ VALUES
     '0628164511',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/LwrVS8h.jpg'
+    'https://i.imgur.com/Ajb5Q8V.png'
   ),
   (
     'Doroteya',
@@ -38,7 +38,7 @@ VALUES
     '0628164512',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/FHz3NQx.jpg'
+    'https://i.imgur.com/vJKyNZ2.jpg'
   ),
   (
     'Matthieu',
@@ -56,7 +56,7 @@ VALUES
     '0628164514',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/lIAKkYJ.jpg'
+    'https://i.imgur.com/DixnvgV.jpg'
   ),
   (
     'Ryan',
@@ -582,7 +582,7 @@ content text not null,
 post_id int not null,
 user_id int not null,
 CONSTRAINT fk_comment_post
-FOREIGN KEY(post_id) REFERENCES post(id),
+FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
 CONSTRAINT fk_comment_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id)
 );
@@ -601,4 +601,9 @@ CREATE TABLE user_group
   CONSTRAINT fk_user_group_group_detail
     FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
 );
+
+
+INSERT INTO
+  user_group (user_id, group_id)
+VALUES (1, 2);
 
