@@ -20,7 +20,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div>
+    <div className="bg-[#F6F6FE]">
       <PostUserContextProvider>
         <CurrentUserContextProvider>
           <Routes>

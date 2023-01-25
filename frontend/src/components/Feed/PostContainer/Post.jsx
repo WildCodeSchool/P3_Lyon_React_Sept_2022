@@ -5,16 +5,15 @@ import axios from "axios";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import EditPost from "./EditPost";
 import "react-toastify/dist/ReactToastify.css";
-import { usePostUserContext } from "../../../contexts/PostUserContext";
 import menuDots from "../../../assets/modifDot.png";
 import rubish from "../../../assets/deleteBtn.png";
+import edit from "../../../assets/edit.png";
 import pdf from "../../../assets/pdf.png";
 // import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-function Post({ post }) {
-  const { handleReset } = usePostUserContext();
+function Post({ post, deleteFromPostWithId }) {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
   const { user } = useCurrentUserContext();
@@ -37,7 +36,6 @@ function Post({ post }) {
       axios
         .delete(`${backEnd}/api/posts/${post.id}`)
         .then(() => {
-          handleReset();
           toast(" ✅ Poste Supprimé !", {
             position: "top-right",
             autoClose: 3000,
@@ -46,13 +44,13 @@ function Post({ post }) {
             pauseOnHover: true,
             theme: "light",
           });
+          deleteFromPostWithId(post.id);
         })
         .catch((err) => {
           console.error(err);
         });
     }
   };
-  const [numberComments, setNumberComments] = useState(0);
 
   return (
     <div>
@@ -60,7 +58,7 @@ function Post({ post }) {
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full w-20 h-20 mr-6 border-4 border-violet md:mr-20"
+              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet md:mr-20"
               src={post.avatar}
               alt={post.username}
             />
@@ -84,7 +82,7 @@ function Post({ post }) {
                 </h3>
               </div>
               {(post.user_id === user.id || user.is_admin) && (
-                <div className="md:ml-36 md:mt-[-30px]">
+                <div className="flex justify-end md:ml-36 md:mt-[-30px]">
                   <button onClick={() => handleEditPost()} type="button">
                     <img
                       className="h-5 ml-12 md:mt-0 md:ml-20"
@@ -95,7 +93,7 @@ function Post({ post }) {
                 </div>
               )}
               {editPostMenu && (
-                <div className=" mt-2 w-40 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
+                <div className=" mt-2 w-52 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
                   {/* <div className=" px-4 pb-2 h-20 "> */}
                   {post.user_id === user.id && (
                     <button
@@ -103,16 +101,12 @@ function Post({ post }) {
                       className="text-black p-2 flex"
                       type="button"
                     >
-                      <img
-                        className="h-5 w-5"
-                        src="./src/assets/edit.png"
-                        alt="Edit"
-                      />
+                      <img className="h-5 w-5" src={edit} alt="Edit" />
                       <span className="pl-3">Modifier</span>
                     </button>
                   )}
                   <button
-                    onClick={() => handleDelete()}
+                    onClick={() => handleDelete(post.id)}
                     className="text-black p-2 flex"
                     type="button"
                   >
@@ -124,6 +118,7 @@ function Post({ post }) {
                     <EditPost
                       editPostModal={editPostModal}
                       setEditPostModal={setEditPostModal}
+                      setEditPostMenu={setEditPostMenu}
                       handleEditPostModal={handleEditPostModal}
                     />
                   )}
@@ -167,18 +162,10 @@ function Post({ post }) {
             />
           ))}
 
-        <Link
-          to={`/feed/${post.id}`}
-          setNumberComments={setNumberComments}
-          numberComments={numberComments}
-        >
-          <p className="pl-6 mt-4 text-sm text-gray-500">
-            {numberComments} commentaires
-          </p>
-
+        <Link to={`/feed/${post.id}`}>
           <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img
-              className="rounded-full w-10 h-10 border-4 border-violet"
+              className="rounded-full w-10 mr-2 h-10 border-4 border-violet"
               src={user.avatar}
               alt="My profile avatar"
             />
