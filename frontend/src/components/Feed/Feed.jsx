@@ -1,6 +1,5 @@
 import React from "react";
-import CreatePostContainer from "./CreatePostContainer/CreatePostContainer";
-import PostContainer from "./PostContainer/PostContainer";
+import { CreatePostContainer, PostContainer } from "..";
 
 function Feed({ groupId, categoryId }) {
   return (

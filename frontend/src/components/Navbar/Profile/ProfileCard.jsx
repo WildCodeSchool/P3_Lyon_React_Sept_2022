@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditProfile from "./EditProfile";
+import { EditProfile } from "../..";
 
 function ProfileCard({ profileUser }) {
   const [editProfile, setEditProfile] = useState(false);

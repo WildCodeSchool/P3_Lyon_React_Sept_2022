@@ -1,17 +1,12 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import CreatePost from "./pages/CreatePost";
 import "./App.css";
-import Connexion from "./pages/Connexion";
-import Main from "./pages/Main";
-import Profile from "./pages/Profile";
 import { PostUserContextProvider } from "./contexts/PostUserContext";
 import { CurrentUserContextProvider } from "./contexts/userContext";
-import Admin from "./pages/Admin";
-import PostList from "./pages/PostList";
-import ModifUser from "./components/Admin/ModifUser";
-import PostDetails from "./components/Feed/PostContainer/PostDetails";
+import { TokenContextProvider } from "./contexts/TokenContext";
+import { Admin, PostList, Profile, Main, Connexion, CreatePost } from "./pages";
+import { PostDetails, ModifUser } from "./components";
 
 function App() {
   const location = useLocation();
@@ -20,40 +15,24 @@ function App() {
     document.documentElement.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const expirationTime = localStorage.getItem("expirationTime");
-
-  //   if (token && expirationTime) {
-  //     if (Date.now() >= expirationTime) {
-  //       localStorage.removeItem("token");
-  //       localStorage.removeItem("expirationTime");
-  //       // redirige le user sur la page connexion
-  //       window.location.href = "/";
-  //     } else {
-  //       // set a timer to check the token's expiration time again
-  //       setTimeout(() => {
-  //         window.location.href = "/";
-  //       }, expirationTime - Date.now());
-  //     }
-  //   }
-  // }, []);
   return (
     <div>
       <PostUserContextProvider>
         <CurrentUserContextProvider>
-          <Routes>
-            <Route path="/" element={<Connexion />} />
-            <Route path="/feed" element={<Main />} />
-            <Route path="/createPost" element={<CreatePost />} />
-            <Route path="/feed/:postId" element={<PostDetails />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/:user_id" element={<Profile />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/adminUser" element={<PostList />} />
-            <Route path="/adminUser/:id" element={<ModifUser />} />
-          </Routes>
-          <ToastContainer />
+          <TokenContextProvider>
+            <Routes>
+              <Route path="/" element={<Connexion />} />
+              <Route path="/feed" element={<Main />} />
+              <Route path="/createPost" element={<CreatePost />} />
+              <Route path="/feed/:postId" element={<PostDetails />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:user_id" element={<Profile />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/adminUser" element={<PostList />} />
+              <Route path="/adminUser/:id" element={<ModifUser />} />
+            </Routes>
+            <ToastContainer />
+          </TokenContextProvider>
         </CurrentUserContextProvider>
       </PostUserContextProvider>
     </div>

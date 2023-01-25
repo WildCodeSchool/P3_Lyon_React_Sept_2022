@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Feed from "../components/Feed/Feed";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar/Navbar";
-import Carrousel from "../components/Carrousel/Carrousel";
+import { Feed, Header, Navbar, Carrousel, Panel } from "../components";
 import { usePostUserContext } from "../contexts/PostUserContext";
-import Panel from "../components/Feed/PostContainer/Panel";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 

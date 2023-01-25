@@ -1,9 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Post from "../components/Feed/PostContainer/Post";
-import Navbar from "../components/Navbar/Navbar";
-import ProfileCard from "../components/Navbar/Profile/ProfileCard";
+import { Post, Navbar, ProfileCard } from "../components";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
 
