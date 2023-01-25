@@ -45,8 +45,9 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                     .includes(filterSearch.toLowerCase());
                 })
                 .map((group) => (
-                  <button
-                    type="button"
+                  <div
+                    role="button"
+                    aria-hidden
                     onClick={() => setValueSelectedGroup(group.group_name)}
                     className="text-lg px-10 font-normal text-primary pt-5 shadow-md"
                     value={group.group_name}
@@ -58,19 +59,20 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         .filter((category) => category.group_id === group.id)
                         .map((category) => (
                           <button type="button" key={category.id}>
-                            <button
-                              type="button"
+                            <li
+                              role="menuitem"
+                              aria-hidden
                               value={category.id}
                               name={category.name}
                               className="cursor-pointer h-10  hover:bg-violet"
                               onClick={() => handleValue(category)}
                             >
                               {category.category_name}
-                            </button>
+                            </li>
                           </button>
                         ))}
                     </ul>
-                  </button>
+                  </div>
                 ))}
             </ul>
           </div>

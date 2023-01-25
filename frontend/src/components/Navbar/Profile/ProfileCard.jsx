@@ -34,6 +34,7 @@ function ProfileCard({ profileUser }) {
           </button>
           {editProfile ? (
             <EditProfile
+              profileUser={profileUser}
               editProfile={editProfile}
               setEditProfile={setEditProfile}
             />

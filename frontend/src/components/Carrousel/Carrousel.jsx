@@ -19,7 +19,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
     setCategoryId(value);
   };
   return (
-    <div className="carrousel-container pt-8 md:h-1/5 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
+    <div className="carrousel-container pt-8 md:h-[450px] md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
         {groupId
           ? groupList

@@ -212,7 +212,7 @@ VALUES
     1,
     1,
     '2022-11-01',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'https://www.choisir.com/medias/b2380444-ligne-enedis.jpg'
   ),
   (
     'Vacances d''été',

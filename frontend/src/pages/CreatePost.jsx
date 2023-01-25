@@ -12,8 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function CreatePost() {
-  const { valueSelectedCategory, valueSelectedGroup, handleReset } =
-    usePostUserContext();
+  const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
   const { user } = useCurrentUserContext();
   const inputRef = useRef(null);
   const [dataPost, setDataPost] = useState({
@@ -69,7 +68,6 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
-          handleReset();
           navigate("/feed");
           toast(" ✅ Poste Publié !", {
             position: "top-center",
@@ -124,6 +122,9 @@ function CreatePost() {
               <p className="text-md ml-[24px] text-primary">
                 {valueSelectedGroup}
               </p>
+              <button type="button" onClick={() => console.warn(dataPost)}>
+                vlique dessus
+              </button>
               <p
                 className="text-md ml-[24px] text-primary"
                 value={valueSelectedCategory}

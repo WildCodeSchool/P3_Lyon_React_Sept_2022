@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import CreatePost from "./pages/CreatePost";
@@ -15,31 +15,36 @@ import PostDetails from "./components/Feed/PostContainer/PostDetails";
 
 function App() {
   const location = useLocation();
+
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const [darkMode, setDarkMode] = useState(false);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const expirationTime = localStorage.getItem("expirationTime");
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  //   if (token && expirationTime) {
+  //     if (Date.now() >= expirationTime) {
+  //       localStorage.removeItem("token");
+  //       localStorage.removeItem("expirationTime");
+  //       // redirige le user sur la page connexion
+  //       window.location.href = "/";
+  //     } else {
+  //       // set a timer to check the token's expiration time again
+  //       setTimeout(() => {
+  //         window.location.href = "/";
+  //       }, expirationTime - Date.now());
+  //     }
+  //   }
+  // }, []);
   return (
-    <div
-      className={`${
-        darkMode ? "bg-gray-800" : "bg-[#F6F6F6] md:bg-background"
-      }`}
-    >
+    <div>
       <PostUserContextProvider>
         <CurrentUserContextProvider>
           <Routes>
             <Route path="/" element={<Connexion />} />
-            <Route
-              path="/feed"
-              element={
-                <Main toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-              }
-            />
+            <Route path="/feed" element={<Main />} />
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/feed/:postId" element={<PostDetails />} />
             <Route path="/profile" element={<Profile />} />

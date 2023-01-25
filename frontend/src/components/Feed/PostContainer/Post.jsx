@@ -55,9 +55,9 @@ function Post({ post }) {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg ">
+      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg md:max-w-2xl ">
         <div className="flex flex-row self-start py-4 px-6">
-          <Link to={`/profile/${post.user_id}`}>
+          <Link user={user} to={`/profile/${post.user_id}`}>
             <img
               className="rounded-full w-20 h-20 mr-6 border-4 border-violet md:mr-20"
               src={post.avatar}
@@ -134,7 +134,7 @@ function Post({ post }) {
 
         {post.post_image && (
           <img
-            className="w-full mx-auto md:max-w-lg md:max-h-full"
+            className="w-full mx-auto md:max-w-full md:max-h-[400px] md:min-h-[400px]"
             src={`${backEnd}/uploads/${post.post_image}`}
             alt="Post"
           />

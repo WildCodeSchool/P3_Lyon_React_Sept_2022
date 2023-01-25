@@ -73,6 +73,9 @@ function PostContainer({ groupId, categoryId }) {
 
   return (
     <div className="md:ml-[-85%] md:w-[40vw] md:rounded-lg">
+      <button type="button" onClick={() => console.warn(token.expiresIn)}>
+        APPUIE MOI DEUSSSSSSSSSSSSSSS
+      </button>
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

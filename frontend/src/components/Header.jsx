@@ -10,7 +10,7 @@ function Header({ darkMode }) {
             : " text-primary text-center text-4xl mb-3"
         }`}
       >
-        Enedis France
+        Notitia
       </h1>
     </div>
   );
