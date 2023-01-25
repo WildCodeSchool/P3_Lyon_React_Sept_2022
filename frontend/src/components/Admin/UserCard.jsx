@@ -1,6 +1,11 @@
 import DropDownEditUser from "./DropDownEditUser";
 
-export default function UserCard({ card, toggleRefresh }) {
+export default function UserCard({
+  card,
+  toggleRefresh,
+  deleteButton,
+  deleteUserGroup,
+}) {
   return (
     <div>
       <div className="flex font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
@@ -15,7 +20,12 @@ export default function UserCard({ card, toggleRefresh }) {
           </p>
           <p className="italic">'{card.role}'</p>
         </div>
-        <DropDownEditUser card={card} toggleRefresh={toggleRefresh} />
+        <DropDownEditUser
+          card={card}
+          toggleRefresh={toggleRefresh}
+          deleteUserGroup={deleteUserGroup}
+          deleteButton={deleteButton}
+        />
       </div>
     </div>
   );

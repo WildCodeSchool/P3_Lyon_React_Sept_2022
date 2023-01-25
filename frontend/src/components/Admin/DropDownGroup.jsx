@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
@@ -7,7 +7,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup() {
+function DropDownGroup({ onGroupSelect }) {
+  const [groupList, setGroupList] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/groups")
+      .then((response) => response.json())
+      .then((result) => {
+        setGroupList(result);
+      })
+      .catch((error) => console.warn(error));
+  }, []);
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -33,58 +44,35 @@ function DropDownGroup() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/"
+                <div
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Actualité
-                </a>
+                  <div>
+                    {groupList.map((group) => (
+                      <div
+                        key={group.id}
+                        className="block py-2 px-4 text-sm"
+                        onClick={() => onGroupSelect(group.id)}
+                        role="button"
+                        onKeyDown={(e) => {
+                          if (e.key === "ArrowDown") {
+                            // ...
+                          } else if (e.key === "ArrowUp") {
+                            // ...
+                          }
+                        }}
+                        tabIndex={0}
+                      >
+                        {group.group_name}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  La Vie des sites
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Affichage reglementaire
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full px-4 py-2 text-left text-sm"
-                    )}
-                  >
-                    Recrutement
-                  </button>
-                )}
-              </Menu.Item>
-            </form>
           </div>
         </Menu.Items>
       </Transition>
