@@ -4,7 +4,7 @@ import logoEnedis from "../../assets/logo-enedis.png";
 import logOut from "../../assets/logout.png";
 import { useCurrentUserContext } from "../../contexts/userContext";
 
-function Navbar({ toggleDarkMode, darkMode, setGroupId, setCategoryId }) {
+function Navbar({ setGroupId, setCategoryId }) {
   const { user, setUser } = useCurrentUserContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,17 +33,7 @@ function Navbar({ toggleDarkMode, darkMode, setGroupId, setCategoryId }) {
             alt="Logo"
           />
         </button>
-        <button
-          type="button"
-          className={`${
-            darkMode
-              ? "bg-white text-gray-800 px-6 py-2 rounded-md"
-              : "bg-gray-800 text-white px-6 py-2 rounded-md"
-          }`}
-          onClick={toggleDarkMode}
-        >
-          {darkMode ? "Light ☀️" : "Dark 🌙"}
-        </button>
+
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">
             <Link to="/profile">
