@@ -54,8 +54,9 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   .includes(filterSearch.toLowerCase());
               })
               .map((group) => (
-                <button
-                  type="button"
+                <ul
+                  role="menu"
+                  aria-hidden
                   onClick={() => setValueSelectedGroup(group.group_name)}
                   className="text-lg px-10 font-normal bg-[#EBF2FB] text-primary pt-5 shadow-md shadow-slate-500"
                   value={group.group_name}
@@ -82,7 +83,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         </span>
                       </li>
                     ))}
-                </button>
+                </ul>
               ))}
           </div>
         </div>
