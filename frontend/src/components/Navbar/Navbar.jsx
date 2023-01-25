@@ -16,11 +16,10 @@ function Navbar({ toggleDarkMode, darkMode, setGroupId, setCategoryId }) {
   };
 
   const toFeedOrAdmin = () => {
-    if (location.pathname === "/feed" || location.pathname === "/admin") {
+    if (location.pathname === "/feed") {
       setGroupId(0);
       setCategoryId(0);
-    } else if (user.is_admin) navigate("/admin");
-    else navigate("/feed");
+    } else navigate("/feed");
   };
 
   return (

@@ -40,7 +40,7 @@ router.delete("/api/users/:id", userControllers.destroy);
 
 // appel de mes posts personnel
 
-router.get("/api/myposts/user/:id", postControllers.browseMyPosts);
+router.get("/api/myposts/user/:id/limit/:base", postControllers.browseMyPosts);
 
 /// /// Gestion des posts ///////
 

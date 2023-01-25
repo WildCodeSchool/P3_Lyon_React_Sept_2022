@@ -5,8 +5,9 @@ import Navbar from "../components/Navbar/Navbar";
 import Carrousel from "../components/Carrousel/Carrousel";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
-// import Panel from "../components/Feed/PostContainer/Panel";
+import Panel from "../components/Feed/PostContainer/Panel";
 import HeaderAdmin from "../components/Admin/HeaderAdmin";
+import CarrouselAdmin from "../components/Admin/CarrouselAdmin";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -39,12 +40,15 @@ function Main({ toggleDarkMode, darkMode }) {
       />
       <div className="md:grid md:grid-cols-4">
         {user.is_admin ? (
-          <HeaderAdmin
-            groupId={groupId}
-            setGroupId={setGroupId}
-            categoryId={categoryId}
-            setCategoryId={setCategoryId}
-          />
+          <>
+            <HeaderAdmin />
+            <CarrouselAdmin
+              groupId={groupId}
+              setGroupId={setGroupId}
+              categoryId={categoryId}
+              setCategoryId={setCategoryId}
+            />
+          </>
         ) : (
           <>
             <Header darkMode={darkMode} />
@@ -58,7 +62,7 @@ function Main({ toggleDarkMode, darkMode }) {
         )}
 
         <Feed groupId={groupId} categoryId={categoryId} />
-        {/* <Panel /> */}
+        <Panel />
       </div>
     </div>
   );
