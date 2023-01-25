@@ -8,6 +8,7 @@ import ModalCreatePost from "../components/Feed/CreatePostContainer/ModalCreateP
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
 import "react-toastify/dist/ReactToastify.css";
+import file from "../assets/file.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -85,16 +86,14 @@ function CreatePost() {
   };
 
   return (
-    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10  md:backdrop-blur-lg md:shadow-md ">
+    <div className="bg-white md:backdrop-blur-lg md:shadow-md ">
       <div className="md:w-1/2 md:border-r-2 md:border-gray-100">
-        <div className="flex justify-between md:justify-around md:mb-5 md:items-center">
-          <Link to="/feed">
-            <img className="ml-2 mt-6 md:mt-2" src={croix} alt="" />
-          </Link>
-          <h1 className="text-[32px] mt:[62px] mr-[46px] leading-[2.9rem] text-primary font-bold text-center md:mr-32 pb-8 md:pb-0 md:mt-2 ">
-            Créer une publication
-          </h1>
-        </div>
+        <Link to="/feed">
+          <img className="ml-2 mt-6 md:mt-2" src={croix} alt="" />
+        </Link>
+        <h1 className="text-[32px] mt-3 text-primary font-bold text-center md:mr-32 pb-8 md:pb-0 md:mt-2 ">
+          Créer une publication
+        </h1>
 
         {/* Formulaire Pour publier un post  */}
         <form
@@ -104,17 +103,21 @@ function CreatePost() {
           className="mb-5"
         >
           <div className="flex items-center">
-            <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
+            <img
+              className="rounded-full w-28 h-28 ml-3 border-4 border-violet"
+              src={user.avatar}
+              alt="Avatar"
+            />
             <div className="block text-left">
               <div className="flex">
                 <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
+                  className="text-2xl ml-[24px] text-green font-bold "
                   value={user.firstname}
                 >
                   {user.firstname}
                 </h2>
                 <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
+                  className="text-2xl ml-2 text-green w-10 font-bold "
                   value={user.lastname}
                 >
                   {user.lastname}
@@ -137,46 +140,50 @@ function CreatePost() {
             <input
               className="mt-8 h-[5em] w-full pl-8"
               type="text"
-              placeholder="Titre...*"
+              placeholder="Titre... *"
               name="title"
               value={dataPost.title}
               onChange={onChange}
             />
-            <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
+            <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
             <input
-              className="h-[10em] w-full pl-8"
+              className="h-60 w-full pl-8"
               type="text"
               name="content"
-              placeholder="Votre publication...*"
+              placeholder="Votre publication... *"
               value={dataPost.content}
               onChange={onChange}
             />
           </div>
-          <input
-            className="md:ml-[25%]"
-            type="file"
-            value={dataPost.image}
-            name="avatar"
-            ref={inputRef}
-          />
           <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
-          <div className="md:h-20 md:mt-3">
-            <SelectBar
-              showCategories={showCategories}
-              setShowCategories={setShowCategories}
-            />
+          <div className="flex items-center justify-start mt-8">
+            <label className="flex flex-col items-center text-md font-light text-primary pl-6 cursor-pointer">
+              <img className="w-7 h-7 mr-2" src={file} alt="New file" />
+              <input
+                className="hidden"
+                type="file"
+                value={dataPost.image}
+                name="avatar"
+                ref={inputRef}
+              />
+              Fichier
+            </label>
+            <div>
+              <SelectBar
+                showCategories={showCategories}
+                setShowCategories={setShowCategories}
+              />
+            </div>
           </div>
-          <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
+          <hr className="h-[2px] mt-4 bg-grey w-[100vw] md:w-[50vw]" />
           <button
             type="submit"
-            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[56%] w-40 md:ml-[38%] md:w-48 
+            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[50%] w-40 md:ml-[38%] md:w-48 
          rounded-[20px] justify-end"
           >
             Publier
           </button>
         </form>
-
-        <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
 
         {showCategories ? (
           <ModalCreatePost

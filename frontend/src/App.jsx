@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import CreatePost from "./pages/CreatePost";
@@ -19,27 +19,13 @@ function App() {
     document.documentElement.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
   return (
-    <div
-      className={`${
-        darkMode ? "bg-gray-800" : "bg-[#F6F6F6] md:bg-background"
-      }`}
-    >
+    <div>
       <PostUserContextProvider>
         <CurrentUserContextProvider>
           <Routes>
             <Route path="/" element={<Connexion />} />
-            <Route
-              path="/feed"
-              element={
-                <Main toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-              }
-            />
+            <Route path="/feed" element={<Main />} />
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/feed/:postId" element={<PostDetails />} />
             <Route path="/profile" element={<Profile />} />

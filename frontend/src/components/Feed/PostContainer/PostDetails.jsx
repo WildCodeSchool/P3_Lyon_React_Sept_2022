@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
+import pdf from "../../../assets/pdf.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -29,7 +30,7 @@ function PostDetails({ numberComments, setNumberComments }) {
 
   return (
     <div className="bg-white h-screen w-screen">
-      <div className="">
+      <div>
         <Link to="/feed">
           <img
             className="mt-2 md:mt-6 md:ml-4"
@@ -57,18 +58,34 @@ function PostDetails({ numberComments, setNumberComments }) {
           </div>
         </div>
       </div>
-      <div className="w-11/12 m-auto flex flex-col items-start shadow-md rounded-xl py-4 text-sm">
-        <h2 className="text-2xl px-5 md:ml-6 md:text-center">
+      <div className="w-11/12 m-auto flex flex-col items-start text-sm">
+        <h2 className="text-2xl px-2 md:ml-6 md:text-center">
           {postDetails.title}
         </h2>
-        <p className="text-md py-2 px-5 md:ml-6 md:text-center">
+        <p className="text-md py-2 px-2 pb-4 md:ml-6 md:text-center">
           {postDetails.content}
         </p>
-        <img
-          className="mt-3 md:h-[40%] md:mx-auto"
-          src={`${backEnd}/uploads/${postDetails.post_image}`}
-          alt="Post"
-        />
+
+        {postDetails.post_image &&
+          (postDetails.post_image.slice(-4) === ".pdf" ? (
+            <div className="flex flex-row w-6/12 pl-3 py-6 ml-3 shadow-md rounded-xl">
+              <img className="w-5 h-5 mr-2" src={pdf} alt="pdf" />
+              <a
+                href={`${backEnd}/uploads/${PostDetails.post_image}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary text-md"
+              >
+                Visualiser le PDF
+              </a>
+            </div>
+          ) : (
+            <img
+              className="mt-3 md:h-[40%] md:mx-auto"
+              src={`${backEnd}/uploads/${postDetails.post_image}`}
+              alt="Post"
+            />
+          ))}
       </div>
 
       <div className="w-full mt-6 flex flex-col pl-2 md:items-start">
