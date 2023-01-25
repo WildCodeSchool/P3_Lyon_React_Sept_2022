@@ -58,7 +58,7 @@ const edit = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  const { id } = req.params;
+  const id = parseInt(req.params.id, 10);
   models.group_detail
     .delete(id)
     .then((result) => {
