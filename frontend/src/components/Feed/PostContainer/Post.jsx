@@ -58,7 +58,7 @@ function Post({ post, deleteFromPostWithId }) {
         <div className="flex flex-row self-start py-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full w-20 h-20 mr-6 border-4 border-violet md:mr-20"
+              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet md:mr-20"
               src={post.avatar}
               alt={post.username}
             />
@@ -118,6 +118,7 @@ function Post({ post, deleteFromPostWithId }) {
                     <EditPost
                       editPostModal={editPostModal}
                       setEditPostModal={setEditPostModal}
+                      setEditPostMenu={setEditPostMenu}
                       handleEditPostModal={handleEditPostModal}
                     />
                   )}

@@ -104,7 +104,7 @@ function CreatePost() {
         >
           <div className="flex items-center">
             <img
-              className="rounded-full w-28 h-28 ml-3 border-4 border-violet"
+              className="rounded-full object-cover w-28 h-28 ml-3 border-4 border-violet"
               src={user.avatar}
               alt="Avatar"
             />

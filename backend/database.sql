@@ -29,7 +29,7 @@ VALUES
     '0628164511',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/LwrVS8h.jpg'
+    'https://i.imgur.com/Ajb5Q8V.png'
   ),
   (
     'Doroteya',
@@ -56,7 +56,7 @@ VALUES
     '0628164514',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/lIAKkYJ.jpg'
+    'https://i.imgur.com/DixnvgV.jpg'
   ),
   (
     'Ryan',
