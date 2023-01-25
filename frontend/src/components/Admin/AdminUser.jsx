@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
 import AddUser from "./AddUser";
-import DropDownGroup from "./DropDownGroup";
+import HeaderAdmin from "./HeaderAdmin";
 import UserCard from "./UserCard";
+import DropDownGroup from "./DropDownGroup";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -82,31 +83,7 @@ export default function AdminUser() {
 
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
-      <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
-        Espace admin
-      </h2>
-      <div className="flex justify-around mt-6 mb-5">
-        <button
-          type="button"
-          className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mb-6 mt-6 border-primary rounded-2xl "
-        >
-          Publications
-        </button>
-        <Link to="/adminUser">
-          <button
-            type="button"
-            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
-          >
-            Utilisateurs
-          </button>
-        </Link>
-        <button
-          type="button"
-          className="text-white font-[Enedis] bg-primary w-34 text-l w-[26vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
-        >
-          Espaces
-        </button>
-      </div>
+      <HeaderAdmin />
       <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
         <h3>Gérer la liste des utilisateurs</h3>
       </div>

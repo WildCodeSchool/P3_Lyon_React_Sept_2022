@@ -38,8 +38,7 @@ function Connexion() {
         .then((result) => {
           setUser(result.user);
           setToken(result.token);
-          if (result.user.is_admin) navigate("/admin");
-          else navigate("/feed");
+          navigate("/feed");
         })
 
         .catch(console.error);

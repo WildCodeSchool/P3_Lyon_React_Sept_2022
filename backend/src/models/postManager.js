@@ -33,17 +33,20 @@ class PostManager extends AbstractManager {
     );
   }
 
-  findMyPosts(base) {
+  findMyPosts(id, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
        LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
       LEFT JOIN category as c
       ON c.id = p.category_id
-       LEFT JOIN group_detail as g
-      ON g.id = c.group_id ORDER BY p.id DESC;`,
-      [base]
+      LEFT JOIN group_detail as g
+      ON g.id = c.group_id 
+      WHERE p.user_id = $1
+      ORDER BY p.id DESC 
+      limit 5 offset $2;`,
+      [id, base]
     );
   }
 
@@ -51,11 +54,11 @@ class PostManager extends AbstractManager {
     return this.connection.any(
       `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
-       LEFT JOIN user_detail as ud
+      LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
       LEFT JOIN category as c
       ON c.id = p.category_id
-       LEFT JOIN group_detail as g
+      LEFT JOIN group_detail as g
       ON g.id = c.group_id 
       WHERE g.id = $1 
       ORDER BY p.id DESC 
