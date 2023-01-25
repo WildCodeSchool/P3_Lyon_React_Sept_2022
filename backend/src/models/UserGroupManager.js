@@ -20,7 +20,7 @@ class UserGroupManager extends AbstractManager {
 
   findByGroupId(groupId) {
     return this.connection.any(
-      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email, user_group.user_id FROM user_detail AS ud
+      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
       RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
       WHERE group_id = $1`,
       [groupId]

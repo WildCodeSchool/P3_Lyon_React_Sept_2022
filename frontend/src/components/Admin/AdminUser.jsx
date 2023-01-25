@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import pictoGroup from "../../assets/pictoGroup.png";
 import AddUser from "./AddUser";
 import DropDownGroup from "./DropDownGroup";
@@ -35,22 +36,39 @@ export default function AdminUser() {
   }, [addUser, refresh]);
 
   const handleGroupSelect = (groupId) => {
-    setDeleteButton(groupId);
     fetch(`http://localhost:5000/api/user_group/group/${groupId}`)
       .then((response) => response.json())
       .then((result) => {
         setUserCard(result);
+        setDeleteButton(groupId);
       })
       .catch((error) => console.warn(error));
   };
 
-  const handleDeleteUserGroup = (groupId, userId) => {
-    fetch(`http://localhost:5000/api/user_group/${groupId}/${userId}`)
-      .then((response) => response.json())
+  /* const handleDeleteUserGroup = (groupId, userId) => {
+    fetch(
+      `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((result) => {
         setUserCard(result);
       })
       .catch((error) => console.warn(error));
+  }; */
+  const handleDeleteUserGroup = (groupId, userId) => {
+    axios
+      .delete(
+        `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`
+      )
+      .then((result) => {
+        toggleRefresh(result);
+        console.warn("Utilisateur supprimé du groupe");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (

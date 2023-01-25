@@ -101,7 +101,9 @@ export default function DropDownEditUser({
                       />{" "}
                       <button
                         type="button"
-                        onClick={() => deleteUserGroup(deleteButton, card.id)}
+                        onClick={() =>
+                          deleteUserGroup(deleteButton, card.user_id)
+                        }
                       >
                         Supprimer un utilisateur du groupe
                       </button>
