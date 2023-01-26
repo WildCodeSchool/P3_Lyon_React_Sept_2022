@@ -106,7 +106,7 @@ category_name varchar(200) not null,
 image varchar(250),
 group_id int not null,
 CONSTRAINT fk_category_group
-FOREIGN KEY(group_id) REFERENCES group_detail(id)
+FOREIGN KEY(group_id) REFERENCES group_detail(id) ON DELETE CASCADE
 );
 
 INSERT INTO
@@ -200,7 +200,7 @@ post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
 CONSTRAINT fk_post_category
-FOREIGN KEY(category_id) REFERENCES category(id)
+FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
 );
 
 INSERT INTO
@@ -529,7 +529,7 @@ image varchar(250),
 pdf varchar(250),
 post_id int not null,
 CONSTRAINT fk_attached_file_post
-FOREIGN KEY(post_id) REFERENCES post(id)
+FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE
 );
 
 CREATE TABLE comment(
@@ -540,7 +540,7 @@ user_id int not null,
 CONSTRAINT fk_comment_post
 FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
 CONSTRAINT fk_comment_user
-FOREIGN KEY(user_id) REFERENCES user_detail(id)
+FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE
 );
 
 INSERT INTO

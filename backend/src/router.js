@@ -118,6 +118,10 @@ router.post("/api/avatar", upload.single("avatar"), fileControllers.fileRename);
 
 // Gestion des commentaires
 router.get("/api/posts/:id/comments", commentControllers.browse);
+router.get(
+  "/api/posts/:id/commentsamount",
+  commentControllers.browseCommentsAmount
+);
 router.post("/api/posts/:id/comments", commentControllers.add);
 router.delete(
   "/api/posts/:id/comments/:comment_id",

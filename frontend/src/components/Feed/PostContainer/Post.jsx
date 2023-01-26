@@ -163,6 +163,14 @@ function Post({ post, deleteFromPostWithId }) {
           ))}
 
         <Link to={`/feed/${post.id}`}>
+          {post.nbcomments > 0 && (
+            <p className="pl-6 mt-4 text-sm text-gray-500">
+              {post.nbcomments > 1
+                ? `${post.nbcomments} commentaires`
+                : `${post.nbcomments} commentaire`}
+            </p>
+          )}
+
           <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img
               className="rounded-full w-10 mr-2 h-10 border-4 border-violet"
