@@ -10,7 +10,7 @@ export default function UserCard({
     <div>
       <div className="flex font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
         <img
-          className="rounded-full w-16 mr-6 border-4 border-violet"
+          className="rounded-full w-16 h-16 object-cover mr-6 border-4 border-violet"
           src={card.avatar}
           alt="User avatar"
         />

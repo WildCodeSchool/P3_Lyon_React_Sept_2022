@@ -35,7 +35,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
           />
         </button>
         <h1 className="text-[32px] px-6 text-primary font-bold text-center ">
-          Choisir un groupe et une catégorie
+          Choisir une catégorie
         </h1>
         <div className=" w-full">
           <input
@@ -58,11 +58,11 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   role="menu"
                   aria-hidden
                   onClick={() => setValueSelectedGroup(group.group_name)}
-                  className="text-lg px-10 font-normal bg-[#EBF2FB] text-primary pt-5 shadow-md shadow-slate-500"
+                  className="text-lg px-10 font-normal pt-5 shadow-md shadow-slate-200"
                   value={group.group_name}
                   key={group.id}
                 >
-                  <span className="text-xl font-bold hover:bg-primary hover:text-white">
+                  <span className="text-xl font-bold bg-[#EBF2FB] text-primary ">
                     {group.group_name}
                   </span>
 
@@ -78,7 +78,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         className="cursor-pointer flex flex-col mt-3 h-10"
                         onClick={() => handleValue(category)}
                       >
-                        <span className="hover:bg-violet hover:text-primary active:bg-violet active:text-primary">
+                        <span className="w-fit hover:bg-violet hover:text-primary active:bg-violet active:text-primary">
                           {category.category_name}
                         </span>
                       </li>
