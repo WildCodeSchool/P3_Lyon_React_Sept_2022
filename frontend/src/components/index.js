@@ -22,3 +22,6 @@ export { default as Carrousel } from "./Carrousel/Carrousel";
 export { default as GroupCard } from "./Carrousel/GroupCard";
 // components + Admin
 export { default as ModifUser } from "./Admin/ModifUser";
+export { default as AdminEspace } from "./Admin/AdminEspace";
+export { default as CarrouselAdmin } from "./Admin/CarrouselAdmin";
+export { default as HeaderAdmin } from "./Admin/HeaderAdmin";

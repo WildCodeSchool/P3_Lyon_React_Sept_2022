@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import CarrouselAdmin from "../components/Admin/CarrouselAdmin";
-import HeaderAdmin from "../components/Admin/HeaderAdmin";
-import { Feed, Header, Navbar, Carrousel, Panel } from "../components";
+import {
+  Feed,
+  Header,
+  Navbar,
+  Carrousel,
+  Panel,
+  CarrouselAdmin,
+  HeaderAdmin,
+} from "../components";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
 

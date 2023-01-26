@@ -5,9 +5,7 @@ import "./App.css";
 import { PostUserContextProvider } from "./contexts/PostUserContext";
 import { CurrentUserContextProvider } from "./contexts/userContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
-import ModifUser from "./components/Admin/ModifUser";
-import PostDetails from "./components/Feed/PostContainer/PostDetails";
-import AdminEspace from "./components/Admin/AdminEspace";
+import { PostDetails, AdminEspace, ModifUser } from "./components";
 import { Connexion, Main, CreatePost, Profile, PostList } from "./pages";
 
 function App() {

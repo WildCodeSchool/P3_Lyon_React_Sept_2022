@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Post, Navbar, ProfileCard } from "../components";
 import { useCurrentUserContext } from "../contexts/userContext";
+import "../App.css";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -63,16 +64,18 @@ function Profile() {
   };
 
   return (
-    <div className="bg-[#f6f6fe] overflow-x-hidden">
+    <div className="bg-[#f6f6fe] md:overflow-y-hidden md:h-screen  ">
       {profileUser && (
         <div>
-          <Navbar />
-          <ProfileCard profileUser={profileUser} />
-          <h1 className="text-primary text-center text-4xl mb-3">
-            Publications
-          </h1>
-          <div>
-            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:grid md:grid-cols-2 md:gap-2">
+          <div className="md:sticky md:top-0 md:w-full md:z-10 md:bg-[#f6f6fe]">
+            <Navbar />
+          </div>
+          <div className="md:flex md:max-h-screen ">
+            <ProfileCard profileUser={profileUser} />
+            <h1 className="text-primary text-center text-4xl mb-3 md:hidden">
+              Publications
+            </h1>
+            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:w-[130rem] md:mr-72 max-h-screen overflow-y-auto md:overflow-x-hidden md:rounded-lg  ">
               {myPosts
                 .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useCurrentUserContext } from "../../../contexts/userContext";
-import EditPost from "./EditPost";
+import { EditPost } from "../..";
 import menuDots from "../../../assets/modifDot.png";
 import rubish from "../../../assets/deleteBtn.png";
 import edit from "../../../assets/edit.png";
@@ -106,7 +106,6 @@ function Post({ post, deleteFromPostWithId }) {
               )}
               {editPostMenu && (
                 <div className=" mt-2 w-52 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
-                  {/* <div className=" px-4 pb-2 h-20 "> */}
                   {post.user_id === user.id && (
                     <button
                       onClick={() => handleEditPostModal()}
@@ -170,7 +169,7 @@ function Post({ post, deleteFromPostWithId }) {
             </div>
           ) : (
             <img
-              className="w-full mx-auto"
+              className="object-cover md:h-96 mx-auto"
               src={`${backEnd}/uploads/${post.post_image}`}
               alt="Post"
             />

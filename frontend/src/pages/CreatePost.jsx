@@ -123,9 +123,6 @@ function CreatePost() {
               <p className="text-md ml-[24px] text-primary">
                 {valueSelectedGroup}
               </p>
-              <button type="button" onClick={() => console.warn(dataPost)}>
-                vlique dessus
-              </button>
               <p
                 className="text-md ml-[24px] text-primary"
                 value={valueSelectedCategory}
