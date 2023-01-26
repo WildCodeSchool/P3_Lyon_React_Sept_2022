@@ -52,7 +52,6 @@ function Post({ post }) {
         });
     }
   };
-  const [numberComments, setNumberComments] = useState(0);
 
   return (
     <div>
@@ -167,14 +166,14 @@ function Post({ post }) {
             />
           ))}
 
-        <Link
-          to={`/feed/${post.id}`}
-          setNumberComments={setNumberComments}
-          numberComments={numberComments}
-        >
-          <p className="pl-6 mt-4 text-sm text-gray-500">
-            {numberComments} commentaires
-          </p>
+        <Link to={`/feed/${post.id}`}>
+          {post.nbcomments > 0 && (
+            <p className="pl-6 mt-4 text-sm text-gray-500">
+              {post.nbcomments > 1
+                ? `${post.nbcomments} commentaires`
+                : `${post.nbcomments} commentaire`}
+            </p>
+          )}
 
           <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img

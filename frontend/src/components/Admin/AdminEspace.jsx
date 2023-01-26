@@ -33,12 +33,31 @@ function AdminEspace() {
       });
   }, [refresh]);
 
-  const handleDelete = (group) => {
+  const handleDeleteGroup = (group) => {
     axios
       .delete(`${backEnd}/api/groups/${group}`)
       .then(() => {
         setRefresh(!refresh);
         toast(" ✅ Group Supprimé !", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleDeleteCategory = (category) => {
+    axios
+      .delete(`${backEnd}/api/categories/${category}`)
+      .then(() => {
+        setRefresh(!refresh);
+        toast(" ✅ Catégorie Supprimé !", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -104,7 +123,10 @@ function AdminEspace() {
                   </button>
                 </div>
                 <div>
-                  <button type="button" onClick={() => handleDelete(group.id)}>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteGroup(group.id)}
+                  >
                     <img
                       className="w-4 h-4 mt-3 ml-3"
                       src={rubbish}
@@ -167,7 +189,10 @@ function AdminEspace() {
                               alt=""
                             />
                           </button>
-                          <button type="button">
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteCategory(category.id)}
+                          >
                             <img
                               className="w-4 h-4 mt-3 ml-3"
                               src={rubbish}
