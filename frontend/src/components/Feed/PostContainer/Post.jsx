@@ -66,7 +66,7 @@ function Post({ post, deleteFromPostWithId }) {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
+      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-7 md:rounded-lg">
         {(post.user_id === user.id || user.is_admin) && (
           <div className="flex justify-end md:ml-36 md:mt-[-30px]">
             <button onClick={() => handleEditPost()} type="button">

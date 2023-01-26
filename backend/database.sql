@@ -47,7 +47,7 @@ VALUES
     '0628164513',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/zmIj4mm.jpg'
+    'https://i.imgur.com/QFlGPRB.jpg'
   ),
   (
     'Sahrane',
