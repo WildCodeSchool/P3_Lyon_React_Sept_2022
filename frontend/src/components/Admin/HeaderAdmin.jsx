@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function HeaderAdmin() {
+function HeaderAdmin({ backtoZero }) {
   return (
     <div className="flex-col justify-around">
       <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
@@ -18,7 +18,8 @@ function HeaderAdmin() {
         <Link to="/adminUser">
           <button
             type="button"
-            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
+            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl"
+            onClick={() => backtoZero()}
           >
             Utilisateurs
           </button>

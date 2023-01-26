@@ -19,9 +19,10 @@ class UserManager extends AbstractManager {
     );
   }
 
-  findAll() {
+  findAll(base) {
     return this.connection.any(
-      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id ASC`
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id DESC limit 5 offset $1`,
+      [base]
     );
   }
 

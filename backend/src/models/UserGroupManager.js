@@ -18,12 +18,12 @@ class UserGroupManager extends AbstractManager {
 
   // je récupère les utilisateurs qui appartiennent à un groupe en fonction de son id
 
-  findByGroupId(groupId) {
+  findByGroupId(groupId, base) {
     return this.connection.any(
       `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
       RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
-      WHERE group_id = $1`,
-      [groupId]
+      WHERE group_id = $1 limit 5 offset $2`,
+      [groupId, base]
     );
   }
 

@@ -3,6 +3,7 @@ import React from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
+import croix from "../../assets/close-red.png";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css";
 // eslint-disable-next-line import/no-unresolved
@@ -10,6 +11,11 @@ import "swiper/css/pagination";
 
 function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
   const { groupList, categoryList } = usePostUserContext();
+
+  const backToZero = () => {
+    setGroupId(0);
+    setCategoryId(0);
+  };
 
   const handleGroup = (value) => {
     setGroupId(value);
@@ -20,18 +26,37 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
   };
   return (
     <div className="carrousel-container pt-8 md:h-1/5 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
-      <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
-        {groupId
-          ? groupList
-              .filter((group) => group.id === groupId)
-              .map((group) => group.group_name)
-          : "Mes Groupes"}
-        <br />
-        {categoryId > 0 &&
-          categoryList
-            .filter((category) => category.id === categoryId)
-            .map((category) => category.category_name)}
-      </h2>
+      <div className="flex justify-center">
+        <div className="flex flex-col items-center ">
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm ">
+            {groupId
+              ? groupList
+                  .filter((group) => group.id === groupId)
+                  .map((group) => group.group_name)
+              : "Mes Groupes"}
+          </h2>
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl ">
+            {categoryId > 0 &&
+              categoryList
+                .filter((category) => category.id === categoryId)
+                .map((category) => category.category_name)}
+          </h2>
+        </div>
+        {groupId > 0 && (
+          <button type="button" onClick={() => backToZero()}>
+            <img
+              src={croix}
+              alt="croix rouge pour effacer"
+              className={
+                groupId > 0 && categoryId === 0
+                  ? "h-6 w-6 ml-4 mb-7"
+                  : "h-6 w-6 ml-4 mb-5"
+              }
+            />
+          </button>
+        )}
+      </div>
+
       <Swiper
         className={
           !groupId

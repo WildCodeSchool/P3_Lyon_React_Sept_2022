@@ -92,8 +92,10 @@ function AdminEspace() {
           Ajouter un nouvelle catégorie
         </button>
       </div>
-      <div className="flex justify-center border">
-        <h1>ICI, UNE BARRE DE RECHERCHE</h1>
+      <div className="flex justify-center text-center mb-6">
+        <h1 className=" w-3/4 border rounded-md">
+          ICI, UNE BARRE DE RECHERCHE
+        </h1>
       </div>
       <div className="flex flex-col items-center w-screen">
         {groupList.map((group) => (
@@ -112,11 +114,11 @@ function AdminEspace() {
                   aria-hidden="true"
                 />
               </Menu.Button>
-              <div className="flex flex-col">
+              <div className="flex flex-col mb-7">
                 <div>
                   <button type="button">
                     <img
-                      className="w-4 h-4 mt-3 ml-3"
+                      className="w-5 h-5 mt-3 ml-3"
                       src={editbtn}
                       alt="stylo"
                     />
@@ -128,7 +130,7 @@ function AdminEspace() {
                     onClick={() => handleDeleteGroup(group.id)}
                   >
                     <img
-                      className="w-4 h-4 mt-3 ml-3"
+                      className="w-5 h-5 mt-3 ml-3"
                       src={rubbish}
                       alt="poubelle"
                     />
