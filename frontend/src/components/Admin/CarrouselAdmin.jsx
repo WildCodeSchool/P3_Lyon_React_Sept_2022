@@ -17,7 +17,7 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
           <DropDownCategory groupId={groupId} setCategoryId={setCategoryId} />
         )}
       </div>
-      <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
+      <h2 className="text-primary text-center text-xl md:text-3xl">
         {groupId > 0 &&
           groupList
             .filter((group) => group.id === groupId)
