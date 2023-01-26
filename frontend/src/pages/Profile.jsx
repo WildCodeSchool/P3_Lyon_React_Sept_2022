@@ -59,6 +59,12 @@ function Profile() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const deleteFromPostWithId = (idPost) => {
+    const postIndex = myPosts.findIndex((post) => post.id === idPost);
+    myPosts.splice(postIndex, 1);
+    setMyPosts([...myPosts]);
+  };
+
   return (
     <div className="bg-[#f6f6fe] overflow-x-hidden">
       {profileUser && (
@@ -69,10 +75,16 @@ function Profile() {
             Publications
           </h1>
           <div>
-            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:flex md:flex-wrap">
-              {myPosts.map((post) => (
-                <Post post={post} key={post.id} />
-              ))}
+            <div className="bg-[#f6f6fe] w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:flex md:flex-wrap">
+              {myPosts
+                .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
+                .map((post) => (
+                  <Post
+                    post={post}
+                    key={post.id}
+                    deleteFromPostWithId={deleteFromPostWithId}
+                  />
+                ))}
             </div>
           </div>
         </div>
