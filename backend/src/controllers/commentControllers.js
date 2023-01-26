@@ -13,6 +13,19 @@ const browse = (req, res) => {
     });
 };
 
+const browseCommentsAmount = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  models.comment
+    .findAmountByPost(id)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const add = (req, res) => {
   const comment = req.body;
 
@@ -45,6 +58,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseCommentsAmount,
   add,
   destroy,
 };
