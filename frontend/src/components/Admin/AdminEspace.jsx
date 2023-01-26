@@ -38,7 +38,7 @@ function AdminEspace() {
       .delete(`${backEnd}/api/groups/${group}`)
       .then(() => {
         setRefresh(!refresh);
-        toast(" ✅ Group Supprimé !", {
+        toast.success("Groupe Supprimé !", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -57,7 +57,7 @@ function AdminEspace() {
       .delete(`${backEnd}/api/categories/${category}`)
       .then(() => {
         setRefresh(!refresh);
-        toast(" ✅ Catégorie Supprimé !", {
+        toast.success("Catégorie Supprimée !", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
