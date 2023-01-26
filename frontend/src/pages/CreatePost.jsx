@@ -15,6 +15,8 @@ const backEnd = import.meta.env.VITE_BACKEND_URL;
 function CreatePost() {
   const { valueSelectedCategory, valueSelectedGroup, handleReset } =
     usePostUserContext();
+  const [fileName, setFileName] = useState("");
+
   const { user } = useCurrentUserContext();
   const inputRef = useRef(null);
   const [dataPost, setDataPost] = useState({
@@ -41,10 +43,18 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (
+    if (valueSelectedCategory === "") {
+      toast.warn(" Veuillez renseigner le groupe de la publication", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } else if (
       dataPost.title &&
       dataPost.content &&
       dataPost.user_id &&
@@ -72,17 +82,20 @@ function CreatePost() {
           console.warn(retour);
           handleReset();
           navigate("/feed");
-          toast(" ✅ Poste Publié !", {
+          toast.success(" Publié avec succès !", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            theme: "light",
           });
         })
         .catch(console.error());
     }
+  };
+
+  const handleFileUpload = (event) => {
+    setFileName(event.target.files[0].name);
   };
 
   return (
@@ -156,7 +169,10 @@ function CreatePost() {
             />
           </div>
           <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
-          <div className="flex items-center justify-start mt-8">
+          <p className="text-sm mt-3 ml-4 font-light text-[#070D4F]">
+            {fileName}
+          </p>
+          <div className="flex items-center justify-start mt-5">
             <label className="flex flex-col items-center text-md font-light text-primary pl-6 cursor-pointer">
               <img className="w-7 h-7 mr-2" src={file} alt="New file" />
               <input
@@ -165,6 +181,7 @@ function CreatePost() {
                 value={dataPost.image}
                 name="avatar"
                 ref={inputRef}
+                onChange={handleFileUpload}
               />
               Fichier
             </label>

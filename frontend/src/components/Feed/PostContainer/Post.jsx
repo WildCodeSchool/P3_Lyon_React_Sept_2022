@@ -36,7 +36,7 @@ function Post({ post, deleteFromPostWithId }) {
       axios
         .delete(`${backEnd}/api/posts/${post.id}`)
         .then(() => {
-          toast(" ✅ Poste Supprimé !", {
+          toast.success("Publication supprimée !", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -54,8 +54,51 @@ function Post({ post, deleteFromPostWithId }) {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm	border-t border-gray-100 mt-10 md:rounded-lg">
-        <div className="flex flex-row self-start py-4 px-6">
+      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-10 md:rounded-lg">
+        {(post.user_id === user.id || user.is_admin) && (
+          <div className="flex justify-end md:ml-36 md:mt-[-30px]">
+            <button onClick={() => handleEditPost()} type="button">
+              <img
+                className="h-5 mt-3 md:mt-10 mr-5 md:ml-20"
+                src={menuDots}
+                alt="Menu"
+              />
+            </button>
+          </div>
+        )}
+        {editPostMenu && (
+          <div className=" mt-2 w-60 left-32 md:left-1/2 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
+            {/* <div className=" px-4 pb-2 h-20 "> */}
+            {post.user_id === user.id && (
+              <button
+                onClick={() => handleEditPostModal()}
+                className="text-black p-2 flex"
+                type="button"
+              >
+                <img className="h-5 w-5" src={edit} alt="Edit" />
+                <span className="pl-3">Modifier</span>
+              </button>
+            )}
+            <button
+              onClick={() => handleDelete(post.id)}
+              className="text-black p-2 flex"
+              type="button"
+            >
+              <img className="h-5 w-5" src={rubish} alt="Edit" />
+              <span className="pl-3">Supprimer</span>
+            </button>
+            {/* </div> */}
+            {editPostModal && (
+              <EditPost
+                editPostModal={editPostModal}
+                setEditPostModal={setEditPostModal}
+                setEditPostMenu={setEditPostMenu}
+                handleEditPostModal={handleEditPostModal}
+              />
+            )}
+          </div>
+        )}
+        <div className="flex flex-row self-start pt-2 pb-4 px-6 md:py-8">
           <Link to={`/profile/${post.user_id}`}>
             <img
               className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet md:mr-20"
@@ -81,49 +124,6 @@ function Post({ post, deleteFromPostWithId }) {
                   {formatDate(post.post_date)}
                 </h3>
               </div>
-              {(post.user_id === user.id || user.is_admin) && (
-                <div className="flex justify-end md:ml-36 md:mt-[-30px]">
-                  <button onClick={() => handleEditPost()} type="button">
-                    <img
-                      className="h-5 ml-12 md:mt-0 md:ml-20"
-                      src={menuDots}
-                      alt="Menu"
-                    />
-                  </button>
-                </div>
-              )}
-              {editPostMenu && (
-                <div className=" mt-2 w-52 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
-                  {/* <div className=" px-4 pb-2 h-20 "> */}
-                  {post.user_id === user.id && (
-                    <button
-                      onClick={() => handleEditPostModal()}
-                      className="text-black p-2 flex"
-                      type="button"
-                    >
-                      <img className="h-5 w-5" src={edit} alt="Edit" />
-                      <span className="pl-3">Modifier</span>
-                    </button>
-                  )}
-                  <button
-                    onClick={() => handleDelete(post.id)}
-                    className="text-black p-2 flex"
-                    type="button"
-                  >
-                    <img className="h-5 w-5" src={rubish} alt="Edit" />
-                    <span className="pl-3">Supprimer</span>
-                  </button>
-                  {/* </div> */}
-                  {editPostModal && (
-                    <EditPost
-                      editPostModal={editPostModal}
-                      setEditPostModal={setEditPostModal}
-                      setEditPostMenu={setEditPostMenu}
-                      handleEditPostModal={handleEditPostModal}
-                    />
-                  )}
-                </div>
-              )}
             </div>
           </div>
         </div>
