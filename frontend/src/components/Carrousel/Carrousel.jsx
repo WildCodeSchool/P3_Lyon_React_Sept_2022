@@ -25,7 +25,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
     setCategoryId(value);
   };
   return (
-    <div className="carrousel-container pt-8 md:h-1/5 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
+    <div className="carrousel-container pt-8 md:h-fit md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
       <div className="flex justify-center">
         <div className="flex flex-col items-center ">
           <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm ">
@@ -49,8 +49,8 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               alt="croix rouge pour effacer"
               className={
                 groupId > 0 && categoryId === 0
-                  ? "h-6 w-6 ml-4 mb-7"
-                  : "h-6 w-6 ml-4 mb-5"
+                  ? "h-6 w-6 md:h-8 md:w-8 ml-4 mb-7"
+                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-5"
               }
             />
           </button>
@@ -105,33 +105,38 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
 
       {/* pour version Desktop */}
       {!groupId ? (
-        <div className=" hidden md:block ">
-          {groupList.map((group) => {
-            return (
-              <button
-                onClick={() => handleCategory(group.id)}
-                type="button"
-                className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
-                key={group.id}
-              >
-                {group.group_name}
-              </button>
-            );
-          })}
+        <div className="bg-alert">
+          <div className=" hidden md:block ">
+            {groupList.map((group) => {
+              return (
+                <button
+                  onClick={() => handleGroup(group.id)}
+                  type="button"
+                  className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  key={group.id}
+                >
+                  {group.group_name}
+                </button>
+              );
+            })}
+          </div>
         </div>
       ) : (
-        <div className="hidden md:block">
-          {categoryList
-            .filter((category) => category.group_id === groupId)
-            .map((category) => (
-              <button
-                type="button"
-                key={category.id}
-                className="  md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
-              >
-                {category.category_name}
-              </button>
-            ))}
+        <div className="bg-alert">
+          <div className="hidden md:block">
+            {categoryList
+              .filter((category) => category.group_id === groupId)
+              .map((category) => (
+                <button
+                  onClick={() => handleCategory(category.id)}
+                  type="button"
+                  className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  key={category.id}
+                >
+                  {category.category_name}
+                </button>
+              ))}
+          </div>
         </div>
       )}
     </div>
