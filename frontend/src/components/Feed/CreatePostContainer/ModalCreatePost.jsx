@@ -23,7 +23,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
   }
   return (
     <div>
-      <div className="fixed top-0 overflow-y-scroll bg-white w-[101%] h-[100vh] md:w-1/2 md:ml-[50%] md:mt-2 ">
+      <div className="fixed top-0 overflow-y-scroll bg-white w-screen h-screen">
         <button
           type="button"
           onClick={() => setShowCategories(!showCategories)}
@@ -34,15 +34,15 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
             alt="Close"
           />
         </button>
-        <h1 className="text-[32px] px-6 text-primary font-bold text-center ">
-          Choisir un groupe et une catégorie
+        <h1 className="text-[32px] px-6 text-primary font-bold text-center md:text-4xl">
+          Choisir une catégorie
         </h1>
-        <div className=" w-full">
+        <div className="flex justify-center">
           <input
             type="text"
             onChange={handleSearch}
             placeholder="Cherchez un groupe..."
-            className="border rounded-xl border-primary mx-auto w-[280px] h-11 mt-10 mb-3 ml-16 pl-4"
+            className="border rounded-xl border-primary mx-auto w-[280px] md:w-1/2 h-11 mt-10 mb-3 pl-4"
           />
         </div>
         <div className="w-full mt-4 md:flex md:justify-around md:wrap">
@@ -58,11 +58,11 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                   role="menu"
                   aria-hidden
                   onClick={() => setValueSelectedGroup(group.group_name)}
-                  className="text-lg px-10 font-normal bg-[#EBF2FB] text-primary pt-5 shadow-md shadow-slate-500"
+                  className="text-lg px-10 font-normal pt-5 shadow-md shadow-slate-200"
                   value={group.group_name}
                   key={group.id}
                 >
-                  <span className="text-xl font-bold hover:bg-primary hover:text-white">
+                  <span className="text-xl md:text-2xl font-bold bg-[#EBF2FB] text-primary ">
                     {group.group_name}
                   </span>
 
@@ -78,7 +78,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
                         className="cursor-pointer flex flex-col mt-3 h-10"
                         onClick={() => handleValue(category)}
                       >
-                        <span className="hover:bg-violet hover:text-primary active:bg-violet active:text-primary">
+                        <span className="w-fit md:text-xl hover:bg-violet hover:text-primary active:bg-violet active:text-primary">
                           {category.category_name}
                         </span>
                       </li>

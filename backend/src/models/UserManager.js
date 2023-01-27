@@ -21,13 +21,14 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.connection.any(
-      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id ASC`
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id DESC `
     );
   }
 
-  noFetchAll() {
+  noFetchAll(query) {
     return this.connection.any(
-      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname AND lastname ILIKE %$1%`
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname OR lastname ILIKE %$1%`,
+      [query]
     );
   }
 

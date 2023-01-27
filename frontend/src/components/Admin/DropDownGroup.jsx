@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
 
 function classNames(...classes) {
@@ -27,7 +26,6 @@ function DropDownGroup({ setGroupId }) {
             Groupes
             <img className="w-3 h-2 mt-3 ml-3" src={FlecheDownBlue} alt="" />
           </div>
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
 

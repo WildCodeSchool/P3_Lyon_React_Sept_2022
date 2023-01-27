@@ -29,7 +29,7 @@ function PostDetails({ numberComments, setNumberComments }) {
   }, [postId]);
 
   return (
-    <div className="bg-white h-screen w-screen">
+    <div className="bg-white h-screen w-screen overflow-x-hidden">
       <div>
         <Link to="/feed">
           <img

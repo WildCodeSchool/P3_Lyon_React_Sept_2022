@@ -92,7 +92,7 @@ router.get(
 );
 // je récupère les utilisateurs d'un groupe en fonction de l'id du groupe
 router.get(
-  "/api/user_group/group/:groupId",
+  "/api/user_group/group/:groupId/limit/:base",
   userGroupControllers.findUserByGroupId
 );
 // J'ajoute un utilisateur dans un groupe
@@ -119,6 +119,10 @@ router.post("/api/avatar", upload.single("avatar"), fileControllers.fileRename);
 
 // Gestion des commentaires
 router.get("/api/posts/:id/comments", commentControllers.browse);
+router.get(
+  "/api/posts/:id/commentsamount",
+  commentControllers.browseCommentsAmount
+);
 router.post("/api/posts/:id/comments", commentControllers.add);
 router.delete(
   "/api/posts/:id/comments/:comment_id",

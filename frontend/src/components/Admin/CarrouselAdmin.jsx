@@ -7,15 +7,8 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
   const { groupList, categoryList } = usePostUserContext();
   return (
     <div>
-      <div className="font-[Enedis] text-primary text-center text-2xl mb-6">
+      <div className="font-[Enedis] text-primary text-center text-2xl mb-3">
         <h3>Gérer la liste des publications</h3>
-      </div>
-
-      <div className=" flex justify-around mt-6 ">
-        <DropDownGroup setGroupId={setGroupId} />
-        {groupId > 0 && (
-          <DropDownCategory groupId={groupId} setCategoryId={setCategoryId} />
-        )}
       </div>
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
         {groupId > 0 &&
@@ -28,6 +21,13 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
             .filter((category) => category.id === categoryId)
             .map((category) => `Catégorie: ${category.category_name}`)}
       </h2>
+
+      <div className=" flex justify-around mt-3 ">
+        <DropDownGroup setGroupId={setGroupId} />
+        {groupId > 0 && (
+          <DropDownCategory groupId={groupId} setCategoryId={setCategoryId} />
+        )}
+      </div>
     </div>
   );
 }

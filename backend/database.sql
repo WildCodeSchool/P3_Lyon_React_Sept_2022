@@ -29,7 +29,7 @@ VALUES
     '0628164511',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/LwrVS8h.jpg'
+    'https://i.imgur.com/Ajb5Q8V.png'
   ),
   (
     'Doroteya',
@@ -38,7 +38,7 @@ VALUES
     '0628164512',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/FHz3NQx.jpg'
+    'https://i.imgur.com/vJKyNZ2.jpg'
   ),
   (
     'Matthieu',
@@ -47,7 +47,7 @@ VALUES
     '0628164513',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/zmIj4mm.jpg'
+    'https://i.imgur.com/QFlGPRB.jpg'
   ),
   (
     'Sahrane',
@@ -56,7 +56,7 @@ VALUES
     '0628164514',
     'user',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/lIAKkYJ.jpg'
+    'https://i.imgur.com/DixnvgV.jpg'
   ),
   (
     'Ryan',
@@ -106,7 +106,7 @@ category_name varchar(200) not null,
 image varchar(250),
 group_id int not null,
 CONSTRAINT fk_category_group
-FOREIGN KEY(group_id) REFERENCES group_detail(id)
+FOREIGN KEY(group_id) REFERENCES group_detail(id) ON DELETE CASCADE
 );
 
 INSERT INTO
@@ -200,319 +200,363 @@ post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
 CONSTRAINT fk_post_category
-FOREIGN KEY(category_id) REFERENCES category(id)
+FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
 );
 
 INSERT INTO
-  post (title, content, user_id, category_id, post_date)
+  post (title, content, user_id, category_id, post_date, post_image)
 VALUES
   (
     'Organisation repas de Noel !',
     'You are my fire. The one desire. Believe when I say. I want it that way',
     1,
     1,
-    '2022-11-01'
+    '2022-11-01',
+    'https://www.choisir.com/medias/b2380444-ligne-enedis.jpg'
   ),
   (
     'Vacances d''été',
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     2,
     2,
-    '2022-11-02'
+    '2022-11-02',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Joyeux anniversaire Margaux!',
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     3,
     3,
-    '2022-11-03'
+    '2022-11-03',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Secret Santa',
     'Tell me why, I never wanna hear you say. I want it that way',
     4,
     4,
-    '2022-11-04'
+    '2022-11-04',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Michael Jackson',
     'Don''t stop until you get enough',
     5,
     5,
-    '2022-11-05'
+    '2022-11-05',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Ron Steward',
     'Have you ever seen the rain?',
     1,
     6,
-    '2022-11-06'
+    '2022-11-06',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Mick Jagger',
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     2,
     7,
-    '2022-11-07'
+    '2022-11-07',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Sash',
     '¡ ECUADOR !',
     3,
     8,
-    '2022-11-08'
+    '2022-11-08',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Lenny Kravitz',
     'Are you gona go my way ?',
     4,
     9,
-    '2022-11-08'
+    '2022-11-08',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Police',
     'You don''t have to put on that red light',
     5,
     10,
-    '2022-11-09'
+    '2022-11-09',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Arctic Monkeys',
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     1,
     11,
-    '2022-11-10'
+    '2022-11-10',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Pink Floyd',
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     2,
     12,
-    '2022-11-11'
+    '2022-11-11',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'David Bowie',
     'If you say run, I''ll run with you and if you say hide, we''ll hide',
     3,
     13,
-    '2022-11-12'
+    '2022-11-12',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
 (
     'Derek & The Dominos',
     'What will you do when you get lonely? No one waiting by your side?',
     4,
     15,
-    '2022-11-13'
+    '2022-11-13',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Mamas & The Papas',
     'All the leaves are brown and the sky is gray.',
     5,
     1,
-    '2022-11-14'
+    '2022-11-14',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Dire Straits',
     'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
     1,
     2,
-    '2022-11-15'
+    '2022-11-15',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Doors',
     'Come on, baby, light my fire',
     2,
     3,
-    '2022-11-16'
+    '2022-11-16',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Pixies',
     'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
     3,
     4,
-    '2022-11-17'
+    '2022-11-17',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'J.J. Cale',
     'If you want to hang out. You''ve got to take her out, cocaine',
     4,
     5,
-    '2022-11-18'
+    '2022-11-18',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'KISS',
     'I was made for loving you, baby. You were made for loving me',
     5,
     6,
-    '2022-11-19'
+    '2022-11-19',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Guns N'' Roses',
     'Take me down to the Paradise City, where the grass is green and the girls are pretty',
     1,
     7,
-    '2022-11-20'
+    '2022-11-20',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Thin Lizzy',
     'The boys are back in town',
     2,
     8,
-    '2022-11-21'
+    '2022-11-21',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Organisation repas de Noël !',
     'You are my fire. The one desire. Believe when I say. I want it that way',
     3,
     9,
-    '2022-11-22'
+    '2022-11-22',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Vacances d''été',
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     4,
     10,
-    '2022-11-23'
+    '2022-11-23',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Joyeux anniversaire Margaux!',
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     5,
     11,
-    '2022-11-24'
+    '2022-11-24',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Secret Santa',
     'Tell me why, I never wanna hear you say. I want it that way',
     1,
     12,
-    '2022-11-25'
+    '2022-11-25',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Michael Jackson',
     'Don''t stop until you get enough',
     2,
     13,
-    '2022-11-26'
+    '2022-11-26',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Ron Steward',
     'Have you ever seen the rain?',
     3,
     14,
-    '2022-11-27'
+    '2022-11-27',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Mick Jagger',
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     4,
     15,
-    '2022-11-28'
+    '2022-11-28',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Sash',
     '¡ ECUADOR !',
     5,
     1,
-    '2022-11-29'
+    '2022-11-29',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Lenny Kravitz',
     'Are you gona go my way ?',
     1,
     2,
-    '2022-11-30'
+    '2022-11-30',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Police',
     'You don''t have to put on that red light',
     2,
     3,
-    '2022-12-01'
+    '2022-12-01',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Arctic Monkeys',
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     3,
     4,
-    '2022-12-02'
+    '2022-12-02',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
   (
     'Pink Floyd',
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     4,
     5,
-    '2022-12-03'
+    '2022-12-03',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'David Bowie',
     'If you say run, I''ll run with you and if you say hide, we''ll hide',
     5,
     6,
-    '2022-12-04'
+    '2022-12-04',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Derek & The Dominos',
     'What will you do when you get lonely? No one waiting by your side?',
     1,
     7,
-    '2022-12-05'
+    '2022-12-05',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Mamas & The Papas',
     'All the leaves are brown and the sky is gray.',
     2,
     8,
-    '2022-12-06'
+    '2022-12-06',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Dire Straits',
     'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
     3,
     9,
-    '2022-12-07'
+    '2022-12-07',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'The Doors',
     'Come on, baby, light my fire',
     4,
     10,
-    '2022-12-08'
+    '2022-12-08',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Pixies',
     'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
     5,
     11,
-    '2022-12-09'
+    '2022-12-09',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'J.J. Cale',
     'If you want to hang out. You''ve got to take her out, cocaine',
     1,
     12,
-    '2022-12-10'
+    '2022-12-10',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'KISS',
     'I was made for loving you, baby. You were made for loving me',
     2,
     13,
-    '2022-12-11'
+    '2022-12-11',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Guns N'' Roses',
     'Take me down to the Paradise City, where the grass is green and the girls are pretty',
     3,
     14,
-    '2022-12-12'
+    '2022-12-12',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   ),
     (
     'Thin Lizzy',
     'The boys are back in town',
     4,
     15,
-    '2022-12-13'
+    '2022-12-13',
+    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
   );
 
 CREATE TABLE like_table(
@@ -529,7 +573,7 @@ image varchar(250),
 pdf varchar(250),
 post_id int not null,
 CONSTRAINT fk_attached_file_post
-FOREIGN KEY(post_id) REFERENCES post(id)
+FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE
 );
 
 CREATE TABLE comment(
@@ -538,9 +582,9 @@ content text not null,
 post_id int not null,
 user_id int not null,
 CONSTRAINT fk_comment_post
-FOREIGN KEY(post_id) REFERENCES post(id),
+FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
 CONSTRAINT fk_comment_user
-FOREIGN KEY(user_id) REFERENCES user_detail(id)
+FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE
 );
 
 INSERT INTO
@@ -557,4 +601,9 @@ CREATE TABLE user_group
   CONSTRAINT fk_user_group_group_detail
     FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
 );
+
+
+INSERT INTO
+  user_group (user_id, group_id)
+VALUES (1, 2);
 

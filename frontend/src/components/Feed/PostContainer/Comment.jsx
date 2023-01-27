@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
+import send from "../../../assets/send.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -33,7 +34,6 @@ function Comment({ postId }) {
       headers: myHeaders,
       body,
     };
-    console.warn(createComment);
     if (
       createComment.content &&
       createComment.user_id &&
@@ -59,14 +59,21 @@ function Comment({ postId }) {
         src={user.avatar}
         alt="My profile avatar"
       />
-      <form onSubmit={onSubmit} name="form">
+      <form
+        onSubmit={onSubmit}
+        name="form"
+        className="flex justify-around items-center shadow-md rounded-xl"
+      >
         <input
-          className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm"
+          className="w-60 py-2 pl-2 text-sm"
           type="text"
           name="content"
           placeholder="Laissez un commentaire..."
           onChange={onChange}
         />
+        <button type="button" className="py-3 w-8" onClick={onSubmit}>
+          <img className="w-4 h-4" src={send} alt="Send comment" />
+        </button>
       </form>
     </div>
   );

@@ -61,35 +61,35 @@ function EditProfile({ editProfile, setEditProfile }) {
             placeholder="Project Manager"
           />
         </label>
+        <h2 className="text-lg text-center mt-2 font-light mb-4">
+          Sélectionnez votre équipe
+        </h2>
+        <div className="flex justify-center items-center">
+          <select
+            id="equipe"
+            className="w-80 bg-gray-50 border border-primary text-gray-900 text-md rounded-lg p-3"
+          >
+            <option selected>Equipe</option>
+            <option value="Communication">Communication</option>
+            <option value="Informatique">Informatique</option>
+            <option value="RH">RH</option>
+            <option value="Developpement">Développement</option>
+            <option value="Technique">Technique</option>
+            <option value="RC">Relation client</option>
+          </select>
+        </div>
+        <div className="text-center mt-8">
+          <button
+            type="button"
+            className="bg-primary text-white py-3 px-[2.5rem] rounded-[20px] w-6/12 text-md mb-4"
+          >
+            Enregistrer
+          </button>
+        </div>
       </form>
-      <h2 className="text-lg text-center mt-2 font-light mb-4">
-        Sélectionnez votre équipe
-      </h2>
-      <div className="flex justify-center items-center">
-        <select
-          id="equipe"
-          className="w-80 bg-gray-50 border border-primary text-gray-900 text-md rounded-lg p-3"
-        >
-          <option selected>Equipe</option>
-          <option value="Communication">Communication</option>
-          <option value="Informatique">Informatique</option>
-          <option value="RH">RH</option>
-          <option value="Developpement">Développement</option>
-          <option value="Technique">Technique</option>
-          <option value="RC">Relation client</option>
-        </select>
-      </div>
-      <div className="text-center mt-8">
-        <button
-          type="button"
-          className="bg-primary text-white py-3 px-[2.5rem] rounded-[20px] w-6/12 text-md mb-4"
-        >
-          Enregistrer
-        </button>
-        <Link to="/">
-          <h3 className="font-light">Se déconnecter</h3>
-        </Link>
-      </div>
+      <Link to="/">
+        <h3 className="font-light">Se déconnecter</h3>
+      </Link>
     </div>
   );
 }
