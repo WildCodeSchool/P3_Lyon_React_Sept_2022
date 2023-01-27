@@ -117,24 +117,24 @@ function CreatePost() {
           onSubmit={(e) => onSubmit(e)}
           method="PUT"
           encType="multipart/form-data"
-          className="mb-5 md:bg-[white] md:flex md:items-center md:justify-center md:flex-col md:shadow-md md:w-3/5 md:border md:border-gray-200 md:m-auto"
+          className="mb-5 md:bg-[white] md:flex md:items-center md:justify-center md:flex-col md:shadow-md sm:w-4/5 xl:w-3/5 md:border md:border-gray-200 md:m-auto"
         >
           <div className="flex items-center md:justify-start md:mr-60 md:mt-7">
             <img
-              className="rounded-full object-cover w-28 h-28 md:w-48 md:h-48 ml-3 border-4 border-violet md:ml-0"
+              className="rounded-full object-cover w-28 h-28 sm:w-48 sm:h-48 ml-3 md:ml-6 border-4 border-violet"
               src={user.avatar}
               alt="Avatar"
             />
             <div className="block text-left">
               <div className="flex">
                 <h2
-                  className="text-2xl ml-[24px] md:ml-5 md:text-4xl text-green font-bold "
+                  className="text-2xl ml-[24px] sm:ml-5 sm:text-4xl text-green font-bold "
                   value={user.firstname}
                 >
                   {user.firstname}
                 </h2>
                 <h2
-                  className="text-2xl ml-2 md:text-4xl text-green w-10 font-bold "
+                  className="text-2xl ml-2 sm:text-4xl text-green w-10 font-bold "
                   value={user.lastname}
                 >
                   {user.lastname}
@@ -172,11 +172,11 @@ function CreatePost() {
               onChange={onChange}
             />
           </div>
-          <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
+          <hr className="h-[2px] bg-grey w-[100vw] md:w-[70vw] xl:w-[60vw]" />
           <p className="text-sm mt-3 md:mt-0 ml-4 font-light text-[#070D4F]">
             {fileName}
           </p>
-          <div className="flex items-center justify-around mt-5 md:justify-end md:ml-[37rem] md:mb-3">
+          <div className="flex items-center justify-around mt-5 md:justify-end md:w-11/12 md:mr-6 md:mb-3">
             <label className="flex flex-col items-center text-md md:text-lg font-light text-primary pl-6 md:mr-10 cursor-pointer">
               <img
                 className="w-7 h-7 mr-2 md:w-9 md:h-9"
@@ -200,14 +200,16 @@ function CreatePost() {
               />
             </div>
           </div>
-          <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
-          <button
-            type="submit"
-            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-8 ml-32 w-40 md:mx-auto md:w-48 
-         rounded-3xl justify-center md:mb-2 md:mt-5"
-          >
-            Publier
-          </button>
+          <hr className="h-[2px] bg-grey w-[100vw] md:w-[70vw] xl:w-[60vw]" />
+          <div className="w-11/12 flex justify-center items-center">
+            <button
+              type="submit"
+              className="bg-primary hover:bg-[#0d17a1] text-white py-3 mt-8 w-40 md:w-48 
+         rounded-3xl md:mb-2 md:mt-5"
+            >
+              Publier
+            </button>
+          </div>
         </form>
 
         {showCategories ? (
