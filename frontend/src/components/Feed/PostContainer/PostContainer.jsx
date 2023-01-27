@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
+import { Post } from "../..";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import { useTokenContext } from "../../../contexts/TokenContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -8,6 +9,7 @@ function PostContainer({ groupId, categoryId }) {
   const [posts, setPosts] = useState([]);
   const [base, setBase] = useState(0);
   const { token } = useCurrentUserContext();
+  const { redirectIfDisconnected } = useTokenContext();
 
   useEffect(() => {
     setPosts([]);
@@ -31,10 +33,16 @@ function PostContainer({ groupId, categoryId }) {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("J'AI DIS NON!");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch(console.error);
     } else if (groupId > 0 && categoryId === 0) {
       fetch(`${backEnd}/api/posts/group/${groupId}/limit/${base}`, {
         method: "GET",
@@ -43,10 +51,16 @@ function PostContainer({ groupId, categoryId }) {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("J'AI DIS NON!");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((err) => console.error(err));
     } else if (categoryId > 0) {
       fetch(`${backEnd}/api/posts/category/${categoryId}/limit/${base}`, {
         method: "GET",
@@ -55,10 +69,16 @@ function PostContainer({ groupId, categoryId }) {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("J'AI DIS NON!");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((err) => console.error(err));
     }
   }, [base, groupId, categoryId]);
 

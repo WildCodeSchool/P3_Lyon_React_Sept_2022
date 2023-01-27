@@ -144,7 +144,7 @@ export default function AdminUser() {
 
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
-      <HeaderAdmin backtoZero={backToZero} />
+      <HeaderAdmin />
       <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
         <h3>Gérer la liste des utilisateurs</h3>
       </div>

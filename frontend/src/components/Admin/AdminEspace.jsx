@@ -8,6 +8,7 @@ import Navbar from "../Navbar/Navbar";
 import HeaderAdmin from "./HeaderAdmin";
 import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
+import plus from "../../assets/plus.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -81,14 +82,16 @@ function AdminEspace() {
       <div className="flex flex-col items-center justify-center">
         <button
           type="button"
-          className="w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
+          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouveau groupe
         </button>
         <button
           type="button"
-          className="w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
+          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouvelle catégorie
         </button>
       </div>
