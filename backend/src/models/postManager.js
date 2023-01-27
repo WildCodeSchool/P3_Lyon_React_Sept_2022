@@ -7,7 +7,7 @@ class PostManager extends AbstractManager {
 
   find(id) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
        LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -21,7 +21,7 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -57,7 +57,7 @@ class PostManager extends AbstractManager {
 
   findPostsByGroup(group, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -67,7 +67,7 @@ class PostManager extends AbstractManager {
       ON g.id = c.group_id 
       LEFT JOIN comment ON comment.post_id = p.id
       WHERE g.id = $1 
-      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image,  ud.lastname, ud.avatar, c.category_name, g.group_name
       ORDER BY p.id DESC 
       limit 5 offset $2;`,
       [group, base]
@@ -76,7 +76,7 @@ class PostManager extends AbstractManager {
 
   findPostsByCategory(category, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -95,7 +95,7 @@ class PostManager extends AbstractManager {
 
   insert(post) {
     return this.connection.any(
-      `INSERT INTO ${this.table} (title, content, user_id, category_id, post_date, post_image) VALUES ($1, $2, $3, $4, current_date, $5) RETURNING *;
+      `INSERT INTO ${this.table} (title, content, user_id, category_id, post_date, post_image) VALUES ($1, $2, $3, $4, current_timestamp, $5) RETURNING *;
       `,
       [
         post.title,
