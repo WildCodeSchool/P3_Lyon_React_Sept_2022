@@ -8,6 +8,7 @@ import Navbar from "../Navbar/Navbar";
 import HeaderAdmin from "./HeaderAdmin";
 import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
+import plus from "../../assets/plus.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -81,19 +82,23 @@ function AdminEspace() {
       <div className="flex flex-col items-center justify-center">
         <button
           type="button"
-          className="w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
+          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouveau groupe
         </button>
         <button
           type="button"
-          className="w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
+          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouvelle catégorie
         </button>
       </div>
-      <div className="flex justify-center border">
-        <h1>ICI, UNE BARRE DE RECHERCHE</h1>
+      <div className="flex justify-center text-center mb-6">
+        <h1 className=" w-3/4 border rounded-md">
+          ICI, UNE BARRE DE RECHERCHE
+        </h1>
       </div>
       <div className="flex flex-col items-center w-screen">
         {groupList.map((group) => (
@@ -112,11 +117,11 @@ function AdminEspace() {
                   aria-hidden="true"
                 />
               </Menu.Button>
-              <div className="flex flex-col">
+              <div className="flex flex-col mb-7">
                 <div>
                   <button type="button">
                     <img
-                      className="w-4 h-4 mt-3 ml-3"
+                      className="w-5 h-5 mt-3 ml-3"
                       src={editbtn}
                       alt="stylo"
                     />
@@ -128,7 +133,7 @@ function AdminEspace() {
                     onClick={() => handleDeleteGroup(group.id)}
                   >
                     <img
-                      className="w-4 h-4 mt-3 ml-3"
+                      className="w-5 h-5 mt-3 ml-3"
                       src={rubbish}
                       alt="poubelle"
                     />

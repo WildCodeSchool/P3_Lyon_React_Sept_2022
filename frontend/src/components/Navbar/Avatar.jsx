@@ -9,7 +9,7 @@ function Avatar() {
       <img
         src={user.avatar}
         alt="My profile avatar"
-        className="rounded-full w-24 h-24 border-4 border-violet mr-5 "
+        className="rounded-full object-cover w-24 h-24 border-4 border-violet mr-5 "
       />
     </Link>
   );

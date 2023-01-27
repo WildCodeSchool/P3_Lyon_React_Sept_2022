@@ -32,7 +32,7 @@ router.post(
 );
 
 /// //// Gestion des users ///////
-router.get("/api/users", userControllers.browse);
+router.get("/api/users/limit/:base", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);
@@ -91,7 +91,7 @@ router.get(
 );
 // je récupère les utilisateurs d'un groupe en fonction de l'id du groupe
 router.get(
-  "/api/user_group/group/:groupId",
+  "/api/user_group/group/:groupId/limit/:base",
   userGroupControllers.findUserByGroupId
 );
 // J'ajoute un utilisateur dans un groupe

@@ -1,20 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import croix from "../assets/croix.png";
-import "../App.css";
-import SelectBar from "../components/Feed/CreatePostContainer/SelectBar";
-import ModalCreatePost from "../components/Feed/CreatePostContainer/ModalCreatePost";
+import file from "../assets/file.svg";
+import { SelectBar, ModalCreatePost } from "../components";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
-import "react-toastify/dist/ReactToastify.css";
-import file from "../assets/file.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function CreatePost() {
-  const { valueSelectedCategory, valueSelectedGroup, handleReset } =
-    usePostUserContext();
+  const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
   const [fileName, setFileName] = useState("");
 
   const { user } = useCurrentUserContext();
@@ -80,7 +77,6 @@ function CreatePost() {
         .then((response) => response.text())
         .then((retour) => {
           console.warn(retour);
-          handleReset();
           navigate("/feed");
           toast.success(" Publié avec succès !", {
             position: "top-center",

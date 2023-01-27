@@ -34,7 +34,6 @@ function Comment({ postId }) {
       headers: myHeaders,
       body,
     };
-    console.warn(createComment);
     if (
       createComment.content &&
       createComment.user_id &&
