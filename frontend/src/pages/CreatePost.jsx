@@ -113,11 +113,11 @@ function CreatePost() {
           onSubmit={(e) => onSubmit(e)}
           method="PUT"
           encType="multipart/form-data"
-          className="mb-5 md:bg-[white] md:flex md:items-center md:justify-center md:flex-col md:shadow-md sm:w-4/5 xl:w-3/5 md:border md:border-gray-200 md:m-auto"
+          className="mb-5 md:bg-[white] md:flex md:items-center md:justify-center md:flex-col md:shadow-md sm:w-4/5 xl:w-3/5 md:border md:border-gray-200 md:m-auto md:h-fit"
         >
           <div className="flex items-center md:justify-start md:mr-60 md:mt-7">
             <img
-              className="rounded-full object-cover w-28 h-28 sm:w-48 sm:h-48 ml-3 md:ml-6 border-4 border-violet"
+              className="rounded-full object-cover w-28 h-28 sm:w-48 sm:h-48 md:w-16 md:h-16 ml-3 md:ml-6 border-4 border-violet"
               src={user.avatar}
               alt="Avatar"
             />

@@ -48,12 +48,16 @@ function Connexion() {
   };
   return (
     <div className="md:flex">
-      <div className="h-[100vh] bg-white md:w-[50%]">
+      <div className=" bg-white md:w-[50%]">
         <div className="mb-8 md:mb-4">
-          <img className="md:ml-[18%] md:w-3/4" src={enedisLogo} alt="" />
+          <img
+            className="md:ml-[24%] md:w-2/4 h-36 mx-auto "
+            src={enedisLogo}
+            alt=""
+          />
         </div>
         <div>
-          <h1 className="text-[40px] leading-[2.9rem] mt-[-10%] mb-4 text-primary font-bold text-center  md:leading-10 md:mt-[-10%] md:mb-5 ">
+          <h1 className="text-3xl leading-[2.9rem] mt-[-10%] mb-4 text-primary font-bold text-center  md:leading-10 md:mt-[-10%] md:mb-5 ">
             Votre outil de communication Enedis
           </h1>
         </div>
