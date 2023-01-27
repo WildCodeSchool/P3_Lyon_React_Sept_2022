@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import SelectBar from "../CreatePostContainer/SelectBar";
+import { SelectBar } from "../..";
 
-function EditPost({ handleEditPostModal, setEditPostMenu }) {
-  const [editTitle, setTitle] = useState("Solar énergies renouvelables");
-  const [editText, setText] = useState(
-    "In publishing and graphic design, Lorem ipsum is In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form."
-  );
+function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
+  const [editTitle, setTitle] = useState("");
+  const [editText, setText] = useState("");
+
+  const [showGroupAndCategory, setShowGroupAndCategory] = useState(false);
   return (
     <div className="fixed top-0 left-0 bg-white h-screen w-screen overflow-y-scroll z-10">
       <div className="flex justify-between">
@@ -17,6 +17,9 @@ function EditPost({ handleEditPostModal, setEditPostMenu }) {
           type="button"
         >
           <img className="ml-2 mt-6" src="./src/assets/croix.png" alt="Close" />
+        </button>
+        <button type="button" onClick={() => console.warn(post)}>
+          POULOULOU
         </button>
         <button
           type="button"
@@ -34,15 +37,16 @@ function EditPost({ handleEditPostModal, setEditPostMenu }) {
       <div className="flex items-center">
         <img
           className="rounded-full w-28 ml-3"
-          src="./src/assets/my-avatar.jpeg"
+          src={user.avatar}
           alt="Avatar"
         />
         <div className="block text-left">
           <h2 className="text-xl ml-[24px] text-primary font-bold ">
-            Ryan Bidau
+            {user.firstname}
+            {user.lastname}
           </h2>
-          <p className="text-md ml-[24px] text-primary">Communication agence</p>
-          <p className="text-md ml-[24px] text-primary">Actualités</p>
+          <p className="text-md ml-[24px] text-primary">{post.group_name}</p>
+          <p className="text-md ml-[24px] text-primary">{post.category_name}</p>
         </div>
       </div>
 
@@ -51,6 +55,7 @@ function EditPost({ handleEditPostModal, setEditPostMenu }) {
           className="text-black font-bold self-start mt-5 px-6 w-screen"
           type="text"
           value={editTitle}
+          placeholder={post.title}
           onChange={(event) => setTitle(event.target.value)}
         />
 
@@ -58,11 +63,18 @@ function EditPost({ handleEditPostModal, setEditPostMenu }) {
           className="px-6 w-screen h-28"
           type="text"
           value={editText}
+          placeholder={post.content}
           onChange={(event) => setText(event.target.value)}
         />
-        <img src="./src/assets/solar-groups.jpeg" alt="Post" />
+        <img src={post.post_image} alt="Post" />
       </div>
-      <SelectBar />
+
+      {showGroupAndCategory && (
+        <SelectBar
+          showGroupAndCategory={showGroupAndCategory}
+          setShowGroupAndCategory={setShowGroupAndCategory}
+        />
+      )}
     </div>
   );
 }

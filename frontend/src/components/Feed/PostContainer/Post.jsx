@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useCurrentUserContext } from "../../../contexts/userContext";
-import EditPost from "./EditPost";
-import "react-toastify/dist/ReactToastify.css";
+import { EditPost } from "../..";
 import menuDots from "../../../assets/modifDot.png";
 import rubish from "../../../assets/deleteBtn.png";
 import edit from "../../../assets/edit.png";
@@ -18,6 +18,7 @@ function Post({ post, deleteFromPostWithId }) {
   const [editPostModal, setEditPostModal] = useState(false);
   const { user } = useCurrentUserContext();
   // three dots button and modifying stuff
+  const navigate = useNavigate();
 
   const formatDate = (date) => {
     return date.slice(0, 10).split("-").reverse().join("-");
@@ -28,7 +29,7 @@ function Post({ post, deleteFromPostWithId }) {
   };
 
   const handleEditPostModal = () => {
-    setEditPostModal(!editPostModal);
+    setEditPostModal(!editPostModal.id);
   };
 
   const handleDelete = () => {
@@ -47,7 +48,18 @@ function Post({ post, deleteFromPostWithId }) {
           deleteFromPostWithId(post.id);
         })
         .catch((err) => {
-          console.error(err);
+          if (err === 401) {
+            console.error(err);
+            navigate("/");
+            toast(" ✅ Veuillez vous reconnecter !", {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              theme: "light",
+            });
+          }
         });
     }
   };
@@ -156,7 +168,7 @@ function Post({ post, deleteFromPostWithId }) {
             </div>
           ) : (
             <img
-              className="w-full mx-auto"
+              className="object-cover md:h-96 mx-auto"
               src={`${backEnd}/uploads/${post.post_image}`}
               alt="Post"
             />
