@@ -38,41 +38,40 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         <div className="w-full mt-4 md:flex md:justify-around md:wrap">
           <div className=" inline-block relative w-full ">
             <ul>
-              {groupList
-                .filter((group) => {
-                  return group.group_name
-                    .toLowerCase()
-                    .includes(filterSearch.toLowerCase());
-                })
-                .map((group) => (
-                  <button
-                    type="button"
-                    onClick={() => setValueSelectedGroup(group.group_name)}
-                    className="text-lg px-10 font-normal text-primary pt-5 shadow-md"
-                    value={group.group_name}
-                    key={group.id}
-                  >
-                    {group.group_name}
-                    <ul>
-                      {categoryList
-                        .filter((category) => category.group_id === group.id)
-                        .map((category) => (
-                          <button type="button" key={category.id}>
-                            <button
-                              type="button"
-                              arial-hidden
-                              value={category.id}
-                              name={category.name}
-                              className="cursor-pointer h-10  hover:bg-violet"
-                              onClick={() => handleValue(category)}
-                            >
-                              {category.category_name}
-                            </button>
+              {groupList.map((group) => (
+                <button
+                  type="button"
+                  onClick={() => setValueSelectedGroup(group.group_name)}
+                  className="text-lg px-10 font-normal text-primary pt-5 shadow-md"
+                  value={group.group_name}
+                  key={group.id}
+                >
+                  {group.group_name}
+                  <ul>
+                    {categoryList
+                      .filter((category) => category.group_id === group.id)
+                      .filter((category) => {
+                        return category.category_name
+                          .toLowerCase()
+                          .includes(filterSearch.toLowerCase());
+                      })
+                      .map((category) => (
+                        <button type="button" key={category.id}>
+                          <button
+                            type="button"
+                            arial-hidden
+                            value={category.id}
+                            name={category.name}
+                            className="cursor-pointer h-10  hover:bg-violet"
+                            onClick={() => handleValue(category)}
+                          >
+                            {category.category_name}
                           </button>
-                        ))}
-                    </ul>
-                  </button>
-                ))}
+                        </button>
+                      ))}
+                  </ul>
+                </button>
+              ))}
             </ul>
           </div>
         </div>

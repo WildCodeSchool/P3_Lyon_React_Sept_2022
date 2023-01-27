@@ -212,7 +212,7 @@ VALUES
     1,
     1,
     '2022-11-01',
-    'https://www.choisir.com/medias/b2380444-ligne-enedis.jpg'
+    'pro.jpg'
   ),
   (
     'Vacances d''été',
@@ -220,7 +220,7 @@ VALUES
     2,
     2,
     '2022-11-02',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Joyeux anniversaire Margaux!',
@@ -228,7 +228,7 @@ VALUES
     3,
     3,
     '2022-11-03',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Secret Santa',
@@ -236,7 +236,7 @@ VALUES
     4,
     4,
     '2022-11-04',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Michael Jackson',
@@ -244,7 +244,7 @@ VALUES
     5,
     5,
     '2022-11-05',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Ron Steward',
@@ -252,7 +252,7 @@ VALUES
     1,
     6,
     '2022-11-06',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Mick Jagger',
@@ -260,7 +260,7 @@ VALUES
     2,
     7,
     '2022-11-07',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Sash',
@@ -268,7 +268,7 @@ VALUES
     3,
     8,
     '2022-11-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Lenny Kravitz',
@@ -276,7 +276,7 @@ VALUES
     4,
     9,
     '2022-11-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Police',
@@ -284,7 +284,7 @@ VALUES
     5,
     10,
     '2022-11-09',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Arctic Monkeys',
@@ -292,7 +292,7 @@ VALUES
     1,
     11,
     '2022-11-10',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Pink Floyd',
@@ -300,7 +300,7 @@ VALUES
     2,
     12,
     '2022-11-11',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'David Bowie',
@@ -308,7 +308,7 @@ VALUES
     3,
     13,
     '2022-11-12',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
 (
     'Derek & The Dominos',
@@ -316,7 +316,7 @@ VALUES
     4,
     15,
     '2022-11-13',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Mamas & The Papas',
@@ -324,7 +324,7 @@ VALUES
     5,
     1,
     '2022-11-14',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Dire Straits',
@@ -332,7 +332,7 @@ VALUES
     1,
     2,
     '2022-11-15',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Doors',
@@ -340,7 +340,7 @@ VALUES
     2,
     3,
     '2022-11-16',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Pixies',
@@ -348,7 +348,7 @@ VALUES
     3,
     4,
     '2022-11-17',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'J.J. Cale',
@@ -356,7 +356,7 @@ VALUES
     4,
     5,
     '2022-11-18',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'KISS',
@@ -364,7 +364,7 @@ VALUES
     5,
     6,
     '2022-11-19',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Guns N'' Roses',
@@ -372,7 +372,7 @@ VALUES
     1,
     7,
     '2022-11-20',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Thin Lizzy',
@@ -380,7 +380,7 @@ VALUES
     2,
     8,
     '2022-11-21',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Organisation repas de Noël !',
@@ -388,7 +388,7 @@ VALUES
     3,
     9,
     '2022-11-22',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Vacances d''été',
@@ -396,7 +396,7 @@ VALUES
     4,
     10,
     '2022-11-23',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Joyeux anniversaire Margaux!',
@@ -404,7 +404,7 @@ VALUES
     5,
     11,
     '2022-11-24',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Secret Santa',
@@ -412,7 +412,7 @@ VALUES
     1,
     12,
     '2022-11-25',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Michael Jackson',
@@ -420,7 +420,7 @@ VALUES
     2,
     13,
     '2022-11-26',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Ron Steward',
@@ -428,7 +428,7 @@ VALUES
     3,
     14,
     '2022-11-27',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Mick Jagger',
@@ -436,7 +436,7 @@ VALUES
     4,
     15,
     '2022-11-28',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Sash',
@@ -444,7 +444,7 @@ VALUES
     5,
     1,
     '2022-11-29',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Lenny Kravitz',
@@ -452,7 +452,7 @@ VALUES
     1,
     2,
     '2022-11-30',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Police',
@@ -460,7 +460,7 @@ VALUES
     2,
     3,
     '2022-12-01',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Arctic Monkeys',
@@ -468,7 +468,7 @@ VALUES
     3,
     4,
     '2022-12-02',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
   (
     'Pink Floyd',
@@ -476,7 +476,7 @@ VALUES
     4,
     5,
     '2022-12-03',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'David Bowie',
@@ -484,7 +484,7 @@ VALUES
     5,
     6,
     '2022-12-04',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Derek & The Dominos',
@@ -492,7 +492,7 @@ VALUES
     1,
     7,
     '2022-12-05',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Mamas & The Papas',
@@ -500,7 +500,7 @@ VALUES
     2,
     8,
     '2022-12-06',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Dire Straits',
@@ -508,7 +508,7 @@ VALUES
     3,
     9,
     '2022-12-07',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'The Doors',
@@ -516,7 +516,7 @@ VALUES
     4,
     10,
     '2022-12-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Pixies',
@@ -524,7 +524,7 @@ VALUES
     5,
     11,
     '2022-12-09',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'J.J. Cale',
@@ -532,7 +532,7 @@ VALUES
     1,
     12,
     '2022-12-10',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'KISS',
@@ -540,7 +540,7 @@ VALUES
     2,
     13,
     '2022-12-11',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Guns N'' Roses',
@@ -548,7 +548,7 @@ VALUES
     3,
     14,
     '2022-12-12',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   ),
     (
     'Thin Lizzy',
@@ -556,7 +556,7 @@ VALUES
     4,
     15,
     '2022-12-13',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'pro.jpg'
   );
 
 CREATE TABLE like_table(

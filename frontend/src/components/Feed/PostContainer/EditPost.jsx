@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { SelectBar } from "../..";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
   const [editTitle, setTitle] = useState("");
   const [editText, setText] = useState("");
 
   const [showGroupAndCategory, setShowGroupAndCategory] = useState(false);
   return (
-    <div className="fixed top-0 left-0 bg-white h-screen w-screen overflow-y-scroll z-10">
+    <div className="fixed top-0 left-0 bg-white h-screen w-screen  overflow-hidden z-10">
       <div className="flex justify-between">
         <button
           onClick={() => {
@@ -66,7 +68,11 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
           placeholder={post.content}
           onChange={(event) => setText(event.target.value)}
         />
-        <img src={post.post_image} alt="Post" />
+        <img
+          className="objet-cover"
+          src={`${backEnd}/uploads/${post.post_image}`}
+          alt="Post"
+        />
       </div>
 
       {showGroupAndCategory && (
