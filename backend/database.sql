@@ -27,7 +27,7 @@ VALUES
     'Lopez',
     'javier@enedis.fr',
     '0628164511',
-    'user',
+    'Spécialiste en cyber-sécurité',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
     'https://i.imgur.com/Ajb5Q8V.png'
   ),
@@ -36,7 +36,7 @@ VALUES
     'Donova',
     'doroteya@enedis.fr',
     '0628164512',
-    'user',
+    'Design specialst',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
     'https://i.imgur.com/vJKyNZ2.jpg'
   ),
@@ -45,7 +45,7 @@ VALUES
     'George',
     'matthieu@enedis.fr',
     '0628164513',
-    'user',
+    'Admin réseau',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
     'https://i.imgur.com/QFlGPRB.jpg'
   ),
@@ -54,7 +54,7 @@ VALUES
     'Guassemi',
     'sahrane@enedis.fr',
     '0628164514',
-    'user',
+    'Directeur technique',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
     'https://i.imgur.com/DixnvgV.jpg'
   ),
@@ -63,7 +63,7 @@ VALUES
     'Beaujot',
     'ryan@enedis.fr',
     '0628164515',
-    'user',
+    'Chargé de marketing',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
     'https://i.imgur.com/lIAKkYJ.jpg'
   );
@@ -143,7 +143,7 @@ VALUES
     2
   ),
   (
-    'Prev1',
+    'Réseau',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     3
   ),
@@ -163,27 +163,27 @@ VALUES
     4
   ),
   (
-    'Nous 2',
+    'Mobilité',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     4
   ),
   (
-    'Nous 3',
+    'Rapports d''activités',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     4
   ),
   (
-    'Client 1',
+    'Infos Rhône-Alpes',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     5
   ),
   (
-    'Client 2',
+    'Projet régionnal',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     5
   ),
   (
-    'Client 3',
+    'Innovation',
     'https://i.imgur.com/3Qdp5Tz.jpg',
     5
   );
@@ -212,7 +212,7 @@ VALUES
     1,
     1,
     '2022-11-01',
-    'https://www.choisir.com/medias/b2380444-ligne-enedis.jpg'
+    'waterEolienne.jpg'
   ),
   (
     'Vacances d''été',
@@ -220,7 +220,7 @@ VALUES
     2,
     2,
     '2022-11-02',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Joyeux anniversaire Margaux!',
@@ -228,7 +228,7 @@ VALUES
     3,
     3,
     '2022-11-03',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Secret Santa',
@@ -236,7 +236,7 @@ VALUES
     4,
     4,
     '2022-11-04',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Michael Jackson',
@@ -244,7 +244,7 @@ VALUES
     5,
     5,
     '2022-11-05',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Ron Steward',
@@ -252,7 +252,7 @@ VALUES
     1,
     6,
     '2022-11-06',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Mick Jagger',
@@ -260,7 +260,7 @@ VALUES
     2,
     7,
     '2022-11-07',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Sash',
@@ -268,7 +268,7 @@ VALUES
     3,
     8,
     '2022-11-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Lenny Kravitz',
@@ -276,7 +276,7 @@ VALUES
     4,
     9,
     '2022-11-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'The Police',
@@ -284,7 +284,7 @@ VALUES
     5,
     10,
     '2022-11-09',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Arctic Monkeys',
@@ -292,7 +292,7 @@ VALUES
     1,
     11,
     '2022-11-10',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Pink Floyd',
@@ -300,7 +300,7 @@ VALUES
     2,
     12,
     '2022-11-11',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'David Bowie',
@@ -308,7 +308,7 @@ VALUES
     3,
     13,
     '2022-11-12',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
 (
     'Derek & The Dominos',
@@ -316,7 +316,7 @@ VALUES
     4,
     15,
     '2022-11-13',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'The Mamas & The Papas',
@@ -324,7 +324,7 @@ VALUES
     5,
     1,
     '2022-11-14',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Dire Straits',
@@ -332,7 +332,7 @@ VALUES
     1,
     2,
     '2022-11-15',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'The Doors',
@@ -340,7 +340,7 @@ VALUES
     2,
     3,
     '2022-11-16',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Pixies',
@@ -348,7 +348,7 @@ VALUES
     3,
     4,
     '2022-11-17',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'J.J. Cale',
@@ -356,7 +356,7 @@ VALUES
     4,
     5,
     '2022-11-18',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'KISS',
@@ -364,7 +364,7 @@ VALUES
     5,
     6,
     '2022-11-19',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Guns N'' Roses',
@@ -372,7 +372,7 @@ VALUES
     1,
     7,
     '2022-11-20',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Thin Lizzy',
@@ -380,7 +380,7 @@ VALUES
     2,
     8,
     '2022-11-21',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Organisation repas de Noël !',
@@ -388,7 +388,7 @@ VALUES
     3,
     9,
     '2022-11-22',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Vacances d''été',
@@ -396,7 +396,7 @@ VALUES
     4,
     10,
     '2022-11-23',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Joyeux anniversaire Margaux!',
@@ -404,7 +404,7 @@ VALUES
     5,
     11,
     '2022-11-24',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Secret Santa',
@@ -412,7 +412,7 @@ VALUES
     1,
     12,
     '2022-11-25',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Michael Jackson',
@@ -420,7 +420,7 @@ VALUES
     2,
     13,
     '2022-11-26',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Ron Steward',
@@ -428,7 +428,7 @@ VALUES
     3,
     14,
     '2022-11-27',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Mick Jagger',
@@ -436,7 +436,7 @@ VALUES
     4,
     15,
     '2022-11-28',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Sash',
@@ -444,7 +444,7 @@ VALUES
     5,
     1,
     '2022-11-29',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'Lenny Kravitz',
@@ -452,7 +452,7 @@ VALUES
     1,
     2,
     '2022-11-30',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
     'The Police',
@@ -460,7 +460,7 @@ VALUES
     2,
     3,
     '2022-12-01',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Arctic Monkeys',
@@ -468,7 +468,7 @@ VALUES
     3,
     4,
     '2022-12-02',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
   (
     'Pink Floyd',
@@ -476,87 +476,88 @@ VALUES
     4,
     5,
     '2022-12-03',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   ),
     (
-    'David Bowie',
-    'If you say run, I''ll run with you and if you say hide, we''ll hide',
-    5,
+    'Qui sommes-nous ? | Enedis',
+    'Nos 38 000 salariés répartis dans chacune des régions de France œuvrent au quotidien pour vous garantir l''accès à une alimentation électrique de qualité.',
+    1,
     6,
     '2022-12-04',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'téléchargement.jpg'
   ),
     (
-    'Derek & The Dominos',
-    'What will you do when you get lonely? No one waiting by your side?',
-    1,
+    'Projets raccordement Electrique',
+    'Enedis est une entreprise de service public, gestionnaire du réseau de distribution d''électricité. Elle développe, exploite, modernise le réseau électrique et gère les données associées. Elle facilite la transition énergétique des territoires en les accompagnant dans le développement et la planification de leur production d''électricité d''origine renouvelable.',
+    5,
     7,
     '2022-12-05',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    '1200x680_20190627_110949_resized.jpg'
   ),
     (
-    'The Mamas & The Papas',
-    'All the leaves are brown and the sky is gray.',
+    'Enedis au coeur de la transition énergétique',
+    'Entreprise de service public de distribution d''électricité, Enedis tire le bilan de dix ans d''expertise dans l''accompagnement des territoires et lance des projets toujours plus innovants en Auvergne-Rhône-Alpes.',
     2,
-    8,
+    14,
     '2022-12-06',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    ''
   ),
     (
-    'Dire Straits',
-    'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
+    'Mise à niveau numérique',
+    'Spécialisée dans le développement d''outils de conception, de simulation et de supervision 3D pour l''industrie, la société toulousaine Virtual IT s''embarque pour le CES de Las Vegas avec une nouvelle solution qui permet d''adapter l''utilisation de maquettes numériques à des interventions de terrain. Démonstration avec Enedis.',
     3,
-    9,
+    15,
     '2022-12-07',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    '000831369_896x598_c.jpg'
   ),
     (
-    'The Doors',
-    'Come on, baby, light my fire',
+    'Développement de la mobilité électrique',
+    'La flotte électrique d''entreprise d''Enedis est la 2e en France avec 1880 voitures destinées aux interventions. Cette flotte est un véritable laboratoire de la mobilité électrique à grande échelle : elle permet à Enedis d''acquérir une expérience réelle, tant du point de vue technologique que d''un point de vue humain.',
     4,
-    10,
+    11,
     '2022-12-08',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'voitures.jpg'
   ),
     (
-    'Pixies',
-    'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
+    'Rapport d''activité',
+    'Voici rapport de synthèse des usines de Val de Loire',
     5,
     11,
     '2022-12-09',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'synthèse Matthieu GEORGE.pdf'
   ),
     (
-    'J.J. Cale',
-    'If you want to hang out. You''ve got to take her out, cocaine',
+    'Le compteur Linky vous facilite la vie',
+    'Le compteur Linky apporte de nouveaux services. Il simplifie vos démarches et vous permet de maîtriser votre consommation et votre facture d''électricité.',
     1,
-    12,
+    15,
     '2022-12-10',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'linky.png'
   ),
     (
-    'KISS',
-    'I was made for loving you, baby. You were made for loving me',
+    'Plan de restructuration en Rhône-Alpes',
+    'La crise sanitaire frappe durement l’activité des petits commerçants et artisans, entraînant une augmentation de la vacance dans les territoires fragiles et, notamment, dans beaucoup de centres-villes. Or, les commerces de proximité participent à l’attractivité des territoires et à la qualité de vie de leurs habitants.',
     2,
     13,
     '2022-12-11',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    ''
+    
   ),
     (
-    'Guns N'' Roses',
-    'Take me down to the Paradise City, where the grass is green and the girls are pretty',
-    3,
+    'Le futur de l''Auvergne',
+    'Un nouveau projet s''aprêtte à voir le jour aux alentours de Clermont-ferrand pour le plus grand bonheur de la régions qui estime une baisse du coup de l''électricité dans la régons de 10% sur 5 ans ',
+    4,
     14,
     '2022-12-12',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'panneaux.jpg'
   ),
     (
-    'Thin Lizzy',
-    'The boys are back in town',
-    4,
+    'À la conquête de l''océan',
+    'Après de nombreuses recherches il semblerait qu''il suffirait de recouvrir seulement 2% de la surface de l''océan d''éolienne pour subvenir au besoins de toute l''humanité en électricité, propre et renouvelable de sûrcroit !',
+    3,
     15,
     '2022-12-13',
-    ' https://www.choisir.com/medias/b2380444-ligne-enedis.jpg '
+    'waterEolienne.jpg'
   );
 
 CREATE TABLE like_table(
