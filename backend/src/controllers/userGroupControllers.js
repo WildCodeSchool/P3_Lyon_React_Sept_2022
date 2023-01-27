@@ -30,10 +30,10 @@ const findGroupByUserId = (req, res) => {
 // je récupère les utilisateurs qui appartiennent à un groupe en fonction de son id
 
 const findUserByGroupId = (req, res) => {
-  const { groupId } = req.params;
+  const { groupId, base } = req.params;
 
   models.user_group
-    .findByGroupId(groupId)
+    .findByGroupId(groupId, base)
     .then((results) => {
       if (results[0]) res.send(results);
       else res.sendStatus(404);

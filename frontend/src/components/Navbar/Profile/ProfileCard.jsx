@@ -7,7 +7,7 @@ function ProfileCard({ profileUser }) {
         <img
           src={profileUser.avatar}
           alt="My profile avatar"
-          className="rounded-full w-60 h-60 border-4 border-violet"
+          className="rounded-full object-cover w-60 h-60 border-4 border-violet"
         />
       </div>
       <div className="flex justify-center shadow-[3px_3px_4px_#C9CBF0] border border-primary rounded-lg w-80 h-72 mx-auto relative top-[-60px] md:ml-0 ">

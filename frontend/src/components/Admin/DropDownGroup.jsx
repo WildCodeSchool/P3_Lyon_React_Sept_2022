@@ -21,10 +21,10 @@ function DropDownGroup({ setGroupId }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="flex w-[56vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          <div className="flex">
-            Filtrer par groupes
-            <img className="w-6 h-3 mt-5 ml-3" src={FlecheDownBlue} alt="" />
+        <Menu.Button className="flex justify-between w-[36vw] h-12 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+          <div className="flex justify-between">
+            Groupes
+            <img className="w-3 h-2 mt-3 ml-3" src={FlecheDownBlue} alt="" />
           </div>
         </Menu.Button>
       </div>
