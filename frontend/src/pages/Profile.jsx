@@ -75,7 +75,7 @@ function Profile() {
             <h1 className="text-primary text-center text-4xl mb-3 md:hidden">
               Publications
             </h1>
-            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:w-[130rem] md:mr-72 max-h-screen overflow-y-auto md:overflow-x-hidden md:rounded-lg  ">
+            <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-6 md:w-[130rem] md:mr-72 max-h-screen md:overflow-y-auto md:overflow-x-hidden md:rounded-lg  ">
               {myPosts
                 .filter((posts) => profileUser.id === posts.user_id) // je filtre les publications de l'utilisateur pour les faire correspondre à l'id de l'utilisateur
                 .map((post) => (

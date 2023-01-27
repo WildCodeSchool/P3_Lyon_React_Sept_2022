@@ -110,10 +110,10 @@ function Post({ post, deleteFromPostWithId }) {
             )}
           </div>
         )}
-        <div className="flex flex-row self-start pt-2 pb-4 px-6 md:py-8">
+        <div className="flex flex-row self-start pt-2 pb-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet md:mr-20"
+              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet"
               src={post.avatar}
               alt={post.username}
             />
@@ -140,7 +140,7 @@ function Post({ post, deleteFromPostWithId }) {
           </div>
         </div>
         <Link to={`/feed/${post.id}`}>
-          <div className="px-6 w-[390px] md:w-[640px]">
+          <div className="px-6 w-[390px] md:w-full">
             <h2 className="text-black text-left pb-1 text-xl">{post.title}</h2>
             <p className="text-md py-2">
               {post.content.length < 151
