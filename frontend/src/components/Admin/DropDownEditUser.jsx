@@ -32,11 +32,11 @@ export default function DropDownEditUser({
   };
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu>
       <div>
         <Menu.Button>
           <div className="flex justify-between">
-            <img className="w-2 h-6 ml-32 " src={modifDot} alt="" />
+            <img className="w-2 h-6 ml-28" src={modifDot} alt="" />
           </div>
         </Menu.Button>
       </div>
