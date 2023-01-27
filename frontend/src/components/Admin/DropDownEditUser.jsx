@@ -17,6 +17,8 @@ export default function DropDownEditUser({
   toggleRefresh,
   deleteUserGroup,
   deleteButton,
+  groupId,
+  addUserInGroup,
 }) {
   const handleDelete = (id) => {
     axios
@@ -106,6 +108,32 @@ export default function DropDownEditUser({
                         }
                       >
                         Supprimer un utilisateur du groupe
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Menu.Item>
+            )}
+            {groupId > 0 && (
+              <Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    <div className="flex">
+                      <img
+                        className="h-3 w-3 mr-2 mt-1"
+                        src={deleteBtn}
+                        alt=""
+                      />{" "}
+                      <button
+                        type="button"
+                        onClick={() => addUserInGroup(card.id)}
+                      >
+                        Ajouter au groupe
                       </button>
                     </div>
                   </div>

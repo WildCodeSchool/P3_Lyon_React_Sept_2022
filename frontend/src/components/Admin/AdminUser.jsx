@@ -15,6 +15,7 @@ export default function AdminUser() {
   const [refresh, setRefresh] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [deleteButton, setDeleteButton] = useState(0);
+  const [addUserGroupButton, setAddUserGroupButton] = useState(0);
 
   const openAndCloseUserModal = () => {
     setAddUser(!addUser);
@@ -42,6 +43,7 @@ export default function AdminUser() {
       .then((result) => {
         setUserCard(result);
         setDeleteButton(groupId);
+        setAddUserGroupButton(groupId);
       })
       .catch((error) => console.warn(error));
   };
@@ -102,9 +104,11 @@ export default function AdminUser() {
 
       {deleteButton > 0 && (
         <Link
-          to="/admin/add-user-group"
+          to={`/admin/add-user-group/${addUserGroupButton}`}
           handleSearch={handleSearchUserGroup}
           searchInput={searchInput}
+          deleteButton={deleteButton}
+          addUserGroupButton={addUserGroupButton}
         >
           <button type="button">
             <img className="w-5 h-4 mt-0 mr-3" alt="" src={pictoGroup} />

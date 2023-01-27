@@ -33,6 +33,7 @@ router.post(
 
 /// //// Gestion des users ///////
 router.get("/api/users", userControllers.browse);
+router.get("/api/not-all-users", userControllers.browseInBackend);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);

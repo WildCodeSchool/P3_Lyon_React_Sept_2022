@@ -12,6 +12,18 @@ const browse = (req, res) => {
     });
 };
 
+const browseInBackend = (req, res) => {
+  models.user_detail
+    .noFetchAll()
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   const { id } = req.params;
 
@@ -77,4 +89,5 @@ module.exports = {
   add,
   edit,
   destroy,
+  browseInBackend,
 };

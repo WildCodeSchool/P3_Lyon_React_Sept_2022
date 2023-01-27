@@ -33,7 +33,10 @@ function App() {
             <Route path="/profile/:user_id" element={<Profile />} />
             <Route path="/adminUser" element={<PostList />} />
             <Route path="/adminUser/:id" element={<ModifUser />} />
-            <Route path="/admin/add-user-group" element={<AddUserGroup />} />
+            <Route
+              path="/admin/add-user-group/:groupId"
+              element={<AddUserGroup />}
+            />
             <Route path="/adminEspace" element={<AdminEspace />} />
           </Routes>
           <ToastContainer />

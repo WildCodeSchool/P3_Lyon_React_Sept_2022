@@ -5,6 +5,9 @@ export default function UserCard({
   toggleRefresh,
   deleteButton,
   deleteUserGroup,
+  addUserInGroup,
+  addUserGroupButton,
+  groupId,
 }) {
   return (
     <div>
@@ -19,12 +22,16 @@ export default function UserCard({
             {card.firstname} {card.lastname}
           </p>
           <p className="italic">'{card.role}'</p>
+          <p>{JSON.stringify(groupId)}</p>
         </div>
         <DropDownEditUser
           card={card}
           toggleRefresh={toggleRefresh}
           deleteUserGroup={deleteUserGroup}
           deleteButton={deleteButton}
+          addUserInGroup={addUserInGroup}
+          addUserGroupButton={addUserGroupButton}
+          groupId={groupId}
         />
       </div>
     </div>

@@ -1,23 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import UserCard from "./UserCard";
 
-function AddUserGroup() {
-  const [userCard, setUserCard] = useState([]);
+function AddUserGroup({ deleteButton }) {
+  const [userCards, setUserCards] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const { groupId } = useParams();
 
   const handleSearchUserGroup = (e) => {
     setSearchInput(e.target.value);
     if (searchInput === "") {
-      setUserCard([]);
+      setUserCards([]);
       return;
     }
     fetch(`http://localhost:5000/api/users/?search=${searchInput}`)
       .then((response) => response.json())
       .then((result) => {
-        setUserCard(result);
+        setUserCards(result);
       })
+      .catch((error) => console.warn(error));
+  };
+
+  const addUserInGroup = (idUser) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const body = JSON.stringify({
+      user_id: idUser,
+      group_id: parseInt(groupId, 10),
+    });
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:5000/api/user_group", requestOptions)
+      .then((response) => response.json())
       .catch((error) => console.warn(error));
   };
 
@@ -40,7 +60,7 @@ function AddUserGroup() {
               type="button"
               className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
             >
-              Utilisatieurs
+              Utilisateurs
             </button>
           </Link>
           <button
@@ -52,7 +72,7 @@ function AddUserGroup() {
         </div>
       </div>
       <input
-        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary flex justify-center "
         type="text"
         placeholder="Rechercher..."
         onChange={handleSearchUserGroup}
@@ -61,8 +81,15 @@ function AddUserGroup() {
 
       <div className="bg-[#F6F6F6]">
         {searchInput === ""
-          ? userCard.map((card) => <UserCard key={card.id} card={card} />)
-          : userCard
+          ? userCards.map((card) => (
+              <UserCard
+                key={card.id}
+                card={card}
+                deleteButton={deleteButton}
+                addUserGroup={addUserInGroup}
+              />
+            ))
+          : userCards
               .filter(
                 (user) =>
                   user.firstname
@@ -72,7 +99,15 @@ function AddUserGroup() {
                     .toLocaleLowerCase()
                     .includes(searchInput.toLocaleLowerCase())
               )
-              .map((card) => <UserCard key={card.id} card={card} />)}
+              .map((card) => (
+                <UserCard
+                  key={card.id}
+                  card={card}
+                  deleteButton={deleteButton}
+                  addUserInGroup={addUserInGroup}
+                  groupId={groupId}
+                />
+              ))}
       </div>
     </>
   );

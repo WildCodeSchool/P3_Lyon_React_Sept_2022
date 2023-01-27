@@ -25,6 +25,12 @@ class UserManager extends AbstractManager {
     );
   }
 
+  noFetchAll() {
+    return this.connection.any(
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname AND lastname ILIKE %$1%`
+    );
+  }
+
   insert(user) {
     return this.connection.any(
       `INSERT INTO ${this.table} (firstname, lastname, email, role, phone_number, user_password, avatar) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
