@@ -39,7 +39,7 @@ function PostDetails({ numberComments, setNumberComments }) {
           />
         </Link>
         <div className="flex flex-row items-center py-2 md:py-2 px-10 ">
-          <div className="md:flex md:ml-[200px]">
+          <div className="flex md:flex md:ml-[200px]">
             <img
               className="rounded-full w-24 h-24 md:w-22 md:h-22 mr-6 border-4 border-violet"
               src={postDetails.avatar}
@@ -62,7 +62,7 @@ function PostDetails({ numberComments, setNumberComments }) {
       </div>
       <div className="w-11/12 m-auto md:w-[70%] md:flex-row md:bg-white md:py-6 md:px-6 md:item-center md:rounded-xl flex flex-col items-start text-sm">
         <div className="md:flex-col md:flex md:justify-center">
-          <h2 className="text-2xl px-2 md:mr-10 md:mb-10 text-center">
+          <h2 className="text-2xl px-2 md:ml-[2vw] md:mb-6 text-start">
             {postDetails.title}
           </h2>
           <p className="text-md py-2 px-2 pb-4 md:ml-6 md:w-[80%] md:h-[70%] ">
