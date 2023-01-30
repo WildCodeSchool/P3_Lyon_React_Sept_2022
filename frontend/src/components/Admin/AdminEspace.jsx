@@ -10,6 +10,7 @@ import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
 import plus from "../../assets/plus.png";
 import file from "../../assets/file.svg";
+import DropDownGroup from "./DropDownGroup";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -19,14 +20,9 @@ function classNames(...classes) {
 
 function AdminEspace() {
   const [groupList, setGroupList] = useState([]);
+  const [groupId, setGroupId] = useState(0);
   const [categoryList, setCategoryList] = useState([]);
   const [refresh, setRefresh] = useState([]);
-
-  const [categoryPost, setCategoryPost] = useState({
-    category_name: "",
-    image: "",
-    group_id: "",
-  });
 
   useEffect(() => {
     fetch(`${backEnd}/api/groups`)
@@ -50,7 +46,9 @@ function AdminEspace() {
     setFileName(event.target.files[0].name);
   };
 
-  // Group creation (State, onChange function, Submit)
+  // Group creation (States, onChange function)
+
+  const [chooseGroup, setChooseGroup] = useState(false);
 
   const [groupPost, setGroupPost] = useState({
     group_name: "",
@@ -64,6 +62,32 @@ function AdminEspace() {
     });
   };
 
+  // Category creation (states, onChange)
+
+  const [chooseCategory, setChooseCategory] = useState(false);
+
+  const [categoryPost, setCategoryPost] = useState({
+    category_name: "",
+    image: "",
+    group_id: "",
+  });
+
+  const onChangeCategory = (e) => {
+    setCategoryPost({
+      ...categoryPost,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    setCategoryPost({
+      ...categoryPost,
+      group_id: groupId,
+    });
+  }, [groupId]);
+
+  // Everything back to origin and re-mapping
+
   const resetStates = () => {
     setGroupPost({
       group_name: "",
@@ -74,10 +98,15 @@ function AdminEspace() {
       image: "",
       group_id: "",
     });
+    setChooseGroup(false);
+    setChooseCategory(false);
+    setFileName("");
     setRefresh(!refresh);
   };
 
-  const onSubmit = (e) => {
+  // Submits for groups and categories
+
+  const onSubmitGroup = (e) => {
     e.preventDefault();
     if (fileName === "") {
       toast.warn("Veuillez choisir une image ou un fichier PDF", {
@@ -109,7 +138,59 @@ function AdminEspace() {
         .then((retour) => {
           console.warn(retour);
           resetStates();
-          toast.success(" Publié avec succès !", {
+          toast.success(" Groupe créé avec succès !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        })
+        .catch(console.error());
+    }
+  };
+
+  const onSubmitCategory = (e) => {
+    e.preventDefault();
+    if (!(categoryPost.group_id > 0)) {
+      toast.warn("Veuillez choisir un groupe", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } else if (fileName === "") {
+      toast.warn("Veuillez choisir une image ou un fichier PDF", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } else if (categoryPost.category_name && categoryPost.group_id) {
+      const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "multipart/form-data");
+
+      const category = JSON.stringify(categoryPost);
+
+      const formData = new FormData();
+      formData.append("category", category);
+      formData.append("picture", inputRef.current.files[0]);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+      };
+
+      // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
+      // je pourrais être renvoyé à la route login
+      fetch(`${backEnd}/api/categories`, requestOptions)
+        .then((response) => response.text())
+        .then((retour) => {
+          console.warn(retour);
+          resetStates();
+          toast.success("Catégorie créée avec succès !", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -169,57 +250,122 @@ function AdminEspace() {
         <h3>Gérer les groupes et les catégories</h3>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <button
-          type="button"
-          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
-        >
-          <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
-          Ajouter un nouveau groupe
-        </button>
-        <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
-          <form
-            onSubmit={(e) => onSubmit(e)}
-            method="PUT"
-            encType="multipart/form-data"
-            className="flex flex-col items-center w-full"
+        {!chooseGroup && !chooseCategory && (
+          <button
+            type="button"
+            onClick={() => setChooseGroup(true)}
+            className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
           >
-            <h3>Ajouter un nouveau groupe</h3>
-            <input
-              type="text"
-              className="border border-primary w-full h-10 my-4 rounded-md text-center"
-              placeholder="Group name"
-              name="group_name"
-              value={groupPost.group_name}
-              onChange={onChangeGroup}
-            />
-            <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
-              <img
-                className="w-7 h-7 md:w-9 md:h-9"
-                src={file}
-                alt="New file"
-              />
+            <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
+            Ajouter un nouveau groupe
+          </button>
+        )}
+        {chooseGroup && (
+          <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+            <form
+              onSubmit={(e) => onSubmitGroup(e)}
+              method="PUT"
+              encType="multipart/form-data"
+              className="flex flex-col items-center w-full"
+            >
+              <h3>Ajouter un nouveau groupe</h3>
               <input
-                className="hidden"
-                type="file"
-                value={setGroupPost.image}
-                name="image"
-                ref={inputRef}
-                onChange={handleFileUpload}
+                type="text"
+                className="border border-primary w-full h-10 my-4 rounded-md text-center"
+                placeholder="Group name"
+                name="group_name"
+                value={groupPost.group_name}
+                onChange={onChangeGroup}
               />
-              {fileName.length > 0 ? `${fileName}` : "Fichier"}
-            </label>
-            <button type="submit" onClick={categoryPost}>
-              <img className="w-8 h-8 my-2" src={plus} alt="ajouter" />
-            </button>
-          </form>
-        </section>
-        <button
-          type="button"
-          className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
-        >
-          <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
-          Ajouter un nouvelle catégorie
-        </button>
+              <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
+                <img
+                  className="w-7 h-7 md:w-9 md:h-9"
+                  src={file}
+                  alt="New file"
+                />
+                <input
+                  className="hidden"
+                  type="file"
+                  value={setGroupPost.image}
+                  name="image"
+                  ref={inputRef}
+                  onChange={handleFileUpload}
+                />
+                {fileName.length > 0 ? `${fileName}` : "Fichier"}
+              </label>
+              <button type="submit">
+                <img className="w-8 h-8 my-2" src={plus} alt="ajouter" />
+              </button>
+            </form>
+          </section>
+        )}
+        {!chooseGroup && !chooseCategory && (
+          <button
+            type="button"
+            onClick={() => setChooseCategory(true)}
+            className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+          >
+            <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
+            Ajouter un nouvelle catégorie
+          </button>
+        )}
+        {chooseCategory && (
+          <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+            <form
+              onSubmit={(e) => onSubmitCategory(e)}
+              method="PUT"
+              encType="multipart/form-data"
+              className="flex flex-col items-center w-full"
+            >
+              <h3>Ajouter une nouvelle catégorie</h3>
+              <input
+                type="text"
+                className="border border-primary w-full h-10 my-4 rounded-md text-center"
+                placeholder="Category name"
+                name="category_name"
+                value={categoryPost.category_name}
+                onChange={onChangeCategory}
+              />
+              {groupId > 0 ? (
+                groupList
+                  .filter((group) => group.id === groupId)
+                  .map((group) => (
+                    <h3
+                      className="text-center my-4 bg-violet w-auto rounded-sm"
+                      key={group.id}
+                    >
+                      Groupe: {group.group_name}
+                    </h3>
+                  ))
+              ) : (
+                <h3 className="text-center my-4">
+                  Associez la catégorie à un groupe
+                </h3>
+              )}
+
+              <DropDownGroup setGroupId={setGroupId} />
+              <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
+                <img
+                  className="w-7 h-7 md:w-9 md:h-9"
+                  src={file}
+                  alt="New file"
+                />
+                <input
+                  className="hidden"
+                  type="file"
+                  value={setCategoryPost.image}
+                  name="image"
+                  ref={inputRef}
+                  onChange={handleFileUpload}
+                />
+                {fileName.length > 0 ? `${fileName}` : "Fichier"}
+              </label>
+              <button type="submit">
+                <img className="w-10 h-10 mt-4 mb-2" src={plus} alt="ajouter" />
+              </button>
+            </form>
+          </section>
+        )}
       </div>
       <div className="flex justify-center text-center mb-6">
         <h1 className=" w-3/4 border rounded-md">

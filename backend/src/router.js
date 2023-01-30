@@ -68,7 +68,12 @@ router.delete("/api/posts/:id", postControllers.destroy);
 
 router.get("/api/categories", categoryControllers.browse);
 router.get("/api/categories/:id", categoryControllers.read);
-router.post("/api/categories", categoryControllers.add);
+router.post(
+  "/api/categories",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  categoryControllers.add
+);
 router.put("/api/categories/:id", categoryControllers.edit);
 router.delete("/api/categories/:id", categoryControllers.destroy);
 

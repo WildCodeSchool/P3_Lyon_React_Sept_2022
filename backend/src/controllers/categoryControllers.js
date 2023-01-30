@@ -28,12 +28,15 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const category = req.body;
-
+  const category = JSON.parse(req.body.category);
+  category.image = req.renamedFile;
   models.category
     .insert(category)
     .then((result) => {
-      res.location(`/api/categories/${result.insertId}`).sendStatus(201);
+      res
+        .location(`/api/categories/${result.insertId}`)
+        .json(result)
+        .sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
