@@ -44,7 +44,7 @@ router.get("/api/myposts/user/:id/limit/:base", postControllers.browseMyPosts);
 
 /// /// Gestion des posts ///////
 
-router.get("/api/posts/limit/:base", verifyToken, postControllers.browse); // Feed de base
+router.get("/api/posts/limit/:base", postControllers.browse); // Feed de base
 router.get(
   "/api/posts/group/:group/limit/:base",
   postControllers.browseByGroup
