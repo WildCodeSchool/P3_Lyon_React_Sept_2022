@@ -102,6 +102,8 @@ function Post({ post, deleteFromPostWithId }) {
             {/* </div> */}
             {editPostModal && (
               <EditPost
+                post={post}
+                user={user}
                 editPostModal={editPostModal}
                 setEditPostModal={setEditPostModal}
                 setEditPostMenu={setEditPostMenu}
