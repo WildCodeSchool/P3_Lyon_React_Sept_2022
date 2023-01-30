@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
@@ -9,6 +9,7 @@ import HeaderAdmin from "./HeaderAdmin";
 import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
 import plus from "../../assets/plus.png";
+import file from "../../assets/file.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,6 +21,12 @@ function AdminEspace() {
   const [groupList, setGroupList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [refresh, setRefresh] = useState([]);
+
+  const [categoryPost, setCategoryPost] = useState({
+    category_name: "",
+    image: "",
+    group_id: "",
+  });
 
   useEffect(() => {
     fetch(`${backEnd}/api/groups`)
@@ -34,6 +41,87 @@ function AdminEspace() {
       });
   }, [refresh]);
 
+  // File upload
+
+  const inputRef = useRef(null);
+  const [fileName, setFileName] = useState("");
+
+  const handleFileUpload = (event) => {
+    setFileName(event.target.files[0].name);
+  };
+
+  // Group creation (State, onChange function, Submit)
+
+  const [groupPost, setGroupPost] = useState({
+    group_name: "",
+    image: "",
+  });
+
+  const onChangeGroup = (e) => {
+    setGroupPost({
+      ...groupPost,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const resetStates = () => {
+    setGroupPost({
+      group_name: "",
+      image: "",
+    });
+    setCategoryPost({
+      category_name: "",
+      image: "",
+      group_id: "",
+    });
+    setRefresh(!refresh);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (fileName === "") {
+      toast.warn("Veuillez choisir une image ou un fichier PDF", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } else if (groupPost.group_name) {
+      const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "multipart/form-data");
+
+      const group = JSON.stringify(groupPost);
+
+      const formData = new FormData();
+      formData.append("group", group);
+      formData.append("picture", inputRef.current.files[0]);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+      };
+
+      // On appelle le back. Si tous les middleware placé sur la route ci-dessous,
+      // je pourrais être renvoyé à la route login
+      fetch(`${backEnd}/api/groups`, requestOptions)
+        .then((response) => response.text())
+        .then((retour) => {
+          console.warn(retour);
+          resetStates();
+          toast.success(" Publié avec succès !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        })
+        .catch(console.error());
+    }
+  };
+
+  // Group deletion
   const handleDeleteGroup = (group) => {
     axios
       .delete(`${backEnd}/api/groups/${group}`)
@@ -53,6 +141,7 @@ function AdminEspace() {
       });
   };
 
+  // Category deletion
   const handleDeleteCategory = (category) => {
     axios
       .delete(`${backEnd}/api/categories/${category}`)
@@ -84,14 +173,51 @@ function AdminEspace() {
           type="button"
           className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
-          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
+          <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouveau groupe
         </button>
+        <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+          <form
+            onSubmit={(e) => onSubmit(e)}
+            method="PUT"
+            encType="multipart/form-data"
+            className="flex flex-col items-center w-full"
+          >
+            <h3>Ajouter un nouveau groupe</h3>
+            <input
+              type="text"
+              className="border border-primary w-full h-10 my-4 rounded-md text-center"
+              placeholder="Group name"
+              name="group_name"
+              value={groupPost.group_name}
+              onChange={onChangeGroup}
+            />
+            <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
+              <img
+                className="w-7 h-7 md:w-9 md:h-9"
+                src={file}
+                alt="New file"
+              />
+              <input
+                className="hidden"
+                type="file"
+                value={setGroupPost.image}
+                name="image"
+                ref={inputRef}
+                onChange={handleFileUpload}
+              />
+              {fileName.length > 0 ? `${fileName}` : "Fichier"}
+            </label>
+            <button type="submit" onClick={categoryPost}>
+              <img className="w-8 h-8 my-2" src={plus} alt="ajouter" />
+            </button>
+          </form>
+        </section>
         <button
           type="button"
           className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
         >
-          <img className="w-8 h-7 mt-0 mr-3" src={plus} alt="ajouter" />
+          <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
           Ajouter un nouvelle catégorie
         </button>
       </div>

@@ -75,7 +75,12 @@ router.delete("/api/categories/:id", categoryControllers.destroy);
 // Gestion des groupes
 router.get("/api/groups", groupControllers.browse);
 router.get("/api/groups/:id", groupControllers.read);
-router.post("/api/groups", groupControllers.add);
+router.post(
+  "/api/groups",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  groupControllers.add
+);
 router.put("/api/groups/:id", groupControllers.edit);
 router.delete("/api/groups/:id", groupControllers.destroy);
 

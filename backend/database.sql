@@ -84,23 +84,23 @@ INSERT INTO
 VALUES
   (
     'Communication Agence',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Métier',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Prévention',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Entre nous',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Clients',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   );
 
 CREATE TABLE category(
@@ -117,77 +117,77 @@ INSERT INTO
 VALUES
   (
     'Actualités',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
     (
     'La vie des sites',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
     (
     'Affichage réglementaire',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
   (
     'Métier1',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Métier2',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Métier3',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Réseau',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Prev2',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Prev3',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Nous 1',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Mobilité',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Rapports d''activités',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Infos Rhône-Alpes',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   ),
   (
     'Projet régionnal',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   ),
   (
     'Innovation',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   );
   
