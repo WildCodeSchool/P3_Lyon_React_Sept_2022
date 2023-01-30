@@ -7,7 +7,7 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
   const { groupList, categoryList } = usePostUserContext();
   return (
     <div>
-      <div className="font-[Enedis] text-primary text-center text-2xl mb-3">
+      <div className="font-[Enedis] text-primary text-center text-4xl">
         <h3>Gérer la liste des publications</h3>
       </div>
       <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
