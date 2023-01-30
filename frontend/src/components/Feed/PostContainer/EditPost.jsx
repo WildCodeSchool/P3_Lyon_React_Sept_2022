@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalCreatePost, SelectBar } from "../..";
+import { ModalCreatePost } from "../..";
+import { usePostUserContext } from "../../../contexts/PostUserContext";
+import groupe from "../../../assets/groupe.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
-  const [showCategories, setShowCategories] = useState("");
+  // récupère du context l'id de la category selectionné
+  const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
 
+  // ouvre les groupes et categories via le bouton Catégorie
+  const [showCategories, setShowCategories] = useState(false);
+
+  // data envoyé au back pour update le post
   const [dataPost, setDataPost] = useState({
-    ...post,
+    title: "",
+    content: "",
+    user_id: user.id,
+    category_id: valueSelectedCategory.id,
+    post_image: "",
   });
+
   const onChange = (e) => {
     setDataPost({
       ...dataPost,
@@ -17,9 +29,15 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
     });
   };
   const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (post.title && post.content) {
+    if (
+      dataPost.title &&
+      dataPost.content &&
+      dataPost.user_id &&
+      dataPost.category_id
+    ) {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -76,15 +94,31 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
                   {user.lastname}
                 </h2>
               </div>
-              <p className="text-md md:text-xl ml-[24px] text-primary">
-                {post.group_name}
+              <p
+                placeholder={post.group_name}
+                className="text-md md:text-xl ml-[24px] text-primary"
+              >
+                {valueSelectedGroup}
               </p>
-              <p className="text-md md:text-xl ml-[24px] text-primary">
-                {post.category_name}
+              <p
+                placeholder={post.category_name}
+                value={valueSelectedCategory.id}
+                className="text-md md:text-xl ml-[24px] text-primary"
+              >
+                {valueSelectedCategory.category_name}
               </p>
             </div>
           </div>
-
+          <button
+            type="button"
+            onClick={() => console.warn(valueSelectedCategory.id)}
+          >
+            category_id
+          </button>
+          <br />
+          <button type="button" onClick={() => console.warn(dataPost)}>
+            dataPost
+          </button>
           <div>
             <input
               className="mt-8 h-16 md:text-xl w-full pl-8"
@@ -109,13 +143,29 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               alt="Post"
             />
           </div>
-          <button
+          <div>
+            <button
+              className="flex flex-col items-center justify-center cursor-pointer pl-7"
+              type="button"
+              onClick={() => setShowCategories(!showCategories)}
+            >
+              <img className="w-7 h-7 md:w-9 md:h-9" src={groupe} alt="Group" />
+              <h3 className="text-md font-light text-primary md:text-lg">
+                Catégorie
+              </h3>
+            </button>
+          </div>
+          {/* <button
             type="button"
             onClick={() => setShowCategories(!showCategories)}
           >
-            <SelectBar />
-          </button>
+            <SelectBar
+              showCategories={showCategories}
+              setShowCategories={setShowCategories}
+            />
+          </button> */}
           <button
+            onClick={() => console.warn(dataPost)}
             type="submit"
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
