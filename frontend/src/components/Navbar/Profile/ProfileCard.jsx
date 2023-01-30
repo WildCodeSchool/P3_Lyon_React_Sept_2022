@@ -31,7 +31,7 @@ function ProfileCard({ profileUser, setProfileUser }) {
         setUser({ ...user, avatar: result.avatar });
         setProfileUser({ ...user, avatar: result.avatar });
         setAvatar(result.avatar);
-        toast.success("Publié avec succès !", {
+        toast.success("Photo de profil modifiée avec succès !", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -43,9 +43,9 @@ function ProfileCard({ profileUser, setProfileUser }) {
   };
 
   return (
-    <div className="flex flex-col justify-center w-screen pt-5 md:-mt-20 md:ml-40 ">
-      <div className="user-avatar mx-auto rounded-full z-10 md:mt-1 md:ml-12 ">
-        <div className="">
+    <div className="flex flex-col justify-center items-center w-screen pt-5 md:-mt-20 md:ml-40 ">
+      <div className="mx-auto rounded-full z-10 md:mt-1 md:ml-12 ">
+        <div className="mb-4">
           {avatar && (
             <img
               src={`${backEnd}/uploads/${avatar}`}
@@ -53,16 +53,19 @@ function ProfileCard({ profileUser, setProfileUser }) {
               alt="User avatar"
             />
           )}
-        </div>{" "}
+        </div>
         {profileUser.id === user.id ? (
-          <input
-            type="file"
-            id="image-upload"
-            name="avatar"
-            ref={inputRef}
-            className="mt-3"
-            onChange={handleChange}
-          />
+          <label className="ml-5 md:ml-1 cursor-pointer hover:bg-primary hover:text-white text-primary border border-primary py-3 px-[2.5rem] rounded-[20px] text-md mb-4">
+            <input
+              type="file"
+              id="image-upload"
+              name="avatar"
+              ref={inputRef}
+              className="hidden"
+              onChange={handleChange}
+            />
+            Changer de photo
+          </label>
         ) : null}
       </div>
 
