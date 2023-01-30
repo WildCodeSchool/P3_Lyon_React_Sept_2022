@@ -44,7 +44,7 @@ router.get("/api/myposts/user/:id/limit/:base", postControllers.browseMyPosts);
 
 /// /// Gestion des posts ///////
 
-router.get("/api/posts/limit/:base", verifyToken, postControllers.browse); // Feed de base
+router.get("/api/posts/limit/:base", postControllers.browse); // Feed de base
 router.get(
   "/api/posts/group/:group/limit/:base",
   postControllers.browseByGroup
@@ -68,14 +68,24 @@ router.delete("/api/posts/:id", postControllers.destroy);
 
 router.get("/api/categories", categoryControllers.browse);
 router.get("/api/categories/:id", categoryControllers.read);
-router.post("/api/categories", categoryControllers.add);
+router.post(
+  "/api/categories",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  categoryControllers.add
+);
 router.put("/api/categories/:id", categoryControllers.edit);
 router.delete("/api/categories/:id", categoryControllers.destroy);
 
 // Gestion des groupes
 router.get("/api/groups", groupControllers.browse);
 router.get("/api/groups/:id", groupControllers.read);
-router.post("/api/groups", groupControllers.add);
+router.post(
+  "/api/groups",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  groupControllers.add
+);
 router.put("/api/groups/:id", groupControllers.edit);
 router.delete("/api/groups/:id", groupControllers.destroy);
 

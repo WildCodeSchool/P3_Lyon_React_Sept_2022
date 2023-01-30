@@ -13,6 +13,12 @@ import pdf from "../../../assets/pdf.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
+const date = new Date();
+
+const currentDate = `${date.getFullYear()}${`0${date.getMonth()}${1}`.slice(
+  -2
+)}${date.getDate()}-${date.getHours()}:${date.getMinutes()}`;
+
 function Post({ post, deleteFromPostWithId }) {
   const [editPostMenu, setEditPostMenu] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
@@ -20,9 +26,8 @@ function Post({ post, deleteFromPostWithId }) {
   // three dots button and modifying stuff
   const navigate = useNavigate();
 
-  const formatDate = (date) => {
-    return date.slice(0, 10).split("-").reverse().join("-");
-  };
+  const postDate = post.post_date.slice(0, 10).split("-").reverse().join("-");
+  const postTime = post.post_date.slice(11, 16);
 
   const handleEditPost = () => {
     setEditPostMenu(!editPostMenu);
@@ -132,10 +137,17 @@ function Post({ post, deleteFromPostWithId }) {
               <div className="flex flex-col md:w-60">
                 <h3 className="font-light text-primary">{post.group_name}</h3>
                 <h3 className="font-light text-primary">
-                  {post.category_name}
+                  {post.category_name} {post.post_time}
                 </h3>
                 <h3 className="text-gray-400 font-light">
-                  {formatDate(post.post_date)}
+                  {postDate.split("-").reverse().join("") ===
+                    currentDate.slice(0, 8) && `${postTime}`}
+                  {currentDate.slice(0, 8) -
+                    postDate.split("-").reverse().join("") ===
+                    1 && "Hier"}
+                  {currentDate.slice(0, 8) -
+                    postDate.split("-").reverse().join("") >
+                    1 && `${postDate}`}
                 </h3>
               </div>
             </div>

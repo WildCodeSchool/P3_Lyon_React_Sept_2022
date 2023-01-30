@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS group_detail;
 DROP TABLE IF EXISTS user_detail;
 
+set timezone TO 'Europe/Paris';
+SET TIME ZONE 'Europe/Paris';
+
 CREATE TABLE user_detail(
 id serial primary key not null,
 firstname varchar(250) not null,
@@ -81,23 +84,23 @@ INSERT INTO
 VALUES
   (
     'Communication Agence',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Métier',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Prévention',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Entre nous',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   ),
   (
     'Clients',
-    'https://i.imgur.com/CDXh5eB.jpg'
+    'solar-groups.jpeg'
   );
 
 CREATE TABLE category(
@@ -114,77 +117,77 @@ INSERT INTO
 VALUES
   (
     'Actualités',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
     (
     'La vie des sites',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
     (
     'Affichage réglementaire',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     1
   ),
   (
     'Métier1',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Métier2',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Métier3',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     2
   ),
   (
     'Réseau',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Prev2',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Prev3',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     3
   ),
   (
     'Nous 1',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Mobilité',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Rapports d''activités',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     4
   ),
   (
     'Infos Rhône-Alpes',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   ),
   (
     'Projet régionnal',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   ),
   (
     'Innovation',
-    'https://i.imgur.com/3Qdp5Tz.jpg',
+    'office.jpg',
     5
   );
   
@@ -195,7 +198,7 @@ title varchar(200) not null,
 content text not null,
 user_id int not null,
 category_id int not null,
-post_date DATE,
+post_date timestamptz,
 post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
@@ -211,7 +214,7 @@ VALUES
     'You are my fire. The one desire. Believe when I say. I want it that way',
     1,
     1,
-    '2022-11-01',
+    '2022-11-01T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -219,7 +222,7 @@ VALUES
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     2,
     2,
-    '2022-11-02',
+    '2022-11-02T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -227,7 +230,7 @@ VALUES
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     3,
     3,
-    '2022-11-03',
+    '2022-11-03T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -235,7 +238,7 @@ VALUES
     'Tell me why, I never wanna hear you say. I want it that way',
     4,
     4,
-    '2022-11-04',
+    '2022-11-04T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -243,7 +246,7 @@ VALUES
     'Don''t stop until you get enough',
     5,
     5,
-    '2022-11-05',
+    '2022-11-05T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -251,7 +254,7 @@ VALUES
     'Have you ever seen the rain?',
     1,
     6,
-    '2022-11-06',
+    '2022-11-06T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -259,7 +262,7 @@ VALUES
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     2,
     7,
-    '2022-11-07',
+    '2022-11-07T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -267,7 +270,7 @@ VALUES
     '¡ ECUADOR !',
     3,
     8,
-    '2022-11-08',
+    '2022-11-08T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -275,7 +278,7 @@ VALUES
     'Are you gona go my way ?',
     4,
     9,
-    '2022-11-08',
+    '2022-11-08T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -283,7 +286,7 @@ VALUES
     'You don''t have to put on that red light',
     5,
     10,
-    '2022-11-09',
+    '2022-11-09T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -291,7 +294,7 @@ VALUES
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     1,
     11,
-    '2022-11-10',
+    '2022-11-10T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -299,7 +302,7 @@ VALUES
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     2,
     12,
-    '2022-11-11',
+    '2022-11-11T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -307,7 +310,7 @@ VALUES
     'If you say run, I''ll run with you and if you say hide, we''ll hide',
     3,
     13,
-    '2022-11-12',
+    '2022-11-12T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
 (
@@ -315,7 +318,7 @@ VALUES
     'What will you do when you get lonely? No one waiting by your side?',
     4,
     15,
-    '2022-11-13',
+    '2022-11-13T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -323,7 +326,7 @@ VALUES
     'All the leaves are brown and the sky is gray.',
     5,
     1,
-    '2022-11-14',
+    '2022-11-14T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -331,7 +334,7 @@ VALUES
     'And Harry doesn''t mind if he doesn''t make the scene. He''s got a daytime job, he''s doing alright',
     1,
     2,
-    '2022-11-15',
+    '2022-11-15T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -339,7 +342,7 @@ VALUES
     'Come on, baby, light my fire',
     2,
     3,
-    '2022-11-16',
+    '2022-11-16T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -347,7 +350,7 @@ VALUES
     'With your feet on the air and your head on the ground. Try this trick and spin it, yeah ',
     3,
     4,
-    '2022-11-17',
+    '2022-11-17T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -355,7 +358,7 @@ VALUES
     'If you want to hang out. You''ve got to take her out, cocaine',
     4,
     5,
-    '2022-11-18',
+    '2022-11-18T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -363,7 +366,7 @@ VALUES
     'I was made for loving you, baby. You were made for loving me',
     5,
     6,
-    '2022-11-19',
+    '2022-11-19T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -371,7 +374,7 @@ VALUES
     'Take me down to the Paradise City, where the grass is green and the girls are pretty',
     1,
     7,
-    '2022-11-20',
+    '2022-11-20T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -379,7 +382,7 @@ VALUES
     'The boys are back in town',
     2,
     8,
-    '2022-11-21',
+    '2022-11-21T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -387,7 +390,7 @@ VALUES
     'You are my fire. The one desire. Believe when I say. I want it that way',
     3,
     9,
-    '2022-11-22',
+    '2022-11-22T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -395,7 +398,7 @@ VALUES
     'Tell me why, ain''t nothing but a heartache. Tell me why, ain''t nothing but a mistake',
     4,
     10,
-    '2022-11-23',
+    '2022-11-23T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -403,7 +406,7 @@ VALUES
     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form.',
     5,
     11,
-    '2022-11-24',
+    '2022-11-24T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -411,7 +414,7 @@ VALUES
     'Tell me why, I never wanna hear you say. I want it that way',
     1,
     12,
-    '2022-11-25',
+    '2022-11-25T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -419,7 +422,7 @@ VALUES
     'Don''t stop until you get enough',
     2,
     13,
-    '2022-11-26',
+    '2022-11-26T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -427,7 +430,7 @@ VALUES
     'Have you ever seen the rain?',
     3,
     14,
-    '2022-11-27',
+    '2022-11-27T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -435,7 +438,7 @@ VALUES
     'Please allow me to introduce myself, I''m a man of wealth and taste',
     4,
     15,
-    '2022-11-28',
+    '2022-11-28T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -443,7 +446,7 @@ VALUES
     '¡ ECUADOR !',
     5,
     1,
-    '2022-11-29',
+    '2022-11-29T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -451,7 +454,7 @@ VALUES
     'Are you gona go my way ?',
     1,
     2,
-    '2022-11-30',
+    '2022-11-30T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -459,7 +462,7 @@ VALUES
     'You don''t have to put on that red light',
     2,
     3,
-    '2022-12-01',
+    '2022-12-01T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -467,7 +470,7 @@ VALUES
     'I''ve seen your frown and it''s like looking down the barrel of a gun',
     3,
     4,
-    '2022-12-02',
+    '2022-12-02T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
   (
@@ -475,7 +478,7 @@ VALUES
     'Money, it''s a gas. Grab that cash with both hands and make a stash',
     4,
     5,
-    '2022-12-03',
+    '2022-12-03T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
     (
@@ -483,7 +486,7 @@ VALUES
     'Nos 38 000 salariés répartis dans chacune des régions de France œuvrent au quotidien pour vous garantir l''accès à une alimentation électrique de qualité.',
     1,
     6,
-    '2022-12-04',
+    '2022-12-04T11:04:06.163Z',
     'téléchargement.jpg'
   ),
     (
@@ -491,7 +494,7 @@ VALUES
     'Enedis est une entreprise de service public, gestionnaire du réseau de distribution d''électricité. Elle développe, exploite, modernise le réseau électrique et gère les données associées. Elle facilite la transition énergétique des territoires en les accompagnant dans le développement et la planification de leur production d''électricité d''origine renouvelable.',
     5,
     7,
-    '2022-12-05',
+    '2022-12-05T11:04:06.163Z',
     '1200x680_20190627_110949_resized.jpg'
   ),
     (
@@ -499,7 +502,7 @@ VALUES
     'Entreprise de service public de distribution d''électricité, Enedis tire le bilan de dix ans d''expertise dans l''accompagnement des territoires et lance des projets toujours plus innovants en Auvergne-Rhône-Alpes.',
     2,
     14,
-    '2022-12-06',
+    '2022-12-06T11:04:06.163Z',
     ''
   ),
     (
@@ -507,7 +510,7 @@ VALUES
     'Spécialisée dans le développement d''outils de conception, de simulation et de supervision 3D pour l''industrie, la société toulousaine Virtual IT s''embarque pour le CES de Las Vegas avec une nouvelle solution qui permet d''adapter l''utilisation de maquettes numériques à des interventions de terrain. Démonstration avec Enedis.',
     3,
     15,
-    '2022-12-07',
+    '2022-12-07T11:04:06.163Z',
     '000831369_896x598_c.jpg'
   ),
     (
@@ -515,7 +518,7 @@ VALUES
     'La flotte électrique d''entreprise d''Enedis est la 2e en France avec 1880 voitures destinées aux interventions. Cette flotte est un véritable laboratoire de la mobilité électrique à grande échelle : elle permet à Enedis d''acquérir une expérience réelle, tant du point de vue technologique que d''un point de vue humain.',
     4,
     11,
-    '2022-12-08',
+    '2022-12-08T11:04:06.163Z',
     'voitures.jpg'
   ),
     (
@@ -523,7 +526,7 @@ VALUES
     'Voici rapport de synthèse des usines de Val de Loire',
     5,
     11,
-    '2022-12-09',
+    '2022-12-09T11:04:06.163Z',
     'synthèse Matthieu GEORGE.pdf'
   ),
     (
@@ -531,15 +534,15 @@ VALUES
     'Le compteur Linky apporte de nouveaux services. Il simplifie vos démarches et vous permet de maîtriser votre consommation et votre facture d''électricité.',
     1,
     15,
-    '2022-12-10',
+    '2022-12-10T11:04:06.163Z',
     'linky.png'
   ),
     (
     'Plan de restructuration en Rhône-Alpes',
-    'La crise sanitaire frappe durement l’activité des petits commerçants et artisans, entraînant une augmentation de la vacance dans les territoires fragiles et, notamment, dans beaucoup de centres-villes. Or, les commerces de proximité participent à l’attractivité des territoires et à la qualité de vie de leurs habitants.',
+    'La crise sanitaire frappe durement l''activité des petits commerçants et artisans, entraînant une augmentation de la vacance dans les territoires fragiles et, notamment, dans beaucoup de centres-villes. Or, les commerces de proximité participent à l’attractivité des territoires et à la qualité de vie de leurs habitants.',
     2,
     13,
-    '2022-12-11',
+    '2022-12-11T11:04:06.163Z',
     ''
     
   ),
@@ -548,7 +551,7 @@ VALUES
     'Un nouveau projet s''aprêtte à voir le jour aux alentours de Clermont-ferrand pour le plus grand bonheur de la régions qui estime une baisse du coup de l''électricité dans la régons de 10% sur 5 ans ',
     4,
     14,
-    '2022-12-12',
+    '2022-12-12T11:04:06.163Z',
     'panneaux.jpg'
   ),
     (
@@ -556,7 +559,7 @@ VALUES
     'Après de nombreuses recherches il semblerait qu''il suffirait de recouvrir seulement 2% de la surface de l''océan d''éolienne pour subvenir au besoins de toute l''humanité en électricité, propre et renouvelable de sûrcroit !',
     3,
     15,
-    '2022-12-13',
+    '2022-12-13T11:04:06.163Z',
     'waterEolienne.jpg'
   );
 

@@ -31,7 +31,6 @@ function Connexion() {
     };
 
     if (email && password) {
-      console.warn(setUser);
       // on appelle le back
       fetch(`${backEnd}/api/login`, requestOptions)
         .then((response) => response.json())

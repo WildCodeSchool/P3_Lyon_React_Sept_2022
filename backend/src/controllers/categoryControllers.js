@@ -28,8 +28,8 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const category = req.body;
-
+  const category = JSON.parse(req.body.category);
+  category.image = req.renamedFile;
   models.category
     .insert(category)
     .then((result) => {
