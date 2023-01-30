@@ -44,18 +44,17 @@ function ProfileCard({ profileUser, setProfileUser }) {
 
   return (
     <div className="flex flex-col justify-center items-center w-screen pt-5 md:-mt-20 md:ml-40 ">
-      <div className="mx-auto rounded-full z-10 md:mt-1 md:ml-12 ">
-        <div className="mb-4">
-          {avatar && (
-            <img
-              src={`${backEnd}/uploads/${avatar}`}
-              className="rounded-full object-cover w-60 h-60 border-4 border-violet"
-              alt="User avatar"
-            />
-          )}
-        </div>
+      <div className="xl:mr-20 z-10 md:mt-1">
+        {avatar && (
+          <img
+            src={`${backEnd}/uploads/${avatar}`}
+            className="rounded-full object-cover w-60 h-60 border-4 border-violet mb-3"
+            alt="User avatar"
+          />
+        )}
+
         {profileUser.id === user.id ? (
-          <label className="ml-5 md:ml-1 cursor-pointer hover:bg-primary hover:text-white text-primary border border-primary py-3 px-[2.5rem] rounded-[20px] text-md mb-4">
+          <label className="ml-5 cursor-pointer hover:bg-primary hover:text-white text-primary border border-primary p-3 rounded-[20px] text-md mb-5">
             <input
               type="file"
               id="image-upload"
@@ -64,14 +63,14 @@ function ProfileCard({ profileUser, setProfileUser }) {
               className="hidden"
               onChange={handleChange}
             />
-            Changer de photo
+            Changer photo de profil
           </label>
         ) : null}
       </div>
 
-      <div className="flex justify-center shadow-[3px_3px_4px_#C9CBF0] border border-primary rounded-lg w-80 h-72 mx-auto relative top-[-60px] md:ml-0 ">
+      <div className="flex justify-center shadow-[3px_3px_4px_#C9CBF0] border border-primary rounded-lg w-80 h-72 mx-auto relative top-[-90px] md:ml-0 ">
         <div className="profile-details text-primary text-center">
-          <h2 className="text-2xl font-black mt-20">
+          <h2 className="text-2xl font-black mt-28">
             {profileUser.firstname} {profileUser.lastname}
           </h2>
           <h3 className="text-xl italic">{profileUser.role}</h3>

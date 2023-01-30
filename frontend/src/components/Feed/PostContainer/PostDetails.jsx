@@ -97,7 +97,7 @@ function PostDetails({ numberComments, setNumberComments }) {
           >
             <img
               className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-              src={comment.avatar}
+              src={`${backEnd}/uploads/${comment.avatar}`}
               alt="My profile avatar"
             />
             <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm">
