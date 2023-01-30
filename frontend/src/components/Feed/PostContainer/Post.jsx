@@ -116,7 +116,7 @@ function Post({ post, deleteFromPostWithId }) {
           <Link to={`/profile/${post.user_id}`}>
             <img
               className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet"
-              src={post.avatar}
+              src={`${backEnd}/uploads/${post.avatar}`}
               alt={post.username}
             />
           </Link>
@@ -188,7 +188,7 @@ function Post({ post, deleteFromPostWithId }) {
           <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img
               className="rounded-full w-10 mr-2 h-10 border-4 border-violet"
-              src={user.avatar}
+              src={`${backEnd}/uploads/${user.avatar}`}
               alt="My profile avatar"
             />
             <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">

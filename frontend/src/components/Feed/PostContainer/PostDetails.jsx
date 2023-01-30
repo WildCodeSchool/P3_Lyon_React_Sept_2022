@@ -41,7 +41,7 @@ function PostDetails({ numberComments, setNumberComments }) {
         <div className="flex flex-row items-center py-6 px-10 md:mx-auto">
           <img
             className="rounded-full w-24 h-24 mr-6 border-4 border-violet"
-            src={postDetails.avatar}
+            src={`${backEnd}/uploads/${postDetails.avatar}`}
             alt="User avatar"
           />
           <div className="flex flex-col justify-start items-start">

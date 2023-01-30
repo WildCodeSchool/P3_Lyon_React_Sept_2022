@@ -56,7 +56,7 @@ function Comment({ postId }) {
     <div className="w-full mt-6 flex items-center pl-2 pb-4 md:items-start">
       <img
         className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-        src={user.avatar}
+        src={`${backEnd}/uploads/${user.avatar}`}
         alt="My profile avatar"
       />
       <form

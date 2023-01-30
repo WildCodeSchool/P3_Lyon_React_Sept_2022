@@ -37,7 +37,7 @@ function Navbar({ setGroupId, setCategoryId }) {
           <div className="rounded-full md:mr-5 ">
             <Link to="/profile">
               <img
-                src={user.avatar}
+                src={`http://localhost:5000/uploads/${user.avatar}`}
                 alt="My profile avatar"
                 className="rounded-full object-cover w-10 h-10 mr-2 border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
               />
