@@ -9,6 +9,8 @@ import "swiper/css";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
   const { groupList, categoryList } = usePostUserContext();
 
@@ -49,8 +51,8 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               alt="croix rouge pour effacer"
               className={
                 groupId > 0 && categoryId === 0
-                  ? "h-6 w-6 md:h-8 md:w-8 ml-4 mb-7"
-                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-5"
+                  ? "h-6 w-6 md:h-8 md:w-8 ml-4 mb-8"
+                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-14"
               }
             />
           </button>
@@ -75,7 +77,9 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
                 key={group.id}
                 className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
                 onClick={() => handleGroup(group.id)}
-                style={{ backgroundImage: `url(${group.image})` }}
+                style={{
+                  backgroundImage: `url(${backEnd}/uploads/${group.image})`,
+                }}
               >
                 <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
                   {group.group_name}
@@ -90,9 +94,11 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="md:hidden group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                  className="md:hidden group-card flex bg-cover  bg-center justify-center items-center align-middle text-center cursor-pointer"
                   onClick={() => handleCategory(category.id)}
-                  style={{ backgroundImage: `url(${category.image})` }}
+                  style={{
+                    backgroundImage: `url(${backEnd}/uploads/${category.image})`,
+                  }}
                 >
                   <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
                     {category.category_name}
