@@ -33,10 +33,7 @@ const add = (req, res) => {
   models.category
     .insert(category)
     .then((result) => {
-      res
-        .location(`/api/categories/${result.insertId}`)
-        .json(result)
-        .sendStatus(201);
+      res.location(`/api/categories/${result.insertId}`).sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
