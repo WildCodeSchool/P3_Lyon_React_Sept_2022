@@ -14,6 +14,7 @@ import pdf from "../../../assets/pdf.png";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 const date = new Date();
+
 const currentDate = `${date.getFullYear()}${`0${date.getMonth()}${1}`.slice(
   -2
 )}${date.getDate()}-${date.getHours()}:${date.getMinutes()}`;
@@ -145,20 +146,7 @@ function Post({ post, deleteFromPostWithId }) {
                   {currentDate.slice(0, 8) -
                     postDate.split("-").reverse().join("") >
                     1 && `${postDate}`}
-                  {/* {postDate} {postTime} */}
                 </h3>
-                <h3 className="text-blue-800 font-light">
-                  {/* {formatDate(post.post_date)} */}
-                  {currentDate}
-                </h3>
-                {/* <button
-                  type="button"
-                  onClick={() =>
-                    console.log(postDate)
-                  }
-                >
-                  log time
-                </button> */}
               </div>
             </div>
           </div>

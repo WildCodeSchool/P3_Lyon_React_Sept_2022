@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS group_detail;
 DROP TABLE IF EXISTS user_detail;
 
+set timezone TO 'Europe/Paris';
+SET TIME ZONE 'Europe/Paris';
+
 CREATE TABLE user_detail(
 id serial primary key not null,
 firstname varchar(250) not null,
@@ -195,7 +198,7 @@ title varchar(200) not null,
 content text not null,
 user_id int not null,
 category_id int not null,
-post_date timestamp,
+post_date timestamptz,
 post_image varchar(250),
 CONSTRAINT fk_post_user
 FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE,
