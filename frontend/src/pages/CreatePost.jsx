@@ -16,6 +16,8 @@ function CreatePost() {
 
   const { user } = useCurrentUserContext();
   const inputRef = useRef(null);
+
+  // Data envoyé au back pour update un post
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
@@ -25,6 +27,7 @@ function CreatePost() {
   });
   const navigate = useNavigate();
 
+  // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
   const onChange = (e) => {

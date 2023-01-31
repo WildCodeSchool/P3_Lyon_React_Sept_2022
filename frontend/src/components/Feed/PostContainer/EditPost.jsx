@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalCreatePost } from "../..";
-import { usePostUserContext } from "../../../contexts/PostUserContext";
 import groupe from "../../../assets/groupe.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
-  // récupère du context l'id de la category selectionné
-  const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
-
   // ouvre les groupes et categories via le bouton Catégorie
   const [showCategories, setShowCategories] = useState(false);
 
   // data envoyé au back pour update le post
   const [dataPost, setDataPost] = useState({
-    title: "",
-    content: "",
-    user_id: user.id,
-    category_id: valueSelectedCategory.id,
-    post_image: "",
+    ...post,
   });
 
   const onChange = (e) => {
@@ -96,23 +88,21 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               </div>
               <p
                 placeholder={post.group_name}
+                value={dataPost.group_id}
                 className="text-md md:text-xl ml-[24px] text-primary"
               >
-                {valueSelectedGroup}
+                {post.group_name}
               </p>
               <p
                 placeholder={post.category_name}
-                value={valueSelectedCategory.id}
+                value={dataPost.category_id}
                 className="text-md md:text-xl ml-[24px] text-primary"
               >
-                {valueSelectedCategory.category_name}
+                {post.category_name}
               </p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => console.warn(valueSelectedCategory.id)}
-          >
+          <button type="button" onClick={() => console.warn(post.category_id)}>
             category_id
           </button>
           <br />
@@ -155,15 +145,6 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               </h3>
             </button>
           </div>
-          {/* <button
-            type="button"
-            onClick={() => setShowCategories(!showCategories)}
-          >
-            <SelectBar
-              showCategories={showCategories}
-              setShowCategories={setShowCategories}
-            />
-          </button> */}
           <button
             onClick={() => console.warn(dataPost)}
             type="submit"

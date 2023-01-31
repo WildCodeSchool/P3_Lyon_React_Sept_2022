@@ -21,7 +21,7 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, c.id as category_id, g.group_name, g.id as group_id, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -30,7 +30,7 @@ class PostManager extends AbstractManager {
       LEFT JOIN group_detail as g
       ON g.id = c.group_id 
       LEFT JOIN comment ON comment.post_id = p.id
-      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, c.id, g.group_name, g.id
       ORDER BY p.id DESC limit 5 offset $1;`,
       [base]
     );
