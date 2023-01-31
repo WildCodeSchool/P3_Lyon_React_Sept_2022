@@ -17,6 +17,7 @@ function AddUserGroup() {
     fetch(`http://localhost:5000/api/users/?search=${searchInput}`)
       .then((response) => response.json())
       .then((result) => {
+        console.warn(result);
         setUserCards(result);
       })
       .catch((error) => console.warn(error));
@@ -26,8 +27,8 @@ function AddUserGroup() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
-      user_id: idUser,
-      group_id: parseInt(groupId, 10),
+      userId: idUser,
+      groupId: parseInt(groupId, 10),
     });
     const requestOptions = {
       method: "POST",
@@ -81,13 +82,7 @@ function AddUserGroup() {
 
       <div className="bg-[#F6F6F6]">
         {searchInput === ""
-          ? userCards.map((card) => (
-              <UserCard
-                key={card.id}
-                card={card}
-                addUserGroup={addUserInGroup}
-              />
-            ))
+          ? ""
           : userCards
               .filter(
                 (user) =>

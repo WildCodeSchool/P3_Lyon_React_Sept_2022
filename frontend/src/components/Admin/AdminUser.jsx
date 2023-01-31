@@ -190,7 +190,7 @@ export default function AdminUser() {
         )}
       </div>
 
-      {deleteButton > 0 && (
+      {selectedGroup > 0 && (
         <Link
           to={`/admin/add-user-group/${selectedGroup}`}
           handleSearch={handleSearchUserGroup}
