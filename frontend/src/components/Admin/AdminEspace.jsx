@@ -111,7 +111,7 @@ function AdminEspace() {
   const onSubmitGroup = (e) => {
     e.preventDefault();
     if (fileName === "") {
-      toast.warn("Veuillez choisir une image ou un fichier PDF", {
+      toast.warn("Veuillez choisir une image", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -163,7 +163,7 @@ function AdminEspace() {
         pauseOnHover: true,
       });
     } else if (fileName === "") {
-      toast.warn("Veuillez choisir une image ou un fichier PDF", {
+      toast.warn("Veuillez choisir une image", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

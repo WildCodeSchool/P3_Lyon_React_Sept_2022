@@ -6,6 +6,12 @@ import pdf from "../../../assets/pdf.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
+const date = new Date();
+
+const currentDate = `${date.getFullYear()}${`0${date.getMonth()}${1}`.slice(
+  -2
+)}${date.getDate()}-${date.getHours()}:${date.getMinutes()}`;
+
 function PostDetails({ numberComments, setNumberComments }) {
   const [comments, setComments] = useState([]);
   const { refreshComment } = usePostUserContext();
@@ -55,6 +61,24 @@ function PostDetails({ numberComments, setNumberComments }) {
             <h3 className="font-light text-primary">
               {postDetails.category_name}
             </h3>
+            {postDetails.post_date && (
+              <h3 className="text-gray-400 font-light">
+                {postDetails.post_date.slice(0, 10).split("-").join("") ===
+                  currentDate.slice(0, 8) &&
+                  `${postDetails.post_date.slice(11, 16)}`}
+                {currentDate.slice(0, 8) -
+                  postDetails.post_date.slice(0, 10).split("-").join("") ===
+                  1 && "Hier"}
+                {currentDate.slice(0, 8) -
+                  postDetails.post_date.slice(0, 10).split("-").join("") >
+                  1 &&
+                  `${postDetails.post_date
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-")}`}
+              </h3>
+            )}
           </div>
         </div>
       </div>

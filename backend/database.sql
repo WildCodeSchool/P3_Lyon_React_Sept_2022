@@ -585,6 +585,7 @@ id serial primary key not null,
 content text not null,
 post_id int not null,
 user_id int not null,
+comment_date timestamptz,
 CONSTRAINT fk_comment_post
 FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE,
 CONSTRAINT fk_comment_user
@@ -593,7 +594,7 @@ FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE
 
 INSERT INTO
   comment (content, post_id, user_id)
-VALUES ('YOLOOO', 1, 2);
+VALUES ('J''adore !', 1, 2);
 
 CREATE TABLE user_group
 (
