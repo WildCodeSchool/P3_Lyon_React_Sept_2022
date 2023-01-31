@@ -26,7 +26,7 @@ function HeaderAdmin() {
         <Link to="/adminEspace">
           <button
             type="button"
-            className="text-white font-[Enedis] bg-primary w-34 text-l w-[26vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
+            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
           >
             Espaces
           </button>

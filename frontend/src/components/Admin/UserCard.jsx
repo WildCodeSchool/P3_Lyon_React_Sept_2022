@@ -1,5 +1,7 @@
 import DropDownEditUser from "./DropDownEditUser";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 export default function UserCard({
   card,
   toggleRefresh,
@@ -11,7 +13,7 @@ export default function UserCard({
       <div className="flex justify-start font-[Enedis] text-primary rounded-3xl bg-white m-4 p-6">
         <img
           className="rounded-full w-[21vw] h-[22vw] border-4 border-violet"
-          src={card.avatar}
+          src={`${backEnd}/uploads/${card.avatar}`}
           alt="User avatar"
         />
         <div>

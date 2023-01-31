@@ -28,11 +28,7 @@ function Profile() {
           setMyPosts((prev) => [...prev, ...result]);
         });
     } else {
-      fetch(`${backEnd}/api/users/${user.id}`)
-        .then((response) => response.json())
-        .then((result) => {
-          setProfileUser(result);
-        });
+      setProfileUser(user);
       fetch(`${backEnd}/api/myposts/user/${user.id}/limit/${base}`)
         .then((response) => response.json())
         .then((result) => {
@@ -65,13 +61,16 @@ function Profile() {
 
   return (
     <div className="bg-[#f6f6fe] md:overflow-y-hidden md:h-screen  ">
-      {profileUser && (
+      {profileUser.id && (
         <div>
           <div className="md:sticky md:top-0 md:w-full md:z-10 md:bg-[#f6f6fe]">
             <Navbar />
           </div>
           <div className="md:flex md:max-h-screen ">
-            <ProfileCard profileUser={profileUser} />
+            <ProfileCard
+              profileUser={profileUser}
+              setProfileUser={setProfileUser}
+            />
             <h1 className="text-primary text-center text-4xl mb-3 md:hidden">
               Publications
             </h1>
