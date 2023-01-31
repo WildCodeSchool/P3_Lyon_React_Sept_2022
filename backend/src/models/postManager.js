@@ -109,7 +109,7 @@ class PostManager extends AbstractManager {
 
   update(post) {
     return this.connection.any(
-      `UPDATE ${this.table} set title = $1, content = $2, user_id = $3, category_id = $4 where id = $5`,
+      `update ${this.table} set title = $1, content = $2, user_id = $3, category_id = $4 where id = $5`,
       [post.title, post.content, post.user_id, post.category_id, post.id]
     );
   }

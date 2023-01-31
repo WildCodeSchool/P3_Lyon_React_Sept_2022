@@ -117,11 +117,11 @@ function Post({ post, deleteFromPostWithId }) {
             )}
           </div>
         )}
-        <div className="flex flex-row self-start pt-2 pb-4 px-6 md:py-8">
+        <div className="flex flex-row self-start pt-2 pb-4 px-6">
           <Link to={`/profile/${post.user_id}`}>
             <img
-              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet md:mr-20"
-              src={post.avatar}
+              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet"
+              src={`${backEnd}/uploads/${post.avatar}`}
               alt={post.username}
             />
           </Link>
@@ -154,7 +154,7 @@ function Post({ post, deleteFromPostWithId }) {
           </div>
         </div>
         <Link to={`/feed/${post.id}`}>
-          <div className="px-6 w-[390px] md:w-[640px]">
+          <div className="px-6 w-[390px] md:w-full">
             <h2 className="text-black text-left pb-1 text-xl">{post.title}</h2>
             <p className="text-md py-2">
               {post.content.length < 151
@@ -200,7 +200,7 @@ function Post({ post, deleteFromPostWithId }) {
           <div className="w-full mt-6 pl-4 flex items-center pb-6">
             <img
               className="rounded-full w-10 mr-2 h-10 border-4 border-violet"
-              src={user.avatar}
+              src={`${backEnd}/uploads/${user.avatar}`}
               alt="My profile avatar"
             />
             <div className="w-72 shadow-md text-left pl-3 rounded-xl py-2 text-sm text-gray-500">

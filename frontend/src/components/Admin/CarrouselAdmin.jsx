@@ -14,7 +14,7 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
 
   return (
     <div>
-      <div className="font-[Enedis] text-primary text-center text-2xl mb-3">
+      <div className="font-[Enedis] text-primary text-center text-4xl">
         <h3>Gérer la liste des publications</h3>
       </div>
       <div className="flex justify-center">
