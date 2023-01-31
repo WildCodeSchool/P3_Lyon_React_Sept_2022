@@ -137,7 +137,7 @@ function Post({ post, deleteFromPostWithId }) {
               <div className="flex flex-col md:w-60">
                 <h3 className="font-light text-primary">{post.group_name}</h3>
                 <h3 className="font-light text-primary">
-                  {post.category_name} {post.post_time}
+                  {post.category_name}
                 </h3>
                 <h3 className="text-gray-400 font-light">
                   {postDate.split("-").reverse().join("") ===
