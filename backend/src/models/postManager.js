@@ -7,7 +7,7 @@ class PostManager extends AbstractManager {
 
   find(id) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.id, c.group_id c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
       FROM ${this.table} as p
        LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -21,7 +21,7 @@ class PostManager extends AbstractManager {
 
   findAll(base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, c.id as category_id, g.group_name, g.id as group_id, count(comment.id) as nbComments
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -30,7 +30,7 @@ class PostManager extends AbstractManager {
       LEFT JOIN group_detail as g
       ON g.id = c.group_id 
       LEFT JOIN comment ON comment.post_id = p.id
-      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, c.id, g.group_name, g.id
+      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
       ORDER BY p.id DESC limit 5 offset $1;`,
       [base]
     );
@@ -38,7 +38,7 @@ class PostManager extends AbstractManager {
 
   findMyPosts(id, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -57,7 +57,7 @@ class PostManager extends AbstractManager {
 
   findPostsByGroup(group, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -76,7 +76,7 @@ class PostManager extends AbstractManager {
 
   findPostsByCategory(category, base) {
     return this.connection.any(
-      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name
+      `select p.id, p.user_id, p.title, p.content, ud.firstname, p.post_image, p.post_date,  ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
       FROM ${this.table} as p
       LEFT JOIN user_detail as ud
       ON ud.id= p.user_id
@@ -109,8 +109,8 @@ class PostManager extends AbstractManager {
 
   update(post) {
     return this.connection.any(
-      `update ${this.table} set title = $1, content = $2, user_id = $3, category_id = $4 where id = $5`,
-      [post.title, post.content, post.user_id, post.category_id, post.id]
+      `update ${this.table} set title = $1, content = $2, user_id = $3, category_id = $4 where id = $4`,
+      [post.title, post.content, post.user_id, post.category_id]
     );
   }
 }
