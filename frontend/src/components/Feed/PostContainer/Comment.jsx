@@ -53,19 +53,19 @@ function Comment({ postId }) {
   };
 
   return (
-    <div className="w-full mt-6 flex items-center pl-2 pb-4 md:items-start">
+    <div className="w-full mt-6 md:mt-0 flex items-center md:rounded-xl pl-2 pb-4 md:ml-[14vw]">
       <img
         className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-        src={user.avatar}
+        src={`${backEnd}/uploads/${user.avatar}`}
         alt="My profile avatar"
       />
       <form
         onSubmit={onSubmit}
         name="form"
-        className="flex justify-around items-center shadow-md rounded-xl"
+        className="flex justify-around items-center shadow-md rounded-xl md:bg-white"
       >
         <input
-          className="w-60 py-2 pl-2 text-sm"
+          className="w-60 md:w-[50vw] md:rounded-lg py-2 pl-2 text-sm"
           type="text"
           name="content"
           placeholder="Laissez un commentaire..."

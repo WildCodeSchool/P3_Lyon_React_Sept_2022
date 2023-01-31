@@ -36,6 +36,12 @@ router.get("/api/users/limit/:base", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.post("/api/users", hashPassword, userControllers.add);
 router.put("/api/users/:id", userControllers.edit);
+router.put(
+  "/api/avatars/:userid",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  userControllers.editUserAvatar
+);
 router.delete("/api/users/:id", userControllers.destroy);
 
 // appel de mes posts personnel

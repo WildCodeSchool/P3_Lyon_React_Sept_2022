@@ -16,6 +16,8 @@ function CreatePost() {
 
   const { user } = useCurrentUserContext();
   const inputRef = useRef(null);
+
+  // Data envoyé au back pour update un post
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
@@ -25,6 +27,7 @@ function CreatePost() {
   });
   const navigate = useNavigate();
 
+  // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
   const onChange = (e) => {
@@ -118,7 +121,7 @@ function CreatePost() {
           <div className="flex items-center md:justify-start md:mr-60 md:mt-7">
             <img
               className="rounded-full object-cover w-28 h-28 sm:w-48 sm:h-48 md:w-16 md:h-16 ml-3 md:ml-6 border-4 border-violet"
-              src={user.avatar}
+              src={`${backEnd}/uploads/${user.avatar}`}
               alt="Avatar"
             />
             <div className="block text-left">

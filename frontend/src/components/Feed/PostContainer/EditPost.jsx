@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalCreatePost, SelectBar } from "../..";
+import { ModalCreatePost } from "../..";
+import groupe from "../../../assets/groupe.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
-  const [showCategories, setShowCategories] = useState("");
+  // ouvre les groupes et categories via le bouton Catégorie
+  const [showCategories, setShowCategories] = useState(false);
 
+  // data envoyé au back pour update le post
   const [dataPost, setDataPost] = useState({
     ...post,
   });
+
   const onChange = (e) => {
     setDataPost({
       ...dataPost,
@@ -17,9 +21,15 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
     });
   };
   const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (post.title && post.content) {
+    if (
+      dataPost.title &&
+      dataPost.content &&
+      dataPost.user_id &&
+      dataPost.category_id
+    ) {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -64,7 +74,7 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
           <div className="md:flex">
             <img
               className="rounded-full object-cover w-28 h-28 sm:w-32 sm:h-32 ml-3 md:ml-6 border-4 border-violet"
-              src={user.avatar}
+              src={`${backEnd}/uploads/${user.avatar}`}
               alt="Avatar"
             />
             <div>
@@ -76,15 +86,29 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
                   {user.lastname}
                 </h2>
               </div>
-              <p className="text-md md:text-xl ml-[24px] text-primary">
+              <p
+                placeholder={post.group_name}
+                value={dataPost.group_id}
+                className="text-md md:text-xl ml-[24px] text-primary"
+              >
                 {post.group_name}
               </p>
-              <p className="text-md md:text-xl ml-[24px] text-primary">
+              <p
+                placeholder={post.category_name}
+                value={dataPost.category_id}
+                className="text-md md:text-xl ml-[24px] text-primary"
+              >
                 {post.category_name}
               </p>
             </div>
           </div>
-
+          <button type="button" onClick={() => console.warn(post.category_id)}>
+            category_id
+          </button>
+          <br />
+          <button type="button" onClick={() => console.warn(dataPost)}>
+            dataPost
+          </button>
           <div>
             <input
               className="mt-8 h-16 md:text-xl w-full pl-8"
@@ -109,13 +133,20 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               alt="Post"
             />
           </div>
+          <div>
+            <button
+              className="flex flex-col items-center justify-center cursor-pointer pl-7"
+              type="button"
+              onClick={() => setShowCategories(!showCategories)}
+            >
+              <img className="w-7 h-7 md:w-9 md:h-9" src={groupe} alt="Group" />
+              <h3 className="text-md font-light text-primary md:text-lg">
+                Catégorie
+              </h3>
+            </button>
+          </div>
           <button
-            type="button"
-            onClick={() => setShowCategories(!showCategories)}
-          >
-            <SelectBar />
-          </button>
-          <button
+            onClick={() => console.warn(dataPost)}
             type="submit"
             className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 mr-3
          rounded-[20px] justify-end"
