@@ -48,7 +48,7 @@ function Comment({ postId }) {
           const form = document.getElementsByName("form")[0];
           form.reset();
         })
-        .catch(console.error());
+        .catch(console.error);
     }
   };
 
