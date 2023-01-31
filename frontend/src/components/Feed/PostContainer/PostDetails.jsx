@@ -29,7 +29,7 @@ function PostDetails({ numberComments, setNumberComments }) {
   }, [postId]);
 
   return (
-    <div className="bg-white md:bg-[#F6F6F6] h-screen w-screen overflow-x-hidden ">
+    <div className="bg-white md:bg-[#F6F6Fe] h-screen w-screen overflow-x-hidden ">
       <div>
         <Link to="/feed">
           <img
@@ -103,7 +103,7 @@ function PostDetails({ numberComments, setNumberComments }) {
                 src={`${backEnd}/uploads/${comment.avatar}`}
                 alt="My profile avatar"
               />
-              <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm">
+              <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm md:bg-white">
                 {comment.content}
               </div>
             </div>

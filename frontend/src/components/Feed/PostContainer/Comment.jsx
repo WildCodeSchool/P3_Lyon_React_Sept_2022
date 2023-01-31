@@ -62,7 +62,7 @@ function Comment({ postId }) {
       <form
         onSubmit={onSubmit}
         name="form"
-        className="flex justify-around items-center shadow-md rounded-xl"
+        className="flex justify-around items-center shadow-md rounded-xl md:bg-white"
       >
         <input
           className="w-60 md:w-[50vw] md:rounded-lg py-2 pl-2 text-sm"

@@ -74,7 +74,7 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
           <div className="md:flex">
             <img
               className="rounded-full object-cover w-28 h-28 sm:w-32 sm:h-32 ml-3 md:ml-6 border-4 border-violet"
-              src={user.avatar}
+              src={`${backEnd}/uploads/${user.avatar}`}
               alt="Avatar"
             />
             <div>
