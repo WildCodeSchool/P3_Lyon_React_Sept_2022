@@ -7,6 +7,7 @@ import { CurrentUserContextProvider } from "./contexts/userContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
 import { PostDetails, AdminEspace, ModifUser } from "./components";
 import { Connexion, Main, CreatePost, Profile, PostList } from "./pages";
+import AddUserGroup from "./components/Admin/AddUserGroup";
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,10 @@ function App() {
               <Route path="/profile/:user_id" element={<Profile />} />
               <Route path="/adminUser" element={<PostList />} />
               <Route path="/adminUser/:id" element={<ModifUser />} />
+              <Route
+                path="/admin/add-user-group/:groupId"
+                element={<AddUserGroup />}
+              />
               <Route path="/adminEspace" element={<AdminEspace />} />
             </Routes>
             <ToastContainer />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
 import croix from "../../assets/close-red.png";
 import AddUser from "./AddUser";
@@ -142,6 +143,15 @@ export default function AdminUser() {
       });
   };
 
+  const handleSearchUserGroup = () => {
+    fetch(`http://localhost:5000/api/users`)
+      .then((response) => response.json())
+      .then((result) => {
+        setUserCard(result);
+      })
+      .catch((error) => console.warn(error));
+  };
+
   return (
     <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
       <HeaderAdmin />
@@ -156,6 +166,7 @@ export default function AdminUser() {
         Ajouter un utilisateur
         <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
       </button>
+
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className="flex flex-col justify-center w-screen items-center">
         <DropDownGroup setGroupId={handleGroupSelect} />
@@ -179,15 +190,26 @@ export default function AdminUser() {
         )}
       </div>
 
-      <div className=" flex justify-around mt-6 ">
-        <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
-          type="text"
-          placeholder="Rechercher..."
-          onChange={handleSearch}
-          value={searchInput}
-        />
-      </div>
+      {selectedGroup > 0 && (
+        <Link
+          to={`/admin/add-user-group/${selectedGroup}`}
+          handleSearch={handleSearchUserGroup}
+          searchInput={searchInput}
+          deleteButton={deleteButton}
+        >
+          <button type="button">
+            <img className="w-5 h-4 mt-0 mr-3" alt="" src={pictoGroup} />
+          </button>
+        </Link>
+      )}
+
+      <input
+        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+        type="text"
+        placeholder="Rechercher..."
+        onChange={handleSearch}
+        value={searchInput}
+      />
 
       <div className="bg-[#F6F6F6]">
         {userCard

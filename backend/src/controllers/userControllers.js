@@ -1,9 +1,20 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  const base = parseInt(req.params.base, 10);
   models.user_detail
-    .findAll(base)
+    .findAll()
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseInBackend = (req, res) => {
+  models.user_detail
+    .noFetchAll()
     .then((results) => {
       res.send(results);
     })
@@ -96,4 +107,5 @@ module.exports = {
   edit,
   editUserAvatar,
   destroy,
+  browseInBackend,
 };
