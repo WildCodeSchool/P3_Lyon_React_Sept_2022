@@ -96,17 +96,9 @@ export default function AddUser({ openAndCloseUserModal }) {
       <div className="flex justify-around ">
         <img
           className="rounded-full w-[42vw] ml-5 border-4 border-violet"
-          src="./src/assets/user-avatar2.jpeg"
+          src="./src/assets/photo-avatar-profil.png"
           alt="User avatar"
         />
-        <div className="ml-5 mt-4">
-          <button
-            type="button"
-            className="text-white mr-4 my-4 font-[Enedis] bg-primary text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
-          >
-            Modifier
-          </button>
-        </div>
       </div>
       <div className="flex justify-center">
         <form
