@@ -11,7 +11,7 @@ export function TokenContextProvider({ children }) {
   const navigate = useNavigate();
   function redirectIfDisconnected() {
     navigate("/");
-    toast(" ✅ Session expirée !", {
+    toast.warn("Session expirée, veuillez-vous reconnecter !", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,

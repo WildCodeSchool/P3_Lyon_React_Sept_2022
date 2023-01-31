@@ -32,7 +32,7 @@ VALUES
     '0628164511',
     'Spécialiste en cyber-sécurité',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/Ajb5Q8V.png'
+    'javier.jpg'
   ),
   (
     'Doroteya',
@@ -41,7 +41,7 @@ VALUES
     '0628164512',
     'Design specialst',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/vJKyNZ2.jpg'
+    'doroteya.jpg'
   ),
   (
     'Matthieu',
@@ -50,7 +50,7 @@ VALUES
     '0628164513',
     'Admin réseau',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/QFlGPRB.jpg'
+    'matthieu.jpg'
   ),
   (
     'Sahrane',
@@ -59,7 +59,7 @@ VALUES
     '0628164514',
     'Directeur technique',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/DixnvgV.jpg'
+    'sahrane.jpg'
   ),
   (
     'Ryan',
@@ -68,7 +68,7 @@ VALUES
     '0628164515',
     'Chargé de marketing',
     '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
-    'https://i.imgur.com/lIAKkYJ.jpg'
+    'ryan.jpg'
   );
 
 UPDATE user_detail SET is_admin = true WHERE id = 3;
@@ -486,8 +486,8 @@ VALUES
     'Nos 38 000 salariés répartis dans chacune des régions de France œuvrent au quotidien pour vous garantir l''accès à une alimentation électrique de qualité.',
     1,
     6,
-    '2022-12-04T11:04:06.163Z',
-    'téléchargement.jpg'
+    '2022-12-04',
+    'téléchargement.jpeg'
   ),
     (
     'Projets raccordement Electrique',
