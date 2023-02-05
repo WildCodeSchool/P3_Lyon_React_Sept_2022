@@ -12,6 +12,20 @@ const browse = (req, res) => {
     });
 };
 
+const browseBy5 = (req, res) => {
+  const { base } = req.params;
+
+  models.user_detail
+    .findAllBy5(base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const browseInBackend = (req, res) => {
   const query = `%${req.params.query}%`;
 
@@ -104,6 +118,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseBy5,
   read,
   add,
   edit,

@@ -32,6 +32,7 @@ router.post(
 );
 
 /// //// Gestion des users ///////
+router.get("/api/users/limit/:base", userControllers.browseBy5);
 router.get("/api/users", userControllers.browse);
 router.get("/api/not-all-users/:query", userControllers.browseInBackend);
 router.get("/api/users/:id", userControllers.read);
@@ -110,6 +111,11 @@ router.get(
 router.get(
   "/api/user_group/group/:groupId/limit/:base",
   userGroupControllers.findUserByGroupId
+);
+// je récupère les utilisateurs d'un groupe en fonction de l'id du groupe et avec un mot de recherche
+router.get(
+  "/api/user_group/group/:groupId/:query",
+  userGroupControllers.findUserByGroupIdAndQuery
 );
 // J'ajoute un utilisateur dans un groupe
 router.post("/api/user_group", userGroupControllers.addUserInGroup);

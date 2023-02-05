@@ -36,6 +36,7 @@ export default function AdminUser() {
     setAddUser(false);
     setSelectedGroup(0);
     setUserCard([]);
+    setSearchInput("");
     if (base === 0) {
       setRefresh(!refresh);
     } else {
@@ -60,7 +61,7 @@ export default function AdminUser() {
   const toggleRefresh = () => setRefresh(!refresh);
 
   useEffect(() => {
-    if (selectedGroup === 0) {
+    if (selectedGroup === 0 && searchInput === "") {
       fetch(`${backEnd}/api/users/limit/${base}`, {
         method: "GET",
         headers: {
@@ -70,9 +71,23 @@ export default function AdminUser() {
       })
         .then((response) => response.json())
         .then((result) => {
+          console.warn(result);
           setUserCard((prev) => [...prev, ...result]);
         });
-    } else {
+    } else if (selectedGroup === 0 && searchInput !== "") {
+      fetch(`${backEnd}/api/not-all-users/${searchInput}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.warn(result);
+          setUserCard(result);
+        });
+    } else if (selectedGroup > 0 && searchInput === "") {
       fetch(
         `http://localhost:5000/api/user_group/group/${selectedGroup}/limit/${base}`,
         {
@@ -88,8 +103,24 @@ export default function AdminUser() {
           setUserCard((prev) => [...prev, ...result]);
         })
         .catch((error) => console.warn(error));
+    } else if (selectedGroup > 0 && searchInput !== "") {
+      fetch(
+        `http://localhost:5000/api/user_group/group/${selectedGroup}/${searchInput}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setUserCard(result);
+        })
+        .catch((error) => console.warn(error));
     }
-  }, [refresh, base]);
+  }, [refresh, base, searchInput]);
 
   const handleScroll = () => {
     if (
@@ -169,7 +200,21 @@ export default function AdminUser() {
 
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className="flex flex-col justify-center w-screen items-center">
-        <DropDownGroup setGroupId={handleGroupSelect} />
+        <div className="flex justify-center">
+          <DropDownGroup setGroupId={handleGroupSelect} />
+          {selectedGroup > 0 && (
+            <Link
+              to={`/admin/add-user-group/${selectedGroup}`}
+              handleSearch={handleSearchUserGroup}
+              searchInput={searchInput}
+              deleteButton={deleteButton}
+            >
+              <button type="button">
+                <img className="w-5 h-4 mt-4 ml-3" alt="" src={pictoGroup} />
+              </button>
+            </Link>
+          )}
+        </div>
 
         {selectedGroup > 0 && (
           <div className="flex justify-center">
@@ -190,47 +235,26 @@ export default function AdminUser() {
         )}
       </div>
 
-      {selectedGroup > 0 && (
-        <Link
-          to={`/admin/add-user-group/${selectedGroup}`}
-          handleSearch={handleSearchUserGroup}
-          searchInput={searchInput}
-          deleteButton={deleteButton}
-        >
-          <button type="button">
-            <img className="w-5 h-4 mt-0 mr-3" alt="" src={pictoGroup} />
-          </button>
-        </Link>
-      )}
-
-      <input
-        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
-        type="text"
-        placeholder="Rechercher..."
-        onChange={handleSearch}
-        value={searchInput}
-      />
+      <div className="w-full flex justify-center">
+        <input
+          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          type="text"
+          placeholder="Rechercher..."
+          onChange={handleSearch}
+          value={searchInput}
+        />
+      </div>
 
       <div className="bg-[#F6F6F6]">
-        {userCard
-          .filter(
-            (user) =>
-              user.firstname
-                .toLocaleLowerCase()
-                .includes(searchInput.toLocaleLowerCase()) ||
-              user.lastname
-                .toLocaleLowerCase()
-                .includes(searchInput.toLocaleLowerCase())
-          )
-          .map((card) => (
-            <UserCard
-              key={card.id}
-              card={card}
-              toggleRefresh={toggleRefresh}
-              deleteUserGroup={handleDeleteUserGroup}
-              deleteButton={deleteButton}
-            />
-          ))}
+        {userCard.map((card) => (
+          <UserCard
+            key={card.id}
+            card={card}
+            toggleRefresh={toggleRefresh}
+            deleteUserGroup={handleDeleteUserGroup}
+            deleteButton={deleteButton}
+          />
+        ))}
       </div>
     </div>
   );
