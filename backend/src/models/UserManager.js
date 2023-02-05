@@ -27,7 +27,7 @@ class UserManager extends AbstractManager {
 
   noFetchAll(query) {
     return this.connection.any(
-      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname OR lastname ILIKE %$1%`,
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname ILIKE $1 OR lastname ILIKE $1`,
       [query]
     );
   }

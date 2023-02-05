@@ -13,8 +13,10 @@ const browse = (req, res) => {
 };
 
 const browseInBackend = (req, res) => {
+  const query = `%${req.params.query}%`;
+
   models.user_detail
-    .noFetchAll()
+    .noFetchAll(query)
     .then((results) => {
       res.send(results);
     })
