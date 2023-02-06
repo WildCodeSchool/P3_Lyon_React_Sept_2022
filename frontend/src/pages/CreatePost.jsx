@@ -199,7 +199,7 @@ function CreatePost() {
             </div>
           </div>
           <hr className="h-[2px] bg-grey w-[100vw] md:w-[70vw] xl:w-[60vw]" />
-          <div className="w-11/12 flex justify-center items-center">
+          <div className="w-11/12 mx-auto flex justify-center items-center">
             <button
               type="submit"
               className="bg-primary hover:bg-[#0d17a1] text-white py-3 mt-8 w-40 md:w-48 

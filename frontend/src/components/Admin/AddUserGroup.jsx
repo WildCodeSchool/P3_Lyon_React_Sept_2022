@@ -113,7 +113,7 @@ function AddUserGroup() {
         <input
           className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary flex justify-center "
           type="text"
-          placeholder="Rechercher..."
+          placeholder="Ajouter un utilisateur au groupe..."
           onChange={handleSearchUserGroup}
           value={searchInput}
         />

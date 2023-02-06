@@ -246,7 +246,7 @@ function AdminEspace() {
     <div className="min-h-screen md:overflow-x-hidden">
       <Navbar />
       <HeaderAdmin />
-      <div className="font-[Enedis] text-primary text-center text-4xl mb-8 border-black">
+      <div className="font-[Enedis] text-primary text-center text-4xl mb-8 border-black mt-5 xl:mt-10">
         <h3>Gérer les groupes et les catégories</h3>
       </div>
       <div className="flex flex-col items-center justify-center">
@@ -385,7 +385,7 @@ function AdminEspace() {
 
       <div className=" flex justify-around mb-10">
         <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          className="w-[80vw] md:w-6/12 border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
           type="text"
           placeholder="Rechercher..."
           onChange={(e) => setSearchInput(e.target.value)}
