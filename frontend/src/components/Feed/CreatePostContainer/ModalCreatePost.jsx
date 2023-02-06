@@ -3,10 +3,10 @@ import { usePostUserContext } from "../../../contexts/PostUserContext";
 
 function ModalCreatePost({ showCategories, setShowCategories }) {
   const {
-    groupList,
     categoryList,
     setValueSelectedCategory,
     setValueSelectedGroup,
+    userGroups,
   } = usePostUserContext();
 
   // function pour récuperer la valeur inscrit dans le input et
@@ -47,7 +47,7 @@ function ModalCreatePost({ showCategories, setShowCategories }) {
         </div>
         <div className="w-full mt-4 md:flex md:justify-around md:wrap">
           <div className="flex flex-col w-full ">
-            {groupList
+            {userGroups
               .filter((group) => {
                 return group.group_name
                   .toLowerCase()

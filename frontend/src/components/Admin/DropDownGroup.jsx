@@ -1,24 +1,26 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
+import { usePostUserContext } from "../../contexts/PostUserContext";
 
-const backEnd = import.meta.env.VITE_BACKEND_URL;
+// const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function DropDownGroup({ setGroupId }) {
-  const [groupList, setGroupList] = useState([]);
+  // const [setGroupList] = useState([]);
+  const { userGroups } = usePostUserContext();
 
-  useEffect(() => {
-    fetch(`${backEnd}/api/groups`)
-      .then((response) => response.json())
-      .then((result) => {
-        setGroupList(result);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${backEnd}/api/groups`)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       setGroupList(result);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <Menu as="div" className="relative inline-block text-left mr-2 sm:mr-10">
@@ -46,7 +48,7 @@ function DropDownGroup({ setGroupId }) {
       >
         <Menu.Items className="absolute left-0 z-10 mt-0 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {groupList.map((group) => (
+            {userGroups.map((group) => (
               <Menu.Item key={group.id}>
                 {({ active }) => (
                   <div

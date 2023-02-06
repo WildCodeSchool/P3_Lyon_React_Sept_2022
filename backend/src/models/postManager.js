@@ -36,6 +36,23 @@ class PostManager extends AbstractManager {
     );
   }
 
+  findAllByUserGroup(id, base) {
+    return this.connection.any(
+      `SELECT 
+      p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
+      FROM post as p
+      LEFT JOIN category as c ON p.category_id = c.id 
+      LEFT JOIN group_detail as g ON c.group_id = g.id 
+      LEFT JOIN user_detail as ud ON ud.id = p.user_id
+      LEFT JOIN user_group as ug ON g.id = ug.group_id 
+      LEFT JOIN comment ON comment.post_id = p.id
+      WHERE ug.user_id = $1
+      group by p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname,  p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name
+      ORDER BY p.id DESC limit 5 offset $2;`,
+      [id, base]
+    );
+  }
+
   findMyPosts(id, base) {
     return this.connection.any(
       `select p.id, p.user_id, p.title, p.content, p.post_date, ud.firstname, p.post_image, ud.lastname, ud.avatar, c.category_name, g.group_name, count(comment.id) as nbComments
