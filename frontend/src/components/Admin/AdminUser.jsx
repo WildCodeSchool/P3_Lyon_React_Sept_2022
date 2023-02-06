@@ -188,9 +188,9 @@ export default function AdminUser() {
   // };
 
   return (
-    <div className="flex-col justify-around h-full bg-[#F6F6F6]">
+    <div className="flex-col justify-around h-screen md:overflow-x-hidden">
       <HeaderAdmin />
-      <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
+      <div className="font-[Enedis] text-primary text-center text-4xl mb-10 mt-5 xl:mt-10">
         <h3>Gérer la liste des utilisateurs</h3>
       </div>
       <button

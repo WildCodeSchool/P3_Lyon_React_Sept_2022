@@ -14,12 +14,12 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
 
   return (
     <div>
-      <div className="font-[Enedis] text-primary text-center text-4xl">
+      <div className="font-[Enedis] text-primary text-center text-3xl md:text-4xl mt-5 xl:mt-10">
         <h3>Gérer la liste des publications</h3>
       </div>
       <div className="flex justify-center">
         <div className="flex flex-col items-center ">
-          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm ">
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm">
             {groupId > 0 &&
               groupList
                 .filter((group) => group.id === groupId)
@@ -47,7 +47,7 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
         )}
       </div>
 
-      <div className=" flex justify-around mt-3 ">
+      <div className="flex justify-center mt-3 ">
         <DropDownGroup setGroupId={setGroupId} />
         {groupId > 0 && (
           <DropDownCategory groupId={groupId} setCategoryId={setCategoryId} />

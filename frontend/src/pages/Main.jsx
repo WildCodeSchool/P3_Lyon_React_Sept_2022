@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Feed,
-  Header,
   Navbar,
   Carrousel,
-  Panel,
   CarrouselAdmin,
   HeaderAdmin,
 } from "../components";
@@ -45,7 +43,7 @@ function Main({ toggleDarkMode, darkMode }) {
         setGroupId={setGroupId}
         setCategoryId={setCategoryId}
       />
-      <div className="md:grid md:grid-cols-4">
+      <div>
         {user.is_admin ? (
           <>
             <HeaderAdmin />
@@ -55,21 +53,30 @@ function Main({ toggleDarkMode, darkMode }) {
               categoryId={categoryId}
               setCategoryId={setCategoryId}
             />
+            <div className="xl:mx-52">
+              <Feed groupId={groupId} categoryId={categoryId} />
+            </div>
           </>
         ) : (
-          <>
-            <Header darkMode={darkMode} />
-            <Carrousel
-              groupId={groupId}
-              setGroupId={setGroupId}
-              categoryId={categoryId}
-              setCategoryId={setCategoryId}
-            />
-          </>
+          <div className="md:grid md:grid-cols-3">
+            <div className="md:mt-16 rounded-md md:flex md:flex-col md:col-span-1">
+              <h1 className="text-primary text-center text-3xl md:text-4xl mb-3 md:w-72 xl:w-96 md:mx-auto">
+                Enedis Centre-Val de Loire
+              </h1>
+              <div className="pt-8 md:ml-5 xl:ml-20 md:h-fit lg:w-80 md:w-60 md:bg-white md:mt-16 md:shadow-md md:rounded-lg md:sticky md:top-20">
+                <Carrousel
+                  groupId={groupId}
+                  setGroupId={setGroupId}
+                  categoryId={categoryId}
+                  setCategoryId={setCategoryId}
+                />
+              </div>
+            </div>
+            <div className="md:col-span-2 md:pr-5 xl:pr-16">
+              <Feed groupId={groupId} categoryId={categoryId} />
+            </div>
+          </div>
         )}
-
-        <Feed groupId={groupId} categoryId={categoryId} />
-        <Panel />
       </div>
     </div>
   );

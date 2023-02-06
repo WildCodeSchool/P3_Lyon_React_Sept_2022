@@ -27,10 +27,10 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
     setCategoryId(value);
   };
   return (
-    <div className="carrousel-container pt-8 md:h-fit md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
+    <div>
       <div className="flex justify-center">
         <div className="flex flex-col items-center ">
-          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm ">
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl w-auto rounded-sm ">
             {groupId
               ? userGroups
                   .filter((group) => group.id === groupId)
@@ -51,8 +51,8 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               alt="croix rouge pour effacer"
               className={
                 groupId > 0 && categoryId === 0
-                  ? "h-6 w-6 md:h-8 md:w-8 ml-4 mb-8"
-                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-16"
+                  ? "h-6 w-6 md:h-7 md:w-7 md:mr-5 md:ml-1 ml-4 mb-8"
+                  : "h-6 w-6 md:h-7 md:w-7 md:mr-5 md:ml-1 ml-4 mb-14"
               }
             />
           </button>
@@ -118,7 +118,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
                 <button
                   onClick={() => handleGroup(group.id)}
                   type="button"
-                  className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  className=" md:flex md:flex-col md:text-xl md:hover:bg-violet md:p-3 md:mb-3 md:text-center md:mx-auto "
                   key={group.id}
                 >
                   {group.group_name}
@@ -136,7 +136,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
                 <button
                   onClick={() => handleCategory(category.id)}
                   type="button"
-                  className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  className=" md:flex md:flex-col md:text-xl md:hover:bg-violet md:p-3 md:mb-3 md:text-center md:mx-auto "
                   key={category.id}
                 >
                   {category.category_name}
