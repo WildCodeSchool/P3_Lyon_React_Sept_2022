@@ -101,6 +101,7 @@ function AdminEspace() {
       group_id: "",
     });
     setChooseGroup(false);
+    setGroupId(0);
     setChooseCategory(false);
     setFileName("");
     setRefresh(!refresh);
