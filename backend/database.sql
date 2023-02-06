@@ -495,7 +495,7 @@ VALUES
     5,
     7,
     '2022-12-05T11:04:06.163Z',
-    '1200x680_20190627_110949_resized.jpg'
+    ''
   ),
     (
     'Enedis au coeur de la transition énergétique',
@@ -596,6 +596,9 @@ INSERT INTO
   comment (content, post_id, user_id)
 VALUES ('J''adore !', 1, 2);
 
+
+
+
 CREATE TABLE user_group
 (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -604,9 +607,9 @@ CREATE TABLE user_group
   CONSTRAINT fk_user_group_user_detail
     FOREIGN KEY (user_id) REFERENCES user_detail (id) ON DELETE CASCADE,
   CONSTRAINT fk_user_group_group_detail
-    FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE
+    FOREIGN KEY (group_id) REFERENCES group_detail (id) ON DELETE CASCADE,
+  CONSTRAINT unique_user_group UNIQUE (user_id, group_id)
 );
-
 
 INSERT INTO
   user_group (user_id, group_id)

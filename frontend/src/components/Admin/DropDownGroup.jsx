@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
 
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -10,12 +12,12 @@ function DropDownGroup({ setGroupId }) {
   const [groupList, setGroupList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/groups")
+    fetch(`${backEnd}/api/groups`)
       .then((response) => response.json())
       .then((result) => {
         setGroupList(result);
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (

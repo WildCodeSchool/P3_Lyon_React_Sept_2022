@@ -13,7 +13,6 @@ export function PostUserContextProvider({ children }) {
   const [refreshComment, setRefreshComment] = useState(false);
 
   function handleReset() {
-    console.warn("it works");
     setValueSelectedGroup("");
     setValueSelectedCategory("");
   }
