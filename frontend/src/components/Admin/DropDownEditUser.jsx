@@ -46,7 +46,7 @@ export default function DropDownEditUser({
     <Menu>
       <div>
         <Menu.Button>
-          <div className="flex justify-between">
+          <div>
             <img className="w-2 h-6 ml-28" src={modifDot} alt="" />
           </div>
         </Menu.Button>
@@ -60,42 +60,25 @@ export default function DropDownEditUser({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-0 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  to={`/adminUser/${card.id}`}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  <div className="flex">
-                    <img className="h-3 w-3 mr-2 mt-1" src={edit} alt="" />{" "}
-                    <p>Modifier</p>
-                  </div>
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  <div className="flex">
-                    <img className="h-3 w-3 mr-2 mt-1" src={deleteBtn} alt="" />{" "}
-                    <button type="button" onClick={() => handleDelete(card.id)}>
-                      Supprimer
-                    </button>
-                  </div>
-                </div>
-              )}
-            </Menu.Item>
-            {deleteButton > 0 && (
+        <div className="md:mb-[10vh]">
+          <Menu.Items className="absolute right-0 z-10 mt-0 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to={`/adminUser/${card.id}`}
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
+                    )}
+                  >
+                    <div className="flex">
+                      <img className="h-3 w-3 mr-2 mt-1" src={edit} alt="" />{" "}
+                      <p>Modifier</p>
+                    </div>
+                  </Link>
+                )}
+              </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <div
@@ -112,46 +95,72 @@ export default function DropDownEditUser({
                       />{" "}
                       <button
                         type="button"
-                        className="text-start"
-                        onClick={() =>
-                          deleteUserGroup(deleteButton, card.user_id)
-                        }
+                        onClick={() => handleDelete(card.id)}
                       >
-                        Supprimer l'utilisateur du groupe
+                        Supprimer
                       </button>
                     </div>
                   </div>
                 )}
               </Menu.Item>
-            )}
-            {groupId > 0 && (
-              <Menu.Item>
-                {({ active }) => (
-                  <div
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    <div className="flex">
-                      <img
-                        className="h-3 w-3 mr-2 mt-1"
-                        src={deleteBtn}
-                        alt=""
-                      />{" "}
-                      <button
-                        type="button"
-                        onClick={() => addUserInGroup(card.id)}
-                      >
-                        Ajouter au groupe
-                      </button>
+              {deleteButton > 0 && (
+                <Menu.Item>
+                  {({ active }) => (
+                    <div
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      <div className="flex">
+                        <img
+                          className="h-3 w-3 mr-2 mt-1"
+                          src={deleteBtn}
+                          alt=""
+                        />
+                        <button
+                          type="button"
+                          className="text-start"
+                          onClick={() =>
+                            deleteUserGroup(deleteButton, card.user_id)
+                          }
+                        >
+                          Supprimer l'utilisateur du groupe
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </Menu.Item>
-            )}
-          </div>
-        </Menu.Items>
+                  )}
+                </Menu.Item>
+              )}
+              {groupId > 0 && (
+                <Menu.Item>
+                  {({ active }) => (
+                    <div
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      <div className="flex">
+                        <img
+                          className="h-3 w-3 mr-2 mt-1"
+                          src={deleteBtn}
+                          alt=""
+                        />{" "}
+                        <button
+                          type="button"
+                          onClick={() => addUserInGroup(card.id)}
+                        >
+                          Ajouter au groupe
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </Menu.Item>
+              )}
+            </div>
+          </Menu.Items>
+        </div>
       </Transition>
     </Menu>
   );
