@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar/Navbar";
 import HeaderAdmin from "./HeaderAdmin";
-import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
 import croix from "../../assets/close-red.png";
 import plus from "../../assets/plus.png";
@@ -387,7 +386,7 @@ function AdminEspace() {
           value={searchInput}
         />
       </div>
-      <div className="flex flex-col items-center w-screen">
+      <div className="flex flex-col items-center w-screen pb-36">
         {groupList
           .filter((group) =>
             group.group_name.toLowerCase().includes(searchInput)
@@ -409,15 +408,6 @@ function AdminEspace() {
                   />
                 </Menu.Button>
                 <div className="flex flex-col mb-7">
-                  <div>
-                    <button type="button">
-                      <img
-                        className="w-5 h-5 mt-3 ml-3"
-                        src={editbtn}
-                        alt="stylo"
-                      />
-                    </button>
-                  </div>
                   <div>
                     <button
                       type="button"
@@ -477,14 +467,7 @@ function AdminEspace() {
                               </div>
                             )}
                           </Menu.Item>
-                          <div className="pr-2">
-                            <button type="button">
-                              <img
-                                className="w-4 h-4 mt-3 ml-3"
-                                src={editbtn}
-                                alt=""
-                              />
-                            </button>
+                          <div className="pr-6">
                             <button
                               type="button"
                               onClick={() => handleDeleteCategory(category.id)}
