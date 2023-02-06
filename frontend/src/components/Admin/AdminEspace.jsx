@@ -245,7 +245,7 @@ function AdminEspace() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen md:overflow-x-hidden">
       <Navbar />
       <HeaderAdmin />
       <div className="font-[Enedis] text-primary text-center text-4xl mb-8 border-black">
@@ -257,126 +257,132 @@ function AdminEspace() {
             <img
               src={croix}
               alt="croix rouge pour effacer"
-              className="h-8 w-8 md:h-8 md:w-8 mb-8"
+              className="h-8 w-8 mb-8"
             />
           </button>
         )}
-        {!chooseGroup && !chooseCategory && (
-          <button
-            type="button"
-            onClick={() => setChooseGroup(true)}
-            className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
-          >
-            <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
-            Ajouter un nouveau groupe
-          </button>
-        )}
-        {chooseGroup && (
-          <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
-            <form
-              onSubmit={(e) => onSubmitGroup(e)}
-              method="PUT"
-              encType="multipart/form-data"
-              className="flex flex-col items-center w-full"
+        <div className="md:flex">
+          {!chooseGroup && !chooseCategory && (
+            <button
+              type="button"
+              onClick={() => setChooseGroup(true)}
+              className="flex md:mr-5 w-[74vw] md:w-80 h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
             >
-              <h3>Ajouter un nouveau groupe</h3>
-              <input
-                type="text"
-                className="border border-primary w-full h-10 my-4 rounded-md text-center"
-                placeholder="Group name"
-                name="group_name"
-                value={groupPost.group_name}
-                onChange={onChangeGroup}
-              />
-              <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
-                <img
-                  className="w-7 h-7 md:w-9 md:h-9"
-                  src={file}
-                  alt="New file"
-                />
+              <img className="w-8 h-8  mt-0 mr-3" src={plus} alt="ajouter" />
+              Ajouter un nouveau groupe
+            </button>
+          )}
+          {chooseGroup && (
+            <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+              <form
+                onSubmit={(e) => onSubmitGroup(e)}
+                method="PUT"
+                encType="multipart/form-data"
+                className="flex flex-col items-center w-full"
+              >
+                <h3>Ajouter un nouveau groupe</h3>
                 <input
-                  className="hidden"
-                  type="file"
-                  value={setGroupPost.image}
-                  name="image"
-                  ref={inputRef}
-                  onChange={handleFileUpload}
+                  type="text"
+                  className="border border-primary w-full h-10 my-4 rounded-md text-center"
+                  placeholder="Group name"
+                  name="group_name"
+                  value={groupPost.group_name}
+                  onChange={onChangeGroup}
                 />
-                {fileName.length > 0 ? `${fileName}` : "Fichier"}
-              </label>
-              <button type="submit">
-                <img className="w-8 h-8 my-2" src={plus} alt="ajouter" />
-              </button>
-            </form>
-          </section>
-        )}
-        {!chooseGroup && !chooseCategory && (
-          <button
-            type="button"
-            onClick={() => setChooseCategory(true)}
-            className="flex w-[74vw] h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
-          >
-            <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
-            Ajouter un nouvelle catégorie
-          </button>
-        )}
-        {chooseCategory && (
-          <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
-            <form
-              onSubmit={(e) => onSubmitCategory(e)}
-              method="PUT"
-              encType="multipart/form-data"
-              className="flex flex-col items-center w-full"
+                <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
+                  <img
+                    className="w-7 h-7 md:w-9 md:h-9"
+                    src={file}
+                    alt="New file"
+                  />
+                  <input
+                    className="hidden"
+                    type="file"
+                    value={setGroupPost.image}
+                    name="image"
+                    ref={inputRef}
+                    onChange={handleFileUpload}
+                  />
+                  {fileName.length > 0 ? `${fileName}` : "Fichier"}
+                </label>
+                <button type="submit">
+                  <img className="w-8 h-8 my-2" src={plus} alt="ajouter" />
+                </button>
+              </form>
+            </section>
+          )}
+          {!chooseGroup && !chooseCategory && (
+            <button
+              type="button"
+              onClick={() => setChooseCategory(true)}
+              className="flex w-[74vw] md:w-80 h-18 items-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
             >
-              <h3>Ajouter une nouvelle catégorie</h3>
-              <input
-                type="text"
-                className="border border-primary w-full h-10 my-4 rounded-md text-center"
-                placeholder="Category name"
-                name="category_name"
-                value={categoryPost.category_name}
-                onChange={onChangeCategory}
-              />
-              {groupId > 0 ? (
-                groupList
-                  .filter((group) => group.id === groupId)
-                  .map((group) => (
-                    <h3
-                      className="text-center my-4 bg-violet w-auto rounded-sm"
-                      key={group.id}
-                    >
-                      Groupe: {group.group_name}
-                    </h3>
-                  ))
-              ) : (
-                <h3 className="text-center my-4">
-                  Associez la catégorie à un groupe
-                </h3>
-              )}
+              <img className="w-8 h-8 mt-0 mr-3" src={plus} alt="ajouter" />
+              Ajouter un nouvelle catégorie
+            </button>
+          )}
+          {chooseCategory && (
+            <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+              <form
+                onSubmit={(e) => onSubmitCategory(e)}
+                method="PUT"
+                encType="multipart/form-data"
+                className="flex flex-col items-center w-full"
+              >
+                <h3>Ajouter une nouvelle catégorie</h3>
+                <input
+                  type="text"
+                  className="border border-primary w-full h-10 my-4 rounded-md text-center"
+                  placeholder="Category name"
+                  name="category_name"
+                  value={categoryPost.category_name}
+                  onChange={onChangeCategory}
+                />
+                {groupId > 0 ? (
+                  groupList
+                    .filter((group) => group.id === groupId)
+                    .map((group) => (
+                      <h3
+                        className="text-center my-4 bg-violet w-auto rounded-sm"
+                        key={group.id}
+                      >
+                        Groupe: {group.group_name}
+                      </h3>
+                    ))
+                ) : (
+                  <h3 className="text-center my-4">
+                    Associez la catégorie à un groupe
+                  </h3>
+                )}
 
-              <DropDownGroup setGroupId={setGroupId} />
-              <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
-                <img
-                  className="w-7 h-7 md:w-9 md:h-9"
-                  src={file}
-                  alt="New file"
-                />
-                <input
-                  className="hidden"
-                  type="file"
-                  value={setCategoryPost.image}
-                  name="image"
-                  ref={inputRef}
-                  onChange={handleFileUpload}
-                />
-                {fileName.length > 0 ? `${fileName}` : "Fichier"}
-              </label>
-              <button type="submit">
-                <img className="w-10 h-10 mt-4 mb-2" src={plus} alt="ajouter" />
-              </button>
-            </form>
-          </section>
-        )}
+                <DropDownGroup setGroupId={setGroupId} />
+                <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
+                  <img
+                    className="w-7 h-7 md:w-9 md:h-9"
+                    src={file}
+                    alt="New file"
+                  />
+                  <input
+                    className="hidden"
+                    type="file"
+                    value={setCategoryPost.image}
+                    name="image"
+                    ref={inputRef}
+                    onChange={handleFileUpload}
+                  />
+                  {fileName.length > 0 ? `${fileName}` : "Fichier"}
+                </label>
+                <button type="submit">
+                  <img
+                    className="w-10 h-10 mt-4 mb-2"
+                    src={plus}
+                    alt="ajouter"
+                  />
+                </button>
+              </form>
+            </section>
+          )}
+        </div>
       </div>
 
       <div className=" flex justify-around mb-10">
