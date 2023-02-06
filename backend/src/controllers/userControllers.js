@@ -12,9 +12,25 @@ const browse = (req, res) => {
     });
 };
 
-const browseInBackend = (req, res) => {
+const browseBy5 = (req, res) => {
+  const { base } = req.params;
+
   models.user_detail
-    .noFetchAll()
+    .findAllBy5(base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseInBackend = (req, res) => {
+  const query = `%${req.params.query}%`;
+
+  models.user_detail
+    .noFetchAll(query)
     .then((results) => {
       res.send(results);
     })
@@ -102,6 +118,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseBy5,
   read,
   add,
   edit,

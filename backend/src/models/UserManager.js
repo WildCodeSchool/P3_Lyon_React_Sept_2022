@@ -25,9 +25,16 @@ class UserManager extends AbstractManager {
     );
   }
 
+  findAllBy5(base) {
+    return this.connection.any(
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} ORDER BY id DESC limit 5 offset $1`,
+      [base]
+    );
+  }
+
   noFetchAll(query) {
     return this.connection.any(
-      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname OR lastname ILIKE %$1%`,
+      `select id, firstname, lastname, email, role, avatar, phone_number, is_admin from  ${this.table} WHERE firstname ILIKE $1 OR lastname ILIKE $1`,
       [query]
     );
   }

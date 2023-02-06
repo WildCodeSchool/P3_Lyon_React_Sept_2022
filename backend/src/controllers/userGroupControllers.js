@@ -43,6 +43,23 @@ const findUserByGroupId = (req, res) => {
       res.sendStatus(500);
     });
 };
+
+const findUserByGroupIdAndQuery = (req, res) => {
+  const { groupId } = req.params;
+  const query = `%${req.params.query}%`;
+
+  models.user_group
+    .findByGroupIdAndQuery(groupId, query)
+    .then((results) => {
+      if (results[0]) res.send(results);
+      else res.sendStatus(404);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 const addUserInGroup = (req, res) => {
   const { userId, groupId } = req.body;
 
@@ -105,6 +122,7 @@ module.exports = {
   findGroups,
   findGroupByUserId,
   findUserByGroupId,
+  findUserByGroupIdAndQuery,
   addUserInGroup,
   addUserInSeveralGroup,
   deleteByUserId,

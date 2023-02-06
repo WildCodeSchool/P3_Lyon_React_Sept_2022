@@ -1,26 +1,59 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { HeaderAdmin } from "..";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar/Navbar";
 import UserCard from "./UserCard";
+import { useCurrentUserContext } from "../../contexts/userContext";
+
+const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function AddUserGroup() {
   const [userCards, setUserCards] = useState([]);
+
+  const [groupList, setGroupList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+
+  const { token } = useCurrentUserContext;
   const { groupId } = useParams();
+
+  useEffect(() => {
+    fetch(
+      fetch(`${backEnd}/api/groups`)
+        .then((response) => response.json())
+        .then((groups) => {
+          setGroupList(groups);
+        })
+    );
+  }, []);
+
+  useEffect(() => {
+    if (searchInput === "") {
+      setUserCards([]);
+    }
+  }, [searchInput]);
 
   const handleSearchUserGroup = (e) => {
     setSearchInput(e.target.value);
+    if (searchInput !== "") {
+      fetch(`${backEnd}/api/not-all-users/${searchInput}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.warn(result);
+          setUserCards(result);
+        })
+        .catch((error) => console.warn(error));
+    }
     if (searchInput === "") {
       setUserCards([]);
-      return;
     }
-    fetch(`http://localhost:5000/api/users/?search=${searchInput}`)
-      .then((response) => response.json())
-      .then((result) => {
-        console.warn(result);
-        setUserCards(result);
-      })
-      .catch((error) => console.warn(error));
   };
 
   const addUserInGroup = (idUser) => {
@@ -37,72 +70,53 @@ function AddUserGroup() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:5000/api/user_group", requestOptions)
+    fetch(`${backEnd}/api/user_group`, requestOptions)
       .then((response) => console.warn(response.json()))
+      .then((retour) => {
+        console.warn(retour);
+        toast.success(" Utilisateur ajouté avec succès !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      })
       .catch((error) => console.warn(error));
   };
 
   return (
-    <>
+    <div className="min-h-screen">
       <Navbar />
-      <div className="flex-col justify-around">
-        <h2 className="font-[Enedis] text-[#95CD31] font-bold text-center text-4xl">
-          Espace admin
-        </h2>
-        <div className="flex justify-around mt-8">
-          <button
-            type="button"
-            className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mb-6 mt-6 border-primary rounded-2xl "
-          >
-            Publications
-          </button>
-          <Link to="/adminUser">
-            <button
-              type="button"
-              className="text-white font-[Enedis] bg-primary w-34 text-l w-[28vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
-            >
-              Utilisateurs
-            </button>
-          </Link>
-          <button
-            type="button"
-            className="text-white font-[Enedis] bg-primary w-34 text-l w-[26vw]	font-bold border p-2 mt-6 mb-6 border-primary rounded-2xl "
-          >
-            Espaces
-          </button>
-        </div>
+      <HeaderAdmin />
+      <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
+        {groupList
+          .filter((group) => group.id === parseInt(groupId, 10))
+          .map((group) => (
+            <h3 key={group.id}>Groupe: {group.group_name}</h3>
+          ))}
       </div>
-      <input
-        className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary flex justify-center "
-        type="text"
-        placeholder="Rechercher..."
-        onChange={handleSearchUserGroup}
-        value={searchInput}
-      />
+      <div className="w-full flex justify-center">
+        <input
+          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary flex justify-center "
+          type="text"
+          placeholder="Rechercher..."
+          onChange={handleSearchUserGroup}
+          value={searchInput}
+        />
+      </div>
 
       <div className="bg-[#F6F6F6]">
-        {searchInput === ""
-          ? ""
-          : userCards
-              .filter(
-                (user) =>
-                  user.firstname
-                    .toLocaleLowerCase()
-                    .includes(searchInput.toLocaleLowerCase()) ||
-                  user.lastname
-                    .toLocaleLowerCase()
-                    .includes(searchInput.toLocaleLowerCase())
-              )
-              .map((card) => (
-                <UserCard
-                  key={card.id}
-                  card={card}
-                  addUserInGroup={addUserInGroup}
-                  groupId={groupId}
-                />
-              ))}
+        {userCards.map((card) => (
+          <UserCard
+            key={card.id}
+            card={card}
+            addUserInGroup={addUserInGroup}
+            groupId={groupId}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 

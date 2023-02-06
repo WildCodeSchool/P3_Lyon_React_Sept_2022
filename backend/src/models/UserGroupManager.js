@@ -27,6 +27,15 @@ class UserGroupManager extends AbstractManager {
     );
   }
 
+  findByGroupIdAndQuery(groupId, query) {
+    return this.connection.any(
+      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
+      RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
+      WHERE group_id = $1 AND firstname ILIKE $2 OR lastname ILIKE $2`,
+      [groupId, query]
+    );
+  }
+
   findAll() {
     return this.connection.any(`SELECT * FROM ${this.table}`);
   }
