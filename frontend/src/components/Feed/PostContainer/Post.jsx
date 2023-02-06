@@ -38,7 +38,7 @@ function Post({ post, deleteFromPostWithId }) {
   };
 
   const handleDelete = () => {
-    if (user.id === post.user_id) {
+    if (user.id === post.user_id || user.is_admin) {
       axios
         .delete(`${backEnd}/api/posts/${post.id}`)
         .then(() => {

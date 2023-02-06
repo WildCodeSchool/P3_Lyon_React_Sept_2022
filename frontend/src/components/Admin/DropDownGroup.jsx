@@ -17,7 +17,7 @@ function DropDownGroup({ setGroupId }) {
       .then((result) => {
         setGroupList(result);
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (

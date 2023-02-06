@@ -46,11 +46,14 @@ function PostDetails({ numberComments, setNumberComments }) {
         </Link>
         <div className="flex flex-row items-center py-2 md:py-2 px-10 ">
           <div className="flex md:flex md:ml-[200px]">
-            <img
-              className="rounded-full w-24 h-24 md:w-22 md:h-22 mr-6 border-4 border-violet"
-              src={`${backEnd}/uploads/${postDetails.avatar}`}
-              alt="User avatar"
-            />
+            {postDetails.image && (
+              <img
+                className="rounded-full w-24 h-24 md:w-22 md:h-22 mr-6 border-4 border-violet"
+                src={`${backEnd}/uploads/${postDetails.avatar}`}
+                alt="User avatar"
+              />
+            )}
+
             <div className="flex flex-col justify-start items-start">
               <h2 className=" md:block text-primary text-3xl mb-2">
                 {postDetails.firstname} {postDetails.lastname}
@@ -116,22 +119,23 @@ function PostDetails({ numberComments, setNumberComments }) {
       </div>
       <div className="">
         <div className="mt-4 md:flex md:flex-col pl-2">
-          {comments.map((comment) => (
-            <div
-              key={`${postDetails.id} + ${comment.id}`}
-              comment={comment}
-              className="flex pl-2 md:my-1 md:mx-[14vw] pb-2"
-            >
-              <img
-                className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
-                src={`${backEnd}/uploads/${comment.avatar}`}
-                alt="My profile avatar"
-              />
-              <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm md:bg-white">
-                {comment.content}
+          {comments.length > 0 &&
+            comments.map((comment) => (
+              <div
+                key={`${postDetails.id} + ${comment.id}`}
+                comment={comment}
+                className="flex pl-2 md:my-1 md:mx-[14vw] pb-2"
+              >
+                <img
+                  className="rounded-full w-10 h-10 mr-3 border-4 border-violet"
+                  src={`${backEnd}/uploads/${comment.avatar}`}
+                  alt="My profile avatar"
+                />
+                <div className="w-72 shadow-md rounded-xl py-2 pl-2 text-sm md:bg-white">
+                  {comment.content}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
           <Comment
             postId={postId}

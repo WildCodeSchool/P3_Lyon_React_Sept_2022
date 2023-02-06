@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar/Navbar";
 import HeaderAdmin from "./HeaderAdmin";
-import editbtn from "../../assets/editbtn.png";
 import rubbish from "../../assets/deleteBtn.png";
 import croix from "../../assets/close-red.png";
 import plus from "../../assets/plus.png";
@@ -101,6 +100,7 @@ function AdminEspace() {
       group_id: "",
     });
     setChooseGroup(false);
+    setGroupId(0);
     setChooseCategory(false);
     setFileName("");
     setRefresh(!refresh);
@@ -137,8 +137,7 @@ function AdminEspace() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/groups`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
+        .then(() => {
           resetStates();
           toast.success(" Groupe créé avec succès !", {
             position: "top-center",
@@ -148,7 +147,7 @@ function AdminEspace() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
@@ -189,8 +188,7 @@ function AdminEspace() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/categories`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
+        .then(() => {
           resetStates();
           toast.success("Catégorie créée avec succès !", {
             position: "top-center",
@@ -200,7 +198,7 @@ function AdminEspace() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
@@ -394,7 +392,7 @@ function AdminEspace() {
           value={searchInput}
         />
       </div>
-      <div className="flex flex-col items-center w-screen">
+      <div className="flex flex-col items-center w-screen pb-36">
         {groupList
           .filter((group) =>
             group.group_name.toLowerCase().includes(searchInput)
@@ -406,7 +404,7 @@ function AdminEspace() {
               key={group.id}
             >
               <div className="flex justify-between items-center">
-                <Menu.Button className="flex justify-between w-[80vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                <Menu.Button className="flex justify-between w-[70vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
                   <div className="flex justify-start text-start">
                     {group.group_name}
                   </div>
@@ -416,15 +414,6 @@ function AdminEspace() {
                   />
                 </Menu.Button>
                 <div className="flex flex-col mb-7">
-                  <div>
-                    <button type="button">
-                      <img
-                        className="w-5 h-5 mt-3 ml-3"
-                        src={editbtn}
-                        alt="stylo"
-                      />
-                    </button>
-                  </div>
                   <div>
                     <button
                       type="button"
@@ -484,14 +473,7 @@ function AdminEspace() {
                               </div>
                             )}
                           </Menu.Item>
-                          <div className="pr-2">
-                            <button type="button">
-                              <img
-                                className="w-4 h-4 mt-3 ml-3"
-                                src={editbtn}
-                                alt=""
-                              />
-                            </button>
+                          <div className="pr-6">
                             <button
                               type="button"
                               onClick={() => handleDeleteCategory(category.id)}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
 import croix from "../../assets/close-red.png";
@@ -72,7 +74,8 @@ export default function AdminUser() {
         .then((response) => response.json())
         .then((result) => {
           setUserCard((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((error) => console.error(error));
     } else if (selectedGroup === 0 && searchInput !== "") {
       fetch(`${backEnd}/api/not-all-users/${searchInput}`, {
         method: "GET",
@@ -84,7 +87,8 @@ export default function AdminUser() {
         .then((response) => response.json())
         .then((result) => {
           setUserCard(result);
-        });
+        })
+        .catch((error) => console.error(error));
     } else if (selectedGroup > 0 && searchInput === "") {
       fetch(`${backEnd}/api/user_group/group/${selectedGroup}/limit/${base}`, {
         method: "GET",
@@ -97,7 +101,7 @@ export default function AdminUser() {
         .then((result) => {
           setUserCard((prev) => [...prev, ...result]);
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => console.error(error));
     } else if (selectedGroup > 0 && searchInput !== "") {
       fetch(`${backEnd}/api/user_group/group/${selectedGroup}/${searchInput}`, {
         method: "GET",
@@ -110,7 +114,7 @@ export default function AdminUser() {
         .then((result) => {
           setUserCard(result);
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => console.error(error));
     }
   }, [refresh, base, searchInput]);
 
@@ -140,6 +144,10 @@ export default function AdminUser() {
     }
   };
 
+  const deleteUserList = () => {
+    setUserCard([]);
+  };
+
   /* const handleDeleteUserGroup = (groupId, userId) => {
     fetch(
       `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`,
@@ -150,28 +158,34 @@ export default function AdminUser() {
       .then((result) => {
         setUserCard(result);
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => console.error(error));
   }; */
   const handleDeleteUserGroup = (groupId, userId) => {
     axios
       .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`)
       .then((result) => {
         toggleRefresh(result);
-        console.warn("Utilisateur supprimé du groupe");
+        toast.success(" Utilisateur supprimé du groupe !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const handleSearchUserGroup = () => {
-    fetch(`${backEnd}/api/users`)
-      .then((response) => response.json())
-      .then((result) => {
-        setUserCard(result);
-      })
-      .catch((error) => console.warn(error));
-  };
+  // const handleSearchUserGroup = () => {
+  //   fetch(`${backEnd}/api/users`)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       setUserCard(result);
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
 
   return (
     <div className="flex-col justify-around h-screen md:overflow-x-hidden">
@@ -193,12 +207,7 @@ export default function AdminUser() {
         <div className="flex justify-center">
           <DropDownGroup setGroupId={handleGroupSelect} />
           {selectedGroup > 0 && (
-            <Link
-              to={`/admin/add-user-group/${selectedGroup}`}
-              handleSearch={handleSearchUserGroup}
-              searchInput={searchInput}
-              deleteButton={deleteButton}
-            >
+            <Link to={`/admin/add-user-group/${selectedGroup}`}>
               <button type="button">
                 <img className="w-5 h-4 mt-4 ml-3" alt="" src={pictoGroup} />
               </button>
@@ -208,8 +217,7 @@ export default function AdminUser() {
 
         {selectedGroup > 0 && (
           <div className="flex justify-center">
-            <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
-              Groupe :
+            <h2 className="text-primary text-center text-2xl mb-4  my-4 md:text-3xl bg-violet w-fit rounded-sm">
               {groupList
                 .filter((group) => group.id === selectedGroup)
                 .map((group) => group.group_name)}
@@ -218,7 +226,7 @@ export default function AdminUser() {
               <img
                 src={croix}
                 alt="croix rouge pour effacer"
-                className="h-5 w-5 ml-4 mb-3"
+                className="h-5 w-5 ml-4 "
               />
             </button>
           </div>
@@ -235,7 +243,7 @@ export default function AdminUser() {
         />
       </div>
 
-      <div className="bg-[#F6F6F6]">
+      <div className="bg-[#F6F6F6] pb-2">
         {userCard.map((card) => (
           <UserCard
             key={card.id}
@@ -243,6 +251,7 @@ export default function AdminUser() {
             toggleRefresh={toggleRefresh}
             deleteUserGroup={handleDeleteUserGroup}
             deleteButton={deleteButton}
+            deleteUserList={deleteUserList}
           />
         ))}
       </div>

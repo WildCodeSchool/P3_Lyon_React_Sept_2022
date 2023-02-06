@@ -78,8 +78,7 @@ function CreatePost() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/posts`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
+        .then(() => {
           navigate("/feed");
           toast.success(" Publié avec succès !", {
             position: "top-center",
@@ -89,7 +88,7 @@ function CreatePost() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
