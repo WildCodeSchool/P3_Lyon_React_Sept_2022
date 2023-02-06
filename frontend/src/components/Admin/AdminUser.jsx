@@ -188,7 +188,7 @@ export default function AdminUser() {
   // };
 
   return (
-    <div className="flex-col justify-around h-screen bg-[#F6F6F6]">
+    <div className="flex-col justify-around h-full bg-[#F6F6F6]">
       <HeaderAdmin />
       <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
         <h3>Gérer la liste des utilisateurs</h3>
@@ -243,7 +243,7 @@ export default function AdminUser() {
         />
       </div>
 
-      <div className="bg-[#F6F6F6]">
+      <div className="bg-[#F6F6F6] pb-2">
         {userCard.map((card) => (
           <UserCard
             key={card.id}
