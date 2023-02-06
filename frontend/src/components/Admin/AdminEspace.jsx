@@ -137,8 +137,7 @@ function AdminEspace() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/groups`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
+        .then(() => {
           resetStates();
           toast.success(" Groupe créé avec succès !", {
             position: "top-center",
@@ -148,7 +147,7 @@ function AdminEspace() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
@@ -189,8 +188,7 @@ function AdminEspace() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/categories`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
+        .then(() => {
           resetStates();
           toast.success("Catégorie créée avec succès !", {
             position: "top-center",
@@ -200,7 +198,7 @@ function AdminEspace() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
@@ -400,7 +398,7 @@ function AdminEspace() {
               key={group.id}
             >
               <div className="flex justify-between items-center">
-                <Menu.Button className="flex justify-between w-[80vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                <Menu.Button className="flex justify-between w-[70vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
                   <div className="flex justify-start text-start">
                     {group.group_name}
                   </div>

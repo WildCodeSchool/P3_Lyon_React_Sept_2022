@@ -27,7 +27,6 @@ function ProfileCard({ profileUser, setProfileUser }) {
     fetch(`${backEnd}/api/avatars/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn(result);
         setUser({ ...user, avatar: result.avatar });
         setProfileUser({ ...user, avatar: result.avatar });
         setAvatar(result.avatar);

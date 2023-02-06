@@ -61,24 +61,23 @@ export default function AddUser({ openAndCloseUserModal }) {
       fetch(`${backEnd}/api/register`, requestOptions)
         .then((response) => response.text())
         .then(() => {
-          toast(" ✅ User created !", {
+          openAndCloseUserModal();
+          toast.success(" Utilisateur créé !", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            theme: "light",
           });
         })
         .catch(console.error);
     } else {
-      toast(" ❌ Please specify email and password  !", {
+      toast.error(" Veuillez compléter toutes les informations  !", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        theme: "light",
       });
     }
   };
@@ -109,6 +108,7 @@ export default function AddUser({ openAndCloseUserModal }) {
           <input
             className=" border pl-2 my-3  h-8 rounded w-[80vw] border-primary"
             type="text"
+            required
             name="firstname"
             placeholder="Prénom"
             onChange={onChange}
@@ -118,6 +118,7 @@ export default function AddUser({ openAndCloseUserModal }) {
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
+            required
             name="lastname"
             placeholder="Nom"
             onChange={onChange}
@@ -128,6 +129,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
             name="phone"
+            required
             placeholder="Téléphone"
             onChange={onChangeNum}
             value={credentials.phone_number}
@@ -137,6 +139,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="email"
             name="email"
+            required
             placeholder="email"
             onChange={onChange}
             value={credentials.email}
@@ -146,6 +149,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="password"
             name="pwd"
+            required
             placeholder="*********"
             onChange={onChangepass}
             value={credentials.password}
@@ -155,6 +159,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
             name="role"
+            required
             placeholder="Poste"
             onChange={onChange}
             value={credentials.role}

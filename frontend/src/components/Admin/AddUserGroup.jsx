@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { HeaderAdmin } from "..";
 import "react-toastify/dist/ReactToastify.css";
+import { HeaderAdmin } from "..";
 import Navbar from "../Navbar/Navbar";
 import UserCard from "./UserCard";
 import { useCurrentUserContext } from "../../contexts/userContext";
@@ -46,10 +46,9 @@ function AddUserGroup() {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.warn(result);
           setUserCards(result);
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => console.error(error));
     }
     if (searchInput === "") {
       setUserCards([]);
@@ -71,29 +70,43 @@ function AddUserGroup() {
     };
 
     fetch(`${backEnd}/api/user_group`, requestOptions)
-      .then((response) => console.warn(response.json()))
-      .then((retour) => {
-        console.warn(retour);
-        toast.success(" Utilisateur ajouté avec succès !", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
+      .then((response) => {
+        if (response.status === 201) {
+          response.text();
+          toast.success(" Utilisateur ajouté avec succès !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        } else {
+          toast.warn(" L'utilisateur est déjà présent dans ce groupe", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        }
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => console.error(error));
   };
 
   return (
     <div className="min-h-screen">
       <Navbar />
       <HeaderAdmin />
-      <div className="font-[Enedis] text-primary text-center text-4xl mb-10">
+      <div className="font-[Enedis] flex justify-center text-primary text-center text-4xl mb-10">
         {groupList
           .filter((group) => group.id === parseInt(groupId, 10))
           .map((group) => (
-            <h3 key={group.id}>Groupe: {group.group_name}</h3>
+            <h3
+              key={group.id}
+              className=" text-2xl my-4 md:text-3xl bg-violet w-fit rounded-sm"
+            >
+              {group.group_name}
+            </h3>
           ))}
       </div>
       <div className="w-full flex justify-center">

@@ -15,7 +15,6 @@ const hashPassword = (req, res, next) => {
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
-      console.warn("hashedPassword", hashedPassword);
       delete req.body.password;
       next();
     })
@@ -37,7 +36,7 @@ const verifyPassword = (req, res) => {
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
       } else res.sendStatus(401);
-      console.warn("Error : Your password or email is wrong, try again");
+      console.error("Error : Your password or email is wrong, try again");
     })
     .catch((err) => {
       // do something with err

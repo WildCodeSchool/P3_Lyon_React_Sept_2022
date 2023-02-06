@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import modifDot from "../../assets/modifDot.png";
@@ -19,14 +21,21 @@ export default function DropDownEditUser({
   deleteButton,
   groupId,
   addUserInGroup,
+  deleteUserList,
 }) {
   const handleDelete = (id) => {
     axios
       .delete(`${backEnd}/api/users/${id}`)
-      .then((response) => {
-        console.warn(response.data);
+      .then(() => {
+        deleteUserList();
         toggleRefresh();
-        console.warn("Utilisateur supprimé");
+        toast.success(" Utilisateur supprimé !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -103,11 +112,12 @@ export default function DropDownEditUser({
                       />{" "}
                       <button
                         type="button"
+                        className="text-start"
                         onClick={() =>
                           deleteUserGroup(deleteButton, card.user_id)
                         }
                       >
-                        Supprimer un utilisateur du groupe
+                        Supprimer l'utilisateur du groupe
                       </button>
                     </div>
                   </div>

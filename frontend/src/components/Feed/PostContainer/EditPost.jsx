@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ModalCreatePost } from "../..";
 import groupe from "../../../assets/groupe.svg";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
+function EditPost({ setEditPostModal, setEditPostMenu, post, user }) {
   // ouvre les groupes et categories via le bouton Catégorie
   const [showCategories, setShowCategories] = useState(false);
 
@@ -43,8 +45,15 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/posts/${post.id}`, requestOptions)
         .then((response) => response.text())
-        .then((response) => {
-          console.warn(response);
+        .then(() => {
+          toast.success(" Post modifié !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+
           navigate("/profile");
         })
         .catch(console.error);
@@ -56,7 +65,7 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
       <div className="md:border-r-2 md:border-gray-100">
         <button
           onClick={() => {
-            handleEditPostModal();
+            setEditPostModal(false);
             setEditPostMenu(false);
           }}
           type="button"
@@ -102,13 +111,7 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               </p>
             </div>
           </div>
-          <button type="button" onClick={() => console.warn(post.category_id)}>
-            category_id
-          </button>
-          <br />
-          <button type="button" onClick={() => console.warn(dataPost)}>
-            dataPost
-          </button>
+
           <div>
             <input
               className="mt-8 h-16 md:text-xl w-full pl-8"
@@ -127,11 +130,13 @@ function EditPost({ handleEditPostModal, setEditPostMenu, post, user }) {
               value={dataPost.content}
               onChange={onChange}
             />
-            <img
-              className="objet-cover"
-              src={`${backEnd}/uploads/${post.post_image}`}
-              alt="Post"
-            />
+            {post.post_image && (
+              <img
+                className="objet-cover"
+                src={`${backEnd}/uploads/${post.post_image}`}
+                alt="Post"
+              />
+            )}
           </div>
           <div>
             <button
