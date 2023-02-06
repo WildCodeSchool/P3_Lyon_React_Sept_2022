@@ -109,6 +109,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 my-3 h-8 rounded w-[80vw] border-primary"
             type="text"
             required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             name="firstname"
             placeholder="Prénom"
             onChange={onChange}
@@ -120,6 +121,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             required
             name="lastname"
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Nom"
             onChange={onChange}
             value={credentials.lastname}
@@ -130,6 +132,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             name="phone"
             required
+            pattern="^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$"
             placeholder="Téléphone"
             onChange={onChangeNum}
             value={credentials.phone_number}
@@ -162,6 +165,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             name="role"
             required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Poste"
             onChange={onChange}
             value={credentials.role}
