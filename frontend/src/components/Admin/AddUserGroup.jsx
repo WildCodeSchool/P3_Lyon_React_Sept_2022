@@ -34,25 +34,6 @@ function AddUserGroup() {
     }
   }, [searchInput]);
 
-  // useEffect(() => {
-  //   if (searchInput === "") {
-  //     setUserCards([]);
-  //   } else {
-  //     fetch(`${backEnd}/api/not-all-users/${searchInput}`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         console.warn(result);
-  //         setUserCards(result);
-  //       });
-  //   }
-  // }, [searchInput]);
-
   const handleSearchUserGroup = (e) => {
     setSearchInput(e.target.value);
     if (searchInput !== "") {
@@ -89,7 +70,7 @@ function AddUserGroup() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:5000/api/user_group", requestOptions)
+    fetch(`${backEnd}/api/user_group`, requestOptions)
       .then((response) => console.warn(response.json()))
       .then((retour) => {
         console.warn(retour);

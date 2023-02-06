@@ -71,7 +71,6 @@ export default function AdminUser() {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.warn(result);
           setUserCard((prev) => [...prev, ...result]);
         });
     } else if (selectedGroup === 0 && searchInput !== "") {
@@ -84,36 +83,29 @@ export default function AdminUser() {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.warn(result);
           setUserCard(result);
         });
     } else if (selectedGroup > 0 && searchInput === "") {
-      fetch(
-        `http://localhost:5000/api/user_group/group/${selectedGroup}/limit/${base}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(`${backEnd}/api/user_group/group/${selectedGroup}/limit/${base}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           setUserCard((prev) => [...prev, ...result]);
         })
         .catch((error) => console.warn(error));
     } else if (selectedGroup > 0 && searchInput !== "") {
-      fetch(
-        `http://localhost:5000/api/user_group/group/${selectedGroup}/${searchInput}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(`${backEnd}/api/user_group/group/${selectedGroup}/${searchInput}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           setUserCard(result);
@@ -162,9 +154,7 @@ export default function AdminUser() {
   }; */
   const handleDeleteUserGroup = (groupId, userId) => {
     axios
-      .delete(
-        `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`
-      )
+      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`)
       .then((result) => {
         toggleRefresh(result);
         console.warn("Utilisateur supprimé du groupe");
@@ -175,7 +165,7 @@ export default function AdminUser() {
   };
 
   const handleSearchUserGroup = () => {
-    fetch(`http://localhost:5000/api/users`)
+    fetch(`${backEnd}/api/users`)
       .then((response) => response.json())
       .then((result) => {
         setUserCard(result);
