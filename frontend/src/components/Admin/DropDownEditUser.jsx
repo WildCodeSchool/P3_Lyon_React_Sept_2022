@@ -47,7 +47,11 @@ export default function DropDownEditUser({
       <div>
         <Menu.Button>
           <div>
-            <img className="w-2 h-6 ml-28" src={modifDot} alt="" />
+            <img
+              className="w-8 h-8 ml-20 mr-5"
+              src={modifDot}
+              alt="Menu dots"
+            />
           </div>
         </Menu.Button>
       </div>
@@ -73,7 +77,11 @@ export default function DropDownEditUser({
                     )}
                   >
                     <div className="flex">
-                      <img className="h-3 w-3 mr-2 mt-1" src={edit} alt="" />{" "}
+                      <img
+                        className="h-3 w-3 mr-2 mt-1"
+                        src={edit}
+                        alt="Edit"
+                      />{" "}
                       <p>Modifier</p>
                     </div>
                   </Link>

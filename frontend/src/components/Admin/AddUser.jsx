@@ -89,15 +89,17 @@ export default function AddUser({ openAndCloseUserModal }) {
           <img className="mr-80 mt-3 ml-4" src={croix} alt="Close btn" />
         </button>
       </div>
-      <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
-        Ajouter un utilisateur
-      </div>
-      <div className="flex justify-around ">
-        <img
-          className="rounded-full w-40 ml-5 border-4 border-violet"
-          src="./src/assets/photo-avatar-profil.png"
-          alt="User avatar"
-        />
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
+          Ajouter un utilisateur
+        </div>
+        <div className="flex justify-around ">
+          <img
+            className="rounded-full w-40 ml-5 border-4 border-violet"
+            src="./src/assets/photo-avatar-profil.png"
+            alt="User avatar"
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <form
@@ -143,7 +145,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="email"
             name="email"
             required
-            placeholder="email"
+            placeholder="Email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             onChange={onChange}
             value={credentials.email}
