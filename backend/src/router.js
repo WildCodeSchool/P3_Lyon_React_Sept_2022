@@ -54,6 +54,10 @@ router.get("/api/myposts/user/:id/limit/:base", postControllers.browseMyPosts);
 
 router.get("/api/posts/limit/:base", postControllers.browse); // Feed de base
 router.get(
+  "/api/posts/usergroup/:id/limit/:base",
+  postControllers.browseUserGroup
+); // Feed de base
+router.get(
   "/api/posts/group/:group/limit/:base",
   postControllers.browseByGroup
 ); // Feed par groupe

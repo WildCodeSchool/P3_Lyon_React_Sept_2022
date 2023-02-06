@@ -15,9 +15,9 @@ const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 const date = new Date();
 
-const currentDate = `${date.getFullYear()}${`0${date.getMonth()}${1}`.slice(
+const currentDate = `${date.getFullYear()}${`0${date.getMonth() + 1}`.slice(
   -2
-)}${date.getDate()}-${date.getHours()}:${date.getMinutes()}`;
+)}${`0${date.getDate()}`.slice(-2)}-${date.getHours()}:${date.getMinutes()}`;
 
 function Post({ post, deleteFromPostWithId }) {
   const [editPostMenu, setEditPostMenu] = useState(false);
