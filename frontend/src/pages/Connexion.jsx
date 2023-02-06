@@ -52,7 +52,7 @@ function Connexion() {
           <img
             className="md:ml-[24%] md:w-2/4 h-36 mx-auto "
             src={enedisLogo}
-            alt=""
+            alt="Logo"
           />
         </div>
         <div>
@@ -75,6 +75,7 @@ function Connexion() {
               onChange={(e) => setEmail(e.target.value)}
               className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8 md:w-2/4 md:ml-52"
               type="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               id="email"
               placeholder="name@enedis.fr"
             />
@@ -87,6 +88,7 @@ function Connexion() {
               onChange={(e) => setPassword(e.target.value)}
               className="border border-[#1423DC] pl-4 ml-[50px] h-12 w-[76vw] rounded mb-8 md:w-2/4 md:ml-52"
               type="password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
               id="password"
               placeholder="*************"
             />

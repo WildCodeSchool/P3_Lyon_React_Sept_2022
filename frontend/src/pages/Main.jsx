@@ -48,7 +48,7 @@ function Main({ toggleDarkMode, darkMode }) {
               categoryId={categoryId}
               setCategoryId={setCategoryId}
             />
-            <div className="xl:mx-52">
+            <div className="xl:mx-72">
               <Feed groupId={groupId} categoryId={categoryId} />
             </div>
           </>

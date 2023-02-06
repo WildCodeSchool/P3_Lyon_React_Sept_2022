@@ -511,7 +511,7 @@ VALUES
     3,
     15,
     '2022-12-07T11:04:06.163Z',
-    '000831369_896x598_c.jpg'
+    'computer.jpeg'
   ),
     (
     'Développement de la mobilité électrique',

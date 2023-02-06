@@ -83,7 +83,7 @@ export default function AddUser({ openAndCloseUserModal }) {
   };
 
   return (
-    <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10">
+    <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10 md:overflow-y-scroll">
       <div>
         <button type="button" onClick={openAndCloseUserModal}>
           <img className="mr-80 mt-3 ml-4" src={croix} alt="Close btn" />
@@ -94,7 +94,7 @@ export default function AddUser({ openAndCloseUserModal }) {
       </div>
       <div className="flex justify-around ">
         <img
-          className="rounded-full w-[42vw] ml-5 border-4 border-violet"
+          className="rounded-full w-40 ml-5 border-4 border-violet"
           src="./src/assets/photo-avatar-profil.png"
           alt="User avatar"
         />
@@ -106,7 +106,7 @@ export default function AddUser({ openAndCloseUserModal }) {
         >
           Prénom :
           <input
-            className=" border pl-2 my-3  h-8 rounded w-[80vw] border-primary"
+            className=" border pl-2 my-3 h-8 rounded w-[80vw] border-primary"
             type="text"
             required
             name="firstname"
@@ -141,6 +141,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             name="email"
             required
             placeholder="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             onChange={onChange}
             value={credentials.email}
           />
@@ -150,6 +151,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="password"
             name="pwd"
             required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             placeholder="*********"
             onChange={onChangepass}
             value={credentials.password}
@@ -166,7 +168,7 @@ export default function AddUser({ openAndCloseUserModal }) {
           />
           <button
             type="submit"
-            className="text-white ml-20 mb-1S font-[Enedis] bg-primary text-base w-[40vw] border h-10 border-primary rounded-2xl "
+            className="text-white mx-auto my-2 font-[Enedis] bg-primary text-base w-44 border h-10 border-primary rounded-2xl "
           >
             Enregistrer
           </button>
