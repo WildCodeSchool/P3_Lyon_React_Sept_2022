@@ -25,13 +25,17 @@ export default function AdminUser() {
   const { token } = useCurrentUserContext;
 
   useEffect(() => {
-    fetch(
-      fetch(`${backEnd}/api/groups`)
-        .then((response) => response.json())
-        .then((groups) => {
-          setGroupList(groups);
-        })
-    );
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((groups) => {
+        setGroupList(groups);
+      });
   }, []);
 
   const backToZero = () => {

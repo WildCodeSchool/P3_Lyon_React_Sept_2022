@@ -21,7 +21,10 @@ function ProfileCard({ profileUser, setProfileUser }) {
     formData.append("picture", inputRef.current.files[0]);
     const requestOptions = {
       method: "PUT",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: formData,
     };
     fetch(`${backEnd}/api/avatars/${id}`, requestOptions)

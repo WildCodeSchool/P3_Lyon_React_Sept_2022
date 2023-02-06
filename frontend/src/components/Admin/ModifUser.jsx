@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -7,9 +8,16 @@ export default function ModifUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`${backEnd}/api/users/${id}`)
+    fetch(`${backEnd}/api/users/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((user) => setUserData(user))
       .catch(console.error);
@@ -31,14 +39,17 @@ export default function ModifUser() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(userData);
 
     const requestOptions = {
       method: "PUT",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };

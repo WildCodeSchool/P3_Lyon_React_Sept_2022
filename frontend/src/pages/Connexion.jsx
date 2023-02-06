@@ -7,7 +7,7 @@ import "../App.css";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Connexion() {
-  const { setUser, setToken } = useCurrentUserContext();
+  const { setUser, setToken, token } = useCurrentUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,8 +16,8 @@ function Connexion() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify({
       email,
@@ -26,7 +26,10 @@ function Connexion() {
 
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
     };
 

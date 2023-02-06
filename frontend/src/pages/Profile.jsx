@@ -13,23 +13,41 @@ function Profile() {
   const [base, setBase] = useState(0);
   // const { refresh } = usePostUserContext();
   const { user_id } = useParams();
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
 
   useEffect(() => {
     if (user_id) {
-      fetch(`${backEnd}/api/users/${user_id}`)
+      fetch(`${backEnd}/api/users/${user_id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           setProfileUser(result);
         });
-      fetch(`${backEnd}/api/myposts/user/${user_id}/limit/${base}`)
+      fetch(`${backEnd}/api/myposts/user/${user_id}/limit/${base}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           setMyPosts((prev) => [...prev, ...result]);
         });
     } else {
       setProfileUser(user);
-      fetch(`${backEnd}/api/myposts/user/${user.id}/limit/${base}`)
+      fetch(`${backEnd}/api/myposts/user/${user.id}/limit/${base}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           setMyPosts((prev) => [...prev, ...result]);

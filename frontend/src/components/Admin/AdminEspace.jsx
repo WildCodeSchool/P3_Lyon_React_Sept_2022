@@ -11,6 +11,7 @@ import croix from "../../assets/close-red.png";
 import plus from "../../assets/plus.png";
 import file from "../../assets/file.svg";
 import DropDownGroup from "./DropDownGroup";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -24,14 +25,27 @@ function AdminEspace() {
   const [categoryList, setCategoryList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [refresh, setRefresh] = useState([]);
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`${backEnd}/api/groups`)
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((groups) => {
         setGroupList(groups);
       });
-    fetch(`${backEnd}/api/categories`)
+    fetch(`${backEnd}/api/categories`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((categories) => {
         setCategoryList(categories);
@@ -119,7 +133,7 @@ function AdminEspace() {
         pauseOnHover: true,
       });
     } else if (groupPost.group_name) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const group = JSON.stringify(groupPost);
@@ -129,7 +143,10 @@ function AdminEspace() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: formData,
       };
 
@@ -170,7 +187,7 @@ function AdminEspace() {
         pauseOnHover: true,
       });
     } else if (categoryPost.category_name && categoryPost.group_id) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const category = JSON.stringify(categoryPost);
@@ -180,7 +197,10 @@ function AdminEspace() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: formData,
       };
 

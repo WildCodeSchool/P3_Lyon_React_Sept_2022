@@ -30,6 +30,7 @@ router.post(
   authControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
+router.use(verifyToken);
 
 /// //// Gestion des users ///////
 router.get("/api/users/limit/:base", userControllers.browseBy5);

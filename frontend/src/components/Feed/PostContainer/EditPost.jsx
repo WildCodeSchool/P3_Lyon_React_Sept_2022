@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalCreatePost } from "../..";
 import groupe from "../../../assets/groupe.svg";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function EditPost({ setEditPostModal, setEditPostMenu, post, user }) {
   // ouvre les groupes et categories via le bouton Catégorie
   const [showCategories, setShowCategories] = useState(false);
+  const { token } = useCurrentUserContext();
 
   // data envoyé au back pour update le post
   const [dataPost, setDataPost] = useState({
@@ -32,14 +34,17 @@ function EditPost({ setEditPostModal, setEditPostMenu, post, user }) {
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      // const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
 
       const body = JSON.stringify(dataPost);
 
       const requestOptions = {
         method: "PUT",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body,
       };
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login

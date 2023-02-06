@@ -19,13 +19,17 @@ function AddUserGroup() {
   const { groupId } = useParams();
 
   useEffect(() => {
-    fetch(
-      fetch(`${backEnd}/api/groups`)
-        .then((response) => response.json())
-        .then((groups) => {
-          setGroupList(groups);
-        })
-    );
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((groups) => {
+        setGroupList(groups);
+      });
   }, []);
 
   useEffect(() => {
@@ -56,15 +60,16 @@ function AddUserGroup() {
   };
 
   const addUserInGroup = (idUser) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
       userId: idUser,
       groupId: parseInt(groupId, 10),
     });
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import croix from "../../assets/croix.png";
 import "react-toastify/dist/ReactToastify.css";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 export default function AddUser({ openAndCloseUserModal }) {
+  const { token } = useCurrentUserContext;
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -38,14 +40,15 @@ export default function AddUser({ openAndCloseUserModal }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(credentials);
 
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };
@@ -70,7 +73,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             pauseOnHover: true,
           });
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
     } else {
       toast.error(" Veuillez compléter toutes les informations  !", {
         position: "top-center",

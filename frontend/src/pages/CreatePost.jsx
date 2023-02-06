@@ -14,7 +14,7 @@ function CreatePost() {
   const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
   const [fileName, setFileName] = useState("");
 
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   const inputRef = useRef(null);
 
   // Data envoyé au back pour update un post
@@ -60,7 +60,7 @@ function CreatePost() {
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const post = JSON.stringify(dataPost);
@@ -70,7 +70,10 @@ function CreatePost() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: formData,
       };
 

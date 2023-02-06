@@ -6,7 +6,7 @@ import send from "../../../assets/send.png";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Comment({ postId }) {
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   const { refreshComment, setRefreshComment } = usePostUserContext();
 
   const [createComment, setCreateComment] = useState({
@@ -24,14 +24,17 @@ function Comment({ postId }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(createComment);
 
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
     };
     if (
