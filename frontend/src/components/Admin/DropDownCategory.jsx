@@ -12,8 +12,8 @@ function DropDownCategory({ groupId, setCategoryId }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="flex justify-between w-48 h-12 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none">
-          <div className="flex justify-between">
+        <Menu.Button className="flex justify-between w-40 md:w-48 h-12 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none">
+          <div className="flex justify-between text-lg md:text-xl">
             Categories
             <img
               className="w-3 h-2 mt-3 ml-3 md:ml-8"

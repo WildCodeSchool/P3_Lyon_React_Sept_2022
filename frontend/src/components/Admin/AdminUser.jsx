@@ -196,10 +196,10 @@ export default function AdminUser() {
       <button
         onClick={openAndCloseUserModal}
         type="button"
-        className="flex flex-row-reverse justify-between w-[74vw] h-18 items-center ml-14 text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+        className="flex flex-row-reverse justify-between w-80 h-18 items-center mx-auto text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
       >
         Ajouter un utilisateur
-        <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
+        <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="Add user" />
       </button>
 
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
@@ -235,7 +235,7 @@ export default function AdminUser() {
 
       <div className="w-full flex justify-center">
         <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          className="w-80 md:w-[30vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
           type="text"
           placeholder="Rechercher..."
           onChange={handleSearch}

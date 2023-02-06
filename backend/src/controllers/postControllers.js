@@ -13,6 +13,19 @@ const browse = (req, res) => {
     });
 };
 
+const browseUserGroup = (req, res) => {
+  const { id, base } = req.params;
+  models.post
+    .findAllByUserGroup(id, base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const browseMyPosts = (req, res) => {
   const id = parseInt(req.params.id, 10);
   const base = parseInt(req.params.base, 10);
@@ -116,6 +129,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseUserGroup,
   browseMyPosts,
   browseByGroup,
   browseByCategory,

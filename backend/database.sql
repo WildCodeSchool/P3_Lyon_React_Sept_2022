@@ -18,7 +18,7 @@ email varchar(250) unique not null,
 phone_number varchar(250) unique not null,
 role varchar(250) not null DEFAULT 'user',
 is_admin boolean not null DEFAULT false,
-user_password varchar(400) not null,
+user_password text not null,
 avatar text
 );
 
@@ -31,7 +31,7 @@ VALUES
     'javier@enedis.fr',
     '0628164511',
     'Spécialiste en cyber-sécurité',
-    '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
+    '$argon2id$v=19$m=65536,t=5,p=1$kvX5ONn9UfI5UYsqbQchSQ$twRtSjlkEz8YKLtEUwhqVa70fmjdaK+/sk7cpBUE31M',
     'javier.jpg'
   ),
   (
@@ -40,7 +40,7 @@ VALUES
     'doroteya@enedis.fr',
     '0628164512',
     'Design specialst',
-    '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
+    '$argon2id$v=19$m=65536,t=5,p=1$kvX5ONn9UfI5UYsqbQchSQ$twRtSjlkEz8YKLtEUwhqVa70fmjdaK+/sk7cpBUE31M',
     'doroteya.jpg'
   ),
   (
@@ -49,7 +49,7 @@ VALUES
     'matthieu@enedis.fr',
     '0628164513',
     'Admin réseau',
-    '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
+    '$argon2id$v=19$m=65536,t=5,p=1$kvX5ONn9UfI5UYsqbQchSQ$twRtSjlkEz8YKLtEUwhqVa70fmjdaK+/sk7cpBUE31M',
     'matthieu.jpg'
   ),
   (
@@ -58,7 +58,7 @@ VALUES
     'sahrane@enedis.fr',
     '0628164514',
     'Directeur technique',
-    '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
+    '$argon2id$v=19$m=65536,t=5,p=1$kvX5ONn9UfI5UYsqbQchSQ$twRtSjlkEz8YKLtEUwhqVa70fmjdaK+/sk7cpBUE31M',
     'sahrane.jpg'
   ),
   (
@@ -67,7 +67,7 @@ VALUES
     'ryan@enedis.fr',
     '0628164515',
     'Chargé de marketing',
-    '$argon2id$v=19$m=65536,t=5,p=1$dKODL61qs2D/2A+iFhTc9w$xJWm4TCgdKNDQdy/2KWF1AQrcKqvrljRO9Ex0byxhps',
+    '$argon2id$v=19$m=65536,t=5,p=1$kvX5ONn9UfI5UYsqbQchSQ$twRtSjlkEz8YKLtEUwhqVa70fmjdaK+/sk7cpBUE31M',
     'ryan.jpg'
   );
 
@@ -511,7 +511,7 @@ VALUES
     3,
     15,
     '2022-12-07T11:04:06.163Z',
-    '000831369_896x598_c.jpg'
+    'computer.jpeg'
   ),
     (
     'Développement de la mobilité électrique',
@@ -613,5 +613,5 @@ CREATE TABLE user_group
 
 INSERT INTO
   user_group (user_id, group_id)
-VALUES (1, 2);
+VALUES (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (4, 1), (4, 2), (4, 5), (5, 1), (5, 2), (5, 3);
 

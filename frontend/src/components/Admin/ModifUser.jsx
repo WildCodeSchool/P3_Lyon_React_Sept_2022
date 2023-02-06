@@ -64,19 +64,10 @@ export default function ModifUser() {
       </div>
       <div className="flex justify-around ">
         <img
-          className="rounded-full w-[42vw] ml-5 border-4 border-violet"
-          src="./src/assets/user-avatar2.jpeg"
+          className="rounded-full h-40 w-40 ml-5 border-4 border-violet"
+          src={`${backEnd}/uploads/${userData.avatar}`}
           alt="User avatar"
         />
-        <div className="ml-5 mt-4">
-          <button
-            type="button"
-            className="text-white mr-4 my-4 font-[Enedis] bg-primary text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
-          >
-            Modifier
-          </button>
-          ;
-        </div>
       </div>
       <div className="flex justify-center">
         <form
@@ -139,9 +130,9 @@ export default function ModifUser() {
           />
           <button
             type="submit"
-            className="text-white h-15 ml-20 mt-10 font-[Enedis] bg-primary text-base w-[40vw] border border-primary rounded-2xl "
+            className="text-white h-15 w-44 p-2 mx-auto mt-4 font-[Enedis] bg-primary text-base border border-primary rounded-2xl "
           >
-            Enregistrer les modifications
+            Enregistrer
           </button>
         </form>
       </div>

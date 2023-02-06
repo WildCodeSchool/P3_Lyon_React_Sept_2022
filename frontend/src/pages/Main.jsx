@@ -12,7 +12,7 @@ import { useCurrentUserContext } from "../contexts/userContext";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Main({ toggleDarkMode, darkMode }) {
-  const { setGroupList, setCategoryList } = usePostUserContext();
+  const { setGroupList, setCategoryList, setUserGroups } = usePostUserContext();
   const { user } = useCurrentUserContext();
   const [groupId, setGroupId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
@@ -27,6 +27,11 @@ function Main({ toggleDarkMode, darkMode }) {
       .then((response) => response.json())
       .then((categories) => {
         setCategoryList(categories);
+      });
+    fetch(`${backEnd}/api/user_group/user/${user.id}`)
+      .then((response) => response.json())
+      .then((usersGroups) => {
+        setUserGroups(usersGroups);
       });
   }, []);
 
@@ -48,7 +53,7 @@ function Main({ toggleDarkMode, darkMode }) {
               categoryId={categoryId}
               setCategoryId={setCategoryId}
             />
-            <div className="xl:mx-52">
+            <div className="xl:mx-72">
               <Feed groupId={groupId} categoryId={categoryId} />
             </div>
           </>

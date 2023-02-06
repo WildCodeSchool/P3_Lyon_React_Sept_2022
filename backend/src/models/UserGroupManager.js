@@ -9,7 +9,7 @@ class UserGroupManager extends AbstractManager {
 
   findByUserId(userId) {
     return this.connection.any(
-      `SELECT group_id, group_detail.group_name FROM ${this.table} 
+      `SELECT group_id as id, group_detail.group_name, group_detail.image FROM ${this.table} 
       JOIN group_detail ON group_detail.id = user_group.group_id
       WHERE user_id = $1`,
       [userId]
