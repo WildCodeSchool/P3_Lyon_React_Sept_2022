@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
-  const { groupList, categoryList } = usePostUserContext();
+  const { categoryList, userGroups } = usePostUserContext();
 
   const backToZero = () => {
     setGroupId(0);
@@ -32,7 +32,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
         <div className="flex flex-col items-center ">
           <h2 className="text-primary text-center text-xl mb-4 md:text-3xl bg-violet w-auto rounded-sm ">
             {groupId
-              ? groupList
+              ? userGroups
                   .filter((group) => group.id === groupId)
                   .map((group) => group.group_name)
               : "Mes Groupes"}
@@ -52,7 +52,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               className={
                 groupId > 0 && categoryId === 0
                   ? "h-6 w-6 md:h-8 md:w-8 ml-4 mb-8"
-                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-14"
+                  : "h-6 w-6 md:h-8 md:w-8 ml-4 mb-16"
               }
             />
           </button>
@@ -62,8 +62,8 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
       <Swiper
         className={
           !groupId
-            ? "h-36 md:w-[475px]  md:hidden"
-            : "h-20 md:w-[475px]  md:hidden"
+            ? "h-36 md:w-[475px] md:hidden"
+            : "h-20 md:w-[475px] md:hidden"
         }
         modules={[Pagination, A11y]}
         spaceBetween={20}
@@ -72,7 +72,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
       >
         {!groupId ? (
           <>
-            {groupList.map((group) => (
+            {userGroups.map((group) => (
               <SwiperSlide
                 key={group.id}
                 className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
@@ -113,7 +113,7 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
       {!groupId ? (
         <div className="bg-alert">
           <div className=" hidden md:block ">
-            {groupList.map((group) => {
+            {userGroups.map((group) => {
               return (
                 <button
                   onClick={() => handleGroup(group.id)}

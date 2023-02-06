@@ -11,6 +11,7 @@ export function PostUserContextProvider({ children }) {
   const [groupList, setGroupList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [refreshComment, setRefreshComment] = useState(false);
+  const [userGroups, setUserGroups] = useState([]);
 
   function handleReset() {
     setValueSelectedGroup("");
@@ -34,6 +35,8 @@ export function PostUserContextProvider({ children }) {
         handleReset,
         refreshComment,
         setRefreshComment,
+        userGroups,
+        setUserGroups,
       }}
     >
       {children}

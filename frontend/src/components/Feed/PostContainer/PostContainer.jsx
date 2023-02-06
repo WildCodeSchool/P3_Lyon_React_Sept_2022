@@ -8,7 +8,7 @@ const backEnd = import.meta.env.VITE_BACKEND_URL;
 function PostContainer({ groupId, categoryId }) {
   const [posts, setPosts] = useState([]);
   const [base, setBase] = useState(0);
-  const { token } = useCurrentUserContext();
+  const { token, user } = useCurrentUserContext();
   const { redirectIfDisconnected } = useTokenContext();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function PostContainer({ groupId, categoryId }) {
 
   useEffect(() => {
     if (groupId === 0 && categoryId === 0) {
-      fetch(`${backEnd}/api/posts/limit/${base}`, {
+      fetch(`${backEnd}/api/posts/usergroup/${user.id}/limit/${base}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
