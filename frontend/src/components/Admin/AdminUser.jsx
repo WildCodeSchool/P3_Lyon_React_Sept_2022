@@ -39,6 +39,8 @@ export default function AdminUser() {
       });
   }, []);
 
+  // Setting states back to default
+
   const backToZero = () => {
     setAddUser(false);
     setSelectedGroup(0);
@@ -51,6 +53,8 @@ export default function AdminUser() {
     }
   };
 
+  // open three buttons menu
+
   const openAndCloseUserModal = () => {
     if (addUser) {
       setAddUser(false);
@@ -61,11 +65,14 @@ export default function AdminUser() {
     }
   };
 
+  // handling the input value
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
   };
 
   const toggleRefresh = () => setRefresh(!refresh);
+
+  // Different fetch for users that takes into account the group chosen
 
   useEffect(() => {
     if (selectedGroup === 0 && searchInput === "") {
