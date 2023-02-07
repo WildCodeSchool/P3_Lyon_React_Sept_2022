@@ -26,15 +26,19 @@ function CreatePost() {
     post_image: "",
   });
   const navigate = useNavigate();
-
+  // we limit the numbers of characters written in title to 100
+  const MAX_LENGTH = 100;
+  const numRemaining = MAX_LENGTH - dataPost.title.length;
   // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
   const onChange = (e) => {
-    setDataPost({
-      ...dataPost,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.value.length <= MAX_LENGTH) {
+      setDataPost({
+        ...dataPost,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   useEffect(() => {
@@ -103,7 +107,7 @@ function CreatePost() {
           <img
             className="ml-2 mt-6 md:mt-0 md:pt-2 md:w-10 md:h10"
             src={croix}
-            alt=""
+            alt="Close"
           />
         </Link>
         <h1 className="text-[32px] md:text-4xl mt-3 text-primary font-bold text-center md:m-auto pb-8 md:pb-4">
@@ -160,6 +164,9 @@ function CreatePost() {
               value={dataPost.title}
               onChange={onChange}
             />
+            <small className="text-black italic ml-5">
+              {numRemaining} caractères restants
+            </small>
             <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
             <input
               className="h-60 md:text-xl w-full pl-8"

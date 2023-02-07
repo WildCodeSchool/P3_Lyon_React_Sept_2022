@@ -50,7 +50,7 @@ ul {
 
 span,
 input,
-label {
+label, small {
   font-family: "Enedis";
   font-weight: light;
 }

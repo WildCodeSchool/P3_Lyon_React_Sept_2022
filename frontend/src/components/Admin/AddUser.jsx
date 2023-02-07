@@ -89,15 +89,17 @@ export default function AddUser({ openAndCloseUserModal }) {
           <img className="mr-80 mt-3 ml-4" src={croix} alt="Close btn" />
         </button>
       </div>
-      <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
-        Ajouter un utilisateur
-      </div>
-      <div className="flex justify-around ">
-        <img
-          className="rounded-full w-40 ml-5 border-4 border-violet"
-          src="./src/assets/photo-avatar-profil.png"
-          alt="User avatar"
-        />
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
+          Ajouter un utilisateur
+        </div>
+        <div className="flex justify-around ">
+          <img
+            className="rounded-full w-40 ml-5 border-4 border-violet"
+            src="./src/assets/photo-avatar-profil.png"
+            alt="User avatar"
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <form
@@ -109,6 +111,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 my-3 h-8 rounded w-[80vw] border-primary"
             type="text"
             required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             name="firstname"
             placeholder="Prénom"
             onChange={onChange}
@@ -120,6 +123,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             required
             name="lastname"
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Nom"
             onChange={onChange}
             value={credentials.lastname}
@@ -130,6 +134,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             name="phone"
             required
+            pattern="^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$"
             placeholder="Téléphone"
             onChange={onChangeNum}
             value={credentials.phone_number}
@@ -140,7 +145,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="email"
             name="email"
             required
-            placeholder="email"
+            placeholder="Email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             onChange={onChange}
             value={credentials.email}
@@ -162,6 +167,7 @@ export default function AddUser({ openAndCloseUserModal }) {
             type="text"
             name="role"
             required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Poste"
             onChange={onChange}
             value={credentials.role}
