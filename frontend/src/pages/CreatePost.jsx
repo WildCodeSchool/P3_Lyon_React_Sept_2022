@@ -26,15 +26,19 @@ function CreatePost() {
     post_image: "",
   });
   const navigate = useNavigate();
-
+  // we limit the numbers of characters written in title to 100
+  const MAX_LENGTH = 100;
+  const numRemaining = MAX_LENGTH - dataPost.title.length;
   // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
   const onChange = (e) => {
-    setDataPost({
-      ...dataPost,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.value.length <= MAX_LENGTH) {
+      setDataPost({
+        ...dataPost,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   useEffect(() => {
@@ -160,6 +164,9 @@ function CreatePost() {
               value={dataPost.title}
               onChange={onChange}
             />
+            <small className="text-black italic ml-5">
+              {numRemaining} caractères restants
+            </small>
             <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
             <input
               className="h-60 md:text-xl w-full pl-8"
