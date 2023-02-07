@@ -131,7 +131,7 @@ function Post({ post, deleteFromPostWithId }) {
             </div>
           ) : (
             <img
-              className="object-cover md:h-96 mx-auto"
+              className="object-cover md:h-96 mx-auto md:w-full"
               src={`${backEnd}/uploads/${post.post_image}`}
               alt="Post"
             />
