@@ -103,7 +103,7 @@ function CreatePost() {
           <img
             className="ml-2 mt-6 md:mt-0 md:pt-2 md:w-10 md:h10"
             src={croix}
-            alt=""
+            alt="Close"
           />
         </Link>
         <h1 className="text-[32px] md:text-4xl mt-3 text-primary font-bold text-center md:m-auto pb-8 md:pb-4">

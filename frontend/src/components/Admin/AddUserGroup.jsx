@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HeaderAdmin } from "..";
 import Navbar from "../Navbar/Navbar";
 import UserCard from "./UserCard";
 import { useCurrentUserContext } from "../../contexts/userContext";
+import back from "../../assets/back.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function AddUserGroup() {
+  const navigate = useNavigate();
   const [userCards, setUserCards] = useState([]);
 
   const [groupList, setGroupList] = useState([]);
@@ -97,6 +99,16 @@ function AddUserGroup() {
     <div className="min-h-screen">
       <Navbar />
       <HeaderAdmin />
+
+      <button
+        type="button"
+        className="flex mt-3 ml-2"
+        onClick={() => navigate(-1)}
+      >
+        <img src={back} alt="Arrow back" className="w-6 h-6 mr-1" />
+        <h1>Retour à la liste des utilisateurs</h1>
+      </button>
+
       <div className="font-[Enedis] flex justify-center text-primary text-center text-4xl mb-10">
         {groupList
           .filter((group) => group.id === parseInt(groupId, 10))
