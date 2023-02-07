@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
+import addUserGroup from "../../assets/add-user.png";
 import croix from "../../assets/close-red.png";
 import AddUser from "./AddUser";
 import HeaderAdmin from "./HeaderAdmin";
@@ -22,7 +23,7 @@ export default function AdminUser() {
   const [base, setBase] = useState(0);
   const [selectedGroup, setSelectedGroup] = useState(0);
   const [groupList, setGroupList] = useState([]);
-  const { token } = useCurrentUserContext;
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
     fetch(`${backEnd}/api/groups`, {
@@ -166,7 +167,12 @@ export default function AdminUser() {
   }; */
   const handleDeleteUserGroup = (groupId, userId) => {
     axios
-      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`)
+      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((result) => {
         toggleRefresh(result);
         toast.success(" Utilisateur supprimé du groupe !", {
@@ -200,20 +206,24 @@ export default function AdminUser() {
       <button
         onClick={openAndCloseUserModal}
         type="button"
-        className="flex flex-row-reverse justify-between w-[74vw] h-18 items-center ml-14 text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
+        className="flex flex-row-reverse justify-between w-80 h-18 items-center mx-auto text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
       >
         Ajouter un utilisateur
-        <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="" />
+        <img className="w-5 h-5 mt-0 mr-3" src={pictoGroup} alt="Add user" />
       </button>
 
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className="flex flex-col justify-center w-screen items-center">
         <div className="flex justify-center">
-          <DropDownGroup setGroupId={handleGroupSelect} />
+          <DropDownGroup setGroupId={handleGroupSelect} groupList={groupList} />
           {selectedGroup > 0 && (
             <Link to={`/admin/add-user-group/${selectedGroup}`}>
               <button type="button">
-                <img className="w-5 h-4 mt-4 ml-3" alt="" src={pictoGroup} />
+                <img
+                  className="w-7 h-7 md:w-10 md:h-10 mt-4 md:mt-2 ml-3 md:ml-0"
+                  alt="Add user group"
+                  src={addUserGroup}
+                />
               </button>
             </Link>
           )}
@@ -239,7 +249,7 @@ export default function AdminUser() {
 
       <div className="w-full flex justify-center">
         <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          className="w-80 md:w-[30vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
           type="text"
           placeholder="Rechercher..."
           onChange={handleSearch}

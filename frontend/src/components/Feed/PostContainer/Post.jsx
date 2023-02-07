@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useCurrentUserContext } from "../../../contexts/userContext";
-import { EditPost } from "../..";
-import menuDots from "../../../assets/modifDot.png";
-import rubish from "../../../assets/deleteBtn.png";
-import edit from "../../../assets/edit.png";
 import pdf from "../../../assets/pdf.png";
+import DropDownDeletePost from "./DropDownDeletePost";
 // import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
@@ -20,27 +17,22 @@ const currentDate = `${date.getFullYear()}${`0${date.getMonth() + 1}`.slice(
 )}${`0${date.getDate()}`.slice(-2)}-${date.getHours()}:${date.getMinutes()}`;
 
 function Post({ post, deleteFromPostWithId }) {
-  const [editPostMenu, setEditPostMenu] = useState(false);
-  const [editPostModal, setEditPostModal] = useState(false);
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   // three dots button and modifying stuff
   const navigate = useNavigate();
 
   const postDate = post.post_date.slice(0, 10).split("-").reverse().join("-");
   const postTime = post.post_date.slice(11, 16);
 
-  const handleEditPost = () => {
-    setEditPostMenu(!editPostMenu);
-  };
-
-  const handleEditPostModal = () => {
-    setEditPostModal(!editPostModal.id);
-  };
-
   const handleDelete = () => {
     if (user.id === post.user_id || user.is_admin) {
       axios
-        .delete(`${backEnd}/api/posts/${post.id}`)
+        .delete(`${backEnd}/api/posts/${post.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
         .then(() => {
           toast.success("Publication supprimée !", {
             position: "top-right",
@@ -71,86 +63,48 @@ function Post({ post, deleteFromPostWithId }) {
 
   return (
     <div>
-      <div className="bg-white w-full shadow-md rounded-t-sm border-t border-gray-100 mt-7 md:rounded-lg">
-        {(post.user_id === user.id || user.is_admin) && (
-          <div className="flex justify-end md:ml-36 md:mt-[-30px]">
-            <button onClick={() => handleEditPost()} type="button">
-              <img
-                className="h-5 mt-3 md:mt-10 mr-5 md:ml-20"
-                src={menuDots}
-                alt="Menu"
-              />
-            </button>
-          </div>
-        )}
-        {editPostMenu && (
-          <div className=" mt-2 w-60 left-32 md:left-1/2 absolute block rounded-md shadow-lg bg-white ring-1 z- ring-black ring-opacity-5 focus:outline-none md:ml-72 ">
-            {/* <div className=" px-4 pb-2 h-20 "> */}
-            {post.user_id === user.id && (
-              <button
-                onClick={() => handleEditPostModal()}
-                className="text-black p-2 flex"
-                type="button"
-              >
-                <img className="h-5 w-5" src={edit} alt="Edit" />
-                <span className="pl-3">Modifier</span>
-              </button>
-            )}
-            <button
-              onClick={() => handleDelete(post.id)}
-              className="text-black p-2 flex"
-              type="button"
-            >
-              <img className="h-5 w-5" src={rubish} alt="Edit" />
-              <span className="pl-3">Supprimer</span>
-            </button>
-            {/* </div> */}
-            {editPostModal && (
-              <EditPost
-                post={post}
-                user={user}
-                editPostModal={editPostModal}
-                setEditPostModal={setEditPostModal}
-                setEditPostMenu={setEditPostMenu}
-                handleEditPostModal={handleEditPostModal}
-              />
-            )}
-          </div>
-        )}
-        <div className="flex flex-row self-start pt-2 pb-4 px-6">
-          <Link to={`/profile/${post.user_id}`}>
-            <img
-              className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet"
-              src={`${backEnd}/uploads/${post.avatar}`}
-              alt={post.username}
-            />
-          </Link>
-
-          <div className="flex flex-col">
+      <div className="bg-white w-full shadow-md rounded-t-sm mt-5 md:rounded-lg">
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-row self-start pt-2 pb-4 px-6">
             <Link to={`/profile/${post.user_id}`}>
-              <div className="flex gap-2">
-                <h2 className="text-primary">{post.firstname} </h2>
-                <h2 className="text-primary">{post.lastname}</h2>
-              </div>
+              <img
+                className="rounded-full object-cover w-20 h-20 mr-6 border-4 border-violet"
+                src={`${backEnd}/uploads/${post.avatar}`}
+                alt={post.username}
+              />
             </Link>
-            <div className="flex">
-              <div className="flex flex-col md:w-60">
-                <h3 className="font-light text-primary">{post.group_name}</h3>
-                <h3 className="font-light text-primary">
-                  {post.category_name}
-                </h3>
-                <h3 className="text-gray-400 font-light">
-                  {postDate.split("-").reverse().join("") ===
-                    currentDate.slice(0, 8) && `${postTime}`}
-                  {currentDate.slice(0, 8) -
-                    postDate.split("-").reverse().join("") ===
-                    1 && "Hier"}
-                  {currentDate.slice(0, 8) -
-                    postDate.split("-").reverse().join("") >
-                    1 && `${postDate}`}
-                </h3>
+
+            <div className="flex flex-col">
+              <Link to={`/profile/${post.user_id}`}>
+                <div className="flex gap-2">
+                  <h2 className="text-primary">{post.firstname} </h2>
+                  <h2 className="text-primary">{post.lastname}</h2>
+                </div>
+              </Link>
+              <div className="flex">
+                <div className="flex flex-col md:w-60">
+                  <h3 className="font-light text-primary">{post.group_name}</h3>
+                  <h3 className="font-light text-primary">
+                    {post.category_name}
+                  </h3>
+                  <h3 className="text-gray-400 font-light">
+                    {postDate.split("-").reverse().join("") ===
+                      currentDate.slice(0, 8) && `${postTime}`}
+                    {currentDate.slice(0, 8) -
+                      postDate.split("-").reverse().join("") ===
+                      1 && "Hier"}
+                    {currentDate.slice(0, 8) -
+                      postDate.split("-").reverse().join("") >
+                      1 && `${postDate}`}
+                  </h3>
+                </div>
               </div>
             </div>
+          </div>
+          <div className="self-start">
+            {(post.user_id === user.id || user.is_admin) && (
+              <DropDownDeletePost handleDelete={handleDelete} />
+            )}
           </div>
         </div>
         <Link to={`/feed/${post.id}`}>
@@ -182,7 +136,7 @@ function Post({ post, deleteFromPostWithId }) {
             </div>
           ) : (
             <img
-              className="object-cover md:h-96 mx-auto"
+              className="object-cover md:h-96 mx-auto md:w-full"
               src={`${backEnd}/uploads/${post.post_image}`}
               alt="Post"
             />

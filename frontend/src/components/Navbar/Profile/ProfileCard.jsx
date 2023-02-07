@@ -23,7 +23,6 @@ function ProfileCard({ profileUser, setProfileUser }) {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
       body: formData,
     };

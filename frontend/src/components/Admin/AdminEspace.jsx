@@ -145,7 +145,6 @@ function AdminEspace() {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
         body: formData,
       };
@@ -199,7 +198,6 @@ function AdminEspace() {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
         body: formData,
       };
@@ -225,7 +223,12 @@ function AdminEspace() {
   // Group deletion
   const handleDeleteGroup = (group) => {
     axios
-      .delete(`${backEnd}/api/groups/${group}`)
+      .delete(`${backEnd}/api/groups/${group}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         setRefresh(!refresh);
         toast.success("Groupe Supprimé !", {
@@ -245,7 +248,12 @@ function AdminEspace() {
   // Category deletion
   const handleDeleteCategory = (category) => {
     axios
-      .delete(`${backEnd}/api/categories/${category}`)
+      .delete(`${backEnd}/api/categories/${category}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         setRefresh(!refresh);
         toast.success("Catégorie Supprimée !", {
@@ -266,7 +274,7 @@ function AdminEspace() {
     <div className="min-h-screen md:overflow-x-hidden">
       <Navbar />
       <HeaderAdmin />
-      <div className="font-[Enedis] text-primary text-center text-4xl mb-8 border-black">
+      <div className="font-[Enedis] text-primary text-center text-4xl mb-8 border-black mt-5 xl:mt-10">
         <h3>Gérer les groupes et les catégories</h3>
       </div>
       <div className="flex flex-col items-center justify-center">
@@ -291,7 +299,7 @@ function AdminEspace() {
             </button>
           )}
           {chooseGroup && (
-            <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+            <section className="flex w-[74vw] md:w-[40vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
               <form
                 onSubmit={(e) => onSubmitGroup(e)}
                 method="PUT"
@@ -301,8 +309,8 @@ function AdminEspace() {
                 <h3>Ajouter un nouveau groupe</h3>
                 <input
                   type="text"
-                  className="border border-primary w-full h-10 my-4 rounded-md text-center"
-                  placeholder="Group name"
+                  className="border border-primary w-full md:w-1/2 h-10 my-4 rounded-md text-center"
+                  placeholder="Nom du groupe"
                   name="group_name"
                   value={groupPost.group_name}
                   onChange={onChangeGroup}
@@ -340,18 +348,18 @@ function AdminEspace() {
             </button>
           )}
           {chooseCategory && (
-            <section className="flex w-[74vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
+            <section className="flex w-[74vw] md:w-[40vw] h-18 items-center justify-center text-primary font-[Enedis] bg-white text-l font-bold border p-3 px-8 mb-10 border-primary shadow-sm">
               <form
                 onSubmit={(e) => onSubmitCategory(e)}
                 method="PUT"
                 encType="multipart/form-data"
-                className="flex flex-col items-center w-full"
+                className="flex flex-col items-center w-full md:w-1/2"
               >
                 <h3>Ajouter une nouvelle catégorie</h3>
                 <input
                   type="text"
                   className="border border-primary w-full h-10 my-4 rounded-md text-center"
-                  placeholder="Category name"
+                  placeholder="Nom de la catégorie"
                   name="category_name"
                   value={categoryPost.category_name}
                   onChange={onChangeCategory}
@@ -373,7 +381,7 @@ function AdminEspace() {
                   </h3>
                 )}
 
-                <DropDownGroup setGroupId={setGroupId} />
+                <DropDownGroup setGroupId={setGroupId} groupList={groupList} />
                 <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
                   <img
                     className="w-7 h-7 md:w-9 md:h-9"
@@ -405,7 +413,7 @@ function AdminEspace() {
 
       <div className=" flex justify-around mb-10">
         <input
-          className="w-[80vw] border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
+          className="w-[80vw] md:w-6/12 border border-primary rounded-3xl h-12 pl-6 text-sm placeholder-gray-500 focus:border-primary"
           type="text"
           placeholder="Rechercher..."
           onChange={(e) => setSearchInput(e.target.value)}
@@ -414,8 +422,14 @@ function AdminEspace() {
       </div>
       <div className="flex flex-col items-center w-screen pb-36">
         {groupList
-          .filter((group) =>
-            group.group_name.toLowerCase().includes(searchInput)
+          .filter(
+            (group) =>
+              group.group_name
+                .toLocaleLowerCase()
+                .includes(searchInput.toLocaleLowerCase()) ||
+              group.group_name
+                .toLocaleUpperCase()
+                .includes(searchInput.toLocaleUpperCase())
           )
           .map((group) => (
             <Menu
@@ -424,7 +438,7 @@ function AdminEspace() {
               key={group.id}
             >
               <div className="flex justify-between items-center">
-                <Menu.Button className="flex justify-between w-[70vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                <Menu.Button className="flex justify-between w-[70vw] h-20 items-center text-primary font-[Enedis] bg-white text-xl	font-bold border p-1 px-8 mb-6 border-primary rounded-3xl shadow-sm hover:bg-gray-50 focus:outline-none">
                   <div className="flex justify-start text-start">
                     {group.group_name}
                   </div>
@@ -458,7 +472,7 @@ function AdminEspace() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute left-0 z-10 mt-0 w-[90vw] origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute left-0 z-10 mt-0 w-[90vw] md:w-[60vw] origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
                     {categoryList
                       .filter((category) => category.group_id === group.id)
@@ -501,7 +515,7 @@ function AdminEspace() {
                               <img
                                 className="w-4 h-4 mt-3 ml-3"
                                 src={rubbish}
-                                alt=""
+                                alt="Delete"
                               />
                             </button>
                           </div>
