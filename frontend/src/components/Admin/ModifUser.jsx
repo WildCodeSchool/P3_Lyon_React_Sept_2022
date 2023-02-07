@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import croix from "../../assets/croix.png";
+import avatar from "../../assets/photo-avatar-profil.png";
+import { useCurrentUserContext } from "../../contexts/userContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
@@ -10,12 +12,19 @@ export default function ModifUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`${backEnd}/api/users/${id}`)
+    fetch(`${backEnd}/api/users/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((user) => setUserData(user))
-      .catch(console.error);
+      .catch((error) => console.error(error));
   }, []);
 
   const onChange = (e) => {
@@ -34,14 +43,17 @@ export default function ModifUser() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(userData);
 
     const requestOptions = {
       method: "PUT",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };
@@ -64,7 +76,7 @@ export default function ModifUser() {
             pauseOnHover: true,
           });
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
   };
 
   return (
@@ -81,7 +93,9 @@ export default function ModifUser() {
         <div className="flex justify-around ">
           <img
             className="rounded-full h-40 w-40 ml-5 border-4 border-violet"
-            src={`${backEnd}/uploads/${userData.avatar}`}
+            src={
+              userData.avatar ? `${backEnd}/uploads/${userData.avatar}` : avatar
+            }
             alt="User avatar"
           />
         </div>

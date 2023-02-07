@@ -48,7 +48,7 @@ function CarrouselAdmin({ groupId, setGroupId, categoryId, setCategoryId }) {
       </div>
 
       <div className="flex justify-center mt-3 ">
-        <DropDownGroup setGroupId={setGroupId} />
+        <DropDownGroup setGroupId={setGroupId} groupList={groupList} />
         {groupId > 0 && (
           <DropDownCategory groupId={groupId} setCategoryId={setCategoryId} />
         )}

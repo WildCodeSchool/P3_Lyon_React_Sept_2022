@@ -42,7 +42,7 @@ function PostContainer({ groupId, categoryId }) {
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
     } else if (groupId > 0 && categoryId === 0) {
       fetch(`${backEnd}/api/posts/group/${groupId}/limit/${base}`, {
         method: "GET",

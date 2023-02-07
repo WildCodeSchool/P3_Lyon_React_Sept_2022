@@ -23,16 +23,20 @@ export default function AdminUser() {
   const [base, setBase] = useState(0);
   const [selectedGroup, setSelectedGroup] = useState(0);
   const [groupList, setGroupList] = useState([]);
-  const { token } = useCurrentUserContext;
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(
-      fetch(`${backEnd}/api/groups`)
-        .then((response) => response.json())
-        .then((groups) => {
-          setGroupList(groups);
-        })
-    );
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((groups) => {
+        setGroupList(groups);
+      });
   }, []);
 
   const backToZero = () => {
@@ -151,7 +155,7 @@ export default function AdminUser() {
 
   /* const handleDeleteUserGroup = (groupId, userId) => {
     fetch(
-      `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`,
+      `http://${backEnd}/api/user_group/group/${groupId}/user/${userId}`,
       {
         method: "DELETE",
       }
@@ -163,7 +167,12 @@ export default function AdminUser() {
   }; */
   const handleDeleteUserGroup = (groupId, userId) => {
     axios
-      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`)
+      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((result) => {
         toggleRefresh(result);
         toast.success(" Utilisateur supprimé du groupe !", {
@@ -206,7 +215,7 @@ export default function AdminUser() {
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
       <div className="flex flex-col justify-center w-screen items-center">
         <div className="flex justify-center">
-          <DropDownGroup setGroupId={handleGroupSelect} />
+          <DropDownGroup setGroupId={handleGroupSelect} groupList={groupList} />
           {selectedGroup > 0 && (
             <Link to={`/admin/add-user-group/${selectedGroup}`}>
               <button type="button">

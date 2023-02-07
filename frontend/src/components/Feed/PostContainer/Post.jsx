@@ -17,7 +17,7 @@ const currentDate = `${date.getFullYear()}${`0${date.getMonth() + 1}`.slice(
 )}${`0${date.getDate()}`.slice(-2)}-${date.getHours()}:${date.getMinutes()}`;
 
 function Post({ post, deleteFromPostWithId }) {
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   // three dots button and modifying stuff
   const navigate = useNavigate();
 
@@ -27,7 +27,12 @@ function Post({ post, deleteFromPostWithId }) {
   const handleDelete = () => {
     if (user.id === post.user_id || user.is_admin) {
       axios
-        .delete(`${backEnd}/api/posts/${post.id}`)
+        .delete(`${backEnd}/api/posts/${post.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
         .then(() => {
           toast.success("Publication supprimée !", {
             position: "top-right",

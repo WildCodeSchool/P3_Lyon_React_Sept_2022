@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import FlecheDownBlue from "../../assets/arrow-down-blue.png";
-import { usePostUserContext } from "../../contexts/PostUserContext";
 
 // const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -9,9 +8,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DropDownGroup({ setGroupId }) {
+function DropDownGroup({ setGroupId, groupList }) {
   // const [setGroupList] = useState([]);
-  const { userGroups } = usePostUserContext();
 
   // useEffect(() => {
   //   fetch(`${backEnd}/api/groups`)
@@ -48,7 +46,7 @@ function DropDownGroup({ setGroupId }) {
       >
         <Menu.Items className="absolute left-0 z-10 mt-0 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {userGroups.map((group) => (
+            {groupList.map((group) => (
               <Menu.Item key={group.id}>
                 {({ active }) => (
                   <div

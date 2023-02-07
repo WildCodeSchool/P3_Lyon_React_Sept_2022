@@ -7,7 +7,6 @@ const userSchema = Joi.object({
 
 const validateUser = (req, res, next) => {
   const { email, password } = req.body;
-  console.warn(req.body);
 
   const { error } = userSchema.validate(
     { email, password },

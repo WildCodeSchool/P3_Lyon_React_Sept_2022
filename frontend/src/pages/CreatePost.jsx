@@ -11,10 +11,15 @@ import { useCurrentUserContext } from "../contexts/userContext";
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function CreatePost() {
-  const { valueSelectedCategory, valueSelectedGroup } = usePostUserContext();
+  const {
+    valueSelectedCategory,
+    valueSelectedGroup,
+    setValueSelectedCategory,
+    setValueSelectedGroup,
+  } = usePostUserContext();
   const [fileName, setFileName] = useState("");
 
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   const inputRef = useRef(null);
 
   // Data envoyé au back pour update un post
@@ -64,7 +69,7 @@ function CreatePost() {
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const post = JSON.stringify(dataPost);
@@ -74,7 +79,9 @@ function CreatePost() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       };
 
@@ -83,6 +90,8 @@ function CreatePost() {
       fetch(`${backEnd}/api/posts`, requestOptions)
         .then((response) => response.text())
         .then(() => {
+          setValueSelectedCategory("");
+          setValueSelectedGroup("");
           navigate("/feed");
           toast.success(" Publié avec succès !", {
             position: "top-center",
