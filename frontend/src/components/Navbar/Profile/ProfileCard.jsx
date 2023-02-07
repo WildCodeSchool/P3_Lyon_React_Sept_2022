@@ -41,7 +41,7 @@ function ProfileCard({ profileUser, setProfileUser }) {
           pauseOnHover: true,
         });
       })
-      .catch(console.error);
+      .catch((error) => console.error(error));
   };
 
   return (

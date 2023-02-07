@@ -43,7 +43,7 @@ function Connexion() {
           navigate("/feed");
         })
 
-        .catch(console.error);
+        .catch((error) => console.error(error));
     } else {
       setErrorMessage("Please specify email and password");
     }

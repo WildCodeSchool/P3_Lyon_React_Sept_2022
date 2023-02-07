@@ -154,7 +154,7 @@ export default function AdminUser() {
 
   /* const handleDeleteUserGroup = (groupId, userId) => {
     fetch(
-      `http://localhost:5000/api/user_group/group/${groupId}/user/${userId}`,
+      `http://${backEnd}/api/user_group/group/${groupId}/user/${userId}`,
       {
         method: "DELETE",
       }

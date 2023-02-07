@@ -20,7 +20,7 @@ export default function ModifUser() {
     })
       .then((response) => response.json())
       .then((user) => setUserData(user))
-      .catch(console.error);
+      .catch((error) => console.error(error));
   }, []);
 
   const onChange = (e) => {
@@ -65,7 +65,7 @@ export default function ModifUser() {
         .then(() => {
           navigate("/adminUser");
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
   };
 
   return (

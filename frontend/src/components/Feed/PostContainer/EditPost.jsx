@@ -61,7 +61,7 @@ function EditPost({ setEditPostModal, setEditPostMenu, post, user }) {
 
           navigate("/profile");
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
     }
   };
 

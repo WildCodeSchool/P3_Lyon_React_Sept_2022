@@ -35,8 +35,10 @@ const verifyPassword = (req, res) => {
         });
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
-      } else res.sendStatus(401);
-      console.error("Error : Your password or email is wrong, try again");
+      } else {
+        res.sendStatus(401);
+        console.error("Error : Your password or email is wrong, try again");
+      }
     })
     .catch((err) => {
       // do something with err
