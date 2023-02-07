@@ -17,17 +17,21 @@ function AddUserGroup() {
   const [groupList, setGroupList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  const { token } = useCurrentUserContext;
+  const { token } = useCurrentUserContext();
   const { groupId } = useParams();
 
   useEffect(() => {
-    fetch(
-      fetch(`${backEnd}/api/groups`)
-        .then((response) => response.json())
-        .then((groups) => {
-          setGroupList(groups);
-        })
-    );
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((groups) => {
+        setGroupList(groups);
+      });
   }, []);
 
   useEffect(() => {
@@ -58,15 +62,16 @@ function AddUserGroup() {
   };
 
   const addUserInGroup = (idUser) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
       userId: idUser,
       groupId: parseInt(groupId, 10),
     });
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };
@@ -110,16 +115,17 @@ function AddUserGroup() {
       </button>
 
       <div className="font-[Enedis] flex justify-center text-primary text-center text-4xl mb-10">
-        {groupList
-          .filter((group) => group.id === parseInt(groupId, 10))
-          .map((group) => (
-            <h3
-              key={group.id}
-              className=" text-2xl my-4 md:text-3xl bg-violet w-fit rounded-sm"
-            >
-              {group.group_name}
-            </h3>
-          ))}
+        {groupList &&
+          groupList
+            .filter((group) => group.id === parseInt(groupId, 10))
+            .map((group) => (
+              <h3
+                key={group.id}
+                className=" text-2xl my-4 md:text-3xl bg-violet w-fit rounded-sm"
+              >
+                {group.group_name}
+              </h3>
+            ))}
       </div>
       <div className="w-full flex justify-center">
         <input

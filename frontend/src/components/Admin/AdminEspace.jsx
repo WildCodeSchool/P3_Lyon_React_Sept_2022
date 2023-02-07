@@ -11,6 +11,7 @@ import croix from "../../assets/close-red.png";
 import plus from "../../assets/plus.png";
 import file from "../../assets/file.svg";
 import DropDownGroup from "./DropDownGroup";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -24,14 +25,27 @@ function AdminEspace() {
   const [categoryList, setCategoryList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [refresh, setRefresh] = useState([]);
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`${backEnd}/api/groups`)
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((groups) => {
         setGroupList(groups);
       });
-    fetch(`${backEnd}/api/categories`)
+    fetch(`${backEnd}/api/categories`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((categories) => {
         setCategoryList(categories);
@@ -119,7 +133,7 @@ function AdminEspace() {
         pauseOnHover: true,
       });
     } else if (groupPost.group_name) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const group = JSON.stringify(groupPost);
@@ -129,7 +143,9 @@ function AdminEspace() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       };
 
@@ -170,7 +186,7 @@ function AdminEspace() {
         pauseOnHover: true,
       });
     } else if (categoryPost.category_name && categoryPost.group_id) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const category = JSON.stringify(categoryPost);
@@ -180,7 +196,9 @@ function AdminEspace() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       };
 
@@ -205,7 +223,12 @@ function AdminEspace() {
   // Group deletion
   const handleDeleteGroup = (group) => {
     axios
-      .delete(`${backEnd}/api/groups/${group}`)
+      .delete(`${backEnd}/api/groups/${group}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         setRefresh(!refresh);
         toast.success("Groupe Supprimé !", {
@@ -225,7 +248,12 @@ function AdminEspace() {
   // Category deletion
   const handleDeleteCategory = (category) => {
     axios
-      .delete(`${backEnd}/api/categories/${category}`)
+      .delete(`${backEnd}/api/categories/${category}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         setRefresh(!refresh);
         toast.success("Catégorie Supprimée !", {
@@ -353,7 +381,7 @@ function AdminEspace() {
                   </h3>
                 )}
 
-                <DropDownGroup setGroupId={setGroupId} />
+                <DropDownGroup setGroupId={setGroupId} groupList={groupList} />
                 <label className="flex flex-col items-center text-md md:text-lg font-light text-primary  cursor-pointer">
                   <img
                     className="w-7 h-7 md:w-9 md:h-9"
@@ -394,8 +422,14 @@ function AdminEspace() {
       </div>
       <div className="flex flex-col items-center w-screen pb-36">
         {groupList
-          .filter((group) =>
-            group.group_name.toLowerCase().includes(searchInput)
+          .filter(
+            (group) =>
+              group.group_name
+                .toLocaleLowerCase()
+                .includes(searchInput.toLocaleLowerCase()) ||
+              group.group_name
+                .toLocaleUpperCase()
+                .includes(searchInput.toLocaleUpperCase())
           )
           .map((group) => (
             <Menu

@@ -21,15 +21,18 @@ const categoryControllers = require("./controllers/categoryControllers");
 const groupControllers = require("./controllers/groupControllers");
 const commentControllers = require("./controllers/commentControllers");
 const userGroupControllers = require("./controllers/userGroupControllers");
+const validateUser = require("./middleware/validateUser");
 
 /// //// Authentification //////
 
 router.post("/api/register", hashPassword, userControllers.add);
 router.post(
   "/api/login",
+  validateUser,
   authControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
+router.use(verifyToken);
 
 /// //// Gestion des users ///////
 router.get("/api/users/limit/:base", userControllers.browseBy5);

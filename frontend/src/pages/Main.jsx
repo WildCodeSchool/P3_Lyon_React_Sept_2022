@@ -13,22 +13,40 @@ const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function Main({ toggleDarkMode, darkMode }) {
   const { setGroupList, setCategoryList, setUserGroups } = usePostUserContext();
-  const { user } = useCurrentUserContext();
+  const { user, token } = useCurrentUserContext();
   const [groupId, setGroupId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
 
   useEffect(() => {
-    fetch(`${backEnd}/api/groups`)
+    fetch(`${backEnd}/api/groups`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((groups) => {
         setGroupList(groups);
       });
-    fetch(`${backEnd}/api/categories`)
+    fetch(`${backEnd}/api/categories`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((categories) => {
         setCategoryList(categories);
       });
-    fetch(`${backEnd}/api/user_group/user/${user.id}`)
+    fetch(`${backEnd}/api/user_group/user/${user.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((usersGroups) => {
         setUserGroups(usersGroups);

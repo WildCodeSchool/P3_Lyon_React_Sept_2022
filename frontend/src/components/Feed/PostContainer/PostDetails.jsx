@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import { usePostUserContext } from "../../../contexts/PostUserContext";
+import { useCurrentUserContext } from "../../../contexts/userContext";
 import pdf from "../../../assets/pdf.png";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
@@ -17,9 +18,16 @@ function PostDetails({ numberComments, setNumberComments }) {
   const { refreshComment } = usePostUserContext();
   const [postDetails, setPostDetails] = useState({});
   const { postId } = useParams();
+  const { token } = useCurrentUserContext();
 
   useEffect(() => {
-    fetch(`${backEnd}/api/posts/${postId}/comments`)
+    fetch(`${backEnd}/api/posts/${postId}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((result) => {
         setComments(result);
@@ -27,7 +35,13 @@ function PostDetails({ numberComments, setNumberComments }) {
   }, [refreshComment]);
 
   useEffect(() => {
-    fetch(`${backEnd}/api/posts/${postId}`)
+    fetch(`${backEnd}/api/posts/${postId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((result) => {
         setPostDetails(result);

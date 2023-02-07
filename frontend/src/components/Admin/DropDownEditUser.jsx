@@ -7,6 +7,7 @@ import axios from "axios";
 import modifDot from "../../assets/modifDot.png";
 import edit from "../../assets/edit.png";
 import deleteBtn from "../../assets/deleteBtn.png";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -23,9 +24,15 @@ export default function DropDownEditUser({
   addUserInGroup,
   deleteUserList,
 }) {
+  const { token } = useCurrentUserContext();
   const handleDelete = (id) => {
     axios
-      .delete(`${backEnd}/api/users/${id}`)
+      .delete(`${backEnd}/api/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         deleteUserList();
         toggleRefresh();
