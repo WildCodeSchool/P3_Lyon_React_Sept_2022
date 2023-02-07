@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import croix from "../../assets/croix.png";
+import "react-toastify/dist/ReactToastify.css";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
@@ -53,21 +56,35 @@ export default function ModifUser() {
         .then((response) => response.text())
         .then(() => {
           navigate("/adminUser");
+          toast.success("Utilisateur modifié !", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
         })
         .catch(console.error);
   };
 
   return (
-    <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10">
-      <div className="font-[Enedis] pt-4 mt-1 text-primary text-center font-bold text-4xl mb-6">
-        Modifier un utilisateur
-      </div>
-      <div className="flex justify-around ">
-        <img
-          className="rounded-full h-40 w-40 ml-5 border-4 border-violet"
-          src={`${backEnd}/uploads/${userData.avatar}`}
-          alt="User avatar"
-        />
+    <div className="h-screen">
+      <Link to="/adminuser">
+        <button type="button">
+          <img className="mr-80 mt-3 ml-4" src={croix} alt="Close btn" />
+        </button>
+      </Link>
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="font-[Enedis] text-primary text-center font-bold text-3xl md:text-4xl mb-6 md:w-48">
+          Modifier un utilisateur
+        </div>
+        <div className="flex justify-around ">
+          <img
+            className="rounded-full h-40 w-40 ml-5 border-4 border-violet"
+            src={`${backEnd}/uploads/${userData.avatar}`}
+            alt="User avatar"
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <form

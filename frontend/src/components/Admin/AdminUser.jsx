@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
+import addUserGroup from "../../assets/add-user.png";
 import croix from "../../assets/close-red.png";
 import AddUser from "./AddUser";
 import HeaderAdmin from "./HeaderAdmin";
@@ -199,7 +200,7 @@ export default function AdminUser() {
         className="flex flex-row-reverse justify-between w-80 h-18 items-center mx-auto text-primary font-[Enedis] bg-white text-xl font-bold border p-3 px-8 mb-10 border-primary shadow-sm"
       >
         Ajouter un utilisateur
-        <img className="w-5 h-4 mt-0 mr-3" src={pictoGroup} alt="Add user" />
+        <img className="w-5 h-5 mt-0 mr-3" src={pictoGroup} alt="Add user" />
       </button>
 
       {addUser ? <AddUser openAndCloseUserModal={openAndCloseUserModal} /> : ""}
@@ -209,7 +210,11 @@ export default function AdminUser() {
           {selectedGroup > 0 && (
             <Link to={`/admin/add-user-group/${selectedGroup}`}>
               <button type="button">
-                <img className="w-5 h-4 mt-4 ml-3" alt="" src={pictoGroup} />
+                <img
+                  className="w-7 h-7 md:w-10 md:h-10 mt-4 md:mt-2 ml-3 md:ml-0"
+                  alt="Add user group"
+                  src={addUserGroup}
+                />
               </button>
             </Link>
           )}
