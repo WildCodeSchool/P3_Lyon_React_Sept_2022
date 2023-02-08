@@ -57,6 +57,12 @@ function Profile() {
   }, [base, user_id, refresh]);
   // }, [refresh, user_id]);
 
+  const refreshPosts = () => {
+    setBase(0);
+    setMyPosts([]);
+    setRefresh(!refresh);
+  };
+
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -76,11 +82,6 @@ function Profile() {
     const postIndex = myPosts.findIndex((post) => post.id === idPost);
     myPosts.splice(postIndex, 1);
     setMyPosts([...myPosts]);
-  };
-  const refreshPosts = () => {
-    setBase(0);
-    setMyPosts([]);
-    setRefresh(!refresh);
   };
 
   return (
