@@ -8,6 +8,7 @@ import { TokenContextProvider } from "./contexts/TokenContext";
 import { PostDetails, AdminEspace, ModifUser } from "./components";
 import { Connexion, Main, CreatePost, Profile, PostList } from "./pages";
 import AddUserGroup from "./components/Admin/AddUserGroup";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,8 @@ function App() {
                 element={<AddUserGroup />}
               />
               <Route path="/adminEspace" element={<AdminEspace />} />
+              {/* only match this when no other routes match */}
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
             <ToastContainer />
           </TokenContextProvider>
