@@ -6,7 +6,6 @@ import axios from "axios";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 import pdf from "../../../assets/pdf.png";
 import DropDownDeletePost from "./DropDownDeletePost";
-// import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
