@@ -35,8 +35,7 @@ const findUserByGroupId = (req, res) => {
   models.user_group
     .findByGroupId(groupId, base)
     .then((results) => {
-      if (results[0]) res.send(results);
-      else res.sendStatus(404);
+      res.send(results);
     })
     .catch((error) => {
       console.error(error);
