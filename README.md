@@ -11,11 +11,12 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - Clone this repo, enter it
 - Run command `npm run setup`
 - _NB: To launch the backend server, you'll need an environment file with database credentials. You'll find a template one in `backend/.env.sample`_
+- Run command `npm install` on global repo, frontend and backend for package installation.
+- Create .env files /frontend /backend
 
 ### Available Commands
 
 - `setup` : Initialization of frontend and backend, as well as all toolings
-- `migrate` : Run the database migration script
 - `dev` : Starts both servers (frontend + backend) in one terminal
 - `dev-front` : Starts the React frontend server
 - `dev-back` : Starts the Express backend server
@@ -33,3 +34,13 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
 - _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
 - _Nodemon_ : Allows to restart the server everytime a .js file is udated
+
+### PostgreSQL
+
+- Install PostgreSQL 
+MAC : https://postgresapp.com/downloads.html 
+WINDOWS : https://www.postgresql.org/download/windows/ 
+LINUX : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-22-04 
+- Follow installation process
+- To configure password for your user : `\password` in terminal
+- Then copy/paste script for database in your terminal (no migrate command available)
