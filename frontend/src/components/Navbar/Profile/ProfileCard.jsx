@@ -1,17 +1,21 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCurrentUserContext } from "../../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-function ProfileCard({ profileUser, setProfileUser }) {
+function ProfileCard({ profileUser, setProfileUser, refreshPosts }) {
   const [avatar, setAvatar] = useState(profileUser.avatar);
   const inputRef = useRef(null);
   const { token } = useCurrentUserContext();
 
   const { user, setUser } = useCurrentUserContext();
   const { id } = user;
+
+  useEffect(() => {
+    setAvatar(profileUser.avatar);
+  }, [profileUser]);
 
   const handleChange = () => {
     const myHeaders = new Headers();
@@ -32,6 +36,7 @@ function ProfileCard({ profileUser, setProfileUser }) {
         setUser({ ...user, avatar: result.avatar });
         setProfileUser({ ...user, avatar: result.avatar });
         setAvatar(result.avatar);
+        refreshPosts();
         toast.success("Photo de profil modifiée avec succès !", {
           position: "top-center",
           autoClose: 3000,
@@ -45,7 +50,7 @@ function ProfileCard({ profileUser, setProfileUser }) {
 
   return (
     <div className="flex flex-col justify-center items-center w-screen pt-5 md:-mt-20 md:ml-40 ">
-      <div className="xl:mr-20 z-10 md:mt-1">
+      <div className="z-10 md:mt-1 md:w-full md:ml-20">
         {avatar && (
           <img
             src={`${backEnd}/uploads/${avatar}`}

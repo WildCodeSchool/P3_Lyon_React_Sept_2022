@@ -13,6 +13,7 @@ function Profile() {
   const [base, setBase] = useState(0);
   const { user_id } = useParams();
   const { user, token } = useCurrentUserContext();
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if (user_id) {
@@ -52,8 +53,14 @@ function Profile() {
           setMyPosts((prev) => [...prev, ...result]);
         });
     }
-  }, [base, user_id]);
+  }, [base, user_id, refresh]);
   // }, [refresh, user_id]);
+
+  const refreshPosts = () => {
+    setBase(0);
+    setMyPosts([]);
+    setRefresh(!refresh);
+  };
 
   const handleScroll = () => {
     if (
@@ -87,6 +94,7 @@ function Profile() {
             <ProfileCard
               profileUser={profileUser}
               setProfileUser={setProfileUser}
+              refreshPosts={refreshPosts}
             />
             <h1 className="text-primary text-center text-4xl mb-3 md:hidden">
               Publications
