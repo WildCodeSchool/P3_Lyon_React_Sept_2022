@@ -158,28 +158,6 @@ export default function AdminUser() {
     setUserCard([]);
   };
 
-  /* const handleDeleteUserGroup = (groupId, userId) => {
-    fetch(
-      `http://${backEnd}/api/user_group/group/${groupId}/user/${userId}`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((result) => {
-        setUserCard(result);
-      })
-      .catch((error) => console.error(error));
-  }; */
-
-  // const handleSearchUserGroup = () => {
-  //   fetch(`${backEnd}/api/users`)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       setUserCard(result);
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
-
   return (
     <div className="flex-col justify-around h-screen md:overflow-x-hidden">
       <HeaderAdmin />

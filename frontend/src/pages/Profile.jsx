@@ -11,7 +11,6 @@ function Profile() {
   const [profileUser, setProfileUser] = useState({});
   const [myPosts, setMyPosts] = useState([]);
   const [base, setBase] = useState(0);
-  // const { refresh } = usePostUserContext();
   const { user_id } = useParams();
   const { user, token } = useCurrentUserContext();
   const [refresh, setRefresh] = useState(false);

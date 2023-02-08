@@ -24,8 +24,6 @@ function Comment({ postId }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(createComment);
 

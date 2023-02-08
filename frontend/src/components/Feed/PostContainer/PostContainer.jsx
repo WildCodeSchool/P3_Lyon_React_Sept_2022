@@ -36,7 +36,7 @@ function PostContainer({ groupId, categoryId }) {
         .then((response) => {
           if (response.status === 401) {
             redirectIfDisconnected();
-            throw Error("J'AI DIS NON!");
+            throw Error("Veuillez-vous reconnecter");
           } else return response.json();
         })
         .then((result) => {
@@ -54,7 +54,7 @@ function PostContainer({ groupId, categoryId }) {
         .then((response) => {
           if (response.status === 401) {
             redirectIfDisconnected();
-            throw Error("J'AI DIS NON!");
+            throw Error("Veuillez-vous reconnecter");
           } else return response.json();
         })
         .then((result) => {
@@ -72,7 +72,7 @@ function PostContainer({ groupId, categoryId }) {
         .then((response) => {
           if (response.status === 401) {
             redirectIfDisconnected();
-            throw Error("J'AI DIS NON!");
+            throw Error("Veuillez-vous reconnecter");
           } else return response.json();
         })
         .then((result) => {

@@ -9,17 +9,6 @@ function classNames(...classes) {
 }
 
 function DropDownGroup({ setGroupId, groupList }) {
-  // const [setGroupList] = useState([]);
-
-  // useEffect(() => {
-  //   fetch(`${backEnd}/api/groups`)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       setGroupList(result);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
-
   return (
     <Menu as="div" className="relative inline-block text-left mr-2 sm:mr-10">
       <div>
