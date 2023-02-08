@@ -81,7 +81,7 @@ export default function DropDownDeletePost({ handleDelete }) {
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white sm:mx-0 sm:h-10 sm:w-10">
                       <svg
-                        className="h-6 w-6 text-sky-500"
+                        className="h-6 w-6 text-red-700"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -105,7 +105,8 @@ export default function DropDownDeletePost({ handleDelete }) {
                       </h3>
                       <div className="mt-2">
                         <p className="text-sm text-white">
-                          Êtes vous certain de vouloir supprimer ce post ?
+                          Êtes vous certain de vouloir supprimer cette
+                          publication ?
                         </p>
                       </div>
                     </div>
@@ -115,7 +116,7 @@ export default function DropDownDeletePost({ handleDelete }) {
                   <button
                     onClick={handleDelete}
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Supprimer
                   </button>
