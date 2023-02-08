@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import pictoGroup from "../../assets/pictoGroup.png";
@@ -172,28 +170,6 @@ export default function AdminUser() {
       })
       .catch((error) => console.error(error));
   }; */
-  const handleDeleteUserGroup = (groupId, userId) => {
-    axios
-      .delete(`${backEnd}/api/user_group/group/${groupId}/user/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((result) => {
-        toggleRefresh(result);
-        toast.success(" Utilisateur supprimé du groupe !", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
 
   // const handleSearchUserGroup = () => {
   //   fetch(`${backEnd}/api/users`)
@@ -270,7 +246,6 @@ export default function AdminUser() {
             key={card.id}
             card={card}
             toggleRefresh={toggleRefresh}
-            deleteUserGroup={handleDeleteUserGroup}
             deleteButton={deleteButton}
             deleteUserList={deleteUserList}
           />
