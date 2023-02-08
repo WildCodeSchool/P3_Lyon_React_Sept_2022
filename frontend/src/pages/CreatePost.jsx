@@ -37,13 +37,19 @@ function CreatePost() {
   // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
-  const onChange = (e) => {
+  const onChangeTitle = (e) => {
     if (e.target.value.length <= MAX_LENGTH) {
       setDataPost({
         ...dataPost,
         [e.target.name]: e.target.value,
       });
     }
+  };
+  const onChange = (e) => {
+    setDataPost({
+      ...dataPost,
+      [e.target.name]: e.target.value,
+    });
   };
 
   useEffect(() => {
@@ -165,20 +171,20 @@ function CreatePost() {
             </div>
           </div>
           <div>
-            <input
+            <textarea
               className="mt-8 h-[5em] md:text-xl w-full pl-8"
               type="text"
               placeholder="Titre... *"
               name="title"
               value={dataPost.title}
-              onChange={onChange}
+              onChange={onChangeTitle}
             />
             <small className="text-black italic ml-5">
               {numRemaining} caractères restants
             </small>
             <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
-            <input
-              className="h-60 md:text-xl w-full pl-8"
+            <textarea
+              className="h-60 md:text-xl w-full pl-8 items-start"
               type="text"
               name="content"
               placeholder="Votre publication... *"

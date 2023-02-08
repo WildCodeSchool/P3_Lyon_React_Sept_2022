@@ -94,13 +94,13 @@ function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="md:hidden group-card flex bg-cover  bg-center justify-center items-center align-middle text-center cursor-pointer"
+                  className="md:hidden group-card flex bg-cover bg-center justify-center items-center align-middle text-center cursor-pointer"
                   onClick={() => handleCategory(category.id)}
                   style={{
                     backgroundImage: `url(${backEnd}/uploads/${category.image})`,
                   }}
                 >
-                  <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
+                  <p className="text-primary font-bold bg-white opacity-70 h-1/2 w-11/12 flex justify-center items-center rounded">
                     {category.category_name}
                   </p>
                 </SwiperSlide>
