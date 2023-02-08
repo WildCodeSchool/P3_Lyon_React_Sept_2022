@@ -14,6 +14,7 @@ function Profile() {
   // const { refresh } = usePostUserContext();
   const { user_id } = useParams();
   const { user, token } = useCurrentUserContext();
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if (user_id) {
@@ -53,7 +54,7 @@ function Profile() {
           setMyPosts((prev) => [...prev, ...result]);
         });
     }
-  }, [base, user_id]);
+  }, [base, user_id, refresh]);
   // }, [refresh, user_id]);
 
   const handleScroll = () => {
@@ -76,6 +77,11 @@ function Profile() {
     myPosts.splice(postIndex, 1);
     setMyPosts([...myPosts]);
   };
+  const refreshPosts = () => {
+    setBase(0);
+    setMyPosts([]);
+    setRefresh(!refresh);
+  };
 
   return (
     <div className="bg-[#f6f6fe] md:overflow-y-hidden md:h-screen  ">
@@ -88,6 +94,7 @@ function Profile() {
             <ProfileCard
               profileUser={profileUser}
               setProfileUser={setProfileUser}
+              refreshPosts={refreshPosts}
             />
             <h1 className="text-primary text-center text-4xl mb-3 md:hidden">
               Publications
