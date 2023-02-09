@@ -266,12 +266,12 @@ VALUES
     'waterEolienne.jpg'
   ),
     (
-    'Sash',
-    '¡ ECUADOR !',
+    'Sobriété énergétique',
+    'Dans un contexte de changement climatique et de crise énergétique, il est crucial d''économiser nos ressources. Enedis, en tant que premier distributeur d''électricité en France, accompagne la transition écologique des territoires. Chaque jour, nos équipes se mobilisent pour développer des solutions électriques accessibles et innovantes permettant une consommation d''électricité raisonnée.',
     3,
     8,
     '2022-11-08T11:04:06.163Z',
-    'waterEolienne.jpg'
+    'solar-groups.jpeg'
   ),
     (
     'Lenny Kravitz',
@@ -442,12 +442,12 @@ VALUES
     'waterEolienne.jpg'
   ),
     (
-    'Sash',
-    '¡ ECUADOR !',
+     'Sobriété énergétique',
+    'Dans un contexte de changement climatique et de crise énergétique, il est crucial d''économiser nos ressources. Enedis, en tant que premier distributeur d''électricité en France, accompagne la transition écologique des territoires. Chaque jour, nos équipes se mobilisent pour développer des solutions électriques accessibles et innovantes permettant une consommation d''électricité raisonnée.',
     5,
     1,
-    '2022-11-29T11:04:06.163Z',
-    'waterEolienne.jpg'
+    '2022-11-08T11:04:06.163Z',
+    'solar-groups.jpeg'
   ),
     (
     'Lenny Kravitz',
@@ -548,7 +548,7 @@ VALUES
   ),
     (
     'Le futur de l''Auvergne',
-    'Un nouveau projet s''aprêtte à voir le jour aux alentours de Clermont-ferrand pour le plus grand bonheur de la régions qui estime une baisse du coup de l''électricité dans la régons de 10% sur 5 ans ',
+    'Un nouveau projet s''aprêtte à voir le jour aux alentours de Clermont-Ferrand pour le plus grand bonheur de la région qui estime une baisse du coût de l''électricité dans la régon de 10% sur 5 ans.',
     4,
     14,
     '2022-12-12T11:04:06.163Z',
@@ -594,7 +594,7 @@ FOREIGN KEY(user_id) REFERENCES user_detail(id) ON DELETE CASCADE
 
 INSERT INTO
   comment (content, post_id, user_id)
-VALUES ('J''adore !', 1, 2);
+VALUES ('J''adore !', 1, 2), ('Vous en pensez quoi ?', 43, 4), ('Super intéressant, merci Matthieu !', 44, 1), ('Les énergies de demain !', 44, 4), ('Hâte de voir ce nouveau projet, Sahrane !', 43, 5), ('Moi aussi, quelle bonne nouvelle !', 43, 1), ('Le futur de l''électricité :)', 43, 3), ('Merci pour tous ces retours positifs !', 43, 4);
 
 
 
@@ -613,5 +613,5 @@ CREATE TABLE user_group
 
 INSERT INTO
   user_group (user_id, group_id)
-VALUES (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (4, 1), (4, 2), (4, 5), (5, 1), (5, 2), (5, 3);
+VALUES (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 5), (4, 1), (4, 2), (4, 5), (5, 1), (5, 2), (5, 3), (5, 5);
 
