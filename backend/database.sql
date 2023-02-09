@@ -92,15 +92,15 @@ VALUES
   ),
   (
     'Prévention',
-    'solar-groups.jpeg'
+    'prevention.avif'
   ),
   (
     'Entre nous',
-    'solar-groups.jpeg'
+    'vie-site.jpg'
   ),
   (
     'Clients',
-    'solar-groups.jpeg'
+    'client2.jpg'
   );
 
 CREATE TABLE category(
@@ -182,12 +182,12 @@ VALUES
   ),
   (
     'Projet régionnal',
-    'office.jpg',
+    'logo-region-rhone-alpes.png',
     5
   ),
   (
     'Innovation',
-    'office.jpg',
+    'innovation.jpg',
     5
   );
   
@@ -231,7 +231,7 @@ VALUES
     3,
     3,
     '2022-11-03T11:04:06.163Z',
-    'waterEolienne.jpg'
+    'anniversaire.jpg'
   ),
   (
     'Secret Santa',
@@ -263,7 +263,7 @@ VALUES
     2,
     7,
     '2022-11-07T11:04:06.163Z',
-    'waterEolienne.jpg'
+    'mike-jagger.jpg'
   ),
     (
     'Sobriété énergétique',
@@ -440,7 +440,7 @@ On note par ailleurs une baisse de - 9,2 % pour les clients professionnels (dont
     4,
     15,
     '2022-11-28T11:04:06.163Z',
-    ''
+    'mike-jagger.jpg'
   ),
     (
      'Sobriété énergétique',
