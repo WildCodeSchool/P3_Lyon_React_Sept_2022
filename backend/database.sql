@@ -440,7 +440,7 @@ On note par ailleurs une baisse de - 9,2 % pour les clients professionnels (dont
     4,
     15,
     '2022-11-28T11:04:06.163Z',
-    'mike-jagger.jpg'
+    ''
   ),
     (
      'Sobriété énergétique',
