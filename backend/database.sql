@@ -313,13 +313,13 @@ VALUES
     '2022-11-12T11:04:06.163Z',
     'waterEolienne.jpg'
   ),
-(
-    'Derek & The Dominos',
-    'What will you do when you get lonely? No one waiting by your side?',
+  (
+    'Sobriété énergétique',
+    'À la demande de RTE et des pouvoirs publics, Enedis suspendra temporairement du 15 octobre 2022 au 15 avril 2023 le signal d''enclenchement automatique lié aux heures creuses de 12h à 14h pour les usages électriques pilotés, principalement les ballons d''eau chaude.',
     4,
     15,
     '2022-11-13T11:04:06.163Z',
-    'waterEolienne.jpg'
+    ''
   ),
     (
     'The Mamas & The Papas',
@@ -434,12 +434,13 @@ VALUES
     'waterEolienne.jpg'
   ),
     (
-    'Mick Jagger',
-    'Please allow me to introduce myself, I''m a man of wealth and taste',
+    'Les efforts de sobriété des Français se concrétisent en chiffres !',
+    'Pour la semaine 49, la baisse de la consommation globale des clients résidentiels (particuliers) est de - 10,3 % par rapport à la même semaine de la moyenne des années 2018 à 2021 (hors 2020, année atypique).
+On note par ailleurs une baisse de - 9,2 % pour les clients professionnels (dont la puissance est inférieure à 36 kVa) et de - 7,4 % pour les entreprises (environ 500 000 consommateurs raccordés au réseau géré par Enedis et dont la puissance est supérieure à 36 kVa).',
     4,
     15,
     '2022-11-28T11:04:06.163Z',
-    'mike-jagger.jpg'
+    ''
   ),
     (
      'Sobriété énergétique',
