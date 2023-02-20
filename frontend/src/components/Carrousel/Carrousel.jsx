@@ -1,64 +1,69 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect } from "react";
+import React from "react";
 import { Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { usePostUserContext } from "../../contexts/PostUserContext";
+import croix from "../../assets/close-red.png";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css";
 // eslint-disable-next-line import/no-unresolved
 import "swiper/css/pagination";
 
-function Carrousel() {
-  const {
-    groupList,
-    categoryList,
-    groupId,
-    setGroupId,
-    categoryId,
-    setCategoryId,
-    setPosts,
-    setBase,
-    refresh,
-    setRefresh,
-  } = usePostUserContext();
+const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-  useEffect(() => {
+function Carrousel({ groupId, setGroupId, categoryId, setCategoryId }) {
+  const { categoryList, userGroups } = usePostUserContext();
+
+  const backToZero = () => {
     setGroupId(0);
     setCategoryId(0);
-  }, []);
+  };
 
   const handleGroup = (value) => {
     setGroupId(value);
-    setPosts([]);
-    setBase(0);
-    setRefresh(!refresh);
   };
 
   const handleCategory = (value) => {
     setCategoryId(value);
-    setPosts([]);
-    setBase(0);
-    setRefresh(!refresh);
   };
   return (
-    <div className="carrousel-container pt-8 md:h-1/6 md:w-80 md:ml-[-350px] md:bg-white md:mt-48 md:shadow-md md:rounded-lg md:sticky md:top-20">
-      <h2 className="text-primary text-center text-xl mb-4 md:text-3xl">
-        {groupId
-          ? groupList
-              .filter((group) => group.id === groupId)
-              .map((group) => group.group_name)
-          : "Mes Groupes"}
-        <br />
-        {categoryId > 0 &&
-          categoryList
-            .filter((category) => category.id === categoryId)
-            .map((category) => category.category_name)}
-      </h2>
+    <div>
+      <div className="flex justify-center">
+        <div className="flex flex-col items-center ">
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl w-auto rounded-sm ">
+            {groupId
+              ? userGroups
+                  .filter((group) => group.id === groupId)
+                  .map((group) => group.group_name)
+              : "Mes Groupes"}
+          </h2>
+          <h2 className="text-primary text-center text-xl mb-4 md:text-3xl ">
+            {categoryId > 0 &&
+              categoryList
+                .filter((category) => category.id === categoryId)
+                .map((category) => category.category_name)}
+          </h2>
+        </div>
+        {groupId > 0 && (
+          <button type="button" onClick={() => backToZero()}>
+            <img
+              src={croix}
+              alt="croix rouge pour effacer"
+              className={
+                groupId > 0 && categoryId === 0
+                  ? "h-6 w-6 md:h-7 md:w-7 md:mr-5 md:ml-1 ml-4 mb-8"
+                  : "h-6 w-6 md:h-7 md:w-7 md:mr-5 md:ml-1 ml-4 mb-14"
+              }
+            />
+          </button>
+        )}
+      </div>
+
       <Swiper
         className={
           !groupId
-            ? "h-36 md:w-[475px]  md:hidden"
-            : "h-20 md:w-[475px]  md:hidden"
+            ? "h-36 md:w-[475px] md:hidden"
+            : "h-20 md:w-[475px] md:hidden"
         }
         modules={[Pagination, A11y]}
         spaceBetween={20}
@@ -67,12 +72,14 @@ function Carrousel() {
       >
         {!groupId ? (
           <>
-            {groupList.map((group) => (
+            {userGroups.map((group) => (
               <SwiperSlide
                 key={group.id}
                 className="group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
                 onClick={() => handleGroup(group.id)}
-                style={{ backgroundImage: `url(${group.image})` }}
+                style={{
+                  backgroundImage: `url(${backEnd}/uploads/${group.image})`,
+                }}
               >
                 <p className="text-primary font-bold bg-white opacity-50 h-1/3 w-11/12 flex justify-center items-center rounded">
                   {group.group_name}
@@ -87,11 +94,13 @@ function Carrousel() {
               .map((category) => (
                 <SwiperSlide
                   key={category.id}
-                  className="md:hidden group-card flex bg-cover justify-center items-center align-middle text-center cursor-pointer"
+                  className="md:hidden group-card flex bg-cover bg-center justify-center items-center align-middle text-center cursor-pointer"
                   onClick={() => handleCategory(category.id)}
-                  style={{ backgroundImage: `url(${category.image})` }}
+                  style={{
+                    backgroundImage: `url(${backEnd}/uploads/${category.image})`,
+                  }}
                 >
-                  <p className="text-primary font-bold bg-white opacity-70 h-1/3 w-11/12 flex justify-center items-center rounded">
+                  <p className="text-primary font-bold bg-white opacity-70 h-1/2 w-11/12 flex justify-center items-center rounded">
                     {category.category_name}
                   </p>
                 </SwiperSlide>
@@ -102,33 +111,38 @@ function Carrousel() {
 
       {/* pour version Desktop */}
       {!groupId ? (
-        <div className=" hidden md:block ">
-          {groupList.map((group) => {
-            return (
-              <button
-                onClick={() => handleCategory(group.id)}
-                type="button"
-                className=" md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto "
-                key={group.id}
-              >
-                {group.group_name}
-              </button>
-            );
-          })}
+        <div className="bg-alert">
+          <div className=" hidden md:block ">
+            {userGroups.map((group) => {
+              return (
+                <button
+                  onClick={() => handleGroup(group.id)}
+                  type="button"
+                  className=" md:flex md:flex-col md:text-xl md:hover:bg-violet md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  key={group.id}
+                >
+                  {group.group_name}
+                </button>
+              );
+            })}
+          </div>
         </div>
       ) : (
-        <div className="hidden md:block">
-          {categoryList
-            .filter((category) => category.group_id === groupId)
-            .map((category) => (
-              <button
-                type="button"
-                key={category.id}
-                className="  md:flex md:flex-col md:text-xl mb:border-b md:border md:p-3 md:mb-3 md:text-center md:mx-auto"
-              >
-                {category.category_name}
-              </button>
-            ))}
+        <div className="bg-alert">
+          <div className="hidden md:block">
+            {categoryList
+              .filter((category) => category.group_id === groupId)
+              .map((category) => (
+                <button
+                  onClick={() => handleCategory(category.id)}
+                  type="button"
+                  className=" md:flex md:flex-col md:text-xl md:hover:bg-violet md:p-3 md:mb-3 md:text-center md:mx-auto "
+                  key={category.id}
+                >
+                  {category.category_name}
+                </button>
+              ))}
+          </div>
         </div>
       )}
     </div>

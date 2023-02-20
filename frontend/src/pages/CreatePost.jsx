@@ -1,21 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import croix from "../assets/croix.png";
-import "../App.css";
-import SelectBar from "../components/Feed/CreatePostContainer/SelectBar";
-import ModalCreatePost from "../components/Feed/CreatePostContainer/ModalCreatePost";
+import file from "../assets/file.svg";
+import { SelectBar, ModalCreatePost } from "../components";
 import { usePostUserContext } from "../contexts/PostUserContext";
 import { useCurrentUserContext } from "../contexts/userContext";
-import "react-toastify/dist/ReactToastify.css";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 function CreatePost() {
-  const { valueSelectedCategory, valueSelectedGroup, handleReset } =
-    usePostUserContext();
-  const { user } = useCurrentUserContext();
+  const {
+    valueSelectedCategory,
+    valueSelectedGroup,
+    setValueSelectedCategory,
+    setValueSelectedGroup,
+  } = usePostUserContext();
+  const [fileName, setFileName] = useState("");
+
+  const { user, token } = useCurrentUserContext();
   const inputRef = useRef(null);
+
+  // Data envoyé au back pour update un post
   const [dataPost, setDataPost] = useState({
     title: "",
     content: "",
@@ -24,9 +31,20 @@ function CreatePost() {
     post_image: "",
   });
   const navigate = useNavigate();
-
+  // we limit the numbers of characters written in title to 100
+  const MAX_LENGTH = 100;
+  const numRemaining = MAX_LENGTH - dataPost.title.length;
+  // ouvre  les groupes et catégorie
   const [showCategories, setShowCategories] = useState(false);
 
+  const onChangeTitle = (e) => {
+    if (e.target.value.length <= MAX_LENGTH) {
+      setDataPost({
+        ...dataPost,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
   const onChange = (e) => {
     setDataPost({
       ...dataPost,
@@ -40,16 +58,24 @@ function CreatePost() {
       category_id: valueSelectedCategory.id,
     });
   }, [valueSelectedCategory]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (
+    if (valueSelectedCategory === "") {
+      toast.warn("Veuillez renseigner la catégorie de la publication", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } else if (
       dataPost.title &&
       dataPost.content &&
       dataPost.user_id &&
       dataPost.category_id
     ) {
-      const myHeaders = new Headers();
+      // const myHeaders = new Headers();
       // myHeaders.append("Content-Type", "multipart/form-data");
 
       const post = JSON.stringify(dataPost);
@@ -59,7 +85,9 @@ function CreatePost() {
       formData.append("picture", inputRef.current.files[0]);
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       };
 
@@ -67,65 +95,74 @@ function CreatePost() {
       // je pourrais être renvoyé à la route login
       fetch(`${backEnd}/api/posts`, requestOptions)
         .then((response) => response.text())
-        .then((retour) => {
-          console.warn(retour);
-          handleReset();
+        .then(() => {
+          setValueSelectedCategory("");
+          setValueSelectedGroup("");
           navigate("/feed");
-          toast(" ✅ Poste Publié !", {
+          toast.success(" Publié avec succès !", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            theme: "light",
           });
         })
-        .catch(console.error());
+        .catch((error) => console.error(error));
     }
   };
 
+  const handleFileUpload = (event) => {
+    setFileName(event.target.files[0].name);
+  };
+
   return (
-    <div className="fixed top-0 left-0 bg-white w-[100%] h-[100vh] z-10  md:backdrop-blur-lg md:shadow-md ">
-      <div className="md:w-1/2 md:border-r-2 md:border-gray-100">
-        <div className="flex justify-between md:justify-around md:mb-5 md:items-center">
-          <Link to="/feed">
-            <img className="ml-2 mt-6 md:mt-2" src={croix} alt="" />
-          </Link>
-          <h1 className="text-[32px] mt:[62px] mr-[46px] leading-[2.9rem] text-primary font-bold text-center md:mr-32 pb-8 md:pb-0 md:mt-2 ">
-            Créer une publication
-          </h1>
-        </div>
+    <div className="bg-white md:bg-[#F6F6fe] md:h-screen">
+      <div className="md:border-r-2 md:border-gray-100">
+        <Link to="/feed">
+          <img
+            className="ml-2 mt-6 md:mt-0 md:pt-2 md:w-10 md:h10"
+            src={croix}
+            alt="Close"
+          />
+        </Link>
+        <h1 className="text-[32px] md:text-4xl mt-3 text-primary font-bold text-center md:m-auto pb-8 md:pb-4">
+          Créer une publication
+        </h1>
 
         {/* Formulaire Pour publier un post  */}
         <form
           onSubmit={(e) => onSubmit(e)}
           method="PUT"
           encType="multipart/form-data"
-          className="mb-5"
+          className="mb-5 md:bg-[white] md:flex md:items-center md:justify-center md:flex-col md:shadow-md sm:w-4/5 xl:w-3/5 md:border md:border-gray-200 md:m-auto md:h-fit"
         >
-          <div className="flex items-center">
-            <img className="rounded-full w-28 ml-3" src={user.avatar} alt="" />
+          <div className="flex items-center md:justify-start md:mr-60 md:mt-7">
+            <img
+              className="rounded-full object-cover w-28 h-28 sm:w-48 sm:h-48 md:w-16 md:h-16 ml-3 md:ml-6 border-4 border-violet"
+              src={`${backEnd}/uploads/${user.avatar}`}
+              alt="Avatar"
+            />
             <div className="block text-left">
               <div className="flex">
                 <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
+                  className="text-2xl ml-[24px] sm:ml-5 sm:text-4xl text-green font-bold "
                   value={user.firstname}
                 >
                   {user.firstname}
                 </h2>
                 <h2
-                  className="text-xl ml-[24px] text-primary font-bold "
+                  className="text-2xl ml-2 sm:text-4xl text-green w-10 font-bold "
                   value={user.lastname}
                 >
                   {user.lastname}
                 </h2>
               </div>
 
-              <p className="text-md ml-[24px] text-primary">
+              <p className="text-md md:text-xl ml-[24px] text-primary">
                 {valueSelectedGroup}
               </p>
               <p
-                className="text-md ml-[24px] text-primary"
+                className="text-md md:text-xl ml-[24px] text-primary"
                 value={valueSelectedCategory}
                 name={valueSelectedCategory}
               >
@@ -134,49 +171,66 @@ function CreatePost() {
             </div>
           </div>
           <div>
-            <input
-              className="mt-8 h-[5em] w-full pl-8"
+            <textarea
+              className="mt-8 h-[5em] md:text-xl w-full pl-8"
               type="text"
-              placeholder="Titre...*"
+              placeholder="Titre... *"
               name="title"
               value={dataPost.title}
-              onChange={onChange}
+              onChange={onChangeTitle}
             />
-            <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
-            <input
-              className="h-[10em] w-full pl-8"
+            <small className="text-black italic ml-5">
+              {numRemaining} caractères restants
+            </small>
+            <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
+            <textarea
+              className="h-60 md:text-xl w-full pl-8 items-start"
               type="text"
               name="content"
-              placeholder="Votre publication...*"
+              placeholder="Votre publication... *"
               value={dataPost.content}
               onChange={onChange}
             />
           </div>
-          <input
-            className="md:ml-[25%]"
-            type="file"
-            value={dataPost.image}
-            name="avatar"
-            ref={inputRef}
-          />
-          <hr className="h-[2px] bg-grey w-[100vw] md:w-[50vw]" />
-          <div className="md:h-20 md:mt-3">
-            <SelectBar
-              showCategories={showCategories}
-              setShowCategories={setShowCategories}
-            />
+          <hr className="h-[2px] bg-grey w-[100vw] md:w-[70vw] xl:w-[60vw]" />
+          <p className="text-sm mt-3 md:mt-0 ml-4 font-light text-[#070D4F]">
+            {fileName}
+          </p>
+          <div className="flex items-center justify-around mt-5 md:justify-end md:w-11/12 md:mr-6 md:mb-3">
+            <label className="flex flex-col items-center text-md md:text-lg font-light text-primary pl-6 md:mr-10 cursor-pointer">
+              <img
+                className="w-7 h-7 mr-2 md:w-9 md:h-9"
+                src={file}
+                alt="New file"
+              />
+              <input
+                className="hidden"
+                type="file"
+                value={dataPost.image}
+                name="avatar"
+                ref={inputRef}
+                onChange={handleFileUpload}
+              />
+              Fichier
+            </label>
+            <div>
+              <SelectBar
+                showCategories={showCategories}
+                setShowCategories={setShowCategories}
+              />
+            </div>
           </div>
-          <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
-          <button
-            type="submit"
-            className="bg-[#1423DC] hover:bg-[#0d17a1] text-white py-3 px-[2.5rem] mt-6 ml-[56%] w-40 md:ml-[38%] md:w-48 
-         rounded-[20px] justify-end"
-          >
-            Publier
-          </button>
+          <hr className="h-[2px] bg-grey w-[100vw] md:w-[70vw] xl:w-[60vw]" />
+          <div className="w-11/12 mx-auto flex justify-center items-center">
+            <button
+              type="submit"
+              className="bg-primary hover:bg-[#0d17a1] text-white py-3 mt-8 w-40 md:w-48 
+         rounded-3xl md:mb-2 md:mt-5"
+            >
+              Publier
+            </button>
+          </div>
         </form>
-
-        <hr className="h-[2px] bg-grey w-[100vw]  md:w-[50vw]" />
 
         {showCategories ? (
           <ModalCreatePost

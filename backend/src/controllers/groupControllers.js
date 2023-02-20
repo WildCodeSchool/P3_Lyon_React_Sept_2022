@@ -28,10 +28,10 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const groupDetail = req.body;
-
+  const group = JSON.parse(req.body.group);
+  group.image = req.renamedFile;
   models.group_detail
-    .insert(groupDetail)
+    .insert(group)
     .then((result) => {
       res.location(`/api/groups/${result.insertId}`).sendStatus(201);
     })
@@ -58,7 +58,7 @@ const edit = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  const { id } = req.params;
+  const id = parseInt(req.params.id, 10);
   models.group_detail
     .delete(id)
     .then((result) => {

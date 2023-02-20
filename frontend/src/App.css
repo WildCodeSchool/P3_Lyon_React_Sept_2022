@@ -50,7 +50,7 @@ ul {
 
 span,
 input,
-label {
+label, small {
   font-family: "Enedis";
   font-weight: light;
 }
@@ -58,4 +58,25 @@ label {
 button,
 p {
   font-family: "Public Sans", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+  height: 200px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(187, 187, 187);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

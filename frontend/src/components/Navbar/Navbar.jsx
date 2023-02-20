@@ -1,30 +1,27 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoEnedis from "../../assets/logo-enedis.png";
 import logOut from "../../assets/logout.png";
 import { useCurrentUserContext } from "../../contexts/userContext";
-import { usePostUserContext } from "../../contexts/PostUserContext";
 
-function Navbar({ toggleDarkMode, darkMode }) {
+const backEnd = import.meta.env.VITE_BACKEND_URL;
+
+function Navbar({ setGroupId, setCategoryId }) {
   const { user, setUser } = useCurrentUserContext();
-  const { handleReset } = usePostUserContext();
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   const onClick = () => {
     localStorage.clear();
     setUser({});
-    handleReset();
     navigate("/");
   };
 
   const toFeedOrAdmin = () => {
-    handleReset();
-    if (!user.is_admin) {
-      navigate("/feed");
-    } else {
-      navigate("/admin");
-    }
+    if (location.pathname === "/feed") {
+      setGroupId(0);
+      setCategoryId(0);
+    } else navigate("/feed");
   };
 
   return (
@@ -37,24 +34,14 @@ function Navbar({ toggleDarkMode, darkMode }) {
             alt="Logo"
           />
         </button>
-        <button
-          type="button"
-          className={`${
-            darkMode
-              ? "bg-white text-gray-800 px-6 py-2 rounded-md"
-              : "bg-gray-800 text-white px-6 py-2 rounded-md"
-          }`}
-          onClick={toggleDarkMode}
-        >
-          {darkMode ? "Light ☀️" : "Dark 🌙"}
-        </button>
+
         <div className="flex flex-end items-center md:mr-5">
           <div className="rounded-full md:mr-5 ">
             <Link to="/profile">
               <img
-                src={user.avatar}
+                src={`${backEnd}/uploads/${user.avatar}`}
                 alt="My profile avatar"
-                className="rounded-full w-10 h-10 mr-2 border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
+                className="rounded-full object-cover w-10 h-10 mr-2 border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
               />
             </Link>
           </div>

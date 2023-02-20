@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import croix from "../../assets/croix.png";
 import "react-toastify/dist/ReactToastify.css";
+import { useCurrentUserContext } from "../../contexts/userContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
 export default function AddUser({ openAndCloseUserModal }) {
+  const { token } = useCurrentUserContext();
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -38,14 +40,15 @@ export default function AddUser({ openAndCloseUserModal }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify(credentials);
 
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body,
       redirect: "follow",
     };
@@ -58,54 +61,47 @@ export default function AddUser({ openAndCloseUserModal }) {
       credentials.password &&
       credentials.role
     ) {
-      fetch(`${backEnd}/api/register`, requestOptions)
+      fetch(`${backEnd}/api/users`, requestOptions)
         .then((response) => response.text())
         .then(() => {
-          toast(" ✅ User created !", {
+          openAndCloseUserModal();
+          toast.success(" Utilisateur créé !", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            theme: "light",
           });
         })
-        .catch(console.error);
+        .catch((error) => console.error(error));
     } else {
-      toast(" ❌ Please specify email and password  !", {
+      toast.error(" Veuillez compléter toutes les informations  !", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        theme: "light",
       });
     }
   };
 
   return (
-    <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10">
+    <div className="fixed h-[100vh] top-0 left-0 bg-white w-[100%] z-10 md:overflow-y-scroll">
       <div>
         <button type="button" onClick={openAndCloseUserModal}>
           <img className="mr-80 mt-3 ml-4" src={croix} alt="Close btn" />
         </button>
       </div>
-      <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
-        Ajouter un utilisateur
-      </div>
-      <div className="flex justify-around ">
-        <img
-          className="rounded-full w-[42vw] ml-5 border-4 border-violet"
-          src="./src/assets/user-avatar2.jpeg"
-          alt="User avatar"
-        />
-        <div className="ml-5 mt-4">
-          <button
-            type="button"
-            className="text-white mr-4 my-4 font-[Enedis] bg-primary text-l w-[40vw] font-bold border h-10 border-primary rounded-3xl "
-          >
-            Modifier
-          </button>
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="font-[Enedis] mt-1 text-primary text-center font-bold text-4xl mb-6">
+          Ajouter un utilisateur
+        </div>
+        <div className="flex justify-around ">
+          <img
+            className="rounded-full w-40 ml-5 border-4 border-violet"
+            src="./src/assets/photo-avatar-profil.png"
+            alt="User avatar"
+          />
         </div>
       </div>
       <div className="flex justify-center">
@@ -115,8 +111,10 @@ export default function AddUser({ openAndCloseUserModal }) {
         >
           Prénom :
           <input
-            className=" border pl-2 my-3  h-8 rounded w-[80vw] border-primary"
+            className=" border pl-2 my-3 h-8 rounded w-[80vw] border-primary"
             type="text"
+            required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             name="firstname"
             placeholder="Prénom"
             onChange={onChange}
@@ -126,7 +124,9 @@ export default function AddUser({ openAndCloseUserModal }) {
           <input
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
+            required
             name="lastname"
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Nom"
             onChange={onChange}
             value={credentials.lastname}
@@ -136,6 +136,8 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
             name="phone"
+            required
+            pattern="^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$"
             placeholder="Téléphone"
             onChange={onChangeNum}
             value={credentials.phone_number}
@@ -145,7 +147,9 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="email"
             name="email"
-            placeholder="email"
+            required
+            placeholder="Email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             onChange={onChange}
             value={credentials.email}
           />
@@ -154,6 +158,8 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="password"
             name="pwd"
+            required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             placeholder="*********"
             onChange={onChangepass}
             value={credentials.password}
@@ -163,13 +169,15 @@ export default function AddUser({ openAndCloseUserModal }) {
             className=" border pl-2 h-8 my-3 rounded w-[80vw] border-primary"
             type="text"
             name="role"
+            required
+            pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
             placeholder="Poste"
             onChange={onChange}
             value={credentials.role}
           />
           <button
             type="submit"
-            className="text-white ml-20 mb-1S font-[Enedis] bg-primary text-base w-[40vw] border h-10 border-primary rounded-2xl "
+            className="text-white mx-auto my-2 font-[Enedis] bg-primary text-base w-44 border h-10 border-primary rounded-2xl "
           >
             Enregistrer
           </button>

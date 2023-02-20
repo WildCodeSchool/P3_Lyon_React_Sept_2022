@@ -9,7 +9,7 @@ class UserGroupManager extends AbstractManager {
 
   findByUserId(userId) {
     return this.connection.any(
-      `SELECT group_id, group_detail.group_name FROM ${this.table} 
+      `SELECT group_id as id, group_detail.group_name, group_detail.image FROM ${this.table} 
       JOIN group_detail ON group_detail.id = user_group.group_id
       WHERE user_id = $1`,
       [userId]
@@ -18,12 +18,21 @@ class UserGroupManager extends AbstractManager {
 
   // je récupère les utilisateurs qui appartiennent à un groupe en fonction de son id
 
-  findByGroupId(groupId) {
+  findByGroupId(groupId, base) {
     return this.connection.any(
-      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email, user_group.user_id FROM user_detail AS ud
+      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
       RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
-      WHERE group_id = $1`,
-      [groupId]
+      WHERE group_id = $1 limit 5 offset $2`,
+      [groupId, base]
+    );
+  }
+
+  findByGroupIdAndQuery(groupId, query) {
+    return this.connection.any(
+      `SELECT ud.firstname, ud.lastname, ud.phone_number, ud.email,ud.avatar, ud.id, ud.role, user_group.user_id FROM user_detail AS ud
+      RIGHT JOIN ${this.table} ON ud.id = user_group.user_id
+      WHERE group_id = $1 AND firstname ILIKE $2 OR lastname ILIKE $2`,
+      [groupId, query]
     );
   }
 
@@ -60,10 +69,10 @@ class UserGroupManager extends AbstractManager {
 
   // Je supprime un groupe auquel un utilisateur appartient
 
-  deleteByGroupId(groupId) {
+  deleteByGroupId(groupId, userId) {
     return this.connection.any(
-      `DELETE FROM ${this.table} WHERE group_id = $1`,
-      [groupId]
+      `DELETE FROM ${this.table} WHERE group_id = $1 AND user_id = $2`,
+      [groupId, userId]
     );
   }
 }

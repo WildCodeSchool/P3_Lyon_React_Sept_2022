@@ -17,9 +17,16 @@ class CommentManager extends AbstractManager {
     );
   }
 
+  findAmountByPost(id) {
+    return this.connection.any(
+      `select count(*) FROM ${this.table} WHERE post_id = $1;`,
+      [id]
+    );
+  }
+
   insert(comment) {
     return this.connection.any(
-      `INSERT INTO ${this.table} (content, post_id, user_id) VALUES ($1, $2, $3) RETURNING *;
+      `INSERT INTO ${this.table} (content, post_id, user_id, comment_date) VALUES ($1, $2, $3, LOCALTIMESTAMP) RETURNING *;
       `,
       [comment.content, comment.post_id, comment.user_id]
     );

@@ -12,6 +12,34 @@ const browse = (req, res) => {
     });
 };
 
+const browseBy5 = (req, res) => {
+  const { base } = req.params;
+
+  models.user_detail
+    .findAllBy5(base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseInBackend = (req, res) => {
+  const query = `%${req.params.query}%`;
+
+  models.user_detail
+    .noFetchAll(query)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   const { id } = req.params;
 
@@ -57,6 +85,23 @@ const edit = (req, res) => {
     });
 };
 
+const editUserAvatar = (req, res) => {
+  const user = {};
+  user.id = req.params.userid;
+  user.avatar = req.renamedFile;
+
+  models.user_detail
+    .updateUserAvatar(user)
+    .then((result) => {
+      if (result.affectedRows === 0) res.sendStatus(404);
+      else res.json({ avatar: user.avatar });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const { id } = req.params;
   models.user_detail
@@ -73,8 +118,11 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseBy5,
   read,
   add,
   edit,
+  editUserAvatar,
   destroy,
+  browseInBackend,
 };

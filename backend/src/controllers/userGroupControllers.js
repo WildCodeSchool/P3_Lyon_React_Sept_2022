@@ -30,10 +30,25 @@ const findGroupByUserId = (req, res) => {
 // je récupère les utilisateurs qui appartiennent à un groupe en fonction de son id
 
 const findUserByGroupId = (req, res) => {
-  const { groupId } = req.params;
+  const { groupId, base } = req.params;
 
   models.user_group
-    .findByGroupId(groupId)
+    .findByGroupId(groupId, base)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
+const findUserByGroupIdAndQuery = (req, res) => {
+  const { groupId } = req.params;
+  const query = `%${req.params.query}%`;
+
+  models.user_group
+    .findByGroupIdAndQuery(groupId, query)
     .then((results) => {
       if (results[0]) res.send(results);
       else res.sendStatus(404);
@@ -43,6 +58,7 @@ const findUserByGroupId = (req, res) => {
       res.sendStatus(500);
     });
 };
+
 const addUserInGroup = (req, res) => {
   const { userId, groupId } = req.body;
 
@@ -88,10 +104,10 @@ const deleteByUserId = (req, res) => {
 // Je supprime un groupe auquel un utilisateur appartient
 
 const deleteByGroupId = (req, res) => {
-  const { groupId } = req.params;
+  const { groupId, userId } = req.params;
 
   models.user_group
-    .deleteByGroupId(groupId)
+    .deleteByGroupId(groupId, userId)
     .then(() => {
       res.sendStatus(200);
     })
@@ -105,6 +121,7 @@ module.exports = {
   findGroups,
   findGroupByUserId,
   findUserByGroupId,
+  findUserByGroupIdAndQuery,
   addUserInGroup,
   addUserInSeveralGroup,
   deleteByUserId,

@@ -1,28 +1,48 @@
-import React, { useEffect } from "react";
-import Post from "./Post";
-import { usePostUserContext } from "../../../contexts/PostUserContext";
+import React, { useEffect, useState } from "react";
+import { Post } from "../..";
 import { useCurrentUserContext } from "../../../contexts/userContext";
+import { useTokenContext } from "../../../contexts/TokenContext";
 
 const backEnd = import.meta.env.VITE_BACKEND_URL;
 
-function PostContainer() {
-  const { posts, setPosts, base, setBase, refresh, groupId, categoryId } =
-    usePostUserContext();
-  const { token } = useCurrentUserContext();
+function PostContainer({ groupId, categoryId }) {
+  const [posts, setPosts] = useState([]);
+  const [base, setBase] = useState(0);
+  const { token, user } = useCurrentUserContext();
+  const { redirectIfDisconnected } = useTokenContext();
+
+  useEffect(() => {
+    setPosts([]);
+    if (base > 0) {
+      setBase(0);
+    }
+  }, [groupId, categoryId]);
+
+  const deleteFromPostWithId = (idPost) => {
+    const postIndex = posts.findIndex((post) => post.id === idPost);
+    posts.splice(postIndex, 1);
+    setPosts([...posts]);
+  };
 
   useEffect(() => {
     if (groupId === 0 && categoryId === 0) {
-      fetch(`${backEnd}/api/posts/limit/${base}`, {
+      fetch(`${backEnd}/api/posts/usergroup/${user.id}/limit/${base}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("Veuillez-vous reconnecter");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((error) => console.error(error));
     } else if (groupId > 0 && categoryId === 0) {
       fetch(`${backEnd}/api/posts/group/${groupId}/limit/${base}`, {
         method: "GET",
@@ -31,10 +51,16 @@ function PostContainer() {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("Veuillez-vous reconnecter");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((err) => console.error(err));
     } else if (categoryId > 0) {
       fetch(`${backEnd}/api/posts/category/${categoryId}/limit/${base}`, {
         method: "GET",
@@ -43,12 +69,18 @@ function PostContainer() {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 401) {
+            redirectIfDisconnected();
+            throw Error("Veuillez-vous reconnecter");
+          } else return response.json();
+        })
         .then((result) => {
           setPosts((prev) => [...prev, ...result]);
-        });
+        })
+        .catch((err) => console.error(err));
     }
-  }, [base, refresh]);
+  }, [base, groupId, categoryId]);
 
   const handleScroll = () => {
     if (
@@ -66,9 +98,13 @@ function PostContainer() {
   }, []);
 
   return (
-    <div className="md:ml-[-85%] md:w-[40vw] md:rounded-lg">
+    <div>
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post
+          key={post.id}
+          post={post}
+          deleteFromPostWithId={deleteFromPostWithId}
+        />
       ))}
     </div>
   );
