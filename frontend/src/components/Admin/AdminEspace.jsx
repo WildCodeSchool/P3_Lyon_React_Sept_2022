@@ -506,7 +506,7 @@ function AdminEspace() {
                               </h3>
                               <div className="mt-2">
                                 <p className="text-sm text-white">
-                                  Êtes vous certain de vouloir supprimer cet
+                                  Êtes vous certain de vouloir supprimer ce
                                   groupe ?
                                 </p>
                               </div>

@@ -181,7 +181,7 @@ VALUES
     5
   ),
   (
-    'Projet régionnal',
+    'Projet régional',
     'logo-region-rhone-alpes.png',
     5
   ),
